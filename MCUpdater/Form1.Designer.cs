@@ -388,7 +388,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(159, 17);
             this.label5.TabIndex = 7;
-            this.label5.Text = "(C) MoeCraft 保留所有权利";
+            this.label5.Text = "Copyright © MoeCraft.All Rights Reserved.";
             // 
             // linkLabel2
             // 
@@ -723,4 +723,3 @@
         private System.Windows.Forms.Label label8;
     }
 }
-
