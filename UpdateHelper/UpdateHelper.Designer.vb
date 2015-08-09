@@ -25,13 +25,14 @@ Partial Class UpdateHelper
         Me.UpdateProgress = New System.Windows.Forms.ProgressBar()
         Me.LogList = New System.Windows.Forms.ListBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.ExitBtn = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'UpdateProgress
         '
         Me.UpdateProgress.Location = New System.Drawing.Point(12, 267)
         Me.UpdateProgress.Name = "UpdateProgress"
-        Me.UpdateProgress.Size = New System.Drawing.Size(450, 23)
+        Me.UpdateProgress.Size = New System.Drawing.Size(341, 23)
         Me.UpdateProgress.TabIndex = 0
         Me.UpdateProgress.Value = 10
         '
@@ -54,11 +55,23 @@ Partial Class UpdateHelper
         Me.Label1.Text = "进度："
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'ExitBtn
+        '
+        Me.ExitBtn.Enabled = False
+        Me.ExitBtn.Location = New System.Drawing.Point(359, 267)
+        Me.ExitBtn.Margin = New System.Windows.Forms.Padding(0)
+        Me.ExitBtn.Name = "ExitBtn"
+        Me.ExitBtn.Size = New System.Drawing.Size(103, 23)
+        Me.ExitBtn.TabIndex = 3
+        Me.ExitBtn.Text = "退出"
+        Me.ExitBtn.UseVisualStyleBackColor = True
+        '
         'UpdateHelper
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(474, 311)
+        Me.Controls.Add(Me.ExitBtn)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LogList)
         Me.Controls.Add(Me.UpdateProgress)
@@ -76,4 +89,5 @@ Partial Class UpdateHelper
     Friend WithEvents UpdateProgress As ProgressBar
     Friend WithEvents LogList As ListBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents ExitBtn As Button
 End Class
