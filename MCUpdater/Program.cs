@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -15,8 +14,6 @@ namespace MCUpdater
         [STAThread]
         static void Main()
         {
-            try
-            {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 //1.这里判定是否已经有实例在运行
@@ -32,12 +29,6 @@ namespace MCUpdater
                     //1.2 已经有一个实例在运行
                     HandleRunningInstance(instance);
                 }
-            }
-            catch (Exception ex)
-            {
-                Application.Run(new EX(ex));
-            }
- 
         }
         //2.在进程中查找是否已经有实例在运行
         #region  确保程序只运行一个实例

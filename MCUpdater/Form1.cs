@@ -9,6 +9,8 @@ using System.Xml;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using System.Web.Security;
+using System.Data;
+using System.Data.OleDb;
 
 namespace MCUpdater
 {
@@ -17,6 +19,7 @@ namespace MCUpdater
         private a conn;
         private WebClient w;
         private bool updateFlag = false;
+        private string updateError;
         public Form1()
         {
             try
@@ -64,6 +67,12 @@ namespace MCUpdater
                 }
             }
             */
+            DataSet d = conn.fetch("select * from `cdn`");
+            foreach(DataRow cdn in d.Tables[0].Rows)
+            {
+                updateServer.Items.Add(cdn["desc"]);
+            }
+            updateServer.SelectedIndex = 0;
             getModList();
             /*
             playerName.Text   = conn.getOpt("playerName");
@@ -109,6 +118,12 @@ namespace MCUpdater
                 if (MessageBox.Show("你尚未安装 "+x.name+"，无法进行游戏，是否要现在安装？\r\n你可以稍候在 检查更新 页面安装", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     doUpdate();
+                    forceUpdateAssets.Checked = true;
+                    forceUpdateConfig.Checked = true;
+                    forceUpdateCore.Checked = true;
+                    forceUpdateMods.Checked = true;
+                    forceUpdateOmods.Checked = true;
+                    forceUpdateRoot.Checked = true;
                 }
             }
             log("启动成功");
@@ -129,10 +144,15 @@ namespace MCUpdater
                 lastLog.Text = "[" + DateTime.Now.ToString("H:m:s") + "] " + log;
             }
         }
-        public void error(string msg , string title = "错误")
+        public void error(string msg, string title = "错误")
         {
-            log(title + "：" +msg.Replace("\r\n"," "));
-            MessageBox.Show(msg , title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            log(title + "：" + msg.Replace("\r\n", " "));
+            MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        public void success(string msg, string title = "操作完成")
+        {
+            log(title + "：" + msg.Replace("\r\n", " "));
+            MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         public void getModList()
         {
@@ -209,16 +229,14 @@ namespace MCUpdater
 
         void doUpdate()
         {
-            updateButton.Enabled = false;
-            log("启动检查更新");
-            progressGroupBox.Visible = true;
+            startUpdateAction();
             updateAction.Text = "正在获取更新信息";
             updateLog.AppendText(updateAction.Text + "\r\n");
             w = new WebClient();
             w.DownloadStringCompleted += w_DownloadStringCompleted;
             try
             {
-                w.DownloadStringAsync(new Uri(conn.getOpt("updatePath")));
+                w.DownloadStringAsync(new Uri(conn.getCdn(updateServer.SelectedIndex.ToString())["url"]));
             }
             catch (Exception ex)
             {
@@ -227,11 +245,26 @@ namespace MCUpdater
             }
         }
 
+        private void startUpdateAction()
+        {
+            updateLog.Text = "";
+            updateButton.Enabled = false;
+            forceUpdateAssets.Enabled = false;
+            forceUpdateConfig.Enabled = false;
+            forceUpdateCore.Enabled = false;
+            forceUpdateMods.Enabled = false;
+            forceUpdateOmods.Enabled = false;
+            forceUpdateRoot.Enabled = false;
+            updateServer.Enabled = false;
+            log("启动检查更新");
+        }
+
         void w_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (string.IsNullOrEmpty(e.Result))
             {
                 error("服务器未返回数据，请重试操作", "获取更新数据失败");
+                endUpdateAction();
             }
             XmlDocument doc = new XmlDocument();
             try
@@ -241,6 +274,7 @@ namespace MCUpdater
             catch (Exception ex)
             {
                 error(ex.Message + "\r\n" + e.Result, "解析XML失败");
+                endUpdateAction();
                 return;
             }
             XmlNode      xn = doc.SelectSingleNode("root");
@@ -248,24 +282,34 @@ namespace MCUpdater
             foreach(XmlNode val in xnl) {
                XmlElement updateList = (XmlElement)val;
                Dictionary<string,string> info = conn.getLib(updateList.GetAttribute("id"));
-               updateLog.AppendText("---------------------------------------------------------------------------\r\n检查更新：" + info["desc"] + "\r\n");
+               updateLog.AppendText("---------------------------------------------------------------------------\r\n检查更新：" + info["desc"] + " [ 本地版本: V" + info["ver"] + " ]\r\n");
                double thisVer = 0.0;
                if (Directory.Exists(x.path + x.binpath + info["path"]))
                {
                    thisVer = double.Parse(info["ver"]);
                }
-               if(updateForce.Checked || thisVer < float.Parse(updateList.GetAttribute("ver"))) {
-                   updateLog.AppendText("发现更新：" + info["desc"] + "\r\n");
+               if(thisVer < float.Parse(updateList.GetAttribute("ver")) || isForceUpdate(info["id"])) {
+                   updateLog.AppendText("发现更新：" + info["desc"] + " [ 最新版本: V" + updateList.GetAttribute("ver") + " ]\r\n");
                     updateAction.Text = "正在获取：" + updateList.InnerText;
                     updateLog.AppendText(updateAction.Text + "\r\n");
                     updateFlag = false;
-                    string fileName = info["id"] + "_" + Path.GetRandomFileName() + ".tmp";
-                    startUpdateDownload(updateList.InnerText, fileName);
-                    while(!updateFlag) {
-                        Application.DoEvents();
-                        Thread.Sleep(20);
+                    string fileName = info["id"] + ".zip";
+                    if(File.Exists(fileName))
+                    {
+                        File.Delete(fileName);
                     }
-                    updateLog.AppendText("正在安装文件\r\n");
+                    startUpdateDownload(updateList.InnerText, fileName);
+                    while (!updateFlag)
+                    {
+                        Application.DoEvents();
+                        Thread.Sleep(25);
+                    }
+                    #region 解包更新文件
+                    updateThisProgressText.Text = "安装中";
+                    updateThisProgressBar.Value = 0;
+                    updateThisProgressBar.Style = ProgressBarStyle.Marquee;
+                    updateAction.Text = "正在安装：" + info["desc"];
+                    updateLog.AppendText("正在安装文件："+ info["desc"] + "\r\n");
                     Process p = new Process();
                     p.StartInfo.FileName = x.path + x.updpath + "7z.exe";
                     p.StartInfo.Arguments = "x -y -o\"" + x.path + x.binpath +  info["path"] + "\" \"" + x.path + x.updpath + x.dlpath + fileName + "\"";
@@ -290,21 +334,43 @@ namespace MCUpdater
                         {
                             Directory.CreateDirectory(x.path + x.binpath + info["path"]);
                         }
-
                         p.Start();
+                        p.BeginOutputReadLine();
+                        p.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
+                        conn.setLibVer(updateList.GetAttribute("id"), updateList.GetAttribute("ver"));
+                        while (!p.WaitForExit(25))
+                        {
+                            Application.DoEvents();
+                        }
+                        
                     }
                     catch (Exception ex)
                     {
                         error(ex.Message,"解包数据失败");
+                        updateAction.Text = "检查更新失败";
+                        updateLog.AppendText("检查更新失败");
+                        log("检查更新失败");
+                        endUpdateAction();
                         return;
                     }
-                    p.BeginOutputReadLine();
-
-                    // 为异步获取订阅事件  
-                    p.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
-                    conn.setLibVer(updateList.GetAttribute("id") , updateList.GetAttribute("ver"));
-               }
-               else
+                    if (!string.IsNullOrEmpty(updateError))
+                    {
+                        MessageBox.Show("解包数据失败，请重新尝试更新\r\n" + updateError,
+                            "更新失败",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        updateAction.Text = "检查更新失败";
+                        updateLog.AppendText("检查更新失败");
+                        log("检查更新失败");
+                        endUpdateAction();
+                        return;
+                    }
+                    else
+                    {
+                        updateThisProgressBar.Style = ProgressBarStyle.Blocks;
+                        updateLog.AppendText("已成功更新：" + info["desc"] + "\r\n");
+                    }    
+                    #endregion
+                }
+                else
                {
                     updateLog.AppendText("已是最新版本：" + info["desc"] + "\r\n");
                }
@@ -312,9 +378,93 @@ namespace MCUpdater
             updateAction.Text = "检查更新完成";
             updateLog.AppendText("检查更新完成");
             log("检查更新完成");
-            updateButton.Enabled = true;
+            endUpdateAction();
         }
 
+        private void endUpdateAction()
+        {
+            updateButton.Enabled = true;
+            updateThisProgressBar.Style = ProgressBarStyle.Blocks;
+            updateThisProgressBar.Value = 0;
+            updateThisProgressText.Text = "";
+            forceUpdateAssets.Enabled = true;
+            forceUpdateConfig.Enabled = true;
+            forceUpdateCore.Enabled = true;
+            forceUpdateMods.Enabled = true;
+            forceUpdateOmods.Enabled = true;
+            forceUpdateRoot.Enabled = true;
+            updateServer.Enabled = true;
+        }
+        #region 判断是否需要强制更新
+        private bool isForceUpdate(string v)
+        {
+            switch(v)
+            {
+                case "mods":
+                    if (forceUpdateMods.Checked)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                case "config":
+                    if (forceUpdateConfig.Checked)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                case "omods":
+                    if (forceUpdateOmods.Checked)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                case "root":
+                    if (forceUpdateRoot.Checked)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                case "main":
+                    if (forceUpdateCore.Checked)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                case "asset":
+                    if (forceUpdateAssets.Checked)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                default:
+                    return false;
+            }
+         }
+        #endregion
 
         #region 处理压缩包
 
@@ -323,8 +473,15 @@ namespace MCUpdater
             // 这里仅做输出的示例，实际上您可以根据情况取消获取命令行的内容  
             // 参考：process.CancelOutputRead()  
 
-            if (String.IsNullOrEmpty(e.Data) == false)
-                this.AppendText(e.Data + "\r\n");
+            if (string.IsNullOrEmpty(e.Data) == false)
+            {
+                if(e.Data.IndexOf("Error:") != -1)
+                {
+                    updateError = e.Data;
+                }
+                AppendText(e.Data + "\r\n");
+            }
+                
         }
 
         public delegate void AppendTextCallback(string text);
@@ -462,22 +619,24 @@ namespace MCUpdater
                 string  jsonText = jsr.ReadToEnd().Trim();
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                 var json        = serializer.Deserialize<forgeJsonData>(jsonText);
+                #region 传入参数P1
                 string UUID = FormsAuthentication.HashPasswordForStoringInConfigFile(playerName.Text, "MD5")
-                                .ToLower().Insert(8,"-").Insert(13,"-").Insert(18,"-");
-                log(UUID);
-                var args = json.minecraftArguments
-                                      .Replace("${auth_player_name}", playerName.Text)
-                                      .Replace("${version_name}", jarPath)
-                                      .Replace("${game_directory}", x.path + x.binpath)
-                                      .Replace("${assets_root}", x.path + x.binpath + @"\assets")
-                                      .Replace("${assets_index_name}", json.assetIndex)
-                                      .Replace("${auth_uuid}", UUID)
-                                      .Replace("${user_properties}", "{}")
-                                      .Replace("${user_type}", "Legacy");
-                ps.StartInfo.Arguments += "-Xincgc -Xmx"+playerMem.Text+"M ";
-                var libdir = Directory.GetFiles(x.path + x.binpath + @"\libraries", "*.jar", SearchOption.AllDirectories);
+                                    .ToLower().Insert(8,"-").Insert(13,"-").Insert(18,"-");
+                    log(UUID);
+                    var args = json.minecraftArguments
+                                          .Replace("${auth_player_name}", playerName.Text)
+                                          .Replace("${version_name}", jarPath)
+                                          .Replace("${game_directory}", x.path + x.binpath)
+                                          .Replace("${assets_root}", x.path + x.binpath + @"\assets")
+                                          .Replace("${assets_index_name}", json.assetIndex)
+                                          .Replace("${auth_uuid}", UUID)
+                                          .Replace("${user_properties}", "{}")
+                                          .Replace("${user_type}", "Legacy");
+                    ps.StartInfo.Arguments += "-Xincgc -Xmx"+playerMem.Text+"M ";
+                #endregion
+            var libdir = Directory.GetFiles(x.path + x.binpath + @"\libraries", "*.jar", SearchOption.AllDirectories);
                 var cp = "";
-            log(json.libraries);
+            //log(json.libraries);
                 foreach(string libs in libdir)
                 {
                     if(libs.IndexOf(@"libraries\net\minecraftforge\forge") < 0)
@@ -579,7 +738,7 @@ namespace MCUpdater
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error(ex.Message);
             }
         }
 
@@ -591,24 +750,24 @@ namespace MCUpdater
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error(ex.Message);
             }
         }
 
         private void launcherButton_Click(object sender, EventArgs e)
         {
             if(!File.Exists(x.path + conn.getOpt("launcherPath"))) {
-                MessageBox.Show("未找到启动器！请确保你已经更新启动器到最新版本，且启动器没有改名。请手动打开启动器", "打开启动器失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error("未找到启动器！请确保你已经更新启动器到最新版本，且启动器没有改名。请手动打开启动器", "打开启动器失败");
             }
             else
             {
                 try
                 {
-                    System.Diagnostics.Process.Start(x.path + conn.getOpt("launcherPath"));
+                    Process.Start(x.path + conn.getOpt("launcherPath"));
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "打开启动器失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    error(ex.Message, "打开启动器失败");
                 }
             }
         }
@@ -623,22 +782,22 @@ namespace MCUpdater
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message,"清除下载缓存失败",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    error(ex.Message,"清除下载缓存失败");
                 }
             }
             log("清除下载缓存成功");
-            MessageBox.Show("清除下载缓存成功","清除下载缓存成功",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            success("清除下载缓存成功","清除下载缓存成功");
         }
-
+        
         private void regLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try
             {
-                System.Diagnostics.Process.Start("https://accounts.moecraft.net/index.php?m=home&c=user&a=reg");
+                Process.Start("https://accounts.moecraft.net/index.php?m=home&c=user&a=reg");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\r\n请手动打开：https://accounts.moecraft.net", "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error(ex.Message + "\r\n请手动打开：https://accounts.moecraft.net");
             }
         }
 
@@ -655,7 +814,139 @@ namespace MCUpdater
 
         private void mcLauncher_Click(object sender, EventArgs e)
         {
+            
+        }
+        #region forge进度条
+        private void disableForgeProgress_Click(object sender, EventArgs e)
+        {
+            var v = x.path + x.binpath + @"\Config\splash.properties";
+            if (!File.Exists(v))
+            {
+                error("你还未安装 " + x.name, "操作失败");
+                return;
+            }
+            if (MessageBox.Show("你确定要关闭启动进度条吗？\r\n当关闭启动进度条后，在启动游戏的过程中，游戏将一直不会响应，你将需要等待很长时间\r\n因此，不建议没有启动崩溃问题的电脑关闭启动进度条","确实要关闭启动进度条吗",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    string text = File.ReadAllText(v);
+                    File.WriteAllText(v, text.Replace("enabled=true", "enabled=false"));
+                }
+                catch (Exception ex)
+                {
+                    error(ex.Message);
+                    return;
+                }
+            }
+            log("已成功关闭启动进度条");
+            success("已成功关闭启动进度条", "操作成功");
+        }
 
+        private void enableForgeProgress_Click(object sender, EventArgs e)
+        {
+            var v = x.path + x.binpath + @"\Config\splash.properties";
+            if (!File.Exists(v))
+            {
+                error("你还未安装 " + x.name);
+                return;
+            }
+            if (MessageBox.Show("你确定要恢复启动进度条吗？\r\n当恢复启动进度条后，如果你的电脑有问题，你将不能启动游戏", "确实要恢复启动进度条吗", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    string text = File.ReadAllText(v);
+                    File.WriteAllText(v, text.Replace("enabled=false", "enabled=true"));
+                }
+                catch (Exception ex)
+                {
+                    error(ex.Message, "操作失败");
+                    return;
+                }
+            }
+            log("已成功恢复启动进度条");
+            success("已成功恢复启动进度条", "操作成功");
+        }
+        #endregion
+
+        private void updateThisProgressText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kenvixUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("http://zhizhe8.net");
+        }
+
+        private void stusUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("http://www.stus8.com");
+        }
+
+        private void accountsUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+        Process.Start("https://accounts.moecraft.net");
+        }
+
+        private void joinGroupUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+        Process.Start("http://jq.qq.com/?_wv=1027&k=ewYmnq");
+        }
+
+        private void bakMcOpt_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (string file in x.bakList)
+                {
+                    if (File.Exists(x.path + x.binpath + file))
+                    {
+                        if (File.Exists(x.path + x.binpath + file))
+                        {
+                            File.Delete(x.path + x.updpath + "backup." + file);
+                        }
+                        File.Copy(x.path + x.binpath + file, x.path + x.updpath + "backup." + file);
+                    }
+                }
+                success("已成功备份键位和服务器列表数据");
+            }
+            catch (Exception ex)
+            {
+                error(ex.Message, "备份失败");
+            }
+        }
+
+        private void recMcOpt_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (string file in x.bakList)
+                {
+                    if (File.Exists(x.path + x.updpath + "backup." + file))
+                    {
+                        if (File.Exists(x.path + x.binpath + file))
+                        {
+                            File.Delete(x.path + x.binpath + file);
+                        }
+                        File.Copy(x.path + x.updpath + "backup." + file, x.path + x.binpath + file);
+                    }
+                }
+                success("已成功恢复键位和服务器列表数据\r\n重新启动游戏后即可生效");
+            }
+            catch (Exception ex)
+            {
+                error(ex.Message, "恢复失败");
+            }
         }
     }
 }

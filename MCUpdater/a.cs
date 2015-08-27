@@ -89,11 +89,25 @@ namespace MCUpdater
         public Dictionary<String, String> getLib(string id)
         {
             DataSet d = fetch("select * from `lib` where `id` = '" + id + "'");
-            Dictionary<String, String> r = new Dictionary<String, String>();
+            Dictionary<String, string> r = new Dictionary<String, String>();
             r.Add("id", d.Tables[0].Rows[0]["id"].ToString());
             r.Add("desc", d.Tables[0].Rows[0]["desc"].ToString());
             r.Add("ver", d.Tables[0].Rows[0]["ver"].ToString());
             r.Add("path", d.Tables[0].Rows[0]["path"].ToString());
+            return r;
+        }
+
+        /// <summary>
+        /// 根据索引获取cdn信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Dictionary<String, String> getCdn(string id)
+        {
+            DataSet d = fetch("select * from `cdn` where `id` = " + id);
+            Dictionary<String, String> r = new Dictionary<String, String>();
+            r.Add("desc", d.Tables[0].Rows[0]["desc"].ToString());
+            r.Add("url", d.Tables[0].Rows[0]["url"].ToString());
             return r;
         }
 
