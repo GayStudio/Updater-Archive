@@ -1,6 +1,4 @@
-﻿#define R
-
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -33,7 +31,7 @@ namespace MCUpdater
                 Environment.Exit(0);
             }
             InitializeComponent();
-#if R
+#if !DEBUG
             mainTabControl.TabPages.Remove(mainTabControl.TabPages[5]); //隐藏启动器页面
 #endif
             version.Text = "V"+x.ver;
