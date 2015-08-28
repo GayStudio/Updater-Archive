@@ -48,6 +48,7 @@
             this.playerRun = new System.Windows.Forms.Button();
             this.playerSave = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
+            this.playerJREBrowser = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -93,6 +94,9 @@
             this.updateLog = new System.Windows.Forms.TextBox();
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.aboutTab = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.disMcCheck = new System.Windows.Forms.CheckBox();
             this.joinGroupUrl = new System.Windows.Forms.LinkLabel();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
@@ -112,10 +116,6 @@
             this.version = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.playerJREBrowser = new System.Windows.Forms.Button();
-            this.disMcCheck = new System.Windows.Forms.CheckBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.mcLauncher.SuspendLayout();
             this.toolTab.SuspendLayout();
@@ -129,8 +129,8 @@
             this.groupBox3.SuspendLayout();
             this.mainTabControl.SuspendLayout();
             this.aboutTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -336,6 +336,16 @@
             this.label10.Size = new System.Drawing.Size(200, 17);
             this.label10.TabIndex = 15;
             this.label10.Text = "启动参数（高级，一般无需在意）：";
+            // 
+            // playerJREBrowser
+            // 
+            this.playerJREBrowser.Location = new System.Drawing.Point(627, 86);
+            this.playerJREBrowser.Name = "playerJREBrowser";
+            this.playerJREBrowser.Size = new System.Drawing.Size(102, 23);
+            this.playerJREBrowser.TabIndex = 13;
+            this.playerJREBrowser.Text = "浏览 ... (&B)";
+            this.playerJREBrowser.UseVisualStyleBackColor = true;
+            this.playerJREBrowser.Click += new System.EventHandler(this.playerJREBrowser_Click);
             // 
             // label9
             // 
@@ -830,6 +840,38 @@
             this.aboutTab.Text = "关于";
             this.aboutTab.UseVisualStyleBackColor = true;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.textBox5);
+            this.groupBox5.Location = new System.Drawing.Point(415, 12);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(314, 333);
+            this.groupBox5.TabIndex = 24;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "更新器的更新日志";
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(6, 22);
+            this.textBox5.Multiline = true;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(302, 305);
+            this.textBox5.TabIndex = 0;
+            this.textBox5.Text = "=========   V1.8@2015-08-29 =========\r\n1.重制并重新加入全局异常处理程序\r\n=========   V1.7@2015-0" +
+    "8-28 =========\r\n1.工具箱增加 区域文件计算器\r\n2.可以在 关于 页面禁用没有安装MoeCraft的提示\r\n3.增加更新日志";
+            // 
+            // disMcCheck
+            // 
+            this.disMcCheck.AutoSize = true;
+            this.disMcCheck.Location = new System.Drawing.Point(28, 171);
+            this.disMcCheck.Name = "disMcCheck";
+            this.disMcCheck.Size = new System.Drawing.Size(242, 21);
+            this.disMcCheck.TabIndex = 23;
+            this.disMcCheck.Text = "不要在启动时提示我没有安装 MoeCraft";
+            this.disMcCheck.UseVisualStyleBackColor = true;
+            this.disMcCheck.CheckedChanged += new System.EventHandler(this.disMcCheck_CheckedChanged);
+            // 
             // joinGroupUrl
             // 
             this.joinGroupUrl.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
@@ -955,9 +997,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(25, 142);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(176, 17);
+            this.label5.Size = new System.Drawing.Size(172, 17);
             this.label5.TabIndex = 14;
-            this.label5.Text = "(C) MoeNet Inc. 保留所有权利";
+            this.label5.Text = "© MoeNet Inc. 保留所有权利";
             // 
             // stusUrl
             // 
@@ -1037,48 +1079,6 @@
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
-            // playerJREBrowser
-            // 
-            this.playerJREBrowser.Location = new System.Drawing.Point(627, 86);
-            this.playerJREBrowser.Name = "playerJREBrowser";
-            this.playerJREBrowser.Size = new System.Drawing.Size(102, 23);
-            this.playerJREBrowser.TabIndex = 13;
-            this.playerJREBrowser.Text = "浏览 ... (&B)";
-            this.playerJREBrowser.UseVisualStyleBackColor = true;
-            this.playerJREBrowser.Click += new System.EventHandler(this.playerJREBrowser_Click);
-            // 
-            // disMcCheck
-            // 
-            this.disMcCheck.AutoSize = true;
-            this.disMcCheck.Location = new System.Drawing.Point(28, 171);
-            this.disMcCheck.Name = "disMcCheck";
-            this.disMcCheck.Size = new System.Drawing.Size(242, 21);
-            this.disMcCheck.TabIndex = 23;
-            this.disMcCheck.Text = "不要在启动时提示我没有安装 MoeCraft";
-            this.disMcCheck.UseVisualStyleBackColor = true;
-            this.disMcCheck.CheckedChanged += new System.EventHandler(this.disMcCheck_CheckedChanged);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.textBox5);
-            this.groupBox5.Location = new System.Drawing.Point(415, 12);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(314, 333);
-            this.groupBox5.TabIndex = 24;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "更新器的更新日志";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(6, 22);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(302, 305);
-            this.textBox5.TabIndex = 0;
-            this.textBox5.Text = "=========   V1.8@2015-08-29 =========\r\n1.重制并重新加入全局异常处理程序\r\n=========   V1.7@2015-0" +
-    "8-28 =========\r\n1.工具箱增加 区域文件计算器\r\n2.可以在 关于 页面禁用没有安装MoeCraft的提示\r\n3.增加更新日志";
-            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1113,9 +1113,9 @@
             this.mainTabControl.ResumeLayout(false);
             this.aboutTab.ResumeLayout(false);
             this.aboutTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
