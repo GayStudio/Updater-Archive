@@ -108,6 +108,7 @@ namespace MCUpdater
             Dictionary<String, String> r = new Dictionary<String, String>();
             r.Add("desc", d.Tables[0].Rows[0]["desc"].ToString());
             r.Add("url", d.Tables[0].Rows[0]["url"].ToString());
+            r.Add("xml", d.Tables[0].Rows[0]["xml"].ToString());
             return r;
         }
 

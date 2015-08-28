@@ -3,7 +3,7 @@
     static class x
     {
         public const string name = "MoeCraft";
-        public const string ver = "1.6";
+        public const string ver = "1.7";
         public static string path   = System.IO.Directory.GetCurrentDirectory() + "\\";
         public const string binpath = @".minecraft\";
         public const string moddir  = binpath + @"mods\1.7.10\";

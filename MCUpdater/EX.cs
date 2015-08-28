@@ -11,6 +11,13 @@ namespace MCUpdater
 {
     public partial class EX : Form
     {
+        private object exceptionObject;
+
+        public EX(object exceptionObject)
+        {
+            this.exceptionObject = exceptionObject;
+        }
+
         public EX(Exception ex)
         {
             InitializeComponent();
@@ -22,25 +29,41 @@ namespace MCUpdater
             EXMsg.Text += ex.StackTrace;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        void url(string url)
         {
             try
             {
-                System.Diagnostics.Process.Start("mailto:kenvix@vip.qq.com");
-            } catch(Exception ex) {
-                MessageBox.Show(ex.Message , "系统错误", MessageBoxButtons.OK , MessageBoxIcon.Error);
+                System.Diagnostics.Process.Start(url);
             }
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            url("mailto:kenvix@vip.qq.com");
         }
 
         private void openBlog_Click(object sender, EventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start("http://zhizhe8.net/");
-            } catch(Exception ex) {
-                MessageBox.Show(ex.Message , "系统错误", MessageBoxButtons.OK , MessageBoxIcon.Error);
-            }
+            url("http://zhizhe8.net/");
+        }
+
+        private void openForum_Click(object sender, EventArgs e)
+        {
+            url("http://moeclub.net/");
+        }
+
+        private void copy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetDataObject(EXMsg.Text);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Reflection;
+using System.Threading;
 
 namespace MCUpdater
 {
@@ -22,7 +23,26 @@ namespace MCUpdater
                 if (instance == null)
                 {
                     //1.1 没有实例在运行
-                    Application.Run(new Form1());
+                    try
+                    {
+                        //设置应用程序处理异常方式：ThreadException处理
+                        Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+                        //处理UI线程异常
+                        Application.ThreadException += new ThreadExceptionEventHandler(ThreadEXProcessor);
+                        //处理非UI线程异常
+                        AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(UnhandledEXProcessor);
+
+                        #region 应用程序的主入口点
+                        Application.EnableVisualStyles();
+                        Application.SetCompatibleTextRenderingDefault(false);
+                        Application.Run(new Form1());
+                        #endregion
+                    }
+                    catch (Exception exc)
+                    {
+                        EX ex = new EX(exc);
+                        ex.ShowDialog();
+                    }
                 }
                 else
                 {
@@ -30,6 +50,20 @@ namespace MCUpdater
                     HandleRunningInstance(instance);
                 }
         }
+
+        private static void UnhandledEXProcessor(object sender, UnhandledExceptionEventArgs e)
+        {
+            EX ex = new EX(e.ExceptionObject);
+            ex.ShowDialog();
+        }
+
+        private static void ThreadEXProcessor(object sender, ThreadExceptionEventArgs e)
+        {
+            EX ex = new EX(e.Exception);
+            ex.ShowDialog();
+        }
+
+
         //2.在进程中查找是否已经有实例在运行
         #region  确保程序只运行一个实例
         private static Process RunningInstance()

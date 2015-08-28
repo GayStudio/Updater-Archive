@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define R
+
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -10,7 +12,6 @@ using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using System.Web.Security;
 using System.Data;
-using System.Data.OleDb;
 
 namespace MCUpdater
 {
@@ -32,6 +33,9 @@ namespace MCUpdater
                 Environment.Exit(0);
             }
             InitializeComponent();
+#if R
+            mainTabControl.TabPages.Remove(mainTabControl.TabPages[5]); //隐藏启动器页面
+#endif
             version.Text = "V"+x.ver;
             if (!Directory.Exists(x.updpath))
             {
@@ -42,11 +46,6 @@ namespace MCUpdater
             {
                 Directory.CreateDirectory(x.path + x.updpath + x.dlpath);
                 log("初始化：创建目录：" + x.path + x.updpath + x.dlpath);
-            }
-            if (!Directory.Exists(x.path + x.dlpath))
-            {
-                Directory.CreateDirectory(x.path + x.dlpath);
-                log("初始化：创建目录：" + x.path + x.dlpath);
             }
             /*
             if (string.IsNullOrEmpty(playerJRE.Text))
@@ -72,7 +71,6 @@ namespace MCUpdater
             {
                 updateServer.Items.Add(cdn["desc"]);
             }
-            updateServer.SelectedIndex = 0;
             getModList();
             /*
             playerName.Text   = conn.getOpt("playerName");
@@ -113,9 +111,10 @@ namespace MCUpdater
             }
             log("读取用户设置成功");
              */
-            if (!Directory.Exists(x.mcLibPath))
+            if (conn.getOpt("disMcCheck") == "0" && !Directory.Exists(x.mcLibPath))
             {
-                if (MessageBox.Show("你尚未安装 "+x.name+"，无法进行游戏，是否要现在安装？\r\n你可以稍候在 检查更新 页面安装", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                disMcCheck.Checked = false;
+                if (MessageBox.Show("你尚未安装 "+x.name+"，无法进行游戏，是否要现在安装？\r\n你可以稍候在 检查更新 页面安装\r\n如果你不想看到此提示，可以在 关于 页面禁用", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     doUpdate();
                     forceUpdateAssets.Checked = true;
@@ -126,7 +125,11 @@ namespace MCUpdater
                     forceUpdateRoot.Checked = true;
                 }
             }
-            log("启动成功");
+            else
+            {
+                disMcCheck.Checked = true;
+            }
+            log("启动成功: " + " V" + x.ver + " | " + System.Environment.OSVersion);
         }
         /// <summary>
         /// 记录日志
@@ -229,14 +232,16 @@ namespace MCUpdater
 
         void doUpdate()
         {
+            var cdn    = conn.getCdn(updateServer.SelectedIndex.ToString());
+            var server = cdn["url"] + cdn["xml"];
+            updateAction.Text = "正在获取更新信息: " + server;
             startUpdateAction();
-            updateAction.Text = "正在获取更新信息";
             updateLog.AppendText(updateAction.Text + "\r\n");
             w = new WebClient();
             w.DownloadStringCompleted += w_DownloadStringCompleted;
             try
             {
-                w.DownloadStringAsync(new Uri(conn.getCdn(updateServer.SelectedIndex.ToString())["url"]));
+                w.DownloadStringAsync(new Uri(server));
             }
             catch (Exception ex)
             {
@@ -261,6 +266,10 @@ namespace MCUpdater
 
         void w_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
+            if (e.Cancelled)
+            {
+                endUpdateAction();
+            }
             if (string.IsNullOrEmpty(e.Result))
             {
                 error("服务器未返回数据，请重试操作", "获取更新数据失败");
@@ -290,15 +299,24 @@ namespace MCUpdater
                }
                if(thisVer < float.Parse(updateList.GetAttribute("ver")) || isForceUpdate(info["id"])) {
                    updateLog.AppendText("发现更新：" + info["desc"] + " [ 最新版本: V" + updateList.GetAttribute("ver") + " ]\r\n");
-                    updateAction.Text = "正在获取：" + updateList.InnerText;
+                    string downUrl;
+                    if(updateList.InnerText.IndexOf("{{url}}") != -1)
+                    {
+                        downUrl = updateList.InnerText.Replace("{{url}}", info["url"]);
+                    }
+                        else
+                    {
+                        downUrl = updateList.InnerText;
+                    }
+                    updateAction.Text = "正在获取：" + downUrl;
                     updateLog.AppendText(updateAction.Text + "\r\n");
                     updateFlag = false;
                     string fileName = info["id"] + ".zip";
-                    if(File.Exists(fileName))
+                    if (File.Exists(fileName))
                     {
                         File.Delete(fileName);
                     }
-                    startUpdateDownload(updateList.InnerText, fileName);
+                    startUpdateDownload(downUrl, fileName);
                     while (!updateFlag)
                     {
                         Application.DoEvents();
@@ -895,12 +913,12 @@ namespace MCUpdater
 
         private void accountsUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-        Process.Start("https://accounts.moecraft.net");
+            Process.Start("https://accounts.moecraft.net");
         }
 
         private void joinGroupUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-        Process.Start("http://jq.qq.com/?_wv=1027&k=ewYmnq");
+            Process.Start("http://jq.qq.com/?_wv=1027&k=ewYmnq");
         }
 
         private void bakMcOpt_Click(object sender, EventArgs e)
@@ -947,6 +965,39 @@ namespace MCUpdater
             {
                 error(ex.Message, "恢复失败");
             }
+        }
+
+        private void bbsUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("http://moeclub.net");
+        }
+
+        private void label21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void regionCalculatorButton_Click(object sender, EventArgs e)
+        {
+            regionCalculator rc = new regionCalculator();
+            rc.Show();
+        }
+
+        private void disMcCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if(disMcCheck.Checked)
+            {
+                conn.setOpt("disMcCheck","1");
+            }
+            else
+            {
+                conn.setOpt("disMcCheck","0");
+            }
+        }
+
+        private void updateServer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            conn.setOpt("updateServer",updateServer.SelectedIndex.ToString());
         }
     }
 }

@@ -48,18 +48,23 @@
             this.playerRun = new System.Windows.Forms.Button();
             this.playerSave = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
-            this.playerJREBrowser = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.toolTab = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.recMcOpt = new System.Windows.Forms.Button();
+            this.bakMcOpt = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.enableForgeProgress = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.disableForgeProgress = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.toolGroupBox = new System.Windows.Forms.GroupBox();
+            this.regionCalculatorButton = new System.Windows.Forms.Button();
             this.launcherButton = new System.Windows.Forms.Button();
             this.cleanDownloadCache = new System.Windows.Forms.Button();
             this.logTab = new System.Windows.Forms.TabPage();
@@ -88,8 +93,11 @@
             this.updateLog = new System.Windows.Forms.TextBox();
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.aboutTab = new System.Windows.Forms.TabPage();
-            this.label18 = new System.Windows.Forms.Label();
             this.joinGroupUrl = new System.Windows.Forms.LinkLabel();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.bbsUrl = new System.Windows.Forms.LinkLabel();
             this.accountsUrl = new System.Windows.Forms.LinkLabel();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -104,14 +112,14 @@
             this.version = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.recMcOpt = new System.Windows.Forms.Button();
-            this.bakMcOpt = new System.Windows.Forms.Button();
+            this.playerJREBrowser = new System.Windows.Forms.Button();
+            this.disMcCheck = new System.Windows.Forms.CheckBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.mcLauncher.SuspendLayout();
             this.toolTab.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.toolGroupBox.SuspendLayout();
             this.logTab.SuspendLayout();
@@ -122,7 +130,7 @@
             this.mainTabControl.SuspendLayout();
             this.aboutTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -329,16 +337,6 @@
             this.label10.TabIndex = 15;
             this.label10.Text = "启动参数（高级，一般无需在意）：";
             // 
-            // playerJREBrowser
-            // 
-            this.playerJREBrowser.Location = new System.Drawing.Point(627, 86);
-            this.playerJREBrowser.Name = "playerJREBrowser";
-            this.playerJREBrowser.Size = new System.Drawing.Size(102, 23);
-            this.playerJREBrowser.TabIndex = 13;
-            this.playerJREBrowser.Text = "浏览 ... (&B)";
-            this.playerJREBrowser.UseVisualStyleBackColor = true;
-            this.playerJREBrowser.Click += new System.EventHandler(this.playerJREBrowser_Click);
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -387,6 +385,58 @@
             this.toolTab.TabIndex = 5;
             this.toolTab.Text = "工具箱";
             this.toolTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label22);
+            this.groupBox4.Controls.Add(this.recMcOpt);
+            this.groupBox4.Controls.Add(this.bakMcOpt);
+            this.groupBox4.Controls.Add(this.label21);
+            this.groupBox4.Location = new System.Drawing.Point(223, 168);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(486, 137);
+            this.groupBox4.TabIndex = 12;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "备份游戏内设置";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(15, 54);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(224, 17);
+            this.label22.TabIndex = 12;
+            this.label22.Text = "备份内容为游戏设置、服务器列表、键位";
+            // 
+            // recMcOpt
+            // 
+            this.recMcOpt.Location = new System.Drawing.Point(222, 83);
+            this.recMcOpt.Name = "recMcOpt";
+            this.recMcOpt.Size = new System.Drawing.Size(173, 34);
+            this.recMcOpt.TabIndex = 10;
+            this.recMcOpt.Text = "恢复设置 (&R)";
+            this.recMcOpt.UseVisualStyleBackColor = true;
+            this.recMcOpt.Click += new System.EventHandler(this.recMcOpt_Click);
+            // 
+            // bakMcOpt
+            // 
+            this.bakMcOpt.Location = new System.Drawing.Point(18, 83);
+            this.bakMcOpt.Name = "bakMcOpt";
+            this.bakMcOpt.Size = new System.Drawing.Size(173, 34);
+            this.bakMcOpt.TabIndex = 11;
+            this.bakMcOpt.Text = "备份设置 (&B)";
+            this.bakMcOpt.UseVisualStyleBackColor = true;
+            this.bakMcOpt.Click += new System.EventHandler(this.bakMcOpt_Click);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(15, 31);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(440, 17);
+            this.label21.TabIndex = 0;
+            this.label21.Text = "你可以通过备份和恢复设置信息，来防止操作不慎（例如强制更新）导致设置丢失";
+            this.label21.Click += new System.EventHandler(this.label21_Click);
             // 
             // groupBox1
             // 
@@ -441,14 +491,25 @@
             // 
             // toolGroupBox
             // 
+            this.toolGroupBox.Controls.Add(this.regionCalculatorButton);
             this.toolGroupBox.Controls.Add(this.launcherButton);
             this.toolGroupBox.Controls.Add(this.cleanDownloadCache);
             this.toolGroupBox.Location = new System.Drawing.Point(17, 16);
             this.toolGroupBox.Name = "toolGroupBox";
-            this.toolGroupBox.Size = new System.Drawing.Size(191, 141);
+            this.toolGroupBox.Size = new System.Drawing.Size(191, 289);
             this.toolGroupBox.TabIndex = 10;
             this.toolGroupBox.TabStop = false;
             this.toolGroupBox.Text = "常用工具";
+            // 
+            // regionCalculatorButton
+            // 
+            this.regionCalculatorButton.Location = new System.Drawing.Point(26, 140);
+            this.regionCalculatorButton.Name = "regionCalculatorButton";
+            this.regionCalculatorButton.Size = new System.Drawing.Size(133, 34);
+            this.regionCalculatorButton.TabIndex = 10;
+            this.regionCalculatorButton.Text = "区域文件计算器 (&E)";
+            this.regionCalculatorButton.UseVisualStyleBackColor = true;
+            this.regionCalculatorButton.Click += new System.EventHandler(this.regionCalculatorButton_Click);
             // 
             // launcherButton
             // 
@@ -565,7 +626,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(530, 271);
+            this.label17.Location = new System.Drawing.Point(530, 273);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(56, 17);
             this.label17.TabIndex = 10;
@@ -575,10 +636,11 @@
             // 
             this.updateServer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.updateServer.FormattingEnabled = true;
-            this.updateServer.Location = new System.Drawing.Point(595, 268);
+            this.updateServer.Location = new System.Drawing.Point(595, 270);
             this.updateServer.Name = "updateServer";
             this.updateServer.Size = new System.Drawing.Size(139, 25);
             this.updateServer.TabIndex = 9;
+            this.updateServer.SelectedIndexChanged += new System.EventHandler(this.updateServer_SelectedIndexChanged);
             // 
             // groupBox2
             // 
@@ -740,8 +802,13 @@
             // 
             // aboutTab
             // 
-            this.aboutTab.Controls.Add(this.label18);
+            this.aboutTab.Controls.Add(this.groupBox5);
+            this.aboutTab.Controls.Add(this.disMcCheck);
             this.aboutTab.Controls.Add(this.joinGroupUrl);
+            this.aboutTab.Controls.Add(this.textBox4);
+            this.aboutTab.Controls.Add(this.label23);
+            this.aboutTab.Controls.Add(this.label18);
+            this.aboutTab.Controls.Add(this.bbsUrl);
             this.aboutTab.Controls.Add(this.accountsUrl);
             this.aboutTab.Controls.Add(this.textBox3);
             this.aboutTab.Controls.Add(this.textBox2);
@@ -763,30 +830,64 @@
             this.aboutTab.Text = "关于";
             this.aboutTab.UseVisualStyleBackColor = true;
             // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(23, 243);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(92, 17);
-            this.label18.TabIndex = 15;
-            this.label18.Text = "游戏服务器地址";
-            // 
             // joinGroupUrl
             // 
             this.joinGroupUrl.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
             this.joinGroupUrl.AutoSize = true;
             this.joinGroupUrl.BackColor = System.Drawing.Color.Transparent;
             this.joinGroupUrl.LinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.joinGroupUrl.Location = new System.Drawing.Point(330, 301);
+            this.joinGroupUrl.Location = new System.Drawing.Point(336, 307);
             this.joinGroupUrl.Name = "joinGroupUrl";
             this.joinGroupUrl.Size = new System.Drawing.Size(56, 17);
-            this.joinGroupUrl.TabIndex = 19;
+            this.joinGroupUrl.TabIndex = 22;
             this.joinGroupUrl.TabStop = true;
             this.joinGroupUrl.Tag = "";
             this.joinGroupUrl.Text = "点击加入";
             this.joinGroupUrl.VisitedLinkColor = System.Drawing.SystemColors.MenuHighlight;
             this.joinGroupUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.joinGroupUrl_LinkClicked);
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(126, 304);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(195, 23);
+            this.textBox4.TabIndex = 21;
+            this.textBox4.Text = "466674252";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(29, 307);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(80, 17);
+            this.label23.TabIndex = 20;
+            this.label23.Text = "QQ 讨论群号";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(29, 220);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(92, 17);
+            this.label18.TabIndex = 15;
+            this.label18.Text = "游戏服务器地址";
+            // 
+            // bbsUrl
+            // 
+            this.bbsUrl.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.bbsUrl.AutoSize = true;
+            this.bbsUrl.BackColor = System.Drawing.Color.Transparent;
+            this.bbsUrl.LinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.bbsUrl.Location = new System.Drawing.Point(336, 278);
+            this.bbsUrl.Name = "bbsUrl";
+            this.bbsUrl.Size = new System.Drawing.Size(56, 17);
+            this.bbsUrl.TabIndex = 19;
+            this.bbsUrl.TabStop = true;
+            this.bbsUrl.Tag = "";
+            this.bbsUrl.Text = "点击访问";
+            this.bbsUrl.VisitedLinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.bbsUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.bbsUrl_LinkClicked);
             // 
             // accountsUrl
             // 
@@ -794,7 +895,7 @@
             this.accountsUrl.AutoSize = true;
             this.accountsUrl.BackColor = System.Drawing.Color.Transparent;
             this.accountsUrl.LinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.accountsUrl.Location = new System.Drawing.Point(330, 272);
+            this.accountsUrl.Location = new System.Drawing.Point(336, 249);
             this.accountsUrl.Name = "accountsUrl";
             this.accountsUrl.Size = new System.Drawing.Size(56, 17);
             this.accountsUrl.TabIndex = 19;
@@ -806,16 +907,16 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(120, 298);
+            this.textBox3.Location = new System.Drawing.Point(126, 275);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(195, 23);
             this.textBox3.TabIndex = 18;
-            this.textBox3.Text = "466674252";
+            this.textBox3.Text = "http://moeclub.net";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(120, 269);
+            this.textBox2.Location = new System.Drawing.Point(126, 246);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(195, 23);
@@ -825,16 +926,16 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(23, 301);
+            this.label20.Location = new System.Drawing.Point(29, 278);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(80, 17);
+            this.label20.Size = new System.Drawing.Size(56, 17);
             this.label20.TabIndex = 17;
-            this.label20.Text = "QQ 讨论群号";
+            this.label20.Text = "论坛地址";
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(23, 272);
+            this.label19.Location = new System.Drawing.Point(29, 249);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(80, 17);
             this.label19.TabIndex = 17;
@@ -842,7 +943,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(120, 240);
+            this.textBox1.Location = new System.Drawing.Point(126, 217);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(195, 23);
@@ -864,7 +965,7 @@
             this.stusUrl.AutoSize = true;
             this.stusUrl.BackColor = System.Drawing.Color.Transparent;
             this.stusUrl.LinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.stusUrl.Location = new System.Drawing.Point(274, 113);
+            this.stusUrl.Location = new System.Drawing.Point(292, 113);
             this.stusUrl.Name = "stusUrl";
             this.stusUrl.Size = new System.Drawing.Size(113, 17);
             this.stusUrl.TabIndex = 13;
@@ -877,7 +978,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(257, 113);
+            this.label4.Location = new System.Drawing.Point(275, 113);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(20, 17);
             this.label4.TabIndex = 12;
@@ -889,7 +990,7 @@
             this.kenvixUrl.AutoSize = true;
             this.kenvixUrl.BackColor = System.Drawing.Color.Transparent;
             this.kenvixUrl.LinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.kenvixUrl.Location = new System.Drawing.Point(216, 113);
+            this.kenvixUrl.Location = new System.Drawing.Point(234, 113);
             this.kenvixUrl.Name = "kenvixUrl";
             this.kenvixUrl.Size = new System.Drawing.Size(45, 17);
             this.kenvixUrl.TabIndex = 11;
@@ -902,7 +1003,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(176, 113);
+            this.label3.Location = new System.Drawing.Point(194, 113);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 17);
             this.label3.TabIndex = 10;
@@ -913,9 +1014,9 @@
             this.version.AutoSize = true;
             this.version.Location = new System.Drawing.Point(137, 113);
             this.version.Name = "version";
-            this.version.Size = new System.Drawing.Size(33, 17);
+            this.version.Size = new System.Drawing.Size(53, 17);
             this.version.TabIndex = 9;
-            this.version.Text = "V1.6";
+            this.version.Text = "V1.0.0.0";
             // 
             // label2
             // 
@@ -932,60 +1033,51 @@
             this.pictureBox1.ImageLocation = "";
             this.pictureBox1.Location = new System.Drawing.Point(23, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(699, 99);
+            this.pictureBox1.Size = new System.Drawing.Size(385, 99);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
-            // groupBox4
+            // playerJREBrowser
             // 
-            this.groupBox4.Controls.Add(this.recMcOpt);
-            this.groupBox4.Controls.Add(this.bakMcOpt);
-            this.groupBox4.Controls.Add(this.label22);
-            this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Location = new System.Drawing.Point(17, 163);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(191, 188);
-            this.groupBox4.TabIndex = 12;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "备份游戏内设置";
+            this.playerJREBrowser.Location = new System.Drawing.Point(627, 86);
+            this.playerJREBrowser.Name = "playerJREBrowser";
+            this.playerJREBrowser.Size = new System.Drawing.Size(102, 23);
+            this.playerJREBrowser.TabIndex = 13;
+            this.playerJREBrowser.Text = "浏览 ... (&B)";
+            this.playerJREBrowser.UseVisualStyleBackColor = true;
+            this.playerJREBrowser.Click += new System.EventHandler(this.playerJREBrowser_Click);
             // 
-            // label21
+            // disMcCheck
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 29);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(176, 17);
-            this.label21.TabIndex = 0;
-            this.label21.Text = "你可以通过备份和恢复设置信息";
+            this.disMcCheck.AutoSize = true;
+            this.disMcCheck.Location = new System.Drawing.Point(28, 171);
+            this.disMcCheck.Name = "disMcCheck";
+            this.disMcCheck.Size = new System.Drawing.Size(242, 21);
+            this.disMcCheck.TabIndex = 23;
+            this.disMcCheck.Text = "不要在启动时提示我没有安装 MoeCraft";
+            this.disMcCheck.UseVisualStyleBackColor = true;
+            this.disMcCheck.CheckedChanged += new System.EventHandler(this.disMcCheck_CheckedChanged);
             // 
-            // label22
+            // groupBox5
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(7, 52);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(164, 17);
-            this.label22.TabIndex = 1;
-            this.label22.Text = "来防止不慎操作导致设置丢失";
+            this.groupBox5.Controls.Add(this.textBox5);
+            this.groupBox5.Location = new System.Drawing.Point(415, 12);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(314, 333);
+            this.groupBox5.TabIndex = 24;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "更新器的更新日志";
             // 
-            // recMcOpt
+            // textBox5
             // 
-            this.recMcOpt.Location = new System.Drawing.Point(26, 137);
-            this.recMcOpt.Name = "recMcOpt";
-            this.recMcOpt.Size = new System.Drawing.Size(133, 34);
-            this.recMcOpt.TabIndex = 10;
-            this.recMcOpt.Text = "恢复设置 (&R)";
-            this.recMcOpt.UseVisualStyleBackColor = true;
-            this.recMcOpt.Click += new System.EventHandler(this.recMcOpt_Click);
-            // 
-            // bakMcOpt
-            // 
-            this.bakMcOpt.Location = new System.Drawing.Point(26, 83);
-            this.bakMcOpt.Name = "bakMcOpt";
-            this.bakMcOpt.Size = new System.Drawing.Size(133, 34);
-            this.bakMcOpt.TabIndex = 11;
-            this.bakMcOpt.Text = "备份设置 (&B)";
-            this.bakMcOpt.UseVisualStyleBackColor = true;
-            this.bakMcOpt.Click += new System.EventHandler(this.bakMcOpt_Click);
+            this.textBox5.Location = new System.Drawing.Point(6, 22);
+            this.textBox5.Multiline = true;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(302, 305);
+            this.textBox5.TabIndex = 0;
+            this.textBox5.Text = "=========   V1.8@2015-08-29 =========\r\n1.重制并重新加入全局异常处理程序\r\n=========   V1.7@2015-0" +
+    "8-28 =========\r\n1.工具箱增加 区域文件计算器\r\n2.可以在 关于 页面禁用没有安装MoeCraft的提示\r\n3.增加更新日志";
             // 
             // Form1
             // 
@@ -1003,6 +1095,8 @@
             this.mcLauncher.ResumeLayout(false);
             this.mcLauncher.PerformLayout();
             this.toolTab.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.toolGroupBox.ResumeLayout(false);
@@ -1020,8 +1114,8 @@
             this.aboutTab.ResumeLayout(false);
             this.aboutTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1046,7 +1140,6 @@
         private System.Windows.Forms.Button playerRun;
         private System.Windows.Forms.Button playerSave;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button playerJREBrowser;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
@@ -1102,13 +1195,21 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.LinkLabel joinGroupUrl;
+        private System.Windows.Forms.LinkLabel bbsUrl;
         private System.Windows.Forms.LinkLabel accountsUrl;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button recMcOpt;
         private System.Windows.Forms.Button bakMcOpt;
-        private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.LinkLabel joinGroupUrl;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Button regionCalculatorButton;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button playerJREBrowser;
+        private System.Windows.Forms.CheckBox disMcCheck;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.TextBox textBox5;
     }
 }
 
