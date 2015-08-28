@@ -68,6 +68,12 @@ Public Class UpdateHelper
         Log("文件替换完成")
 
         Log("更新完成，启动MoeCraft更新器并退出更新助手")
+        If File.Exists("..\更新器.exe") Then
+            Process.Start("..\更新器.exe")
+            Application.Exit()
+        Else
+            Log("启动更新器失败！未知错误")
+        End If
 
 F:
 

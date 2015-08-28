@@ -32,7 +32,7 @@ Partial Class UpdateHelper
         '
         Me.UpdateProgress.Location = New System.Drawing.Point(12, 267)
         Me.UpdateProgress.Name = "UpdateProgress"
-        Me.UpdateProgress.Size = New System.Drawing.Size(341, 23)
+        Me.UpdateProgress.Size = New System.Drawing.Size(366, 23)
         Me.UpdateProgress.TabIndex = 0
         Me.UpdateProgress.Value = 10
         '
@@ -40,7 +40,7 @@ Partial Class UpdateHelper
         '
         Me.LogList.FormattingEnabled = True
         Me.LogList.ItemHeight = 17
-        Me.LogList.Location = New System.Drawing.Point(12, 42)
+        Me.LogList.Location = New System.Drawing.Point(12, 34)
         Me.LogList.Name = "LogList"
         Me.LogList.Size = New System.Drawing.Size(450, 208)
         Me.LogList.TabIndex = 1
@@ -48,20 +48,20 @@ Partial Class UpdateHelper
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(13, 13)
+        Me.Label1.Location = New System.Drawing.Point(9, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(44, 17)
+        Me.Label1.Size = New System.Drawing.Size(227, 17)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "进度："
+        Me.Label1.Text = "正在更新 MoeCraft更新器。 操作进度："
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'ExitBtn
         '
         Me.ExitBtn.Enabled = False
-        Me.ExitBtn.Location = New System.Drawing.Point(359, 267)
+        Me.ExitBtn.Location = New System.Drawing.Point(381, 267)
         Me.ExitBtn.Margin = New System.Windows.Forms.Padding(0)
         Me.ExitBtn.Name = "ExitBtn"
-        Me.ExitBtn.Size = New System.Drawing.Size(103, 23)
+        Me.ExitBtn.Size = New System.Drawing.Size(81, 23)
         Me.ExitBtn.TabIndex = 3
         Me.ExitBtn.Text = "退出"
         Me.ExitBtn.UseVisualStyleBackColor = True
