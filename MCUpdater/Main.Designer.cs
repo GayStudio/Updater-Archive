@@ -1,6 +1,6 @@
 ﻿namespace MCUpdater
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lastLog = new System.Windows.Forms.ToolStripStatusLabel();
             this.mcLauncher = new System.Windows.Forms.TabPage();
@@ -172,10 +172,10 @@
             this.mcLauncher.Controls.Add(this.label7);
             this.mcLauncher.Controls.Add(this.label6);
             this.mcLauncher.Controls.Add(this.label13);
-            this.mcLauncher.Location = new System.Drawing.Point(4, 26);
+            this.mcLauncher.Location = new System.Drawing.Point(4, 22);
             this.mcLauncher.Name = "mcLauncher";
             this.mcLauncher.Padding = new System.Windows.Forms.Padding(3);
-            this.mcLauncher.Size = new System.Drawing.Size(745, 357);
+            this.mcLauncher.Size = new System.Drawing.Size(745, 361);
             this.mcLauncher.TabIndex = 7;
             this.mcLauncher.Text = "启动器";
             this.mcLauncher.UseVisualStyleBackColor = true;
@@ -544,10 +544,10 @@
             // logTab
             // 
             this.logTab.Controls.Add(this.logBox);
-            this.logTab.Location = new System.Drawing.Point(4, 26);
+            this.logTab.Location = new System.Drawing.Point(4, 22);
             this.logTab.Name = "logTab";
             this.logTab.Padding = new System.Windows.Forms.Padding(3);
-            this.logTab.Size = new System.Drawing.Size(745, 357);
+            this.logTab.Size = new System.Drawing.Size(745, 361);
             this.logTab.TabIndex = 4;
             this.logTab.Text = "操作日志";
             this.logTab.UseVisualStyleBackColor = true;
@@ -833,9 +833,9 @@
             this.aboutTab.Controls.Add(this.version);
             this.aboutTab.Controls.Add(this.label2);
             this.aboutTab.Controls.Add(this.pictureBox1);
-            this.aboutTab.Location = new System.Drawing.Point(4, 26);
+            this.aboutTab.Location = new System.Drawing.Point(4, 22);
             this.aboutTab.Name = "aboutTab";
-            this.aboutTab.Size = new System.Drawing.Size(745, 357);
+            this.aboutTab.Size = new System.Drawing.Size(745, 361);
             this.aboutTab.TabIndex = 8;
             this.aboutTab.Text = "关于";
             this.aboutTab.UseVisualStyleBackColor = true;
@@ -1079,7 +1079,7 @@
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
-            // Form1
+            // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(778, 425);
@@ -1088,7 +1088,7 @@
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "Main";
             this.Text = "MoeCraft 更新程序";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

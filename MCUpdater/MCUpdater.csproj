@@ -121,6 +121,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="a.cs" />
+    <Compile Include="Component1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Component1.Designer.cs">
+      <DependentUpon>Component1.cs</DependentUpon>
+    </Compile>
     <Compile Include="EX.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,15 @@
       <DependentUpon>EX.cs</DependentUpon>
     </Compile>
     <Compile Include="forgeJsonData.cs" />
+    <Compile Include="Main-MCLauncher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main-Tools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main-Updater.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="regionCalculator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,19 +150,19 @@
       <DependentUpon>regionCalculator.cs</DependentUpon>
     </Compile>
     <Compile Include="x.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="EX.resx">
       <DependentUpon>EX.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -165,6 +180,7 @@
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ClassDiagram1.cd" />
     <None Include="MCUpdater_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
