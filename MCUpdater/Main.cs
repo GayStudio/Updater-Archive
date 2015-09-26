@@ -4,6 +4,9 @@ using System.IO;
 using System.Net;
 using System.Windows.Forms;
 using System.Data;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MCUpdater
 {
@@ -318,6 +321,49 @@ namespace MCUpdater
         private void updateServer_SelectedIndexChanged(object sender, EventArgs e)
         {
             conn.setOpt("updateServer",updateServer.SelectedIndex.ToString());
+        }
+
+        #region 查看MC崩溃日志
+        private void crashReportViewerButton_Click(object sender, EventArgs e)
+        {
+            if(!Directory.Exists(x.path + x.binpath + @"crash-reports"))
+            {
+                error("没有最近的崩溃日志可供查看\r\n崩溃日志目录不存在");
+                return;
+            }
+            Thread th = new Thread(() =>
+            {
+                var logList = Directory.GetFiles(x.path + x.binpath + @"crash-reports", "*.txt", SearchOption.TopDirectoryOnly);
+                logViewer lv = new logViewer(logList.Last(), "gb2312");
+                Application.Run(lv);
+            });
+            th.ApartmentState = ApartmentState.STA;
+            th.Start();
+        }
+        #endregion
+
+        private void gameLogViewerButton_Click(object sender, EventArgs e)
+        {
+            var f = x.path + x.binpath + @"logs\latest.log";
+            if (File.Exists(f))
+            {
+                logViewer lv = new logViewer(f);
+                lv.Show();
+            }
+            else
+            {
+                error("没有最近的日志可供查看");
+            }
+        }
+
+        private void updateLogButtom_Click(object sender, EventArgs e)
+        {
+            var f = x.path + x.updpath + @"new.txt";
+            if (File.Exists(f))
+            {
+                logViewer lv = new logViewer(f);
+                lv.Show();
+            }
         }
     }
 }

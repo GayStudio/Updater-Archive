@@ -80,7 +80,7 @@ namespace MCUpdater
             }
             catch (Exception ex)
             {
-                error("激活或禁用Mod失败：" + ex.Message, "激活或禁用Mod失败");
+                error("激活或禁用Mod失败：" + ex.Message + "\r\n请确保你已经关闭了 MineCraft", "激活或禁用Mod失败");
             }
         }
         #endregion

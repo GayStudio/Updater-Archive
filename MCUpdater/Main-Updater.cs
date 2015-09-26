@@ -109,7 +109,7 @@ namespace MCUpdater
                     while (!updateFlag)
                     {
                         Application.DoEvents();
-                        Thread.Sleep(25);
+                        Thread.Sleep(20);
                     }
                     #region 解包更新文件
                     updateThisProgressText.Text = "安装中";

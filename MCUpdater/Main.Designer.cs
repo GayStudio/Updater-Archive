@@ -54,6 +54,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.toolTab = new System.Windows.Forms.TabPage();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.gameLogViewerButton = new System.Windows.Forms.Button();
+            this.crashReportViewerButton = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label22 = new System.Windows.Forms.Label();
             this.recMcOpt = new System.Windows.Forms.Button();
@@ -94,8 +97,6 @@
             this.updateLog = new System.Windows.Forms.TextBox();
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.aboutTab = new System.Windows.Forms.TabPage();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
             this.disMcCheck = new System.Windows.Forms.CheckBox();
             this.joinGroupUrl = new System.Windows.Forms.LinkLabel();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -116,9 +117,11 @@
             this.version = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.updateLogButtom = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.mcLauncher.SuspendLayout();
             this.toolTab.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.toolGroupBox.SuspendLayout();
@@ -129,7 +132,6 @@
             this.groupBox3.SuspendLayout();
             this.mainTabControl.SuspendLayout();
             this.aboutTab.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -172,10 +174,10 @@
             this.mcLauncher.Controls.Add(this.label7);
             this.mcLauncher.Controls.Add(this.label6);
             this.mcLauncher.Controls.Add(this.label13);
-            this.mcLauncher.Location = new System.Drawing.Point(4, 22);
+            this.mcLauncher.Location = new System.Drawing.Point(4, 26);
             this.mcLauncher.Name = "mcLauncher";
             this.mcLauncher.Padding = new System.Windows.Forms.Padding(3);
-            this.mcLauncher.Size = new System.Drawing.Size(745, 361);
+            this.mcLauncher.Size = new System.Drawing.Size(745, 357);
             this.mcLauncher.TabIndex = 7;
             this.mcLauncher.Text = "启动器";
             this.mcLauncher.UseVisualStyleBackColor = true;
@@ -385,6 +387,7 @@
             // 
             // toolTab
             // 
+            this.toolTab.Controls.Add(this.groupBox6);
             this.toolTab.Controls.Add(this.groupBox4);
             this.toolTab.Controls.Add(this.groupBox1);
             this.toolTab.Controls.Add(this.toolGroupBox);
@@ -396,13 +399,44 @@
             this.toolTab.Text = "工具箱";
             this.toolTab.UseVisualStyleBackColor = true;
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.gameLogViewerButton);
+            this.groupBox6.Controls.Add(this.crashReportViewerButton);
+            this.groupBox6.Location = new System.Drawing.Point(17, 201);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(191, 137);
+            this.groupBox6.TabIndex = 13;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Minecraft 游戏工具";
+            // 
+            // gameLogViewerButton
+            // 
+            this.gameLogViewerButton.Location = new System.Drawing.Point(26, 78);
+            this.gameLogViewerButton.Name = "gameLogViewerButton";
+            this.gameLogViewerButton.Size = new System.Drawing.Size(133, 34);
+            this.gameLogViewerButton.TabIndex = 12;
+            this.gameLogViewerButton.Text = "游戏日志查看器 (&S)";
+            this.gameLogViewerButton.UseVisualStyleBackColor = true;
+            this.gameLogViewerButton.Click += new System.EventHandler(this.gameLogViewerButton_Click);
+            // 
+            // crashReportViewerButton
+            // 
+            this.crashReportViewerButton.Location = new System.Drawing.Point(26, 32);
+            this.crashReportViewerButton.Name = "crashReportViewerButton";
+            this.crashReportViewerButton.Size = new System.Drawing.Size(133, 34);
+            this.crashReportViewerButton.TabIndex = 11;
+            this.crashReportViewerButton.Text = "崩溃日志查看器 (&A)";
+            this.crashReportViewerButton.UseVisualStyleBackColor = true;
+            this.crashReportViewerButton.Click += new System.EventHandler(this.crashReportViewerButton_Click);
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.label22);
             this.groupBox4.Controls.Add(this.recMcOpt);
             this.groupBox4.Controls.Add(this.bakMcOpt);
             this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Location = new System.Drawing.Point(223, 168);
+            this.groupBox4.Location = new System.Drawing.Point(223, 201);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(486, 137);
             this.groupBox4.TabIndex = 12;
@@ -456,7 +490,7 @@
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Location = new System.Drawing.Point(223, 16);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(486, 141);
+            this.groupBox1.Size = new System.Drawing.Size(486, 174);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "解决低端电脑启动失败问题";
@@ -506,14 +540,14 @@
             this.toolGroupBox.Controls.Add(this.cleanDownloadCache);
             this.toolGroupBox.Location = new System.Drawing.Point(17, 16);
             this.toolGroupBox.Name = "toolGroupBox";
-            this.toolGroupBox.Size = new System.Drawing.Size(191, 289);
+            this.toolGroupBox.Size = new System.Drawing.Size(191, 174);
             this.toolGroupBox.TabIndex = 10;
             this.toolGroupBox.TabStop = false;
             this.toolGroupBox.Text = "常用工具";
             // 
             // regionCalculatorButton
             // 
-            this.regionCalculatorButton.Location = new System.Drawing.Point(26, 140);
+            this.regionCalculatorButton.Location = new System.Drawing.Point(26, 123);
             this.regionCalculatorButton.Name = "regionCalculatorButton";
             this.regionCalculatorButton.Size = new System.Drawing.Size(133, 34);
             this.regionCalculatorButton.TabIndex = 10;
@@ -523,7 +557,7 @@
             // 
             // launcherButton
             // 
-            this.launcherButton.Location = new System.Drawing.Point(26, 85);
+            this.launcherButton.Location = new System.Drawing.Point(26, 77);
             this.launcherButton.Name = "launcherButton";
             this.launcherButton.Size = new System.Drawing.Size(133, 34);
             this.launcherButton.TabIndex = 8;
@@ -544,10 +578,10 @@
             // logTab
             // 
             this.logTab.Controls.Add(this.logBox);
-            this.logTab.Location = new System.Drawing.Point(4, 22);
+            this.logTab.Location = new System.Drawing.Point(4, 26);
             this.logTab.Name = "logTab";
             this.logTab.Padding = new System.Windows.Forms.Padding(3);
-            this.logTab.Size = new System.Drawing.Size(745, 361);
+            this.logTab.Size = new System.Drawing.Size(745, 357);
             this.logTab.TabIndex = 4;
             this.logTab.Text = "操作日志";
             this.logTab.UseVisualStyleBackColor = true;
@@ -812,7 +846,7 @@
             // 
             // aboutTab
             // 
-            this.aboutTab.Controls.Add(this.groupBox5);
+            this.aboutTab.Controls.Add(this.updateLogButtom);
             this.aboutTab.Controls.Add(this.disMcCheck);
             this.aboutTab.Controls.Add(this.joinGroupUrl);
             this.aboutTab.Controls.Add(this.textBox4);
@@ -833,33 +867,12 @@
             this.aboutTab.Controls.Add(this.version);
             this.aboutTab.Controls.Add(this.label2);
             this.aboutTab.Controls.Add(this.pictureBox1);
-            this.aboutTab.Location = new System.Drawing.Point(4, 22);
+            this.aboutTab.Location = new System.Drawing.Point(4, 26);
             this.aboutTab.Name = "aboutTab";
-            this.aboutTab.Size = new System.Drawing.Size(745, 361);
+            this.aboutTab.Size = new System.Drawing.Size(745, 357);
             this.aboutTab.TabIndex = 8;
             this.aboutTab.Text = "关于";
             this.aboutTab.UseVisualStyleBackColor = true;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.textBox5);
-            this.groupBox5.Location = new System.Drawing.Point(415, 12);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(314, 333);
-            this.groupBox5.TabIndex = 24;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "更新器的更新日志";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(6, 22);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(302, 305);
-            this.textBox5.TabIndex = 0;
-            this.textBox5.Text = "=========   V1.8@2015-08-29 =========\r\n1.重制并重新加入全局异常处理程序\r\n=========   V1.7@2015-0" +
-    "8-28 =========\r\n1.工具箱增加 区域文件计算器\r\n2.可以在 关于 页面禁用没有安装MoeCraft的提示\r\n3.增加更新日志";
             // 
             // disMcCheck
             // 
@@ -1079,6 +1092,16 @@
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
+            // updateLogButtom
+            // 
+            this.updateLogButtom.Location = new System.Drawing.Point(577, 278);
+            this.updateLogButtom.Name = "updateLogButtom";
+            this.updateLogButtom.Size = new System.Drawing.Size(144, 49);
+            this.updateLogButtom.TabIndex = 24;
+            this.updateLogButtom.Text = "更新日志 (&U)";
+            this.updateLogButtom.UseVisualStyleBackColor = true;
+            this.updateLogButtom.Click += new System.EventHandler(this.updateLogButtom_Click);
+            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1095,6 +1118,7 @@
             this.mcLauncher.ResumeLayout(false);
             this.mcLauncher.PerformLayout();
             this.toolTab.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1113,8 +1137,6 @@
             this.mainTabControl.ResumeLayout(false);
             this.aboutTab.ResumeLayout(false);
             this.aboutTab.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1208,8 +1230,10 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button playerJREBrowser;
         private System.Windows.Forms.CheckBox disMcCheck;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Button gameLogViewerButton;
+        private System.Windows.Forms.Button crashReportViewerButton;
+        private System.Windows.Forms.Button updateLogButtom;
     }
 }
 
