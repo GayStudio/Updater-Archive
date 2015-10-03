@@ -16,11 +16,11 @@
             如果要利用文件和注册表虚拟化实现向后 
             兼容性，则删除 requestedExecutionLevel 节点。
         -->
-        <requestedExecutionLevel level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
       </requestedPrivileges>
       <applicationRequestMinimum>
         <defaultAssemblyRequest permissionSetReference="Custom" />
-        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <PermissionSet ID="Custom" SameSite="site" Unrestricted="true" />
       </applicationRequestMinimum>
     </security>
   </trustInfo>
@@ -36,10 +36,10 @@
       <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"></supportedOS>-->
     </application>
   </compatibility>
-  <!-- 启用 Windows 公共控件和对话框的主题(Windows XP 和更高版本) -->
+  <!-- 启用 Windows 公共控件和对话框的主题(Windows XP 和更高版本)
   <dependency>
     <dependentAssembly>
       <assemblyIdentity type="win32" name="Microsoft.Windows.Common-Controls" version="6.0.0.0" processorArchitecture="*" publicKeyToken="6595b64144ccf1df" language="*" />
     </dependentAssembly>
-  </dependency>
+  </dependency> -->
 </asmv1:assembly>

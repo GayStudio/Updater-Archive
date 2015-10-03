@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace MCUpdater
@@ -22,6 +16,7 @@ namespace MCUpdater
         {
             InitializeComponent();
             EXMsg.Text  = x.name + " V" + x.ver + " | " + System.Environment.OSVersion;
+            EXMsg.Text += "\r\n" + x.app.FullName;
             EXMsg.Text += "\r\n异常描述：" + ex.Message;
             EXMsg.Text += "\r\n产生时间：" + DateTime.Now.ToLocalTime().ToString();
             EXMsg.Text += "\r\n源：" + ex.Source;

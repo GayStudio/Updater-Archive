@@ -1,4 +1,6 @@
-﻿namespace MCUpdater
+﻿using System.Reflection;
+
+namespace MCUpdater
 {
     partial class Main
     {
@@ -97,6 +99,7 @@
             this.updateLog = new System.Windows.Forms.TextBox();
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.aboutTab = new System.Windows.Forms.TabPage();
+            this.updateLogButtom = new System.Windows.Forms.Button();
             this.disMcCheck = new System.Windows.Forms.CheckBox();
             this.joinGroupUrl = new System.Windows.Forms.LinkLabel();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -117,7 +120,6 @@
             this.version = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.updateLogButtom = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.mcLauncher.SuspendLayout();
             this.toolTab.SuspendLayout();
@@ -391,10 +393,10 @@
             this.toolTab.Controls.Add(this.groupBox4);
             this.toolTab.Controls.Add(this.groupBox1);
             this.toolTab.Controls.Add(this.toolGroupBox);
-            this.toolTab.Location = new System.Drawing.Point(4, 26);
+            this.toolTab.Location = new System.Drawing.Point(4, 22);
             this.toolTab.Name = "toolTab";
             this.toolTab.Padding = new System.Windows.Forms.Padding(3);
-            this.toolTab.Size = new System.Drawing.Size(745, 357);
+            this.toolTab.Size = new System.Drawing.Size(745, 361);
             this.toolTab.TabIndex = 5;
             this.toolTab.Text = "工具箱";
             this.toolTab.UseVisualStyleBackColor = true;
@@ -602,10 +604,10 @@
             this.offlineModsTab.Controls.Add(this.label1);
             this.offlineModsTab.Controls.Add(this.offlineModList);
             this.offlineModsTab.Controls.Add(this.saveOfflineMod);
-            this.offlineModsTab.Location = new System.Drawing.Point(4, 26);
+            this.offlineModsTab.Location = new System.Drawing.Point(4, 22);
             this.offlineModsTab.Name = "offlineModsTab";
             this.offlineModsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.offlineModsTab.Size = new System.Drawing.Size(745, 357);
+            this.offlineModsTab.Size = new System.Drawing.Size(745, 361);
             this.offlineModsTab.TabIndex = 3;
             this.offlineModsTab.Text = "Mod管理";
             this.offlineModsTab.UseVisualStyleBackColor = true;
@@ -874,6 +876,16 @@
             this.aboutTab.Text = "关于";
             this.aboutTab.UseVisualStyleBackColor = true;
             // 
+            // updateLogButtom
+            // 
+            this.updateLogButtom.Location = new System.Drawing.Point(577, 278);
+            this.updateLogButtom.Name = "updateLogButtom";
+            this.updateLogButtom.Size = new System.Drawing.Size(144, 49);
+            this.updateLogButtom.TabIndex = 24;
+            this.updateLogButtom.Text = "更新日志 (&U)";
+            this.updateLogButtom.UseVisualStyleBackColor = true;
+            this.updateLogButtom.Click += new System.EventHandler(this.updateLogButtom_Click);
+            // 
             // disMcCheck
             // 
             this.disMcCheck.AutoSize = true;
@@ -1071,7 +1083,7 @@
             this.version.Name = "version";
             this.version.Size = new System.Drawing.Size(53, 17);
             this.version.TabIndex = 9;
-            this.version.Text = "V1.0.0.0";
+            this.version.Text = x.app.Version.ToString();
             // 
             // label2
             // 
@@ -1091,16 +1103,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(385, 99);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
-            // 
-            // updateLogButtom
-            // 
-            this.updateLogButtom.Location = new System.Drawing.Point(577, 278);
-            this.updateLogButtom.Name = "updateLogButtom";
-            this.updateLogButtom.Size = new System.Drawing.Size(144, 49);
-            this.updateLogButtom.TabIndex = 24;
-            this.updateLogButtom.Text = "更新日志 (&U)";
-            this.updateLogButtom.UseVisualStyleBackColor = true;
-            this.updateLogButtom.Click += new System.EventHandler(this.updateLogButtom_Click);
             // 
             // Main
             // 

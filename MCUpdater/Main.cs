@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using System.Data;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace MCUpdater
 {
@@ -31,7 +30,6 @@ namespace MCUpdater
 #if !DEBUG
             mainTabControl.TabPages.Remove(mainTabControl.TabPages[5]); //隐藏启动器页面
 #endif
-            version.Text = "V"+x.ver;
             if (!Directory.Exists(x.updpath))
             {
                 Directory.CreateDirectory(x.updpath);
@@ -337,7 +335,7 @@ namespace MCUpdater
                 logViewer lv = new logViewer(logList.Last(), "gb2312");
                 Application.Run(lv);
             });
-            th.ApartmentState = ApartmentState.STA;
+            th.SetApartmentState(ApartmentState.STA);
             th.Start();
         }
         #endregion

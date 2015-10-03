@@ -1,9 +1,12 @@
-﻿namespace MCUpdater
+﻿using System.Reflection;
+
+namespace MCUpdater
 {
     static class x
     {
         public const string name = "MoeCraft";
-        public const string ver = "1.7";
+        public static AssemblyName app = Assembly.GetExecutingAssembly().GetName();
+        public static string ver = app.Version.ToString(); 
         public static string path   = System.IO.Directory.GetCurrentDirectory() + "\\";
         public const string binpath = @".minecraft\";
         public const string moddir  = binpath + @"mods\1.7.10\";

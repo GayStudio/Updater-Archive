@@ -148,6 +148,8 @@ namespace MCUpdater
                 {
                     string text = File.ReadAllText(v);
                     File.WriteAllText(v, text.Replace("enabled=true", "enabled=false"));
+                    log("已成功关闭启动进度条");
+                    success("已成功关闭启动进度条", "操作成功");
                 }
                 catch (Exception ex)
                 {
@@ -155,8 +157,6 @@ namespace MCUpdater
                     return;
                 }
             }
-            log("已成功关闭启动进度条");
-            success("已成功关闭启动进度条", "操作成功");
         }
 
         private void enableForgeProgress_Click(object sender, EventArgs e)
@@ -173,6 +173,8 @@ namespace MCUpdater
                 {
                     string text = File.ReadAllText(v);
                     File.WriteAllText(v, text.Replace("enabled=false", "enabled=true"));
+                    log("已成功恢复启动进度条");
+                    success("已成功恢复启动进度条", "操作成功");
                 }
                 catch (Exception ex)
                 {
@@ -180,8 +182,6 @@ namespace MCUpdater
                     return;
                 }
             }
-            log("已成功恢复启动进度条");
-            success("已成功恢复启动进度条", "操作成功");
         }
         #endregion
     }
