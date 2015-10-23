@@ -65,19 +65,6 @@ namespace MCUpdater
             textBox.SelectAll();
         }
 
-        private void 文件FToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void sToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                openFile(ofd.FileName);
-            }
-        }
-
         private void 关闭LToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -92,37 +79,38 @@ namespace MCUpdater
             }
         }
 
-        private void font_Apply(object sender, EventArgs e)
+        private void 打开OToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                openFile(ofd.FileName);
+            }
         }
 
-        private void explorerButton_Click(object sender, EventArgs e)
+        private void 保存VToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(path))
             {
                 try
                 {
-                    Process.Start("explorer.exe", "/select," + path);
+                    File.WriteAllText(path, textBox.Text, encoding);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     error(ex.Message);
                 }
             }
         }
-        
-        private void saveButton_Click(object sender, EventArgs e)
+
+        private void 资源管理器EToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(path))
+            try
             {
-                try
-                {
-                    File.WriteAllText(path , textBox.Text , encoding);
-                }
-                catch(Exception ex)
-                {
-                    error(ex.Message);
-                }
+                Process.Start("explorer.exe","/select,"+path);
+            }
+            catch (Exception ex)
+            {
+                error(ex.Message);
             }
         }
     }

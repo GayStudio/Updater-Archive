@@ -11,22 +11,29 @@ namespace MCUpdater
 {
     public partial class Main : Form
     {
-        private a conn;
+        private config conn;
+        private cdn cdnc;
         private WebClient w;
         private bool updateFlag = false;
         private string updateError;
+        public bool inited = false;
         public Main()
         {
             try
             {
-                conn = new a();
+                conn = new config();
+                cdnc = new cdn();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("致命错误：启动数据库失败：\r\n" + ex.Message,"初始化失败",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("致命错误：无法打开配置文件：\r\n" + ex.Message + "\r\n" + ex.StackTrace,x.pname + " 初始化失败",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 Environment.Exit(0);
             }
             InitializeComponent();
+            #region UI
+            label2.Text = x.pname;
+            Text = x.pname;
+            version.Text = x.ver;
 #if !DEBUG
             mainTabControl.TabPages.Remove(mainTabControl.TabPages[5]); //隐藏启动器页面
 #endif
@@ -59,10 +66,10 @@ namespace MCUpdater
                 }
             }
             */
-            DataSet d = conn.fetch("select * from `cdn`");
-            foreach(DataRow cdn in d.Tables[0].Rows)
+            var cdnListVar = cdnc.list();
+            foreach(System.Xml.XmlElement cdnInfo in cdnListVar)
             {
-                updateServer.Items.Add(cdn["desc"]);
+                updateServer.Items.Add(cdnInfo.GetAttribute("desc"));
             }
             updateServer.SelectedIndex = 0;
             getModList();
@@ -105,25 +112,30 @@ namespace MCUpdater
             }
             log("读取用户设置成功");
              */
-            if (conn.getOpt("disMcCheck") == "0" && !Directory.Exists(x.mcLibPath))
+            if (conn.getOpt("disMcCheck") == "0")
             {
                 disMcCheck.Checked = false;
-                if (MessageBox.Show("你尚未安装 "+x.name+"，无法进行游戏，是否要现在安装？\r\n你可以稍候在 检查更新 页面安装\r\n如果你不想看到此提示，可以在 关于 页面禁用", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if(!Directory.Exists(x.mcLibPath))
                 {
-                    doUpdate();
-                    forceUpdateAssets.Checked = true;
-                    forceUpdateConfig.Checked = true;
-                    forceUpdateCore.Checked = true;
-                    forceUpdateMods.Checked = true;
-                    forceUpdateOmods.Checked = true;
-                    forceUpdateRoot.Checked = true;
+                    if (MessageBox.Show("你尚未安装 " + x.name + "，无法进行游戏，是否要现在安装？\r\n将使用默认节点下载安装。你可以稍候在 检查更新 页面安装\r\n\r\n如果你不想看到此提示，可以在 关于 页面禁用", x.pname, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        doUpdate();
+                        forceUpdateAssets.Checked = true;
+                        forceUpdateConfig.Checked = true;
+                        forceUpdateCore.Checked = true;
+                        forceUpdateMods.Checked = true;
+                        forceUpdateOmods.Checked = true;
+                        forceUpdateRoot.Checked = true;
+                    }
                 }
             }
             else
             {
                 disMcCheck.Checked = true;
             }
+            #endregion
             log("启动成功: " + " V" + x.ver + " | " + System.Environment.OSVersion);
+            inited = true;
         }
         /// <summary>
         /// 记录日志
@@ -306,13 +318,16 @@ namespace MCUpdater
 
         private void disMcCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if(disMcCheck.Checked)
+            if(inited)
             {
-                conn.setOpt("disMcCheck","1");
-            }
-            else
-            {
-                conn.setOpt("disMcCheck","0");
+                if (disMcCheck.Checked)
+                {
+                    conn.setOpt("disMcCheck", "1");
+                }
+                else
+                {
+                    conn.setOpt("disMcCheck", "0");
+                }
             }
         }
 

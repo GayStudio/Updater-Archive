@@ -15,8 +15,8 @@ namespace MCUpdater
         [STAThread]
         static void Main()
         {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
+#if !DEBUG
+            Application.SetCompatibleTextRenderingDefault(false);
                 //1.这里判定是否已经有实例在运行
                 //只运行一个实例
                 Process instance = RunningInstance();
@@ -36,7 +36,7 @@ namespace MCUpdater
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);
                         Application.Run(new Main());
-                        #endregion
+                       #endregion
                     }
                     catch (Exception exc)
                     {
@@ -49,6 +49,11 @@ namespace MCUpdater
                     //1.2 已经有一个实例在运行
                     HandleRunningInstance(instance);
                 }
+#else
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Main());
+#endif
         }
 
         private static void UnhandledEXProcessor(object sender, UnhandledExceptionEventArgs e)
@@ -65,7 +70,7 @@ namespace MCUpdater
 
 
         //2.在进程中查找是否已经有实例在运行
-        #region  确保程序只运行一个实例
+#region  确保程序只运行一个实例
         private static Process RunningInstance()
         {
             Process current = Process.GetCurrentProcess();
@@ -96,7 +101,7 @@ namespace MCUpdater
         private static extern bool ShowWindowAsync(System.IntPtr hWnd, int cmdShow);
         [DllImport("User32.dll")]
         private static extern bool SetForegroundWindow(System.IntPtr hWnd);
-        #endregion
+#endregion
  
     }
 }

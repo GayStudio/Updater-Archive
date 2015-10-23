@@ -1,8 +1,11 @@
 ﻿//主页：工具箱部分
-
 using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Xml;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace MCUpdater
 {
@@ -85,7 +88,7 @@ namespace MCUpdater
         }
         #endregion
 
-        #region 备份键位
+        #region 备份和恢复键位
         private void bakMcOpt_Click(object sender, EventArgs e)
         {
             try
@@ -111,24 +114,27 @@ namespace MCUpdater
 
         private void recMcOpt_Click(object sender, EventArgs e)
         {
-            try
+            if (MessageBox.Show("你确定要恢复以前备份的设置吗？\r\n这将覆盖现有的键位、服务器列表等数据", "确实要恢复设置吗", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                foreach (string file in x.bakList)
+                try
                 {
-                    if (File.Exists(x.path + x.updpath + "backup." + file))
+                    foreach (string file in x.bakList)
                     {
-                        if (File.Exists(x.path + x.binpath + file))
+                        if (File.Exists(x.path + x.updpath + "backup." + file))
                         {
-                            File.Delete(x.path + x.binpath + file);
+                            if (File.Exists(x.path + x.binpath + file))
+                            {
+                                File.Delete(x.path + x.binpath + file);
+                            }
+                            File.Copy(x.path + x.updpath + "backup." + file, x.path + x.binpath + file);
                         }
-                        File.Copy(x.path + x.updpath + "backup." + file, x.path + x.binpath + file);
                     }
+                    success("已成功恢复键位和服务器列表数据\r\n重新启动游戏后即可生效");
                 }
-                success("已成功恢复键位和服务器列表数据\r\n重新启动游戏后即可生效");
-            }
-            catch (Exception ex)
-            {
-                error(ex.Message, "恢复失败");
+                catch (Exception ex)
+                {
+                    error(ex.Message, "恢复失败");
+                }
             }
         }
         #endregion
@@ -184,5 +190,72 @@ namespace MCUpdater
             }
         }
         #endregion
+
+        private void installPatch_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("你确实要安装低配补丁吗？\r\n安装低配补丁后，FPS(帧率)将会大幅提升，但是画质将会降低、大量特效将被关闭\r\n低配补丁还需要Optifine MOD支持（默认已开启）\r\n安装前请先备份游戏内设置。\r\n如果安装后FPS仍然很低，请尝试调高游戏内存上限", "确实要安装低配补丁吗", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                #region 低配补丁
+                XmlDocument xml;
+                XmlElement root;
+                XmlElement ofnode;
+                XmlNodeList of;
+                XmlElement opnode;
+                XmlNodeList op;
+                try
+                {
+                    xml = new XmlDocument();
+                    xml.LoadXml(File.ReadAllText(x.path + x.updpath + "mcpatch.xml"));
+                    root = xml.DocumentElement;
+                    //optionof.txt
+                    ofnode = (XmlElement)root.SelectSingleNode("optionof");
+                    of = ofnode.ChildNodes;
+                    //option.txt
+                    opnode = (XmlElement)root.SelectSingleNode("option");
+                    op = opnode.ChildNodes;
+                }
+                catch(Exception ex)
+                {
+                    error(ex.Message,"加载低配补丁失败");
+                    return;
+                }
+                var opfile = x.path + x.binpath + @"options.txt";
+                var offile = x.path + x.binpath + @"optionsof.txt";
+                var encode = Encoding.GetEncoding("gb2312");
+                Regex regex;
+                if (!File.Exists(opfile))
+                {
+                    error("你还未安装 " + x.name);
+                    return;
+                }
+                try
+                {
+                    var opdata = File.ReadAllText(opfile, encode);
+                    foreach (XmlNode od in op)
+                    {
+                        regex = new Regex(od.Name + @"\:" + "(.*)");
+                        opdata = regex.Replace(opdata, od.Name + ":" + od.InnerText);
+                    }
+                    File.WriteAllText(opfile, opdata, encode);
+                    if(File.Exists(offile))
+                    {
+                        var ofdata = File.ReadAllText(offile, encode);
+                        foreach (XmlNode fd in of)
+                        {
+                            regex = new Regex(fd.Name + @"\:" + "(.*)");
+                            ofdata = regex.Replace(ofdata, fd.Name + ":" + fd.InnerText);
+                        }
+                        File.WriteAllText(offile, ofdata, encode);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    error(ex.Message, "在应用低配补丁时出错");
+                    return;
+                }
+                #endregion
+                success("已安装低配补丁。重启游戏后生效\r\n如果安装后FPS仍然很低，请尝试调高游戏内存上限");
+            }
+        }
     }
 }

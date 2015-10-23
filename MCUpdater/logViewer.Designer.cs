@@ -29,92 +29,38 @@
         private void InitializeComponent()
         {
             this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.listButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFileButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.explorerButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.saveButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.关闭LToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectAllButton = new System.Windows.Forms.ToolStripMenuItem();
             this.copyButton = new System.Windows.Forms.ToolStripMenuItem();
             this.fontButton = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox = new System.Windows.Forms.TextBox();
             this.font = new System.Windows.Forms.FontDialog();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
+            this.打开OToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.保存VToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.资源管理器EToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.listButton,
             this.selectAllButton,
             this.copyButton,
-            this.fontButton});
+            this.fontButton,
+            this.打开OToolStripMenuItem,
+            this.保存VToolStripMenuItem,
+            this.资源管理器EToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(836, 25);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
-            // listButton
-            // 
-            this.listButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openFileButton,
-            this.explorerButton,
-            this.toolStripSeparator1,
-            this.saveButton,
-            this.toolStripSeparator2,
-            this.关闭LToolStripMenuItem});
-            this.listButton.Name = "listButton";
-            this.listButton.Size = new System.Drawing.Size(58, 21);
-            this.listButton.Text = "文件(&F)";
-            this.listButton.Click += new System.EventHandler(this.文件FToolStripMenuItem_Click);
-            // 
-            // openFileButton
-            // 
-            this.openFileButton.Name = "openFileButton";
-            this.openFileButton.Size = new System.Drawing.Size(199, 22);
-            this.openFileButton.Text = "打开文件(&O)";
-            this.openFileButton.Click += new System.EventHandler(this.sToolStripMenuItem_Click);
-            // 
-            // explorerButton
-            // 
-            this.explorerButton.Name = "explorerButton";
-            this.explorerButton.Size = new System.Drawing.Size(199, 22);
-            this.explorerButton.Text = "在资源管理器中查看(&E)";
-            this.explorerButton.Click += new System.EventHandler(this.explorerButton_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(196, 6);
-            // 
-            // saveButton
-            // 
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(199, 22);
-            this.saveButton.Text = "保存(&A)";
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(196, 6);
-            // 
-            // 关闭LToolStripMenuItem
-            // 
-            this.关闭LToolStripMenuItem.Name = "关闭LToolStripMenuItem";
-            this.关闭LToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.关闭LToolStripMenuItem.Text = "关闭(&L)";
-            this.关闭LToolStripMenuItem.Click += new System.EventHandler(this.关闭LToolStripMenuItem_Click);
-            // 
             // selectAllButton
             // 
             this.selectAllButton.Name = "selectAllButton";
-            this.selectAllButton.Size = new System.Drawing.Size(59, 21);
-            this.selectAllButton.Text = "全选(&S)";
+            this.selectAllButton.Size = new System.Drawing.Size(60, 21);
+            this.selectAllButton.Text = "全选(&A)";
             this.selectAllButton.Click += new System.EventHandler(this.selectAllButton_Click);
             // 
             // copyButton
@@ -144,13 +90,33 @@
             // 
             this.font.FontMustExist = true;
             this.font.ShowColor = true;
-            this.font.Apply += new System.EventHandler(this.font_Apply);
             // 
             // ofd
             // 
             this.ofd.Filter = "日志文件 (*.log)|*.log|所有文件|*.*";
             this.ofd.SupportMultiDottedExtensions = true;
             this.ofd.Title = "打开 MineCraft 日志";
+            // 
+            // 打开OToolStripMenuItem
+            // 
+            this.打开OToolStripMenuItem.Name = "打开OToolStripMenuItem";
+            this.打开OToolStripMenuItem.Size = new System.Drawing.Size(62, 21);
+            this.打开OToolStripMenuItem.Text = "打开(&O)";
+            this.打开OToolStripMenuItem.Click += new System.EventHandler(this.打开OToolStripMenuItem_Click);
+            // 
+            // 保存VToolStripMenuItem
+            // 
+            this.保存VToolStripMenuItem.Name = "保存VToolStripMenuItem";
+            this.保存VToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
+            this.保存VToolStripMenuItem.Text = "保存(&S)";
+            this.保存VToolStripMenuItem.Click += new System.EventHandler(this.保存VToolStripMenuItem_Click);
+            // 
+            // 资源管理器EToolStripMenuItem
+            // 
+            this.资源管理器EToolStripMenuItem.Name = "资源管理器EToolStripMenuItem";
+            this.资源管理器EToolStripMenuItem.Size = new System.Drawing.Size(95, 21);
+            this.资源管理器EToolStripMenuItem.Text = "资源管理器(&E)";
+            this.资源管理器EToolStripMenuItem.Click += new System.EventHandler(this.资源管理器EToolStripMenuItem_Click);
             // 
             // logViewer
             // 
@@ -175,15 +141,11 @@
         private System.Windows.Forms.ToolStripMenuItem copyButton;
         private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.ToolStripMenuItem selectAllButton;
-        private System.Windows.Forms.ToolStripMenuItem listButton;
-        private System.Windows.Forms.ToolStripMenuItem openFileButton;
-        private System.Windows.Forms.ToolStripMenuItem explorerButton;
-        private System.Windows.Forms.ToolStripMenuItem 关闭LToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fontButton;
         private System.Windows.Forms.FontDialog font;
         private System.Windows.Forms.OpenFileDialog ofd;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem saveButton;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem 打开OToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 保存VToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 资源管理器EToolStripMenuItem;
     }
 }

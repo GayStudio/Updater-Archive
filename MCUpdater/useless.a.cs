@@ -7,7 +7,7 @@ using System.Data.OleDb;
 namespace MCUpdater
 {
     /// <summary>
-    /// Access数据库操作类
+    /// Access数据库操作类（弃用）
     /// </summary>
     class a
     {

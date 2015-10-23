@@ -56,14 +56,19 @@ namespace MCUpdater
             this.label6 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.toolTab = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.installPatch = new System.Windows.Forms.Button();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.gameLogViewerButton = new System.Windows.Forms.Button();
             this.crashReportViewerButton = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.recMcOpt = new System.Windows.Forms.Button();
             this.bakMcOpt = new System.Windows.Forms.Button();
-            this.label21 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.enableForgeProgress = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
@@ -123,6 +128,7 @@ namespace MCUpdater
             this.statusStrip1.SuspendLayout();
             this.mcLauncher.SuspendLayout();
             this.toolTab.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -176,10 +182,10 @@ namespace MCUpdater
             this.mcLauncher.Controls.Add(this.label7);
             this.mcLauncher.Controls.Add(this.label6);
             this.mcLauncher.Controls.Add(this.label13);
-            this.mcLauncher.Location = new System.Drawing.Point(4, 26);
+            this.mcLauncher.Location = new System.Drawing.Point(4, 22);
             this.mcLauncher.Name = "mcLauncher";
             this.mcLauncher.Padding = new System.Windows.Forms.Padding(3);
-            this.mcLauncher.Size = new System.Drawing.Size(745, 357);
+            this.mcLauncher.Size = new System.Drawing.Size(745, 361);
             this.mcLauncher.TabIndex = 7;
             this.mcLauncher.Text = "启动器";
             this.mcLauncher.UseVisualStyleBackColor = true;
@@ -389,17 +395,68 @@ namespace MCUpdater
             // 
             // toolTab
             // 
+            this.toolTab.Controls.Add(this.groupBox5);
             this.toolTab.Controls.Add(this.groupBox6);
             this.toolTab.Controls.Add(this.groupBox4);
             this.toolTab.Controls.Add(this.groupBox1);
             this.toolTab.Controls.Add(this.toolGroupBox);
-            this.toolTab.Location = new System.Drawing.Point(4, 22);
+            this.toolTab.Location = new System.Drawing.Point(4, 26);
             this.toolTab.Name = "toolTab";
             this.toolTab.Padding = new System.Windows.Forms.Padding(3);
-            this.toolTab.Size = new System.Drawing.Size(745, 361);
+            this.toolTab.Size = new System.Drawing.Size(745, 357);
             this.toolTab.TabIndex = 5;
             this.toolTab.Text = "工具箱";
             this.toolTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.installPatch);
+            this.groupBox5.Controls.Add(this.label26);
+            this.groupBox5.Controls.Add(this.label25);
+            this.groupBox5.Controls.Add(this.label24);
+            this.groupBox5.Location = new System.Drawing.Point(492, 158);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(217, 183);
+            this.groupBox5.TabIndex = 14;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "安装低配补丁";
+            // 
+            // installPatch
+            // 
+            this.installPatch.Location = new System.Drawing.Point(20, 121);
+            this.installPatch.Name = "installPatch";
+            this.installPatch.Size = new System.Drawing.Size(173, 34);
+            this.installPatch.TabIndex = 14;
+            this.installPatch.Text = "安装低配补丁";
+            this.installPatch.UseVisualStyleBackColor = true;
+            this.installPatch.Click += new System.EventHandler(this.installPatch_Click);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(17, 57);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(148, 17);
+            this.label26.TabIndex = 16;
+            this.label26.Text = "来增强游戏内FPS（帧率）";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(17, 84);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(116, 17);
+            this.label25.TabIndex = 15;
+            this.label25.Text = "安装前请先备份设置";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(17, 31);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(188, 17);
+            this.label24.TabIndex = 14;
+            this.label24.Text = "安装低配补丁，可以通过降低画质";
             // 
             // groupBox6
             // 
@@ -407,7 +464,7 @@ namespace MCUpdater
             this.groupBox6.Controls.Add(this.crashReportViewerButton);
             this.groupBox6.Location = new System.Drawing.Point(17, 201);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(191, 137);
+            this.groupBox6.Size = new System.Drawing.Size(191, 140);
             this.groupBox6.TabIndex = 13;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Minecraft 游戏工具";
@@ -434,21 +491,30 @@ namespace MCUpdater
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label21);
             this.groupBox4.Controls.Add(this.label22);
             this.groupBox4.Controls.Add(this.recMcOpt);
             this.groupBox4.Controls.Add(this.bakMcOpt);
-            this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Location = new System.Drawing.Point(223, 201);
+            this.groupBox4.Location = new System.Drawing.Point(223, 157);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(486, 137);
+            this.groupBox4.Size = new System.Drawing.Size(252, 184);
             this.groupBox4.TabIndex = 12;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "备份游戏内设置";
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(15, 32);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(164, 17);
+            this.label21.TabIndex = 13;
+            this.label21.Text = "防止因操作不慎导致设置丢失";
+            // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(15, 54);
+            this.label22.Location = new System.Drawing.Point(15, 58);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(224, 17);
             this.label22.TabIndex = 12;
@@ -456,7 +522,7 @@ namespace MCUpdater
             // 
             // recMcOpt
             // 
-            this.recMcOpt.Location = new System.Drawing.Point(222, 83);
+            this.recMcOpt.Location = new System.Drawing.Point(18, 134);
             this.recMcOpt.Name = "recMcOpt";
             this.recMcOpt.Size = new System.Drawing.Size(173, 34);
             this.recMcOpt.TabIndex = 10;
@@ -466,23 +532,13 @@ namespace MCUpdater
             // 
             // bakMcOpt
             // 
-            this.bakMcOpt.Location = new System.Drawing.Point(18, 83);
+            this.bakMcOpt.Location = new System.Drawing.Point(18, 88);
             this.bakMcOpt.Name = "bakMcOpt";
             this.bakMcOpt.Size = new System.Drawing.Size(173, 34);
             this.bakMcOpt.TabIndex = 11;
             this.bakMcOpt.Text = "备份设置 (&B)";
             this.bakMcOpt.UseVisualStyleBackColor = true;
             this.bakMcOpt.Click += new System.EventHandler(this.bakMcOpt_Click);
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(15, 31);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(440, 17);
-            this.label21.TabIndex = 0;
-            this.label21.Text = "你可以通过备份和恢复设置信息，来防止操作不慎（例如强制更新）导致设置丢失";
-            this.label21.Click += new System.EventHandler(this.label21_Click);
             // 
             // groupBox1
             // 
@@ -492,7 +548,7 @@ namespace MCUpdater
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Location = new System.Drawing.Point(223, 16);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(486, 174);
+            this.groupBox1.Size = new System.Drawing.Size(486, 135);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "解决低端电脑启动失败问题";
@@ -660,10 +716,10 @@ namespace MCUpdater
             this.checkUpdate.Controls.Add(this.updateButton);
             this.checkUpdate.Controls.Add(this.updateThisProgressBar);
             this.checkUpdate.Controls.Add(this.groupBox3);
-            this.checkUpdate.Location = new System.Drawing.Point(4, 26);
+            this.checkUpdate.Location = new System.Drawing.Point(4, 24);
             this.checkUpdate.Name = "checkUpdate";
             this.checkUpdate.Padding = new System.Windows.Forms.Padding(3);
-            this.checkUpdate.Size = new System.Drawing.Size(745, 357);
+            this.checkUpdate.Size = new System.Drawing.Size(745, 359);
             this.checkUpdate.TabIndex = 2;
             this.checkUpdate.Text = "检查更新";
             this.checkUpdate.UseVisualStyleBackColor = true;
@@ -840,6 +896,7 @@ namespace MCUpdater
             this.mainTabControl.Controls.Add(this.aboutTab);
             this.mainTabControl.Controls.Add(this.logTab);
             this.mainTabControl.Controls.Add(this.mcLauncher);
+            this.mainTabControl.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.mainTabControl.Location = new System.Drawing.Point(13, 13);
             this.mainTabControl.Name = "mainTabControl";
             this.mainTabControl.SelectedIndex = 0;
@@ -1081,18 +1138,18 @@ namespace MCUpdater
             this.version.AutoSize = true;
             this.version.Location = new System.Drawing.Point(137, 113);
             this.version.Name = "version";
-            this.version.Size = new System.Drawing.Size(53, 17);
+            this.version.Size = new System.Drawing.Size(45, 17);
             this.version.TabIndex = 9;
-            this.version.Text = x.app.Version.ToString();
+            this.version.Text = "1.8.0.0";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(26, 113);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(115, 17);
+            this.label2.Size = new System.Drawing.Size(57, 17);
             this.label2.TabIndex = 8;
-            this.label2.Text = "MoeCraft 更新程序";
+            this.label2.Text = "x.pname";
             // 
             // pictureBox1
             // 
@@ -1110,16 +1167,18 @@ namespace MCUpdater
             this.ClientSize = new System.Drawing.Size(778, 425);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.mainTabControl);
-            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Main";
-            this.Text = "MoeCraft 更新程序";
+            this.Text = "x.pname";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.mcLauncher.ResumeLayout(false);
             this.mcLauncher.PerformLayout();
             this.toolTab.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -1224,7 +1283,6 @@ namespace MCUpdater
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button recMcOpt;
         private System.Windows.Forms.Button bakMcOpt;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.LinkLabel joinGroupUrl;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label23;
@@ -1236,6 +1294,12 @@ namespace MCUpdater
         private System.Windows.Forms.Button gameLogViewerButton;
         private System.Windows.Forms.Button crashReportViewerButton;
         private System.Windows.Forms.Button updateLogButtom;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button installPatch;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label21;
     }
 }
 

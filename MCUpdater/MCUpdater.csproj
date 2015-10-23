@@ -125,7 +125,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="a.cs" />
+    <Compile Include="cdn.cs" />
+    <Compile Include="config.cs" />
+    <Compile Include="creator.cs" />
     <Compile Include="EX.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,7 +135,6 @@
       <DependentUpon>EX.cs</DependentUpon>
     </Compile>
     <Compile Include="forgeJsonData.cs" />
-    <Compile Include="ini.cs" />
     <Compile Include="logViewer.cs">
       <SubType>Form</SubType>
     </Compile>

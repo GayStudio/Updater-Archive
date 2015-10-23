@@ -16,9 +16,9 @@ namespace MCUpdater
         {
             InitializeComponent();
             EXMsg.Text  = x.name + " V" + x.ver + " | " + System.Environment.OSVersion;
-            EXMsg.Text += "\r\n" + x.app.FullName;
             EXMsg.Text += "\r\n异常描述：" + ex.Message;
             EXMsg.Text += "\r\n产生时间：" + DateTime.Now.ToLocalTime().ToString();
+            EXMsg.Text += "\r\n程序路径：" + Application.ExecutablePath;
             EXMsg.Text += "\r\n源：" + ex.Source;
             EXMsg.Text += "\r\n================================================\r\n";
             EXMsg.Text += ex.StackTrace;

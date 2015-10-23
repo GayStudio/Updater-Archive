@@ -19,22 +19,15 @@ namespace MCUpdater
 
         void doUpdate()
         {
-            var cdn = conn.getCdn(updateServer.SelectedIndex.ToString());
+            var cdn = cdnc.getByIndex(updateServer.SelectedIndex);
             var server = cdn["url"] + cdn["xml"];
             updateAction.Text = "正在获取更新信息: " + server;
             startUpdateAction();
             updateLog.AppendText(updateAction.Text + "\r\n");
             w = new WebClient();
             w.DownloadStringCompleted += w_DownloadStringCompleted;
-            try
-            {
-                w.DownloadStringAsync(new Uri(server));
-            }
-            catch (Exception ex)
-            {
-                error(ex.Message, "获取更新数据失败");
-                return;
-            }
+            w.DownloadStringAsync(new Uri(server));
+                
         }
 
         private void startUpdateAction()
@@ -53,14 +46,22 @@ namespace MCUpdater
 
         void w_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
+            if (e.Error != null)
+            {
+                error(e.Error.Message, "获取更新数据失败");
+                endUpdateAction();
+                return;
+            }
             if (e.Cancelled)
             {
                 endUpdateAction();
+                return;
             }
             if (string.IsNullOrEmpty(e.Result))
             {
                 error("服务器未返回数据，请重试操作", "获取更新数据失败");
                 endUpdateAction();
+                return;
             }
             XmlDocument doc = new XmlDocument();
             try

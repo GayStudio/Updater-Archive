@@ -57,7 +57,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(319, 17);
             this.label1.TabIndex = 1;
-            this.label1.Text = "MoeCraft 更新程序遇到了无法处理的异常，操作已取消。";
+            this.label1.Text = x.pname + "遇到了无法处理的异常，操作已取消。";
             // 
             // sendMail
             // 
@@ -140,7 +140,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(622, 468);
             this.Name = "EX";
-            this.Text = "MoeCraft 更新程序遇到了无法处理的异常";
+            this.Text = x.pname + "遇到了无法处理的异常";
             this.ResumeLayout(false);
             this.PerformLayout();
 
