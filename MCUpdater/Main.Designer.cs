@@ -61,7 +61,6 @@ namespace MCUpdater
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.gameLogViewerButton = new System.Windows.Forms.Button();
             this.crashReportViewerButton = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -125,11 +124,11 @@ namespace MCUpdater
             this.version = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.runStrongholdsCalculator = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.mcLauncher.SuspendLayout();
             this.toolTab.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.toolGroupBox.SuspendLayout();
@@ -182,10 +181,10 @@ namespace MCUpdater
             this.mcLauncher.Controls.Add(this.label7);
             this.mcLauncher.Controls.Add(this.label6);
             this.mcLauncher.Controls.Add(this.label13);
-            this.mcLauncher.Location = new System.Drawing.Point(4, 22);
+            this.mcLauncher.Location = new System.Drawing.Point(4, 26);
             this.mcLauncher.Name = "mcLauncher";
             this.mcLauncher.Padding = new System.Windows.Forms.Padding(3);
-            this.mcLauncher.Size = new System.Drawing.Size(745, 361);
+            this.mcLauncher.Size = new System.Drawing.Size(745, 357);
             this.mcLauncher.TabIndex = 7;
             this.mcLauncher.Text = "启动器";
             this.mcLauncher.UseVisualStyleBackColor = true;
@@ -396,7 +395,6 @@ namespace MCUpdater
             // toolTab
             // 
             this.toolTab.Controls.Add(this.groupBox5);
-            this.toolTab.Controls.Add(this.groupBox6);
             this.toolTab.Controls.Add(this.groupBox4);
             this.toolTab.Controls.Add(this.groupBox1);
             this.toolTab.Controls.Add(this.toolGroupBox);
@@ -458,20 +456,9 @@ namespace MCUpdater
             this.label24.TabIndex = 14;
             this.label24.Text = "安装低配补丁，可以通过降低画质";
             // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.gameLogViewerButton);
-            this.groupBox6.Controls.Add(this.crashReportViewerButton);
-            this.groupBox6.Location = new System.Drawing.Point(17, 201);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(191, 140);
-            this.groupBox6.TabIndex = 13;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Minecraft 游戏工具";
-            // 
             // gameLogViewerButton
             // 
-            this.gameLogViewerButton.Location = new System.Drawing.Point(26, 78);
+            this.gameLogViewerButton.Location = new System.Drawing.Point(26, 235);
             this.gameLogViewerButton.Name = "gameLogViewerButton";
             this.gameLogViewerButton.Size = new System.Drawing.Size(133, 34);
             this.gameLogViewerButton.TabIndex = 12;
@@ -481,7 +468,7 @@ namespace MCUpdater
             // 
             // crashReportViewerButton
             // 
-            this.crashReportViewerButton.Location = new System.Drawing.Point(26, 32);
+            this.crashReportViewerButton.Location = new System.Drawing.Point(26, 275);
             this.crashReportViewerButton.Name = "crashReportViewerButton";
             this.crashReportViewerButton.Size = new System.Drawing.Size(133, 34);
             this.crashReportViewerButton.TabIndex = 11;
@@ -593,19 +580,22 @@ namespace MCUpdater
             // 
             // toolGroupBox
             // 
+            this.toolGroupBox.Controls.Add(this.runStrongholdsCalculator);
+            this.toolGroupBox.Controls.Add(this.gameLogViewerButton);
             this.toolGroupBox.Controls.Add(this.regionCalculatorButton);
+            this.toolGroupBox.Controls.Add(this.crashReportViewerButton);
             this.toolGroupBox.Controls.Add(this.launcherButton);
             this.toolGroupBox.Controls.Add(this.cleanDownloadCache);
             this.toolGroupBox.Location = new System.Drawing.Point(17, 16);
             this.toolGroupBox.Name = "toolGroupBox";
-            this.toolGroupBox.Size = new System.Drawing.Size(191, 174);
+            this.toolGroupBox.Size = new System.Drawing.Size(191, 325);
             this.toolGroupBox.TabIndex = 10;
             this.toolGroupBox.TabStop = false;
             this.toolGroupBox.Text = "常用工具";
             // 
             // regionCalculatorButton
             // 
-            this.regionCalculatorButton.Location = new System.Drawing.Point(26, 123);
+            this.regionCalculatorButton.Location = new System.Drawing.Point(26, 133);
             this.regionCalculatorButton.Name = "regionCalculatorButton";
             this.regionCalculatorButton.Size = new System.Drawing.Size(133, 34);
             this.regionCalculatorButton.TabIndex = 10;
@@ -615,7 +605,7 @@ namespace MCUpdater
             // 
             // launcherButton
             // 
-            this.launcherButton.Location = new System.Drawing.Point(26, 77);
+            this.launcherButton.Location = new System.Drawing.Point(26, 71);
             this.launcherButton.Name = "launcherButton";
             this.launcherButton.Size = new System.Drawing.Size(133, 34);
             this.launcherButton.TabIndex = 8;
@@ -660,10 +650,10 @@ namespace MCUpdater
             this.offlineModsTab.Controls.Add(this.label1);
             this.offlineModsTab.Controls.Add(this.offlineModList);
             this.offlineModsTab.Controls.Add(this.saveOfflineMod);
-            this.offlineModsTab.Location = new System.Drawing.Point(4, 22);
+            this.offlineModsTab.Location = new System.Drawing.Point(4, 26);
             this.offlineModsTab.Name = "offlineModsTab";
             this.offlineModsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.offlineModsTab.Size = new System.Drawing.Size(745, 361);
+            this.offlineModsTab.Size = new System.Drawing.Size(745, 357);
             this.offlineModsTab.TabIndex = 3;
             this.offlineModsTab.Text = "Mod管理";
             this.offlineModsTab.UseVisualStyleBackColor = true;
@@ -716,10 +706,10 @@ namespace MCUpdater
             this.checkUpdate.Controls.Add(this.updateButton);
             this.checkUpdate.Controls.Add(this.updateThisProgressBar);
             this.checkUpdate.Controls.Add(this.groupBox3);
-            this.checkUpdate.Location = new System.Drawing.Point(4, 24);
+            this.checkUpdate.Location = new System.Drawing.Point(4, 26);
             this.checkUpdate.Name = "checkUpdate";
             this.checkUpdate.Padding = new System.Windows.Forms.Padding(3);
-            this.checkUpdate.Size = new System.Drawing.Size(745, 359);
+            this.checkUpdate.Size = new System.Drawing.Size(745, 357);
             this.checkUpdate.TabIndex = 2;
             this.checkUpdate.Text = "检查更新";
             this.checkUpdate.UseVisualStyleBackColor = true;
@@ -1161,6 +1151,16 @@ namespace MCUpdater
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
+            // runStrongholdsCalculator
+            // 
+            this.runStrongholdsCalculator.Location = new System.Drawing.Point(26, 173);
+            this.runStrongholdsCalculator.Name = "runStrongholdsCalculator";
+            this.runStrongholdsCalculator.Size = new System.Drawing.Size(133, 34);
+            this.runStrongholdsCalculator.TabIndex = 13;
+            this.runStrongholdsCalculator.Text = "要塞坐标计算器 (&T)";
+            this.runStrongholdsCalculator.UseVisualStyleBackColor = true;
+            this.runStrongholdsCalculator.Click += new System.EventHandler(this.runStrongholdsCalculator_Click);
+            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1179,7 +1179,6 @@ namespace MCUpdater
             this.toolTab.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1290,7 +1289,6 @@ namespace MCUpdater
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button playerJREBrowser;
         private System.Windows.Forms.CheckBox disMcCheck;
-        private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button gameLogViewerButton;
         private System.Windows.Forms.Button crashReportViewerButton;
         private System.Windows.Forms.Button updateLogButtom;
@@ -1300,6 +1298,7 @@ namespace MCUpdater
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button runStrongholdsCalculator;
     }
 }
 

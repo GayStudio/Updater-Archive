@@ -378,5 +378,17 @@ namespace MCUpdater
                 lv.Show();
             }
         }
+
+        private void runStrongholdsCalculator_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(x.path + x.updpath + "StrongholdsCalculator.exe");
+            }
+            catch(Exception ex)
+            {
+                error(ex.Message,"启动失败");
+            }
+        }
     }
 }
