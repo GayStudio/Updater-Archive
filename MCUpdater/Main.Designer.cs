@@ -61,8 +61,6 @@ namespace MCUpdater
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.gameLogViewerButton = new System.Windows.Forms.Button();
-            this.crashReportViewerButton = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -74,7 +72,10 @@ namespace MCUpdater
             this.disableForgeProgress = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.toolGroupBox = new System.Windows.Forms.GroupBox();
+            this.runStrongholdsCalculator = new System.Windows.Forms.Button();
+            this.gameLogViewerButton = new System.Windows.Forms.Button();
             this.regionCalculatorButton = new System.Windows.Forms.Button();
+            this.crashReportViewerButton = new System.Windows.Forms.Button();
             this.launcherButton = new System.Windows.Forms.Button();
             this.cleanDownloadCache = new System.Windows.Forms.Button();
             this.logTab = new System.Windows.Forms.TabPage();
@@ -124,7 +125,6 @@ namespace MCUpdater
             this.version = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.runStrongholdsCalculator = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.mcLauncher.SuspendLayout();
             this.toolTab.SuspendLayout();
@@ -456,26 +456,6 @@ namespace MCUpdater
             this.label24.TabIndex = 14;
             this.label24.Text = "安装低配补丁，可以通过降低画质";
             // 
-            // gameLogViewerButton
-            // 
-            this.gameLogViewerButton.Location = new System.Drawing.Point(26, 235);
-            this.gameLogViewerButton.Name = "gameLogViewerButton";
-            this.gameLogViewerButton.Size = new System.Drawing.Size(133, 34);
-            this.gameLogViewerButton.TabIndex = 12;
-            this.gameLogViewerButton.Text = "游戏日志查看器 (&S)";
-            this.gameLogViewerButton.UseVisualStyleBackColor = true;
-            this.gameLogViewerButton.Click += new System.EventHandler(this.gameLogViewerButton_Click);
-            // 
-            // crashReportViewerButton
-            // 
-            this.crashReportViewerButton.Location = new System.Drawing.Point(26, 275);
-            this.crashReportViewerButton.Name = "crashReportViewerButton";
-            this.crashReportViewerButton.Size = new System.Drawing.Size(133, 34);
-            this.crashReportViewerButton.TabIndex = 11;
-            this.crashReportViewerButton.Text = "崩溃日志查看器 (&A)";
-            this.crashReportViewerButton.UseVisualStyleBackColor = true;
-            this.crashReportViewerButton.Click += new System.EventHandler(this.crashReportViewerButton_Click);
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.label21);
@@ -593,6 +573,26 @@ namespace MCUpdater
             this.toolGroupBox.TabStop = false;
             this.toolGroupBox.Text = "常用工具";
             // 
+            // runStrongholdsCalculator
+            // 
+            this.runStrongholdsCalculator.Location = new System.Drawing.Point(26, 173);
+            this.runStrongholdsCalculator.Name = "runStrongholdsCalculator";
+            this.runStrongholdsCalculator.Size = new System.Drawing.Size(133, 34);
+            this.runStrongholdsCalculator.TabIndex = 13;
+            this.runStrongholdsCalculator.Text = "要塞坐标计算器 (&T)";
+            this.runStrongholdsCalculator.UseVisualStyleBackColor = true;
+            this.runStrongholdsCalculator.Click += new System.EventHandler(this.runStrongholdsCalculator_Click);
+            // 
+            // gameLogViewerButton
+            // 
+            this.gameLogViewerButton.Location = new System.Drawing.Point(26, 235);
+            this.gameLogViewerButton.Name = "gameLogViewerButton";
+            this.gameLogViewerButton.Size = new System.Drawing.Size(133, 34);
+            this.gameLogViewerButton.TabIndex = 12;
+            this.gameLogViewerButton.Text = "游戏日志查看器 (&S)";
+            this.gameLogViewerButton.UseVisualStyleBackColor = true;
+            this.gameLogViewerButton.Click += new System.EventHandler(this.gameLogViewerButton_Click);
+            // 
             // regionCalculatorButton
             // 
             this.regionCalculatorButton.Location = new System.Drawing.Point(26, 133);
@@ -602,6 +602,16 @@ namespace MCUpdater
             this.regionCalculatorButton.Text = "区域文件计算器 (&E)";
             this.regionCalculatorButton.UseVisualStyleBackColor = true;
             this.regionCalculatorButton.Click += new System.EventHandler(this.regionCalculatorButton_Click);
+            // 
+            // crashReportViewerButton
+            // 
+            this.crashReportViewerButton.Location = new System.Drawing.Point(26, 275);
+            this.crashReportViewerButton.Name = "crashReportViewerButton";
+            this.crashReportViewerButton.Size = new System.Drawing.Size(133, 34);
+            this.crashReportViewerButton.TabIndex = 11;
+            this.crashReportViewerButton.Text = "崩溃日志查看器 (&A)";
+            this.crashReportViewerButton.UseVisualStyleBackColor = true;
+            this.crashReportViewerButton.Click += new System.EventHandler(this.crashReportViewerButton_Click);
             // 
             // launcherButton
             // 
@@ -1150,16 +1160,6 @@ namespace MCUpdater
             this.pictureBox1.Size = new System.Drawing.Size(385, 99);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
-            // 
-            // runStrongholdsCalculator
-            // 
-            this.runStrongholdsCalculator.Location = new System.Drawing.Point(26, 173);
-            this.runStrongholdsCalculator.Name = "runStrongholdsCalculator";
-            this.runStrongholdsCalculator.Size = new System.Drawing.Size(133, 34);
-            this.runStrongholdsCalculator.TabIndex = 13;
-            this.runStrongholdsCalculator.Text = "要塞坐标计算器 (&T)";
-            this.runStrongholdsCalculator.UseVisualStyleBackColor = true;
-            this.runStrongholdsCalculator.Click += new System.EventHandler(this.runStrongholdsCalculator_Click);
             // 
             // Main
             // 
