@@ -29,6 +29,10 @@ namespace MCUpdater
                 MessageBox.Show("致命错误：无法打开配置文件：\r\n" + ex.Message + "\r\n" + ex.StackTrace,x.pname + " 初始化失败",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 Environment.Exit(0);
             }
+            if(conn.getOpt("disVisualStyles") == "1")
+            {
+                Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
+            }
             InitializeComponent();
             #region UI
             label2.Text = x.pname;
