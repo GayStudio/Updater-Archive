@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<optionof>
+		<ofAoLevel>0.0</ofAoLevel>
+	    <ofConnectedTextures>3</ofConnectedTextures>
+	    <ofChunkLoading>2</ofChunkLoading>
+	    <ofSwampColors>false</ofSwampColors>
+	    <ofRandomMobs>false</ofRandomMobs>
+	    <ofCustomFonts>false</ofCustomFonts>
+	    <ofSmoothBiomes>false</ofSmoothBiomes>
+	    <ofCustomColors>false</ofCustomColors>
+	    <ofCustomSky>false</ofCustomSky>
+	    <ofRenderDistanceChunks>8</ofRenderDistanceChunks>
+	    <ofTrees>1</ofTrees>
+	    <ofGrass>1</ofGrass>
+	    <ofDroppedItems>1</ofDroppedItems>
+	    <ofRain>3</ofRain>
+	    <ofWater>1</ofWater>
+	    <ofClouds>1</ofClouds>
+	    <ofTranslucentBlocks>1</ofTranslucentBlocks>
+	    <ofFastRender>true</ofFastRender>
+	    <ofSmoothFps>true</ofSmoothFps>
+	    <ofChunkUpdates>1</ofChunkUpdates>
+	    <ofFastMath>true</ofFastMath>
+	    <ofSmoothFps>true</ofSmoothFps>
+	    <ofAnimatedLava>2</ofAnimatedLava>
+	    <ofAnimatedWater>2</ofAnimatedWater>
+	    <ofAnimatedFire>false</ofAnimatedFire>
+	    <ofAnimatedRedstone>false</ofAnimatedRedstone>
+	    <ofAnimatedPortal>false</ofAnimatedPortal>
+	    <ofAnimatedExplosion>false</ofAnimatedExplosion>
+	    <ofAnimatedFlame>false</ofAnimatedFlame>
+	    <ofAnimatedSmoke>false</ofAnimatedSmoke>
+	    <ofAnimatedTerrain>false</ofAnimatedTerrain>
+	    <ofWaterParticles>false</ofWaterParticles>
+	    <ofVoidParticles>false</ofVoidParticles>
+	    <ofDrippingWaterLava>false</ofDrippingWaterLava>
+	    <ofPortalParticles>false</ofPortalParticles>
+	    <ofPotionParticles>false</ofPotionParticles>
+	    <ofAnimatedItems>false</ofAnimatedItems>
+	    <ofRainSplash>false</ofRainSplash>
+	    <ofAnimatedTextures>false</ofAnimatedTextures>
+	</optionof>
+
+	<option>
+		<advancedOpengl>true</advancedOpengl>
+        <particles>1</particles>
+        <ao>0</ao>
+		<snooperEnabled>false</snooperEnabled>
+		<enableVsync>false</enableVsync>
+		<maxFps>260</maxFps>
+		<forceUnicodeFont>true</forceUnicodeFont>
+		<renderDistance>8</renderDistance>
+		<fancyGraphics>false</fancyGraphics>
+		<particles>1</particles>
+	</option>
+</root>
