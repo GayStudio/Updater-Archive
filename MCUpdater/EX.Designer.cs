@@ -43,6 +43,7 @@
             // 
             this.EXMsg.Location = new System.Drawing.Point(14, 53);
             this.EXMsg.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.EXMsg.MaxLength = 9999999;
             this.EXMsg.Multiline = true;
             this.EXMsg.Name = "EXMsg";
             this.EXMsg.ReadOnly = true;
@@ -55,9 +56,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(11, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(319, 17);
+            this.label1.Size = new System.Drawing.Size(403, 17);
             this.label1.TabIndex = 1;
-            this.label1.Text = x.pname + "遇到了无法处理的异常，操作已取消。";
+            this.label1.Text = "程序遇到了无法处理的异常，操作已取消。";
             // 
             // sendMail
             // 
@@ -126,6 +127,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(669, 429);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.copy);
@@ -140,7 +143,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(622, 468);
             this.Name = "EX";
-            this.Text = x.pname + "遇到了无法处理的异常";
+            this.Text = "程序遇到了无法处理的异常";
             this.ResumeLayout(false);
             this.PerformLayout();
 

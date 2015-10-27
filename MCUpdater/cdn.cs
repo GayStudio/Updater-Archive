@@ -16,7 +16,7 @@ namespace MCUpdater
         /// </summary>
         public cdn()
         {
-            fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
             f = new XmlDocument();
             f.Load(fs);
             root = f.DocumentElement;

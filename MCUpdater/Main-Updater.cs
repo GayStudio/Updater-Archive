@@ -79,7 +79,7 @@ namespace MCUpdater
             foreach (XmlNode val in xnl)
             {
                 XmlElement updateList = (XmlElement)val;
-                Dictionary<string, string> info = conn.getLib(updateList.GetAttribute("id"));
+                var info = conn.getLib(updateList.GetAttribute("id"));
                 updateLog.AppendText("---------------------------------------------------------------------------\r\n检查更新：" + info["desc"] + " [ 本地版本: V" + info["ver"] + " ]\r\n");
                 double thisVer = 0.0;
                 if (Directory.Exists(x.path + x.binpath + info["path"]))
@@ -346,6 +346,12 @@ namespace MCUpdater
 
         void wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
+            if (e.Error != null)
+            {
+                error(e.Error.Message, "下载更新数据失败");
+                endUpdateAction();
+                return;
+            }
             if (!e.Cancelled)
             {
                 updateFlag = true;

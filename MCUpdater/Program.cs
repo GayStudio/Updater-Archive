@@ -12,11 +12,13 @@ namespace MCUpdater
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
+        ///
+        [STAThread]
         static void Main()
         {
 #if !DEBUG
             //设置应用程序处理异常方式：ThreadException处理
-            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.Automatic);
             //处理UI线程异常
             Application.ThreadException += new ThreadExceptionEventHandler((object sender, ThreadExceptionEventArgs e) =>
             {

@@ -38,6 +38,10 @@ namespace MCUpdater
             label2.Text = x.pname;
             Text = x.pname;
             version.Text = x.ver;
+            diyDialog.HelpRequest += (object sender, EventArgs e) =>
+            {
+                MessageBox.Show("这个功能并没有什么卵用\r\n下次启动更新器后无效","所谓的帮助",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            };
 #if !DEBUG
             mainTabControl.TabPages.Remove(mainTabControl.TabPages[5]); //隐藏启动器页面
 #endif
@@ -392,6 +396,15 @@ namespace MCUpdater
             catch(Exception ex)
             {
                 error(ex.Message,"启动失败");
+            }
+        }
+
+        private void diyButton_Click(object sender, EventArgs e)
+        {
+            if(diyDialog.ShowDialog() == DialogResult.OK)
+            {
+                Font = diyDialog.Font;
+                ForeColor = diyDialog.Color;
             }
         }
     }

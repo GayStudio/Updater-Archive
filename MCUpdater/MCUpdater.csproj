@@ -127,7 +127,6 @@
   <ItemGroup>
     <Compile Include="cdn.cs" />
     <Compile Include="config.cs" />
-    <Compile Include="creator.cs" />
     <Compile Include="EX.cs">
       <SubType>Form</SubType>
     </Compile>

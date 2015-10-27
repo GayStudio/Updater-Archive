@@ -21,7 +21,7 @@ namespace MCUpdater
             EXMsg.Text += "\r\n程序路径：" + Application.ExecutablePath;
             EXMsg.Text += "\r\n源：" + ex.Source;
             EXMsg.Text += "\r\n================================================\r\n";
-            EXMsg.Text += ex.StackTrace;
+            EXMsg.Text += ex.ToString();
         }
 
         void url(string url)
