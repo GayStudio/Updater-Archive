@@ -19,7 +19,7 @@ namespace MCUpdater
 
         void doUpdate()
         {
-            var cdn = cdnc.getByIndex(updateServer.SelectedIndex);
+            var cdn = cdnc.get(updateServer.SelectedIndex);
             var server = cdn["url"] + cdn["xml"];
             updateAction.Text = "正在获取更新信息: " + server;
             startUpdateAction();
@@ -120,7 +120,7 @@ namespace MCUpdater
                     updateLog.AppendText("正在安装文件：" + info["desc"] + "\r\n");
                     Process p = new Process();
                     p.StartInfo.FileName = x.path + x.updpath + "7z.exe";
-                    p.StartInfo.Arguments = "x -y -o\"" + x.path + x.binpath + info["path"] + "\" \"" + x.path + x.updpath + x.dlpath + fileName + "\"";
+                    p.StartInfo.Arguments = "x -y -o\"" + x.path + info["path"] + "\" \"" + x.path + x.updpath + x.dlpath + fileName + "\"";
                     p.StartInfo.UseShellExecute = false;
                     p.StartInfo.CreateNoWindow = true;
                     p.StartInfo.RedirectStandardOutput = true;

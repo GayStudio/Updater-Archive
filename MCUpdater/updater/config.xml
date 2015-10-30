@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <set>
+    <!--设置为1即可获得更好的界面（大雾）-->
+    <disVisualStyles>0</disVisualStyles>
+    <!--禁用检查Minecraft是否已经安装-->
+    <disMcCheck>0</disMcCheck>
+    <!--启动器默认路径-->
+    <launcherPath>启动器.exe</launcherPath>
+    <updateServer>0</updateServer>
+  </set>
+  <lib>
+    <mods ver="0.0" path=".minecraft/mods">模组</mods>
+    <omods ver="0.0" path=".minecraft/mods/1.7.10">可选模组</omods>
+    <config ver="0.0" path=".minecraft">配置文件</config>
+    <res ver="0.0" path=".minecraft/resourcepacks">材质资源包</res>
+    <root ver="0.0" path="">根目录文件</root>
+    <main ver="0.0" path=".minecraft">MC核心文件</main>
+    <asset ver="0.0" path=".minecraft/assets">MC资源文件</asset>
+  </lib>
+  <player>
+    <name>
+    </name>
+    <mem>
+    </mem>
+    <width>
+    </width>
+    <height>
+    </height>
+    <fs>
+    </fs>
+    <jre>
+    </jre>
+    <debug>
+    </debug>
+    <args>
+    </args>
+    <close>
+    </close>
+  </player>
+</root>

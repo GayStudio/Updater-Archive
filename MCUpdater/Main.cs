@@ -44,16 +44,6 @@ namespace MCUpdater
 #if !DEBUG
             mainTabControl.TabPages.Remove(mainTabControl.TabPages[5]); //隐藏启动器页面
 #endif
-            if (!Directory.Exists(x.updpath))
-            {
-                Directory.CreateDirectory(x.updpath);
-                log("初始化：创建目录：" + x.updpath);
-            }
-            if (!Directory.Exists( x.path + x.updpath + x.dlpath))
-            {
-                Directory.CreateDirectory(x.path + x.updpath + x.dlpath);
-                log("初始化：创建目录：" + x.path + x.updpath + x.dlpath);
-            }
             /*
             if (string.IsNullOrEmpty(playerJRE.Text))
             {

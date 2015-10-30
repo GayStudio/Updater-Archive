@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Reflection;
 using System.Threading;
+using System.IO;
 
 namespace MCUpdater
 {
@@ -42,7 +40,18 @@ namespace MCUpdater
         /// </summary>
         private static void initResFile()
         {
-            
+            if (!Directory.Exists(x.updpath))
+            {
+                Directory.CreateDirectory(x.updpath);
+            }
+            if (!Directory.Exists(x.path + x.updpath + x.dlpath))
+            {
+                Directory.CreateDirectory(x.path + x.updpath + x.dlpath);
+            }
+            if(!File.Exists(x.path + x.updpath + "config.xml"))
+            {
+                File.WriteAllBytes(x.path + x.updpath + "config.xml", Properties.Resources.config);
+            }
         }
     }
 }
