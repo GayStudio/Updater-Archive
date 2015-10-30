@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
-using System.Data;
 using System.Linq;
 using System.Threading;
 
@@ -29,7 +28,7 @@ namespace MCUpdater
                 MessageBox.Show("致命错误：无法打开配置文件：\r\n" + ex.Message + "\r\n" + ex.StackTrace,x.pname + " 初始化失败",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 Environment.Exit(0);
             }
-            if(conn.getOpt("disVisualStyles") == "1")
+            if(conn.get("disVisualStyles") == "1")
             {
                 Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
             }
@@ -82,13 +81,13 @@ namespace MCUpdater
             updateServer.SelectedIndex = 0;
             getModList();
             /*
-            playerName.Text   = conn.getOpt("playerName");
-            playerWidth.Text  = conn.getOpt("playerWidth");
-            playerHeight.Text = conn.getOpt("playerHeight");
-            playerJRE.Text    = conn.getOpt("playerJRE");
-            playerArgs.Text   = conn.getOpt("playerArgs");
-            string playerMode = conn.getOpt("playerMode");
-            if (conn.getOpt("playerFS") == "1")
+            playerName.Text   = conn.get("playerName");
+            playerWidth.Text  = conn.get("playerWidth");
+            playerHeight.Text = conn.get("playerHeight");
+            playerJRE.Text    = conn.get("playerJRE");
+            playerArgs.Text   = conn.get("playerArgs");
+            string playerMode = conn.get("playerMode");
+            if (conn.get("playerFS") == "1")
             {
                 playerFS.Checked = true;
             }
@@ -110,7 +109,7 @@ namespace MCUpdater
                 playerMode3.Checked = true;
             }
 
-            if (conn.getOpt("playerClose") == "1")
+            if (conn.get("playerClose") == "1")
             {
                 playerClose.Checked = true;
             }
@@ -120,7 +119,7 @@ namespace MCUpdater
             }
             log("读取用户设置成功");
              */
-            if (conn.getOpt("disMcCheck") == "0")
+            if (conn.get("disMcCheck") == "0")
             {
                 disMcCheck.Checked = false;
                 if(!Directory.Exists(x.mcLibPath))
@@ -223,14 +222,14 @@ namespace MCUpdater
 
         private void launcherButton_Click(object sender, EventArgs e)
         {
-            if(!File.Exists(x.path + conn.getOpt("launcherPath"))) {
+            if(!File.Exists(x.path + conn.get("launcherPath"))) {
                 error("未找到启动器！请确保你已经更新启动器到最新版本，且启动器没有改名。请手动打开启动器", "打开启动器失败");
             }
             else
             {
                 try
                 {
-                    Process.Start(x.path + conn.getOpt("launcherPath"));
+                    Process.Start(x.path + conn.get("launcherPath"));
                 }
                 catch(Exception ex)
                 {
@@ -330,18 +329,18 @@ namespace MCUpdater
             {
                 if (disMcCheck.Checked)
                 {
-                    conn.setOpt("disMcCheck", "1");
+                    conn.set("disMcCheck", "1");
                 }
                 else
                 {
-                    conn.setOpt("disMcCheck", "0");
+                    conn.set("disMcCheck", "0");
                 }
             }
         }
 
         private void updateServer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            conn.setOpt("updateServer",updateServer.SelectedIndex.ToString());
+            conn.set("updateServer",updateServer.SelectedIndex.ToString());
         }
 
         #region 查看MC崩溃日志

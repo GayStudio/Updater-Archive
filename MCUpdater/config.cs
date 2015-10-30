@@ -15,7 +15,7 @@ namespace MCUpdater
         FileStream fs;
         XmlDocument f;
         XmlElement root;
-        XmlElement set;
+        XmlElement setd;
         XmlElement lib;
         XmlElement player;
         public string path = x.path + x.updpath + "config.xml";
@@ -28,7 +28,7 @@ namespace MCUpdater
             f = new XmlDocument();
             f.Load(fs);
             root = f.DocumentElement;
-            set = (XmlElement)root.SelectSingleNode("set");
+            setd = (XmlElement)root.SelectSingleNode("set");
             lib = (XmlElement)root.SelectSingleNode("lib");
             player = (XmlElement)root.SelectSingleNode("player");
         }
@@ -43,21 +43,21 @@ namespace MCUpdater
         /// </summary>
         /// <param name="id">ID</param>
         /// <returns>值</returns>
-        public string getOpt(string id)
+        public string get(string id)
         {
-            return set.GetElementsByTagName(id)[0].InnerText;
+            return setd.GetElementsByTagName(id)[0].InnerText;
         }
         /// <summary>
         /// 保存设置
         /// </summary>
         /// <param name="id">ID</param>
         /// <param name="v">值</param>
-        public void setOpt(string id,string v)
+        public void set(string id,string v)
         {
-            var d = set.GetElementsByTagName(id);
+            var d = setd.GetElementsByTagName(id);
             if(d.Count < 1)
             {
-                addOpt(id,v);
+                add(id,v);
             }
             else
             {
@@ -70,9 +70,9 @@ namespace MCUpdater
         /// </summary>
         /// <param name="id">ID</param>
         /// <param name="v">值</param>
-        public void addOpt(string id, string v)
+        public void add(string id, string v)
         {
-            set.AppendChild(f.CreateElement(id)).InnerText = v;
+            setd.AppendChild(f.CreateElement(id)).InnerText = v;
             save();
         }
         /// <summary>

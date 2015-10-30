@@ -56,7 +56,7 @@ namespace MCUpdater
                 ps.StartInfo.Arguments = "/k title "+x.name+"&java.exe ";
             }
             */
-            string jarPath = conn.getOpt("jarPath");
+            string jarPath = conn.get("jarPath");
             string mcPath = x.path + x.binpath + @"versions\" + jarPath + @"\";
             if (!Directory.Exists(mcPath) || !File.Exists(mcPath + jarPath + ".json"))
             {
@@ -120,36 +120,36 @@ namespace MCUpdater
 
         private void playerSave_Click(object sender, EventArgs e)
         {
-            conn.setOpt("playerName", playerName.Text);
-            conn.setOpt("playerMem", playerMem.Text);
-            conn.setOpt("playerWidth", playerWidth.Text);
-            conn.setOpt("playerHeight", playerHeight.Text);
-            conn.setOpt("playerJRE", playerJRE.Text);
-            conn.setOpt("playerArgs", playerArgs.Text);
+            conn.set("playerName", playerName.Text);
+            conn.set("playerMem", playerMem.Text);
+            conn.set("playerWidth", playerWidth.Text);
+            conn.set("playerHeight", playerHeight.Text);
+            conn.set("playerJRE", playerJRE.Text);
+            conn.set("playerArgs", playerArgs.Text);
             if (playerFS.Checked)
             {
-                conn.setOpt("playerFS", "1");
+                conn.set("playerFS", "1");
             }
             else
             {
-                conn.setOpt("playerFS", "0");
+                conn.set("playerFS", "0");
             }
             if (debugMode.Checked)
             {
-                conn.setOpt("debugMode", "1");
+                conn.set("debugMode", "1");
             }
             else
             {
-                conn.setOpt("debugMode", "2");
+                conn.set("debugMode", "2");
             }
 
             if (playerClose.Checked)
             {
-                conn.setOpt("playerClose", "1");
+                conn.set("playerClose", "1");
             }
             else
             {
-                conn.setOpt("playerClose", "0");
+                conn.set("playerClose", "0");
             }
             log("设置保存成功");
         }

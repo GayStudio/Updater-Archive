@@ -28,18 +28,11 @@ namespace MCUpdater
             f.Save(fs);
         }
 
-        public Dictionary<string,string> getByIndex(int index)
-        {
-            var e = root.ChildNodes[index];
-            return new Dictionary<string, string>
-            {
-                {"url", e.InnerText},
-                {"xml", e.Attributes["xml"].Value},
-                {"desc", e.Attributes["desc"].Value},
-                {"id", e.Name},
-            };
-        }
-
+        /// <summary>
+        /// 用ID获取CDN节点
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Dictionary<string,string> get(string id)
         {
             var e = root.GetElementsByTagName(id)[0];
@@ -49,6 +42,23 @@ namespace MCUpdater
                 {"xml", e.Attributes["xml"].Value},
                 {"desc", e.Attributes["desc"].Value},
                 {"id", id},
+            };
+        }
+
+        /// <summary>
+        /// 用索引获取CDN信息
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> get(int index)
+        {
+            var e = root.ChildNodes[index];
+            return new Dictionary<string, string>
+            {
+                {"url", e.InnerText},
+                {"xml", e.Attributes["xml"].Value},
+                {"desc", e.Attributes["desc"].Value},
+                {"id", e.Name},
             };
         }
 

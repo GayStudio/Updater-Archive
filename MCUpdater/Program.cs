@@ -32,8 +32,17 @@ namespace MCUpdater
                 ex.ShowDialog();
             });
 #endif
+            initResFile();
             Application.EnableVisualStyles();
             Application.Run(new Main());
+        }
+
+        /// <summary>
+        /// 释放资源文件
+        /// </summary>
+        private static void initResFile()
+        {
+            
         }
     }
 }
