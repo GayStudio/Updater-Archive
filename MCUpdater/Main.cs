@@ -228,21 +228,40 @@ namespace MCUpdater
             }
         }
 
+        /// <summary>
+        /// 清除下载缓存。多线程使用范例
+        /// </summary>
         private void cleanDownloadCache_Click(object sender, EventArgs e)
         {
+            string errorMsg = "";
             if(Directory.Exists(x.path + x.updpath + x.dlpath)) {
-                try
+                Thread th = new Thread(() => //直接用lambda表达式声明一个匿名委托。
                 {
-                   
-                    Directory.CreateDirectory(x.path + x.updpath + x.dlpath);
-                }
-                catch (Exception ex)
+                    try
+                    {
+                        Directory.Delete(x.path + x.updpath + x.dlpath, true);
+                        Directory.CreateDirectory(x.path + x.updpath + x.dlpath);
+                    }
+                    catch (Exception ex)
+                    {
+                        errorMsg = ex.Message;
+                    }
+                });
+                th.Start(); //启动线程
+                while (!th.Join(25)) //在25ms内等待线程完成并阻塞主线程
                 {
-                    error(ex.Message,"清除下载缓存失败");
+                    Application.DoEvents(); //处理消息保证用户察觉不到
                 }
+                //循环结束，说明线程已经完成了工作
             }
-            log("清除下载缓存成功");
-            success("清除下载缓存成功","清除下载缓存成功");
+            if(string.IsNullOrEmpty(errorMsg))
+            {
+                success("清除下载缓存成功", "清除下载缓存成功");
+            }
+            else
+            {
+                error(errorMsg, "清除下载缓存失败");
+            }
         }
         
         private void regLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
