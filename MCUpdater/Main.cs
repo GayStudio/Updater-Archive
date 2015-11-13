@@ -12,7 +12,6 @@ namespace MCUpdater
     {
         private config conn;
         private cdn cdnc;
-        private WebClient w;
         private bool updateFlag = false;
         private string updateError;
         public bool inited = false;
@@ -248,7 +247,7 @@ namespace MCUpdater
                     }
                 });
                 th.Start(); //启动线程
-                while (!th.Join(25)) //在25ms内等待线程完成并阻塞主线程
+                while (!th.Join(x.sleep)) //在25ms(x类常量)内等待线程完成并阻塞主线程
                 {
                     Application.DoEvents(); //处理消息保证用户察觉不到
                 }

@@ -16,5 +16,6 @@ namespace MCUpdater
         public const string db = "db.db";
         public static string mcLibPath = path + binpath + @"versions\1.7.10\";
         public static string[] bakList = { "options.txt", "optionsof.txt", "servers.dat" };
+        public const int sleep = 25;
     }
 }

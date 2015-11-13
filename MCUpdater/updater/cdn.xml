@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <root>
-  <jp desc="[全球] CDN" xml="info.xml">https://cdn.moecraft.net/mc/</jp>
-  <qq desc="[国内] CDN" xml="info.xml">http://cdn.andy1999.com/mc/</qq>
-  <onedrive desc="[备用] OneDrive" xml="onedrive.xml">https://cdn.moecraft.net/mc/</onedrive>
+  <v2 desc="[国内] CDN v2" xml="info.xml">http://69b89e97bafcca7776a40eedfe197b88.moecraft.net/mc/</v2>
 </root>

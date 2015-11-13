@@ -76,7 +76,6 @@ namespace MCUpdater
             this.gameLogViewerButton = new System.Windows.Forms.Button();
             this.regionCalculatorButton = new System.Windows.Forms.Button();
             this.crashReportViewerButton = new System.Windows.Forms.Button();
-            this.launcherButton = new System.Windows.Forms.Button();
             this.cleanDownloadCache = new System.Windows.Forms.Button();
             this.logTab = new System.Windows.Forms.TabPage();
             this.logBox = new System.Windows.Forms.TextBox();
@@ -104,6 +103,7 @@ namespace MCUpdater
             this.updateLog = new System.Windows.Forms.TextBox();
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.aboutTab = new System.Windows.Forms.TabPage();
+            this.launcherButton = new System.Windows.Forms.Button();
             this.diyButton = new System.Windows.Forms.Button();
             this.updateLogButtom = new System.Windows.Forms.Button();
             this.disMcCheck = new System.Windows.Forms.CheckBox();
@@ -566,7 +566,6 @@ namespace MCUpdater
             this.toolGroupBox.Controls.Add(this.gameLogViewerButton);
             this.toolGroupBox.Controls.Add(this.regionCalculatorButton);
             this.toolGroupBox.Controls.Add(this.crashReportViewerButton);
-            this.toolGroupBox.Controls.Add(this.launcherButton);
             this.toolGroupBox.Controls.Add(this.cleanDownloadCache);
             this.toolGroupBox.Location = new System.Drawing.Point(17, 16);
             this.toolGroupBox.Name = "toolGroupBox";
@@ -614,16 +613,6 @@ namespace MCUpdater
             this.crashReportViewerButton.Text = "崩溃日志查看器 (&A)";
             this.crashReportViewerButton.UseVisualStyleBackColor = true;
             this.crashReportViewerButton.Click += new System.EventHandler(this.crashReportViewerButton_Click);
-            // 
-            // launcherButton
-            // 
-            this.launcherButton.Location = new System.Drawing.Point(26, 71);
-            this.launcherButton.Name = "launcherButton";
-            this.launcherButton.Size = new System.Drawing.Size(133, 34);
-            this.launcherButton.TabIndex = 8;
-            this.launcherButton.Text = "MoeCraft 启动器 (&L)";
-            this.launcherButton.UseVisualStyleBackColor = true;
-            this.launcherButton.Click += new System.EventHandler(this.launcherButton_Click);
             // 
             // cleanDownloadCache
             // 
@@ -835,7 +824,7 @@ namespace MCUpdater
             // updateThisProgressText
             // 
             this.updateThisProgressText.AutoSize = true;
-            this.updateThisProgressText.Location = new System.Drawing.Point(676, 7);
+            this.updateThisProgressText.Location = new System.Drawing.Point(636, 7);
             this.updateThisProgressText.Name = "updateThisProgressText";
             this.updateThisProgressText.Size = new System.Drawing.Size(56, 17);
             this.updateThisProgressText.TabIndex = 5;
@@ -906,6 +895,7 @@ namespace MCUpdater
             // 
             // aboutTab
             // 
+            this.aboutTab.Controls.Add(this.launcherButton);
             this.aboutTab.Controls.Add(this.diyButton);
             this.aboutTab.Controls.Add(this.updateLogButtom);
             this.aboutTab.Controls.Add(this.disMcCheck);
@@ -928,12 +918,21 @@ namespace MCUpdater
             this.aboutTab.Controls.Add(this.version);
             this.aboutTab.Controls.Add(this.label2);
             this.aboutTab.Controls.Add(this.pictureBox1);
-            this.aboutTab.Location = new System.Drawing.Point(4, 26);
+            this.aboutTab.Location = new System.Drawing.Point(4, 22);
             this.aboutTab.Name = "aboutTab";
-            this.aboutTab.Size = new System.Drawing.Size(745, 357);
+            this.aboutTab.Size = new System.Drawing.Size(745, 361);
             this.aboutTab.TabIndex = 8;
             this.aboutTab.Text = "关于";
             this.aboutTab.UseVisualStyleBackColor = true;
+            // 
+            // launcherButton
+            // 
+            this.launcherButton.Location = new System.Drawing.Point(577, 142);
+            this.launcherButton.Name = "launcherButton";
+            this.launcherButton.Size = new System.Drawing.Size(144, 34);
+            this.launcherButton.TabIndex = 26;
+            this.launcherButton.Text = "MoeCraft 启动器 (&L)";
+            this.launcherButton.UseVisualStyleBackColor = true;
             // 
             // diyButton
             // 
@@ -1246,7 +1245,6 @@ namespace MCUpdater
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TabPage toolTab;
         private System.Windows.Forms.Button cleanDownloadCache;
-        private System.Windows.Forms.Button launcherButton;
         private System.Windows.Forms.TabPage logTab;
         private System.Windows.Forms.TextBox logBox;
         private System.Windows.Forms.TabPage offlineModsTab;
@@ -1319,6 +1317,7 @@ namespace MCUpdater
         private System.Windows.Forms.Button runStrongholdsCalculator;
         private System.Windows.Forms.Button diyButton;
         private System.Windows.Forms.FontDialog diyDialog;
+        private System.Windows.Forms.Button launcherButton;
     }
 }
 

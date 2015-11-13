@@ -12,9 +12,20 @@ namespace MCUpdater
 {
     public partial class Main : Form
     {
+        private bool nowUpdate = false;
+
         private void updateButton_Click(object sender, EventArgs e)
         {
-            doUpdate();
+            if(nowUpdate)
+            {
+                endUpdateAction();
+                updateAction.Text = "更新已取消";
+                updateLog.AppendText(updateAction.Text);
+            }
+            else
+            {
+                doUpdate();
+            }
         }
 
         void doUpdate()
@@ -24,16 +35,44 @@ namespace MCUpdater
             updateAction.Text = "正在获取更新信息: " + server;
             startUpdateAction();
             updateLog.AppendText(updateAction.Text + "\r\n");
-            w = new WebClient();
-            w.DownloadStringCompleted += w_DownloadStringCompleted;
-            w.DownloadStringAsync(new Uri(server));
-                
+            string errorMsg = "";
+            string result = "";
+            Thread th = new Thread(() => {
+                try
+                {
+                    var wb = WebRequest.Create(server);
+                    var ws = wb.GetResponse();
+                    //MessageBox.Show(ws.ContentLength.ToString());
+                    result = new StreamReader(ws.GetResponseStream()).ReadToEnd();
+                }
+                catch (Exception ex)
+                {
+                    errorMsg = ex.Message;
+                }
+            });
+            th.Start();
+            while (!th.Join(x.sleep))
+            {
+                if(!nowUpdate)
+                {
+                    th.Abort();
+                    return;
+                }
+                Application.DoEvents();
+            }
+            if (!string.IsNullOrEmpty(errorMsg))
+            {
+                error(errorMsg,"获取更新数据失败");
+                endUpdateAction();
+                return;
+            }
+            downloadUpdateInfoCompleted(result);
         }
 
         private void startUpdateAction()
         {
             updateLog.Text = "";
-            updateButton.Enabled = false;
+            nowUpdate = true;
             forceUpdateAssets.Enabled = false;
             forceUpdateConfig.Enabled = false;
             forceUpdateCore.Enabled = false;
@@ -41,36 +80,20 @@ namespace MCUpdater
             forceUpdateOmods.Enabled = false;
             forceUpdateRoot.Enabled = false;
             updateServer.Enabled = false;
+            updateButton.Text = "取消更新";
             log("启动检查更新");
         }
 
-        void w_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        void downloadUpdateInfoCompleted(string Result)
         {
-            if (e.Error != null)
-            {
-                error(e.Error.Message, "获取更新数据失败");
-                endUpdateAction();
-                return;
-            }
-            if (e.Cancelled)
-            {
-                endUpdateAction();
-                return;
-            }
-            if (string.IsNullOrEmpty(e.Result))
-            {
-                error("服务器未返回数据，请重试操作", "获取更新数据失败");
-                endUpdateAction();
-                return;
-            }
             XmlDocument doc = new XmlDocument();
             try
             {
-                doc.LoadXml(e.Result);
+                doc.LoadXml(Result);
             }
             catch (Exception ex)
             {
-                error(ex.Message + "\r\n" + e.Result, "解析XML失败");
+                error(ex.Message + "\r\n" + Result, "解析XML失败");
                 endUpdateAction();
                 return;
             }
@@ -101,7 +124,7 @@ namespace MCUpdater
                     updateAction.Text = "正在获取：" + downUrl;
                     updateLog.AppendText(updateAction.Text + "\r\n");
                     updateFlag = false;
-                    string fileName = info["id"] + ".zip";
+                    string fileName = new Random().Next().ToString() + info["id"] + ".zip";
                     if (File.Exists(fileName))
                     {
                         File.Delete(fileName);
@@ -191,7 +214,7 @@ namespace MCUpdater
 
         private void endUpdateAction()
         {
-            updateButton.Enabled = true;
+            nowUpdate = false;
             updateThisProgressBar.Style = ProgressBarStyle.Blocks;
             updateThisProgressBar.Value = 0;
             updateThisProgressText.Text = "";
@@ -202,6 +225,7 @@ namespace MCUpdater
             forceUpdateOmods.Enabled = true;
             forceUpdateRoot.Enabled = true;
             updateServer.Enabled = true;
+            updateButton.Text = "检查更新 (&C)";
         }
         #region 判断是否需要强制更新
         private bool isForceUpdate(string v)
@@ -308,7 +332,12 @@ namespace MCUpdater
         }
 
         #endregion
-
+        /// <summary>
+        /// 开始下载
+        /// </summary>
+        /// <param name="url">下载地址</param>
+        /// <param name="file">保存文件名</param>
+        ///
         /// <summary>
         /// 开始下载
         /// </summary>
@@ -317,6 +346,7 @@ namespace MCUpdater
         /// 
         protected void startUpdateDownload(string url, string file)
         {
+            updateButton.Enabled = false;
             try
             {
 
@@ -343,6 +373,54 @@ namespace MCUpdater
                 }
             }
         }
+        /*
+        protected void startUpdateDownload(string url, string file)
+        {
+            string path = x.path + x.updpath + "downloads\\" + file;
+            string errorMsg = "";
+            long get = 0;
+            Thread th = new Thread(() => {
+                try
+                {
+                    int bufferLength = 0;
+                    //File IO
+                    FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+                    //Web Request
+                    var wb = WebRequest.Create(url);
+                    var ws = wb.GetResponse();
+                    get = ws.ContentLength;
+                    var wr = ws.GetResponseStream();
+                    byte[] buffer = new byte[10240];
+                    while(bufferLength > 0)
+                    {
+                        bufferLength = wr.Read(buffer, 0, buffer.Length);
+                        get = get + buffer.Length;
+                        fs.Write(buffer, 0, bufferLength);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    errorMsg = ex.ToString();
+                }
+            });
+            th.Start();
+            while (!th.Join(x.sleep))
+            {
+                if (!nowUpdate)
+                {
+                    th.Abort();
+                    return;
+                }
+                updateThisProgressText.Text = (get / 1024)  + " KB";
+                Application.DoEvents();
+            }
+            if (!string.IsNullOrEmpty(errorMsg))
+            {
+                error(errorMsg, "获取更新数据失败");
+                endUpdateAction();
+                return;
+            }
+        }*/
 
         void wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
