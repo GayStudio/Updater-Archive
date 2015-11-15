@@ -80,6 +80,7 @@ namespace MCUpdater
                     key++;
                 }
                 getModList();
+                log("已更改可选Mod");
             }
             catch (Exception ex)
             {

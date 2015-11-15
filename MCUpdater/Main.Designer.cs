@@ -88,8 +88,8 @@ namespace MCUpdater
             this.label17 = new System.Windows.Forms.Label();
             this.updateServer = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.forceUpdateRoot = new System.Windows.Forms.CheckBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.forceUpdateAssets = new System.Windows.Forms.CheckBox();
             this.forceUpdateCore = new System.Windows.Forms.CheckBox();
             this.forceUpdateOmods = new System.Windows.Forms.CheckBox();
@@ -400,10 +400,10 @@ namespace MCUpdater
             this.toolTab.Controls.Add(this.groupBox4);
             this.toolTab.Controls.Add(this.groupBox1);
             this.toolTab.Controls.Add(this.toolGroupBox);
-            this.toolTab.Location = new System.Drawing.Point(4, 26);
+            this.toolTab.Location = new System.Drawing.Point(4, 22);
             this.toolTab.Name = "toolTab";
             this.toolTab.Padding = new System.Windows.Forms.Padding(3);
-            this.toolTab.Size = new System.Drawing.Size(745, 357);
+            this.toolTab.Size = new System.Drawing.Size(745, 361);
             this.toolTab.TabIndex = 5;
             this.toolTab.Text = "工具箱";
             this.toolTab.UseVisualStyleBackColor = true;
@@ -651,10 +651,10 @@ namespace MCUpdater
             this.offlineModsTab.Controls.Add(this.label1);
             this.offlineModsTab.Controls.Add(this.offlineModList);
             this.offlineModsTab.Controls.Add(this.saveOfflineMod);
-            this.offlineModsTab.Location = new System.Drawing.Point(4, 26);
+            this.offlineModsTab.Location = new System.Drawing.Point(4, 22);
             this.offlineModsTab.Name = "offlineModsTab";
             this.offlineModsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.offlineModsTab.Size = new System.Drawing.Size(745, 357);
+            this.offlineModsTab.Size = new System.Drawing.Size(745, 361);
             this.offlineModsTab.TabIndex = 3;
             this.offlineModsTab.Text = "Mod管理";
             this.offlineModsTab.UseVisualStyleBackColor = true;
@@ -719,7 +719,7 @@ namespace MCUpdater
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(530, 273);
+            this.label17.Location = new System.Drawing.Point(524, 273);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(56, 17);
             this.label17.TabIndex = 10;
@@ -737,8 +737,8 @@ namespace MCUpdater
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.linkLabel1);
             this.groupBox2.Controls.Add(this.forceUpdateRoot);
-            this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.forceUpdateAssets);
             this.groupBox2.Controls.Add(this.forceUpdateCore);
             this.groupBox2.Controls.Add(this.forceUpdateOmods);
@@ -746,35 +746,42 @@ namespace MCUpdater
             this.groupBox2.Controls.Add(this.forceUpdateMods);
             this.groupBox2.Location = new System.Drawing.Point(524, 62);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(210, 200);
+            this.groupBox2.Size = new System.Drawing.Size(210, 134);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "强制更新";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.linkLabel1.LinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.linkLabel1.Location = new System.Drawing.Point(5, 106);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(200, 17);
+            this.linkLabel1.TabIndex = 28;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Tag = "";
+            this.linkLabel1.Text = "什么是强制更新？什么时候需要它？";
+            this.linkLabel1.VisitedLinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked_1);
+            // 
             // forceUpdateRoot
             // 
             this.forceUpdateRoot.AutoSize = true;
-            this.forceUpdateRoot.Location = new System.Drawing.Point(115, 146);
+            this.forceUpdateRoot.Location = new System.Drawing.Point(115, 51);
             this.forceUpdateRoot.Name = "forceUpdateRoot";
             this.forceUpdateRoot.Size = new System.Drawing.Size(87, 21);
             this.forceUpdateRoot.TabIndex = 6;
             this.forceUpdateRoot.Text = "根目录文件";
             this.forceUpdateRoot.UseVisualStyleBackColor = true;
             // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 22);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(188, 85);
-            this.label16.TabIndex = 5;
-            this.label16.Text = "如果更新器提示已经为最新版本，\r\n但是仍然无法进入游戏，可以考虑\r\n使用强制更新（如果能打开游戏界\r\n面，一般只需更新模组和配置文件\r\n即可）";
-            // 
             // forceUpdateAssets
             // 
             this.forceUpdateAssets.AutoSize = true;
-            this.forceUpdateAssets.Location = new System.Drawing.Point(115, 173);
+            this.forceUpdateAssets.Location = new System.Drawing.Point(115, 78);
             this.forceUpdateAssets.Name = "forceUpdateAssets";
             this.forceUpdateAssets.Size = new System.Drawing.Size(75, 21);
             this.forceUpdateAssets.TabIndex = 4;
@@ -784,7 +791,7 @@ namespace MCUpdater
             // forceUpdateCore
             // 
             this.forceUpdateCore.AutoSize = true;
-            this.forceUpdateCore.Location = new System.Drawing.Point(6, 173);
+            this.forceUpdateCore.Location = new System.Drawing.Point(6, 78);
             this.forceUpdateCore.Name = "forceUpdateCore";
             this.forceUpdateCore.Size = new System.Drawing.Size(75, 21);
             this.forceUpdateCore.TabIndex = 3;
@@ -794,7 +801,7 @@ namespace MCUpdater
             // forceUpdateOmods
             // 
             this.forceUpdateOmods.AutoSize = true;
-            this.forceUpdateOmods.Location = new System.Drawing.Point(6, 146);
+            this.forceUpdateOmods.Location = new System.Drawing.Point(6, 51);
             this.forceUpdateOmods.Name = "forceUpdateOmods";
             this.forceUpdateOmods.Size = new System.Drawing.Size(75, 21);
             this.forceUpdateOmods.TabIndex = 2;
@@ -804,7 +811,7 @@ namespace MCUpdater
             // forceUpdateConfig
             // 
             this.forceUpdateConfig.AutoSize = true;
-            this.forceUpdateConfig.Location = new System.Drawing.Point(115, 119);
+            this.forceUpdateConfig.Location = new System.Drawing.Point(115, 24);
             this.forceUpdateConfig.Name = "forceUpdateConfig";
             this.forceUpdateConfig.Size = new System.Drawing.Size(75, 21);
             this.forceUpdateConfig.TabIndex = 1;
@@ -814,7 +821,7 @@ namespace MCUpdater
             // forceUpdateMods
             // 
             this.forceUpdateMods.AutoSize = true;
-            this.forceUpdateMods.Location = new System.Drawing.Point(6, 119);
+            this.forceUpdateMods.Location = new System.Drawing.Point(6, 24);
             this.forceUpdateMods.Name = "forceUpdateMods";
             this.forceUpdateMods.Size = new System.Drawing.Size(75, 21);
             this.forceUpdateMods.TabIndex = 0;
@@ -836,9 +843,9 @@ namespace MCUpdater
             this.updateAction.AutoSize = true;
             this.updateAction.Location = new System.Drawing.Point(10, 7);
             this.updateAction.Name = "updateAction";
-            this.updateAction.Size = new System.Drawing.Size(272, 17);
+            this.updateAction.Size = new System.Drawing.Size(344, 17);
             this.updateAction.TabIndex = 6;
-            this.updateAction.Text = "若要检查更新，请点击右下角的 [ 检查更新 ] 按钮";
+            this.updateAction.Text = "若要检查更新或者安装游戏，请点击右下角的 [ 检查更新 ] 按钮";
             this.updateAction.Click += new System.EventHandler(this.updateAction_Click);
             // 
             // updateButton
@@ -1268,7 +1275,6 @@ namespace MCUpdater
         private System.Windows.Forms.Label updateThisProgressText;
         private System.Windows.Forms.ProgressBar updateThisProgressBar;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.CheckBox forceUpdateAssets;
         private System.Windows.Forms.CheckBox forceUpdateCore;
         private System.Windows.Forms.CheckBox forceUpdateOmods;
@@ -1318,6 +1324,7 @@ namespace MCUpdater
         private System.Windows.Forms.Button diyButton;
         private System.Windows.Forms.FontDialog diyDialog;
         private System.Windows.Forms.Button launcherButton;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 

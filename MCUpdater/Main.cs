@@ -415,5 +415,10 @@ namespace MCUpdater
                 ForeColor = diyDialog.Color;
             }
         }
+
+        private void linkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show("强制更新，即无论组件是否需要更新，都尝试下载并去更新它\r\n一般情况下并不需要强制更新\r\n\r\n如果更新器提示已经为最新版本，但是仍然无法进入游戏，可以考虑使用强制更新（如果能打开游戏界面，一般只需更新模组和配置文件即可）", "强制更新功能帮助", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }
