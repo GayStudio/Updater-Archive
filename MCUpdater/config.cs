@@ -52,12 +52,50 @@ namespace MCUpdater
         /// </summary>
         /// <param name="id">ID</param>
         /// <param name="v">值</param>
-        public void set(string id,string v)
+        public void set(string id, string v)
         {
             var d = setd.GetElementsByTagName(id);
-            if(d.Count < 1)
+            if (d.Count < 1)
             {
-                add(id,v);
+                add(id, v);
+            }
+            else
+            {
+                d[0].InnerText = v;
+                save();
+            }
+        }
+        /// <summary>
+        /// 添加启动器设置
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="v">值</param>
+        public void padd(string id, string v)
+        {
+            player.AppendChild(f.CreateElement(id)).InnerText = v;
+            save();
+        }
+
+        /// <summary>
+        /// 获取启动器设置
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns>值</returns>
+        public string pget(string id)
+        {
+            return player.GetElementsByTagName(id)[0].InnerText;
+        }
+        /// <summary>
+        /// 保存启动器设置
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="v">值</param>
+        public void pset(string id, string v)
+        {
+            var d = player.GetElementsByTagName(id);
+            if (d.Count < 1)
+            {
+                padd(id, v);
             }
             else
             {
@@ -72,7 +110,7 @@ namespace MCUpdater
         /// <param name="v">值</param>
         public void add(string id, string v)
         {
-            setd.AppendChild(f.CreateElement(id)).InnerText = v;
+            player.AppendChild(f.CreateElement(id)).InnerText = v;
             save();
         }
         /// <summary>

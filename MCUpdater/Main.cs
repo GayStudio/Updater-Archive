@@ -129,6 +129,7 @@ namespace MCUpdater
             {
                 disMcCheck.Checked = true;
             }
+            loadPlayerSettings();
             #endregion
             log("启动成功: " + " V" + x.ver + " | " + System.Environment.OSVersion);
             inited = true;
@@ -267,7 +268,7 @@ namespace MCUpdater
         {
             try
             {
-                Process.Start("https://accounts.moecraft.net/index.php?m=home&c=user&a=reg");
+                Process.Start("https://accounts.moecraft.net/index.php");
             }
             catch (Exception ex)
             {

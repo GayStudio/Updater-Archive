@@ -4,6 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Web.Script.Serialization;
 using System.Web.Security;
+using Microsoft.Win32;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace MCUpdater
 {
@@ -56,7 +59,7 @@ namespace MCUpdater
                 ps.StartInfo.Arguments = "/k title "+x.name+"&java.exe ";
             }
             */
-            string jarPath = conn.get("jarPath");
+            string jarPath = "1.7.10-Forge10.13.4.1564-1.7.10";
             string mcPath = x.path + x.binpath + @"versions\" + jarPath + @"\";
             if (!Directory.Exists(mcPath) || !File.Exists(mcPath + jarPath + ".json"))
             {
@@ -74,38 +77,41 @@ namespace MCUpdater
             var args = json.minecraftArguments
                                   .Replace("${auth_player_name}", playerName.Text)
                                   .Replace("${version_name}", jarPath)
-                                  .Replace("${game_directory}", x.path + x.binpath)
-                                  .Replace("${assets_root}", x.path + x.binpath + @"\assets")
+                                  .Replace("${game_directory}", "./.minecraft")
+                                  .Replace("${assets_root}", "assets")
                                   .Replace("${assets_index_name}", json.assetIndex)
                                   .Replace("${auth_uuid}", UUID)
                                   .Replace("${user_properties}", "{}")
                                   .Replace("${user_type}", "Legacy");
-            ps.StartInfo.Arguments += "-Xincgc -Xmx" + playerMem.Text + "M ";
+            ps.StartInfo.Arguments += " -Xmx" + playerMem.Text + "M";
+            ps.StartInfo.Arguments += " -Dfml.ignoreInvalidMinecraftCertificates=true -Dfml.ignorePatchDiscrepancies=true ";
             #endregion
-            var libdir = Directory.GetFiles(x.path + x.binpath + @"\libraries", "*.jar", SearchOption.AllDirectories);
-            var cp = "";
-            //log(json.libraries);
-            foreach (string libs in libdir)
+            var libdir = x.path + x.binpath + @"\libraries";
+            ps.StartInfo.Arguments += "-Djava.library.path=\"" + x.path + x.binpath + "versions\\" + jarPath + "\\" + jarPath + "-natives" + "\" ";
+            ps.StartInfo.Arguments += "-cp \"";
+            if (!string.IsNullOrEmpty(json.inheritsFrom))
             {
-                if (libs.IndexOf(@"libraries\net\minecraftforge\forge") < 0)
-                {
-                    cp += libs + ";";
-                }
+                ps.StartInfo.Arguments += parseInheritsFrom(json.inheritsFrom, x.path + x.binpath + @"versions\", libdir);
             }
-            cp = cp.Replace(@"\\", @"\").Trim(';');
-            log(cp);
-            /*
-            ps.StartInfo.Arguments += "-Djava.library.path=\"" + x.path + x.binpath + @"bin\natives" + "\" ";
-            ps.StartInfo.Arguments += "-cp " + x.path + x.binpath + @"bin\minecraft.jar;";
-            ps.StartInfo.Arguments += x.path + x.binpath + @"bin\jinput.jar;";
-            ps.StartInfo.Arguments += x.path + x.binpath + @"bin\lwjgl.jar;";
-            ps.StartInfo.Arguments += x.path + x.binpath + @"bin\lwjgl_util.jar ";
-            ps.StartInfo.Arguments += "";
-            ps.StartInfo.Arguments += "";
-            */
-            ps.StartInfo.Arguments += args + " ";
+            foreach (Dictionary<string,object> lib in json.libraries)
+            {
+                ps.StartInfo.Arguments += getMcLibInfo(lib["name"].ToString(), libdir);
+            }
+            if(string.IsNullOrEmpty(json.jar))
+            {
+                ps.StartInfo.Arguments += mcPath + jarPath + ".jar";
+            }
+            else
+            {
+                ps.StartInfo.Arguments += x.path + x.binpath + @"versions\" + json.jar + "\\" + json.jar + ".jar";
+            }
+            ps.StartInfo.Arguments += "\" " + json.mainClass + " " + args + " ";
             ps.StartInfo.Arguments += "--height " + playerHeight.Text + " --width " + playerWidth.Text + " ";
             ps.StartInfo.Arguments += playerArgs.Text;
+            ps.StartInfo.FileName = playerJRE.Text + @"\bin\java.exe";
+            ps.StartInfo.UseShellExecute = false;
+            ps.StartInfo.CreateNoWindow = true;
+            new debugMode(ps).Show();
             if (playerClose.Checked)
             {
                 Application.Exit();
@@ -118,38 +124,71 @@ namespace MCUpdater
             //}
         }
 
+        private string parseInheritsFrom(string v, string mcPath, string libdir)
+        {
+            string r = "";
+            StreamReader jsr = new StreamReader(mcPath + v + "\\" + v + ".json");
+            string jsonText = jsr.ReadToEnd().Trim();
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var json = serializer.Deserialize<forgeJsonData>(jsonText);
+            if (!string.IsNullOrEmpty(json.inheritsFrom))
+            {
+                r += parseInheritsFrom(json.inheritsFrom, mcPath, libdir);
+            }
+            foreach (Dictionary<string, object> lib in json.libraries)
+            {
+                r += getMcLibInfo(lib["name"].ToString(), libdir);
+            }
+            return r;
+        }
+
+        private string getMcLibInfo(string v,string libpath)
+        {
+            string[] s = v.Split(':');
+            string path  = libpath + "\\" + s[0].Replace('.','\\') + "\\";
+            path += s[1] + "\\";
+            path += s[2] + "\\";
+            path += s[1] + "-";
+            path += s[2] + ".jar;";
+            if (s[0] == "tv.twitch")
+            {
+                path.Replace("${arch}", Environment.Is64BitOperatingSystem ? "64" : "32");
+            }
+            return path;
+        }
+
         private void playerSave_Click(object sender, EventArgs e)
         {
-            conn.set("playerName", playerName.Text);
-            conn.set("playerMem", playerMem.Text);
-            conn.set("playerWidth", playerWidth.Text);
-            conn.set("playerHeight", playerHeight.Text);
-            conn.set("playerJRE", playerJRE.Text);
-            conn.set("playerArgs", playerArgs.Text);
+            conn.pset("name", playerName.Text);
+            conn.pset("mem", playerMem.Text);
+            conn.pset("width", playerWidth.Text);
+            conn.pset("height", playerHeight.Text);
+            conn.pset("jre", playerJRE.Text);
+            conn.pset("args", playerArgs.Text);
             if (playerFS.Checked)
             {
-                conn.set("playerFS", "1");
+                conn.pset("fs", "1");
             }
             else
             {
-                conn.set("playerFS", "0");
+                conn.pset("fs", "0");
             }
             if (debugMode.Checked)
             {
-                conn.set("debugMode", "1");
+                conn.pset("debug", "1");
             }
             else
             {
-                conn.set("debugMode", "2");
+                conn.pset("debug", "0");
             }
 
             if (playerClose.Checked)
             {
-                conn.set("playerClose", "1");
+                conn.pset("close", "1");
             }
             else
             {
-                conn.set("playerClose", "0");
+                conn.pset("close", "0");
             }
             log("设置保存成功");
         }
@@ -162,6 +201,51 @@ namespace MCUpdater
             if (fdd.ShowDialog() == DialogResult.OK)
             {
                 playerJRE.Text = fdd.SelectedPath;
+            }
+        }
+
+        void loadPlayerSettings()
+        {
+            playerName.Text = conn.pget("name");
+            playerArgs.Text = conn.pget("args");
+            playerMem.Text = conn.pget("mem");
+            playerWidth.Text = conn.pget("width");
+            playerHeight.Text = conn.pget("height");
+            playerJRE.Text = conn.pget("jre");
+            if(conn.pget("fs") == "1")
+            {
+                playerFS.Checked = true;
+            }
+            if(conn.pget("debug") == "1")
+            {
+                debugMode.Checked = true;
+            }
+            if(conn.pget("fs") == "1")
+            {
+                playerFS.Checked = true;
+            }
+            if(string.IsNullOrEmpty(playerJRE.Text))
+            {
+                playerJRE.Text = getJavaPath();
+            }
+        }
+
+        public String getJavaPath()
+        {
+            try
+            {
+                String javaKey = "SOFTWARE\\JavaSoft\\Java Runtime Environment";
+                using (var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).OpenSubKey(javaKey))
+                {
+                    String currentVersion = baseKey.GetValue("CurrentVersion").ToString();
+                    using (var homeKey = baseKey.OpenSubKey(currentVersion))
+                        return homeKey.GetValue("JavaHome").ToString();
+                }
+            }
+            catch(Exception ex)
+            {
+                log("获取JRE路径失败：" + ex.Message);
+                return "";
             }
         }
     }

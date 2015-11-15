@@ -6,7 +6,7 @@ using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using System.Collections.Generic;
+using System.IO.Compression;
 
 namespace MCUpdater
 {
@@ -141,12 +141,6 @@ namespace MCUpdater
                     updateThisProgressBar.Style = ProgressBarStyle.Marquee;
                     updateAction.Text = "正在安装：" + info["desc"];
                     updateLog.AppendText("正在安装文件：" + info["desc"] + "\r\n");
-                    Process p = new Process();
-                    p.StartInfo.FileName = x.path + x.updpath + "7z.exe";
-                    p.StartInfo.Arguments = "x -y -o\"" + x.path + info["path"] + "\" \"" + x.path + x.updpath + x.dlpath + fileName + "\"";
-                    p.StartInfo.UseShellExecute = false;
-                    p.StartInfo.CreateNoWindow = true;
-                    p.StartInfo.RedirectStandardOutput = true;
                     try
                     {
                         if (updateList.GetAttribute("clear") == "1" && Directory.Exists(x.path + x.binpath + info["path"]))
@@ -165,9 +159,18 @@ namespace MCUpdater
                         {
                             Directory.CreateDirectory(x.path + x.binpath + info["path"]);
                         }
+                        Process p = new Process();
+                        p.StartInfo.FileName = x.path + x.updpath + "7z.exe";
+                        p.StartInfo.Arguments = "x -y -o\"" + x.path + info["path"] + "\" \"" + x.path + x.updpath + x.dlpath + fileName + "\"";
+                        p.StartInfo.UseShellExecute = false;
+                        p.StartInfo.CreateNoWindow = true;
+                        p.StartInfo.RedirectStandardOutput = true;
                         p.Start();
                         p.BeginOutputReadLine();
                         p.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
+
+                        FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                        //GZipStream gz = new GZipStream(fs, CompressionMode.Decompress);
                         conn.setLibVer(updateList.GetAttribute("id"), updateList.GetAttribute("ver"));
                         while (!p.WaitForExit(25))
                         {
@@ -226,6 +229,7 @@ namespace MCUpdater
             forceUpdateRoot.Enabled = true;
             updateServer.Enabled = true;
             updateButton.Text = "检查更新 (&C)";
+            updateButton.Enabled = true;
         }
         #region 判断是否需要强制更新
         private bool isForceUpdate(string v)

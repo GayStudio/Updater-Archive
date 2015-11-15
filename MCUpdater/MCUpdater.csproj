@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>发布\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -27,7 +28,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -49,6 +49,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>MCUpdater.p</StartupObject>
@@ -127,13 +128,19 @@
   <ItemGroup>
     <Compile Include="cdn.cs" />
     <Compile Include="config.cs" />
+    <Compile Include="debugMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="debugMode.Designer.cs">
+      <DependentUpon>debugMode.cs</DependentUpon>
+    </Compile>
     <Compile Include="EX.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EX.Designer.cs">
       <DependentUpon>EX.cs</DependentUpon>
     </Compile>
-    <Compile Include="forgeJsonData.cs" />
+    <Compile Include="I\forgeJsonData.cs" />
     <Compile Include="logViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +171,9 @@
     </Compile>
     <Compile Include="Properties\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="debugMode.resx">
+      <DependentUpon>debugMode.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EX.resx">
       <DependentUpon>EX.cs</DependentUpon>
     </EmbeddedResource>
@@ -186,6 +196,7 @@
     <EmbeddedResource Include="regionCalculator.resx">
       <DependentUpon>regionCalculator.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\app.config" />
     <None Include="updater\mcpatch.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -236,10 +247,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="updater\7z.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="updater\cdn.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="updater\config.xml" />
+    <None Include="updater\config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="updater\7z.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

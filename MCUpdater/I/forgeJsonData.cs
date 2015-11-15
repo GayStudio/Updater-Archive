@@ -17,5 +17,8 @@ namespace MCUpdater
 
         [DataMember(IsRequired = true)]
         public ArrayList libraries { get; set; }
+
+        public string inheritsFrom { get; set; }
+        public string jar { get; set; }
     }
 }
