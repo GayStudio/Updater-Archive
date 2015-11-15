@@ -400,10 +400,10 @@ namespace MCUpdater
             this.toolTab.Controls.Add(this.groupBox4);
             this.toolTab.Controls.Add(this.groupBox1);
             this.toolTab.Controls.Add(this.toolGroupBox);
-            this.toolTab.Location = new System.Drawing.Point(4, 22);
+            this.toolTab.Location = new System.Drawing.Point(4, 26);
             this.toolTab.Name = "toolTab";
             this.toolTab.Padding = new System.Windows.Forms.Padding(3);
-            this.toolTab.Size = new System.Drawing.Size(745, 361);
+            this.toolTab.Size = new System.Drawing.Size(745, 357);
             this.toolTab.TabIndex = 5;
             this.toolTab.Text = "工具箱";
             this.toolTab.UseVisualStyleBackColor = true;
@@ -651,17 +651,17 @@ namespace MCUpdater
             this.offlineModsTab.Controls.Add(this.label1);
             this.offlineModsTab.Controls.Add(this.offlineModList);
             this.offlineModsTab.Controls.Add(this.saveOfflineMod);
-            this.offlineModsTab.Location = new System.Drawing.Point(4, 22);
+            this.offlineModsTab.Location = new System.Drawing.Point(4, 26);
             this.offlineModsTab.Name = "offlineModsTab";
             this.offlineModsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.offlineModsTab.Size = new System.Drawing.Size(745, 361);
+            this.offlineModsTab.Size = new System.Drawing.Size(745, 357);
             this.offlineModsTab.TabIndex = 3;
             this.offlineModsTab.Text = "Mod管理";
             this.offlineModsTab.UseVisualStyleBackColor = true;
             // 
             // refreshMods
             // 
-            this.refreshMods.Location = new System.Drawing.Point(21, 317);
+            this.refreshMods.Location = new System.Drawing.Point(6, 319);
             this.refreshMods.Name = "refreshMods";
             this.refreshMods.Size = new System.Drawing.Size(87, 34);
             this.refreshMods.TabIndex = 4;
@@ -672,7 +672,7 @@ namespace MCUpdater
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 8);
+            this.label1.Location = new System.Drawing.Point(205, 327);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(288, 17);
             this.label1.TabIndex = 3;
@@ -681,15 +681,15 @@ namespace MCUpdater
             // offlineModList
             // 
             this.offlineModList.FormattingEnabled = true;
-            this.offlineModList.Location = new System.Drawing.Point(21, 37);
+            this.offlineModList.Location = new System.Drawing.Point(6, 6);
             this.offlineModList.Name = "offlineModList";
-            this.offlineModList.Size = new System.Drawing.Size(706, 274);
+            this.offlineModList.Size = new System.Drawing.Size(733, 310);
             this.offlineModList.TabIndex = 2;
             this.offlineModList.SelectedIndexChanged += new System.EventHandler(this.offlineModList_SelectedIndexChanged);
             // 
             // saveOfflineMod
             // 
-            this.saveOfflineMod.Location = new System.Drawing.Point(594, 317);
+            this.saveOfflineMod.Location = new System.Drawing.Point(606, 319);
             this.saveOfflineMod.Name = "saveOfflineMod";
             this.saveOfflineMod.Size = new System.Drawing.Size(133, 34);
             this.saveOfflineMod.TabIndex = 1;

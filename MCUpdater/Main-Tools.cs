@@ -26,7 +26,7 @@ namespace MCUpdater
                 foreach (string mod in Directory.GetFiles(x.path + x.moddir, "*", SearchOption.AllDirectories))
                 {
                     FileInfo fileInfo = new FileInfo(mod);
-                    if (fileInfo.Name.Substring(0, black.Length) != black)
+                    if (fileInfo.Name.Length < black.Length || fileInfo.Name.Substring(0, black.Length) != black)
                     {
                         if (fileInfo.Extension == ".jar" || fileInfo.Extension == ".zip")
                         {
@@ -43,7 +43,7 @@ namespace MCUpdater
             }
             catch (Exception ex)
             {
-                log("列出Mod失败：" + ex.Message);
+                log("列出Mod失败：" + ex.ToString());
                 if (MessageBox.Show(ex.Message, "列出Mod失败", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
                 {
                     getModList();
