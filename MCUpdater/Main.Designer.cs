@@ -88,13 +88,8 @@ namespace MCUpdater
             this.label17 = new System.Windows.Forms.Label();
             this.updateServer = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.forceUpdate = new System.Windows.Forms.CheckedListBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.forceUpdateRoot = new System.Windows.Forms.CheckBox();
-            this.forceUpdateAssets = new System.Windows.Forms.CheckBox();
-            this.forceUpdateCore = new System.Windows.Forms.CheckBox();
-            this.forceUpdateOmods = new System.Windows.Forms.CheckBox();
-            this.forceUpdateConfig = new System.Windows.Forms.CheckBox();
-            this.forceUpdateMods = new System.Windows.Forms.CheckBox();
             this.updateThisProgressText = new System.Windows.Forms.Label();
             this.updateAction = new System.Windows.Forms.Label();
             this.updateButton = new System.Windows.Forms.Button();
@@ -183,10 +178,10 @@ namespace MCUpdater
             this.mcLauncher.Controls.Add(this.label7);
             this.mcLauncher.Controls.Add(this.label6);
             this.mcLauncher.Controls.Add(this.label13);
-            this.mcLauncher.Location = new System.Drawing.Point(4, 22);
+            this.mcLauncher.Location = new System.Drawing.Point(4, 26);
             this.mcLauncher.Name = "mcLauncher";
             this.mcLauncher.Padding = new System.Windows.Forms.Padding(3);
-            this.mcLauncher.Size = new System.Drawing.Size(745, 361);
+            this.mcLauncher.Size = new System.Drawing.Size(745, 357);
             this.mcLauncher.TabIndex = 7;
             this.mcLauncher.Text = "启动器";
             this.mcLauncher.UseVisualStyleBackColor = true;
@@ -400,10 +395,10 @@ namespace MCUpdater
             this.toolTab.Controls.Add(this.groupBox4);
             this.toolTab.Controls.Add(this.groupBox1);
             this.toolTab.Controls.Add(this.toolGroupBox);
-            this.toolTab.Location = new System.Drawing.Point(4, 22);
+            this.toolTab.Location = new System.Drawing.Point(4, 26);
             this.toolTab.Name = "toolTab";
             this.toolTab.Padding = new System.Windows.Forms.Padding(3);
-            this.toolTab.Size = new System.Drawing.Size(745, 361);
+            this.toolTab.Size = new System.Drawing.Size(745, 357);
             this.toolTab.TabIndex = 5;
             this.toolTab.Text = "工具箱";
             this.toolTab.UseVisualStyleBackColor = true;
@@ -737,20 +732,26 @@ namespace MCUpdater
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.forceUpdate);
             this.groupBox2.Controls.Add(this.linkLabel1);
-            this.groupBox2.Controls.Add(this.forceUpdateRoot);
-            this.groupBox2.Controls.Add(this.forceUpdateAssets);
-            this.groupBox2.Controls.Add(this.forceUpdateCore);
-            this.groupBox2.Controls.Add(this.forceUpdateOmods);
-            this.groupBox2.Controls.Add(this.forceUpdateConfig);
-            this.groupBox2.Controls.Add(this.forceUpdateMods);
             this.groupBox2.Location = new System.Drawing.Point(524, 62);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(210, 134);
+            this.groupBox2.Size = new System.Drawing.Size(210, 202);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "强制更新";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // forceUpdate
+            // 
+            this.forceUpdate.Enabled = false;
+            this.forceUpdate.FormattingEnabled = true;
+            this.forceUpdate.Items.AddRange(new object[] {
+            "请先检查更新"});
+            this.forceUpdate.Location = new System.Drawing.Point(7, 23);
+            this.forceUpdate.Name = "forceUpdate";
+            this.forceUpdate.Size = new System.Drawing.Size(197, 148);
+            this.forceUpdate.TabIndex = 29;
             // 
             // linkLabel1
             // 
@@ -758,7 +759,7 @@ namespace MCUpdater
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.BackColor = System.Drawing.Color.Transparent;
             this.linkLabel1.LinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.linkLabel1.Location = new System.Drawing.Point(5, 106);
+            this.linkLabel1.Location = new System.Drawing.Point(4, 180);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(200, 17);
             this.linkLabel1.TabIndex = 28;
@@ -767,66 +768,6 @@ namespace MCUpdater
             this.linkLabel1.Text = "什么是强制更新？什么时候需要它？";
             this.linkLabel1.VisitedLinkColor = System.Drawing.SystemColors.MenuHighlight;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked_1);
-            // 
-            // forceUpdateRoot
-            // 
-            this.forceUpdateRoot.AutoSize = true;
-            this.forceUpdateRoot.Location = new System.Drawing.Point(115, 51);
-            this.forceUpdateRoot.Name = "forceUpdateRoot";
-            this.forceUpdateRoot.Size = new System.Drawing.Size(87, 21);
-            this.forceUpdateRoot.TabIndex = 6;
-            this.forceUpdateRoot.Text = "根目录文件";
-            this.forceUpdateRoot.UseVisualStyleBackColor = true;
-            // 
-            // forceUpdateAssets
-            // 
-            this.forceUpdateAssets.AutoSize = true;
-            this.forceUpdateAssets.Location = new System.Drawing.Point(115, 78);
-            this.forceUpdateAssets.Name = "forceUpdateAssets";
-            this.forceUpdateAssets.Size = new System.Drawing.Size(75, 21);
-            this.forceUpdateAssets.TabIndex = 4;
-            this.forceUpdateAssets.Text = "资源文件";
-            this.forceUpdateAssets.UseVisualStyleBackColor = true;
-            // 
-            // forceUpdateCore
-            // 
-            this.forceUpdateCore.AutoSize = true;
-            this.forceUpdateCore.Location = new System.Drawing.Point(6, 78);
-            this.forceUpdateCore.Name = "forceUpdateCore";
-            this.forceUpdateCore.Size = new System.Drawing.Size(75, 21);
-            this.forceUpdateCore.TabIndex = 3;
-            this.forceUpdateCore.Text = "游戏核心";
-            this.forceUpdateCore.UseVisualStyleBackColor = true;
-            // 
-            // forceUpdateOmods
-            // 
-            this.forceUpdateOmods.AutoSize = true;
-            this.forceUpdateOmods.Location = new System.Drawing.Point(6, 51);
-            this.forceUpdateOmods.Name = "forceUpdateOmods";
-            this.forceUpdateOmods.Size = new System.Drawing.Size(75, 21);
-            this.forceUpdateOmods.TabIndex = 2;
-            this.forceUpdateOmods.Text = "单机模组";
-            this.forceUpdateOmods.UseVisualStyleBackColor = true;
-            // 
-            // forceUpdateConfig
-            // 
-            this.forceUpdateConfig.AutoSize = true;
-            this.forceUpdateConfig.Location = new System.Drawing.Point(115, 24);
-            this.forceUpdateConfig.Name = "forceUpdateConfig";
-            this.forceUpdateConfig.Size = new System.Drawing.Size(75, 21);
-            this.forceUpdateConfig.TabIndex = 1;
-            this.forceUpdateConfig.Text = "配置文件";
-            this.forceUpdateConfig.UseVisualStyleBackColor = true;
-            // 
-            // forceUpdateMods
-            // 
-            this.forceUpdateMods.AutoSize = true;
-            this.forceUpdateMods.Location = new System.Drawing.Point(6, 24);
-            this.forceUpdateMods.Name = "forceUpdateMods";
-            this.forceUpdateMods.Size = new System.Drawing.Size(75, 21);
-            this.forceUpdateMods.TabIndex = 0;
-            this.forceUpdateMods.Text = "游戏模组";
-            this.forceUpdateMods.UseVisualStyleBackColor = true;
             // 
             // updateThisProgressText
             // 
@@ -885,6 +826,9 @@ namespace MCUpdater
             this.updateLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.updateLog.Size = new System.Drawing.Size(494, 261);
             this.updateLog.TabIndex = 7;
+            this.updateLog.Text = "若要检查更新或者安装游戏，请点击右下角的 [ 检查更新 ] 按钮\r\n稍后将在此处显示该版本的新特性\r\n\r\nTip:更新器不是启动器；更新完成后会自动下载启动器\r\n" +
+    "Tip:右下角可以选择更新服务器节点\r\nTip:工具箱和关于页面还有很多功能等待你去挖掘\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nMoeUpdater V2 By K" +
+    "envix";
             // 
             // mainTabControl
             // 
@@ -1191,7 +1135,7 @@ namespace MCUpdater
             this.ClientSize = new System.Drawing.Size(778, 425);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.mainTabControl);
-            this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Main";
@@ -1275,15 +1219,9 @@ namespace MCUpdater
         private System.Windows.Forms.Label updateThisProgressText;
         private System.Windows.Forms.ProgressBar updateThisProgressBar;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox forceUpdateAssets;
-        private System.Windows.Forms.CheckBox forceUpdateCore;
-        private System.Windows.Forms.CheckBox forceUpdateOmods;
-        private System.Windows.Forms.CheckBox forceUpdateConfig;
-        private System.Windows.Forms.CheckBox forceUpdateMods;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ComboBox updateServer;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.CheckBox forceUpdateRoot;
         private System.Windows.Forms.TabPage aboutTab;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.LinkLabel stusUrl;
@@ -1325,6 +1263,7 @@ namespace MCUpdater
         private System.Windows.Forms.FontDialog diyDialog;
         private System.Windows.Forms.Button launcherButton;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.CheckedListBox forceUpdate;
     }
 }
 

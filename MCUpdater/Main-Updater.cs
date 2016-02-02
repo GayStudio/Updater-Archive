@@ -7,34 +7,41 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO.Compression;
+using System.Collections.Generic;
 
 namespace MCUpdater
 {
     public partial class Main : Form
     {
-        private bool nowUpdate = false;
-
+        private int nowUpdate = 0;
+        private XmlElement xn;
+        private List<string> update = new List<string> { };
         private void updateButton_Click(object sender, EventArgs e)
         {
-            if(nowUpdate)
+            if(nowUpdate == 2)
             {
                 endUpdateAction();
                 updateAction.Text = "更新已取消";
                 updateLog.AppendText(updateAction.Text);
             }
+            else if(nowUpdate == 1)
+            {
+                startUpdateAction();
+            }
             else
             {
-                doUpdate();
+                doCheckUpdate();
             }
         }
 
-        void doUpdate()
+        void doCheckUpdate()
         {
+            nowUpdate = 2;
             var cdn = cdnc.get(updateServer.SelectedIndex);
             var server = cdn["url"] + cdn["xml"];
             updateAction.Text = "正在获取更新信息: " + server;
-            startUpdateAction();
-            updateLog.AppendText(updateAction.Text + "\r\n");
+            updateLog.Text = updateAction.Text + "\r\n";
+            updateButton.Text = "取消检查更新";
             string errorMsg = "";
             string result = "";
             Thread th = new Thread(() => {
@@ -53,7 +60,7 @@ namespace MCUpdater
             th.Start();
             while (!th.Join(x.sleep))
             {
-                if(!nowUpdate)
+                if(nowUpdate == 2)
                 {
                     th.Abort();
                     return;
@@ -66,167 +73,92 @@ namespace MCUpdater
                 endUpdateAction();
                 return;
             }
-            downloadUpdateInfoCompleted(result);
+            updateAction.Text = "获取本版更新信息成功。点击开始更新按钮可以运行更新。你可以在右侧选择要强制更新哪些组件。";
+            readUpdateInfo(result);
         }
 
-        private void startUpdateAction()
-        {
-            updateLog.Text = "";
-            nowUpdate = true;
-            forceUpdateAssets.Enabled = false;
-            forceUpdateConfig.Enabled = false;
-            forceUpdateCore.Enabled = false;
-            forceUpdateMods.Enabled = false;
-            forceUpdateOmods.Enabled = false;
-            forceUpdateRoot.Enabled = false;
-            updateServer.Enabled = false;
-            updateButton.Text = "取消更新";
-            log("启动检查更新");
-        }
-
-        void downloadUpdateInfoCompleted(string Result)
+        private void readUpdateInfo(string result)
         {
             XmlDocument doc = new XmlDocument();
             try
             {
-                doc.LoadXml(Result);
+                doc.LoadXml(result);
             }
             catch (Exception ex)
             {
-                error(ex.Message + "\r\n" + Result, "解析XML失败");
+                error(ex.Message + "\r\n" + result, "解析XML失败");
                 endUpdateAction();
                 return;
             }
-            XmlNode xn = doc.SelectSingleNode("root");
-            XmlNodeList xnl = xn.ChildNodes;
-            foreach (XmlNode val in xnl)
+            xn = doc.DocumentElement;
+            if (xn.SelectSingleNode("desc") != null)
             {
-                XmlElement updateList = (XmlElement)val;
-                var info = conn.getLib(updateList.GetAttribute("id"));
-                updateLog.AppendText("---------------------------------------------------------------------------\r\n检查更新：" + info["desc"] + " [ 本地版本: V" + info["ver"] + " ]\r\n");
-                double thisVer = 0.0;
-                if (Directory.Exists(x.path + x.binpath + info["path"]))
+                updateLog.Text  = xn.SelectSingleNode("desc").InnerText;
+                updateLog.Text += "\r\n---------------------------------------------------------------------------\r\n";
+                updateLog.Text += "以下内容可以更新：\r\n";
+            }
+            else
+            {
+                updateLog.Text = "暂无更新日志，以下内容可以更新：\r\n";
+            }
+            forceUpdate.Items.Clear();
+      
+            foreach (XmlElement val in xn.SelectSingleNode("libs"))
+            {
+                forceUpdate.Items.Add(val.GetAttribute("name"));
+                if (!File.Exists(x.path + val.GetAttribute("path") + "\\" + val.Name + ".version"))
                 {
-                    thisVer = double.Parse(info["ver"]);
-                }
-                if (thisVer < float.Parse(updateList.GetAttribute("ver")) || isForceUpdate(info["id"]))
-                {
-                    updateLog.AppendText("发现更新：" + info["desc"] + " [ 最新版本: V" + updateList.GetAttribute("ver") + " ]\r\n");
-                    string downUrl;
-                    if (updateList.InnerText.IndexOf("{{url}}") != -1)
-                    {
-                        downUrl = updateList.InnerText.Replace("{{url}}", info["url"]);
-                    }
-                    else
-                    {
-                        downUrl = updateList.InnerText;
-                    }
-                    updateAction.Text = "正在获取：" + downUrl;
-                    updateLog.AppendText(updateAction.Text + "\r\n");
-                    updateFlag = false;
-                    string fileName = new Random().Next().ToString() + info["id"] + ".zip";
-                    if (File.Exists(fileName))
-                    {
-                        File.Delete(fileName);
-                    }
-                    startUpdateDownload(downUrl, fileName);
-                    while (!updateFlag)
-                    {
-                        Application.DoEvents();
-                        Thread.Sleep(20);
-                    }
-                    #region 解包更新文件
-                    updateThisProgressText.Text = "安装中";
-                    updateThisProgressBar.Value = 0;
-                    updateThisProgressBar.Style = ProgressBarStyle.Marquee;
-                    updateAction.Text = "正在安装：" + info["desc"];
-                    updateLog.AppendText("正在安装文件：" + info["desc"] + "\r\n");
-                    try
-                    {
-                        if (updateList.GetAttribute("clear") == "1" && Directory.Exists(x.path + x.binpath + info["path"]))
-                        {
-                            string[] clearFileList = Directory.GetFiles(x.path + x.binpath + info["path"]);
-                            foreach (string clearFileName in clearFileList)
-                            {
-                                File.Delete(clearFileName);
-                            }
-                        }
-                        if (updateList.GetAttribute("clear") == "2" && Directory.Exists(x.path + x.binpath + info["path"]))
-                        {
-                            Directory.Delete(x.path + x.binpath + info["path"], true);
-                        }
-                        if (!Directory.Exists(x.path + x.binpath + info["path"]))
-                        {
-                            Directory.CreateDirectory(x.path + x.binpath + info["path"]);
-                        }
-                        Process p = new Process();
-                        p.StartInfo.FileName = x.path + x.updpath + "7z.exe";
-                        p.StartInfo.Arguments = "x -y -o\"" + x.path + info["path"] + "\" \"" + x.path + x.updpath + x.dlpath + fileName + "\"";
-                        p.StartInfo.UseShellExecute = false;
-                        p.StartInfo.CreateNoWindow = true;
-                        p.StartInfo.RedirectStandardOutput = true;
-                        p.Start();
-                        p.BeginOutputReadLine();
-                        p.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
-
-                        FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-                        //GZipStream gz = new GZipStream(fs, CompressionMode.Decompress);
-                        conn.setLibVer(updateList.GetAttribute("id"), updateList.GetAttribute("ver"));
-                        while (!p.WaitForExit(25))
-                        {
-                            Application.DoEvents();
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        error(ex.Message, "解包数据失败");
-                        updateAction.Text = "检查更新失败";
-                        updateLog.AppendText("检查更新失败");
-                        log("检查更新失败");
-                        endUpdateAction();
-                        return;
-                    }
-                    if (!string.IsNullOrEmpty(updateError))
-                    {
-                        MessageBox.Show("解包数据失败，请重新尝试更新\r\n" + updateError,
-                            "更新失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        updateAction.Text = "检查更新失败";
-                        updateLog.AppendText("检查更新失败");
-                        log("检查更新失败");
-                        endUpdateAction();
-                        return;
-                    }
-                    else
-                    {
-                        updateThisProgressBar.Style = ProgressBarStyle.Blocks;
-                        updateLog.AppendText("已成功更新：" + info["desc"] + "\r\n");
-                    }
-                    #endregion
+                    update.Add(val.Name);
+                    updateLog.Text += val.GetAttribute("name") + "：当前未安装，最新版本：" + val.GetAttribute("ver") + "\r\n";
                 }
                 else
                 {
-                    updateLog.AppendText("已是最新版本：" + info["desc"] + "\r\n");
+                    string thisVer = File.ReadAllText(x.path + val.GetAttribute("path") + "\\" + val.Name + ".version");
+                    if (float.Parse(thisVer) < float.Parse(val.GetAttribute("ver")))
+                    {
+                        update.Add(val.Name);
+                        updateLog.Text += val.GetAttribute("name") + "：当前版本：" + thisVer + "，最新版本：" + val.GetAttribute("ver") + "\r\n";
+                    }
                 }
             }
-            updateAction.Text = "检查更新完成";
-            updateLog.AppendText("检查更新完成");
-            log("检查更新完成");
+            forceUpdate.Enabled = true;
+            updateServer.Enabled = true;
+            updateButton.Text = "确认更新 (&C)";
+            nowUpdate = 1;
+        }
+
+        private void startUpdateAction()
+        {
+            if(xn == null)
+            {
+                error("用法错误");
+                endUpdateAction();
+                return;
+            }
+            updateLog.Text = "";
+            nowUpdate = 2;
+            forceUpdate.Enabled = false;
+            updateServer.Enabled = false;
+            updateButton.Text = "取消更新";
+            log("启动更新");
+            updateLog.Text += "\r\n---------------------------------------------------------------------------\r\n";
+            foreach (string need in update)
+            {
+
+            }
+            updateAction.Text = "更新完成";
+            updateLog.AppendText("******更新完成******");
+            log("更新完成");
             endUpdateAction();
         }
 
         private void endUpdateAction()
         {
-            nowUpdate = false;
+            nowUpdate = 0;
             updateThisProgressBar.Style = ProgressBarStyle.Blocks;
             updateThisProgressBar.Value = 0;
             updateThisProgressText.Text = "";
-            forceUpdateAssets.Enabled = true;
-            forceUpdateConfig.Enabled = true;
-            forceUpdateCore.Enabled = true;
-            forceUpdateMods.Enabled = true;
-            forceUpdateOmods.Enabled = true;
-            forceUpdateRoot.Enabled = true;
+            forceUpdate.Enabled = true;
             updateServer.Enabled = true;
             updateButton.Text = "检查更新 (&C)";
             updateButton.Enabled = true;
@@ -234,71 +166,7 @@ namespace MCUpdater
         #region 判断是否需要强制更新
         private bool isForceUpdate(string v)
         {
-            switch (v)
-            {
-                case "mods":
-                    if (forceUpdateMods.Checked)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
-                case "config":
-                    if (forceUpdateConfig.Checked)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
-                case "omods":
-                    if (forceUpdateOmods.Checked)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
-                case "root":
-                    if (forceUpdateRoot.Checked)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
-                case "main":
-                    if (forceUpdateCore.Checked)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
-                case "asset":
-                    if (forceUpdateAssets.Checked)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
-                default:
-                    return false;
-            }
+            return false;
         }
         #endregion
 
@@ -443,7 +311,7 @@ namespace MCUpdater
                 DialogResult error = MessageBox.Show(e.Error.Message, "下载失败", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                 if (error == DialogResult.Retry)
                 {
-                    doUpdate();
+                    doCheckUpdate();
                 }
                 else
                 {

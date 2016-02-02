@@ -115,13 +115,8 @@ namespace MCUpdater
                 {
                     if (MessageBox.Show("你尚未安装 " + x.name + "，无法进行游戏，是否要现在安装？\r\n将使用默认节点下载安装。你可以稍候在 检查更新 页面安装\r\n\r\n如果你不想看到此提示，可以在 关于 页面禁用", x.pname, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        doUpdate();
-                        forceUpdateAssets.Checked = true;
-                        forceUpdateConfig.Checked = true;
-                        forceUpdateCore.Checked = true;
-                        forceUpdateMods.Checked = true;
-                        forceUpdateOmods.Checked = true;
-                        forceUpdateRoot.Checked = true;
+                        doCheckUpdate();
+                        
                     }
                 }
             }

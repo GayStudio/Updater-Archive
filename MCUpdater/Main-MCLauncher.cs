@@ -19,7 +19,7 @@ namespace MCUpdater
                 if (MessageBox.Show("你尚未安装 Minecraft，无法进行游戏，是否要现在安装？\r\n你可以稍候在 检查更新 页面安装", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     mainTabControl.SelectedIndex = 1;
-                    doUpdate();
+                    doCheckUpdate();
                     return;
                 }
                 else

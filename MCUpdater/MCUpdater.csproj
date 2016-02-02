@@ -73,7 +73,7 @@
     <ManifestKeyFile>MCUpdater_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>MCUpdater_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
@@ -247,6 +247,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <Content Include="updater\update.xml" />
     <None Include="updater\7z.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
