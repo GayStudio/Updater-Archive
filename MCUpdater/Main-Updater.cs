@@ -43,6 +43,7 @@ namespace MCUpdater
             updateButton.Text = "取消检查更新";
             string errorMsg = "";
             string result = "";
+            /*
             Thread th = new Thread(() => {
                 try
                 {
@@ -63,7 +64,9 @@ namespace MCUpdater
                     return;
                 }
                 Application.DoEvents();
-            }
+            }*/
+            startUpdateDownload(server, "update.xml");
+            result = File.ReadAllText(x.path + x.updpath + x.dlpath + "update.xml");
             if (!string.IsNullOrEmpty(errorMsg))
             {
                 error(errorMsg,"获取更新数据失败");
@@ -338,7 +341,6 @@ namespace MCUpdater
         /// 
         protected void startUpdateDownload(string url, string file)
         {
-            updateButton.Enabled = false;
             try
             {
 
