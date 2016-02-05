@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("MoeCraft 更新程序")]
-[assembly: AssemblyDescription("MoeCraft 更新程序和工具箱")]
+[assembly: AssemblyTitle("MoeCraft Toolbox")]
+[assembly: AssemblyDescription("MoeCraft 通用工具箱")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MoeNet Inc.")]
-[assembly: AssemblyProduct("MoeCraft 更新程序")]
+[assembly: AssemblyProduct("MoeCraft ToolBox")]
 [assembly: AssemblyCopyright("Copyright © 2015 MoeNet All Rights Reserved")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Copyright © 2015 MoeNet All Rights Reserved")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 使此程序集中的类型

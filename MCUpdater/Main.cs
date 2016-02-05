@@ -156,31 +156,6 @@ namespace MCUpdater
             MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        void listMCLib()
-        {
-
-        }
-
-        private void playerJRE_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void progressGroupBox_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void updateAction_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try
@@ -271,26 +246,6 @@ namespace MCUpdater
             }
         }
 
-        private void mcLauncher_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void updateThisProgressText_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkUpdate_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void kenvixUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("http://zhizhe8.net");
@@ -314,11 +269,6 @@ namespace MCUpdater
         private void bbsUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("http://moeclub.net");
-        }
-
-        private void label21_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void regionCalculatorButton_Click(object sender, EventArgs e)

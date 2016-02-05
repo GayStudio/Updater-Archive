@@ -37,6 +37,7 @@
             this.openForum = new System.Windows.Forms.Button();
             this.copy = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // EXMsg
@@ -56,7 +57,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(11, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(403, 17);
+            this.label1.Size = new System.Drawing.Size(236, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "程序遇到了无法处理的异常，操作已取消。";
             // 
@@ -123,6 +124,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(502, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(151, 17);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "MoeCraft Toolbox已爆炸";
+            // 
             // EX
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -130,6 +141,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(669, 429);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.copy);
             this.Controls.Add(this.openForum);
@@ -159,5 +171,6 @@
         private System.Windows.Forms.Button openForum;
         private System.Windows.Forms.Button copy;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label3;
     }
 }

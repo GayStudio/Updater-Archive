@@ -46,10 +46,8 @@ namespace MCUpdater
             Thread th = new Thread(() => {
                 try
                 {
-                    var wb = WebRequest.Create(server);
-                    var ws = wb.GetResponse();
-                    //MessageBox.Show(ws.ContentLength.ToString());
-                    result = new StreamReader(ws.GetResponseStream()).ReadToEnd();
+                    var wb = new WebClient();
+                    result = wb.DownloadString(server);
                 }
                 catch (Exception ex)
                 {

@@ -80,6 +80,7 @@ namespace MCUpdater
             this.logTab = new System.Windows.Forms.TabPage();
             this.logBox = new System.Windows.Forms.TextBox();
             this.offlineModsTab = new System.Windows.Forms.TabPage();
+            this.openOmodsDir = new System.Windows.Forms.Button();
             this.refreshMods = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.offlineModList = new System.Windows.Forms.CheckedListBox();
@@ -121,7 +122,6 @@ namespace MCUpdater
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.diyDialog = new System.Windows.Forms.FontDialog();
-            this.openOmodsDir = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.mcLauncher.SuspendLayout();
             this.toolTab.SuspendLayout();
@@ -178,14 +178,13 @@ namespace MCUpdater
             this.mcLauncher.Controls.Add(this.label7);
             this.mcLauncher.Controls.Add(this.label6);
             this.mcLauncher.Controls.Add(this.label13);
-            this.mcLauncher.Location = new System.Drawing.Point(4, 22);
+            this.mcLauncher.Location = new System.Drawing.Point(4, 26);
             this.mcLauncher.Name = "mcLauncher";
             this.mcLauncher.Padding = new System.Windows.Forms.Padding(3);
-            this.mcLauncher.Size = new System.Drawing.Size(745, 361);
+            this.mcLauncher.Size = new System.Drawing.Size(745, 357);
             this.mcLauncher.TabIndex = 7;
             this.mcLauncher.Text = "启动器";
             this.mcLauncher.UseVisualStyleBackColor = true;
-            this.mcLauncher.Click += new System.EventHandler(this.mcLauncher_Click);
             // 
             // regLink
             // 
@@ -395,10 +394,10 @@ namespace MCUpdater
             this.toolTab.Controls.Add(this.groupBox4);
             this.toolTab.Controls.Add(this.groupBox1);
             this.toolTab.Controls.Add(this.toolGroupBox);
-            this.toolTab.Location = new System.Drawing.Point(4, 22);
+            this.toolTab.Location = new System.Drawing.Point(4, 26);
             this.toolTab.Name = "toolTab";
             this.toolTab.Padding = new System.Windows.Forms.Padding(3);
-            this.toolTab.Size = new System.Drawing.Size(745, 361);
+            this.toolTab.Size = new System.Drawing.Size(745, 357);
             this.toolTab.TabIndex = 5;
             this.toolTab.Text = "工具箱";
             this.toolTab.UseVisualStyleBackColor = true;
@@ -622,10 +621,10 @@ namespace MCUpdater
             // logTab
             // 
             this.logTab.Controls.Add(this.logBox);
-            this.logTab.Location = new System.Drawing.Point(4, 22);
+            this.logTab.Location = new System.Drawing.Point(4, 26);
             this.logTab.Name = "logTab";
             this.logTab.Padding = new System.Windows.Forms.Padding(3);
-            this.logTab.Size = new System.Drawing.Size(745, 361);
+            this.logTab.Size = new System.Drawing.Size(745, 357);
             this.logTab.TabIndex = 4;
             this.logTab.Text = "操作日志";
             this.logTab.UseVisualStyleBackColor = true;
@@ -654,6 +653,16 @@ namespace MCUpdater
             this.offlineModsTab.TabIndex = 3;
             this.offlineModsTab.Text = "Mod管理";
             this.offlineModsTab.UseVisualStyleBackColor = true;
+            // 
+            // openOmodsDir
+            // 
+            this.openOmodsDir.Location = new System.Drawing.Point(374, 320);
+            this.openOmodsDir.Name = "openOmodsDir";
+            this.openOmodsDir.Size = new System.Drawing.Size(133, 34);
+            this.openOmodsDir.TabIndex = 5;
+            this.openOmodsDir.Text = "打开模组文件夹 (&O)";
+            this.openOmodsDir.UseVisualStyleBackColor = true;
+            this.openOmodsDir.Click += new System.EventHandler(this.openOmodsDir_Click);
             // 
             // refreshMods
             // 
@@ -710,7 +719,6 @@ namespace MCUpdater
             this.checkUpdate.TabIndex = 2;
             this.checkUpdate.Text = "检查更新";
             this.checkUpdate.UseVisualStyleBackColor = true;
-            this.checkUpdate.Click += new System.EventHandler(this.checkUpdate_Click);
             // 
             // label17
             // 
@@ -740,7 +748,6 @@ namespace MCUpdater
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "选择更新内容";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // forceUpdate
             // 
@@ -761,7 +768,6 @@ namespace MCUpdater
             this.updateThisProgressText.Size = new System.Drawing.Size(56, 17);
             this.updateThisProgressText.TabIndex = 5;
             this.updateThisProgressText.Text = "准备就绪";
-            this.updateThisProgressText.Click += new System.EventHandler(this.updateThisProgressText_Click);
             // 
             // updateAction
             // 
@@ -771,7 +777,6 @@ namespace MCUpdater
             this.updateAction.Size = new System.Drawing.Size(344, 17);
             this.updateAction.TabIndex = 6;
             this.updateAction.Text = "若要检查更新或者安装游戏，请点击右下角的 [ 检查更新 ] 按钮";
-            this.updateAction.Click += new System.EventHandler(this.updateAction_Click);
             // 
             // updateButton
             // 
@@ -853,9 +858,9 @@ namespace MCUpdater
             this.aboutTab.Controls.Add(this.version);
             this.aboutTab.Controls.Add(this.label2);
             this.aboutTab.Controls.Add(this.pictureBox1);
-            this.aboutTab.Location = new System.Drawing.Point(4, 22);
+            this.aboutTab.Location = new System.Drawing.Point(4, 26);
             this.aboutTab.Name = "aboutTab";
-            this.aboutTab.Size = new System.Drawing.Size(745, 361);
+            this.aboutTab.Size = new System.Drawing.Size(745, 357);
             this.aboutTab.TabIndex = 8;
             this.aboutTab.Text = "关于";
             this.aboutTab.UseVisualStyleBackColor = true;
@@ -1086,7 +1091,7 @@ namespace MCUpdater
             this.version.Name = "version";
             this.version.Size = new System.Drawing.Size(45, 17);
             this.version.TabIndex = 9;
-            this.version.Text = "1.8.0.0";
+            this.version.Text = "2.0.0.0";
             // 
             // label2
             // 
@@ -1112,16 +1117,6 @@ namespace MCUpdater
             this.diyDialog.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.diyDialog.ShowColor = true;
             this.diyDialog.ShowHelp = true;
-            // 
-            // openOmodsDir
-            // 
-            this.openOmodsDir.Location = new System.Drawing.Point(374, 320);
-            this.openOmodsDir.Name = "openOmodsDir";
-            this.openOmodsDir.Size = new System.Drawing.Size(133, 34);
-            this.openOmodsDir.TabIndex = 5;
-            this.openOmodsDir.Text = "打开模组文件夹 (&O)";
-            this.openOmodsDir.UseVisualStyleBackColor = true;
-            this.openOmodsDir.Click += new System.EventHandler(this.openOmodsDir_Click);
             // 
             // Main
             // 
