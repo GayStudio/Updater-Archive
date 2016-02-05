@@ -1,70 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <root>
   <desc>
-    本次更新添加了大量有♂趣的东西。
-    Exciting 一颗赛艇
+    <![CDATA[本次更新添加了大量有♂趣的东西。
+Exciting 一颗赛艇]]>
   </desc>
   <libs>
-      <lib id="mods" ver="3.8">
+      <mods ver="3.8" name="模组" path=".minecraft/mods">
         <download>
           <url name="package.mods.7z">{{url}}mods.7z</url>
         </download>
         <script type="bat">
           <![CDATA[
-            @echo off
             echo ================Mod Installer================
             echo Written By Kenvix @ 2016/2/1
-            IF NOT EXIST "{{Root}}/mods" MD "{{Root}}/mods"
-            cd {{Root}}/mods
             del /f /q *.zip
             del /f /q *.jar
             del /f /q *.disabled
-            {{7z}} x -y -o"{{Root}}/mods" {{DLDir}}/package.mods.7z
-            del /f /q {{DLDir}}/package.mods.7z
+            "{{7z}}" x -y -o"{{Path}}" "{{DLDir}}/package.mods.7z"
+            del /f /q "{{DLDir}}/package.mods.7z"
             echo ===============Mods Installed================
           ]]>
           </script>
-      </lib>
-      <lib id="omods" ver="3.1">
+      </mods>
+      <omods ver="3.1" name="可选模组" path=".minecraft/mods/1.7.10">
         <download>
           <url name="package.omods.7z">{{url}}omods.7z</url>
         </download>
         <script type="bat">
           <![CDATA[
-            @echo off
             echo ===========Optional Mod Installer============
             echo Written By Kenvix @ 2016/2/1
-            IF NOT EXIST "{{Root}}/mods/1.7.10" MD "{{Root}}/mods/1.7.10"
-            cd {{Root}}/mods/1.7.10
             del /f /q *.moecraft.jar
             del /f /q *.moecraft.jar.disabled
             del /f /q *.moecraft.zip
             del /f /q *.moecraft.zip.disabled
-            {{7z}} x -y -o"{{Root}}/mods" {{DLDir}}/package.mods.7z
-            del /f /q {{DLDir}}/package.omods.7z
+            "{{7z}}" x -y -o"{{Path}}" "{{DLDir}}/package.mods.7z"
+            del /f /q "{{DLDir}}/package.omods.7z"
             echo ===========Optional Mods Installed===========
           ]]>
         </script>
-      </lib>
-      <lib id="config" ver="3.7">
+      </omods>
+      <config ver="3.7" name="配置文件" path=".minecraft/Config">
         <download>
           <url name="package.config.7z" unpack="1">{{url}}config.7z</url>
         </download>
-      </lib>
-      <lib id="root" ver="1.2">
+      </config>
+      <root ver="1.2" name="根目录文件" path="">
         <download>
           <url name="package.root.7z" unpack="1">{{url}}root.7z</url>
         </download>
-      </lib>
-      <lib id="main" ver="1.2">
+      </root>
+      <main ver="1.2" name="核心文件"  path=".minecraft">
         <download>
           <url name="package.core.7z" unpack="1">{{url}}core.7z</url>
         </download>
-      </lib>
-      <lib id="asset" ver="1.0">
+      </main>
+      <asset ver="1.0" name="资源(语言,声音等)文件" path=".minecraft/assets">
         <download>
           <url name="package.assets.7z" unpack="1">{{url}}assets.7z</url>
         </download>
-      </lib>
+      </asset>
   </libs>
 </root>

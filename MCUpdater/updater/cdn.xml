@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <root>
-  <lc desc="localhost" xml="update.xml">http://localhost/</lc>
+  <!--<lc desc="localhost" xml="update.xml">http://localhost/</lc>-->
   <v2 desc="默认" xml="info.xml">https://cdn.moecraft.net/mc/</v2>
   <cb desc="备用" xml="info.xml">http://cdn.moeclub.net/mc/</cb>
 </root>

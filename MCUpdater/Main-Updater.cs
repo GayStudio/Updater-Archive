@@ -15,7 +15,6 @@ namespace MCUpdater
     {
         private int nowUpdate = 0;
         private XmlElement xn;
-        private List<string> update = new List<string> { };
         private void updateButton_Click(object sender, EventArgs e)
         {
             if(nowUpdate == 2)
@@ -40,7 +39,7 @@ namespace MCUpdater
             var cdn = cdnc.get(updateServer.SelectedIndex);
             var server = cdn["url"] + cdn["xml"];
             updateAction.Text = "正在获取更新信息: " + server;
-            updateLog.Text = updateAction.Text + "\r\n";
+            updateLog.Text = updateAction.Text + "\r\n如果长时间无法获取到更新信息，可以先取消更新，再检查更新\r\n";
             updateButton.Text = "取消检查更新";
             string errorMsg = "";
             string result = "";
@@ -102,13 +101,13 @@ namespace MCUpdater
                 updateLog.Text = "暂无更新日志，以下内容可以更新：\r\n";
             }
             forceUpdate.Items.Clear();
-      
+            int i = 0;
             foreach (XmlElement val in xn.SelectSingleNode("libs"))
             {
                 forceUpdate.Items.Add(val.GetAttribute("name"));
                 if (!File.Exists(x.path + val.GetAttribute("path") + "\\" + val.Name + ".version"))
                 {
-                    update.Add(val.Name);
+                    forceUpdate.SetItemChecked(i, true);
                     updateLog.Text += val.GetAttribute("name") + "：当前未安装，最新版本：" + val.GetAttribute("ver") + "\r\n";
                 }
                 else
@@ -116,11 +115,13 @@ namespace MCUpdater
                     string thisVer = File.ReadAllText(x.path + val.GetAttribute("path") + "\\" + val.Name + ".version");
                     if (float.Parse(thisVer) < float.Parse(val.GetAttribute("ver")))
                     {
-                        update.Add(val.Name);
+                        forceUpdate.SetItemChecked(i, true);
                         updateLog.Text += val.GetAttribute("name") + "：当前版本：" + thisVer + "，最新版本：" + val.GetAttribute("ver") + "\r\n";
                     }
                 }
+                i++;
             }
+            updateLog.Text += "\r\n在右侧选择你想要更新的内容（已自动勾选可以更新的内容），然后点击 确认更新\r\n";
             forceUpdate.Enabled = true;
             updateServer.Enabled = true;
             updateButton.Text = "确认更新 (&C)";
@@ -135,19 +136,146 @@ namespace MCUpdater
                 endUpdateAction();
                 return;
             }
-            updateLog.Text = "";
             nowUpdate = 2;
             forceUpdate.Enabled = false;
             updateServer.Enabled = false;
             updateButton.Text = "取消更新";
             log("启动更新");
-            updateLog.Text += "\r\n---------------------------------------------------------------------------\r\n";
-            foreach (string need in update)
+            updateLog.Text += "---------------------------------------------------------------------------\r\n";
+            for (int need = 0; need < forceUpdate.Items.Count; need++)
             {
-
+                if(forceUpdate.GetItemChecked(need))
+                {
+                    bool updateFatalError = false;
+                    XmlElement var  = (XmlElement)xn.SelectSingleNode("libs").ChildNodes[need];
+                    updateLog.Text += "正在更新：" + var.GetAttribute("name") + " >> " + var.GetAttribute("ver") + "\r\n";
+                    if (!Directory.Exists(x.path + var.GetAttribute("path")))
+                    {
+                        Directory.CreateDirectory(x.path + var.GetAttribute("path"));
+                    }
+                    XmlElement down = (XmlElement)var.SelectSingleNode("download");
+                    foreach (XmlElement downvar in down)
+                    {
+                        startUpdateDownload((downvar.InnerText).Replace("{{url}}", cdnc.get(updateServer.SelectedIndex)["url"]), downvar.GetAttribute("name"));
+                        if(!File.Exists(x.path + x.updpath + x.dlpath + downvar.GetAttribute("name")) || (new FileInfo(x.path + x.updpath + x.dlpath + downvar.GetAttribute("name"))).Length <= 0)
+                        {
+                            updateFatalError = true;
+                        }
+                        else
+                        {
+                            if (downvar.GetAttribute("unpack") != null && downvar.GetAttribute("unpack") == "1")
+                            {
+                                string packageName;
+                                if (downvar.GetAttribute("name") != null)
+                                {
+                                    packageName = downvar.GetAttribute("name");
+                                }
+                                else
+                                {
+                                    packageName = var.Name + ".pkg";
+                                }
+                                doUnpack:
+                                try
+                                {
+                                    updateAction.Text = "正在解压缩文件：" + packageName;
+                                    updateLog.AppendText(updateAction.Text + "\r\n");
+                                    Process p = new Process();
+                                    p.StartInfo.FileName = x.path + x.updpath + "7z.exe";
+                                    p.StartInfo.Arguments = "x -y -o\"" + x.path + var.GetAttribute("path") + "\" \"" + x.path + x.updpath + x.dlpath + packageName + "\"";
+                                    p.StartInfo.UseShellExecute = false;
+                                    p.StartInfo.CreateNoWindow = true;
+                                    p.StartInfo.RedirectStandardOutput = true;
+                                    p.Start();
+                                    p.BeginOutputReadLine();
+                                    p.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
+                                    while (!p.WaitForExit(x.sleep))
+                                    {
+                                        Application.DoEvents();
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    DialogResult error = MessageBox.Show(ex.Message + "\r\n\r\n" + packageName, "解包数据失败", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                                    if (error == DialogResult.Retry)
+                                    {
+                                        goto doUnpack;
+                                    }
+                                    else
+                                    {
+                                        updateFatalError = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    XmlElement bat = (XmlElement)var.SelectSingleNode("script");
+                    if (bat != null)
+                    {
+                        writeBat:
+                        try
+                        {
+                            updateAction.Text = "运行安装程序";
+                            updateLog.AppendText(updateAction.Text + "\r\n");
+                            string batPath = x.path + var.GetAttribute("path") + "\\install.cmd";
+                            string batText = "@echo off\r\n" + bat.InnerText
+                            .Replace("{{7z}}",x.path + x.updpath + "7z.exe")
+                            .Replace("{{Root}}", x.path)
+                            .Replace("{{DLDir}}", x.path + x.updpath + x.dlpath)
+                            .Replace("{{UpdPath}}", x.path + x.updpath)
+                            .Replace("{{Path}}", x.path + var.GetAttribute("path") + "\\");
+                            File.WriteAllText(batPath, batText);
+                            Process pb = new Process();
+                            pb.StartInfo.FileName = batPath;
+                            pb.StartInfo.UseShellExecute = false;
+                            pb.StartInfo.CreateNoWindow = true;
+                            pb.StartInfo.RedirectStandardOutput = true;
+                            pb.Start();
+                            pb.BeginOutputReadLine();
+                            pb.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
+                            while (!pb.WaitForExit(x.sleep))
+                            {
+                                Application.DoEvents();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            DialogResult error = MessageBox.Show(ex.Message + "\r\n\r\n" + x.path + var.GetAttribute("path"), "写入安装脚本失败", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                            if (error == DialogResult.Retry)
+                            {
+                                goto writeBat;
+                            } else
+                            {
+                                updateFatalError = true;
+                            }
+                        }
+                    }
+                    writeVersionFile:
+                    try
+                    {
+                        if(!updateFatalError)
+                        {
+                            File.WriteAllText(x.path + var.GetAttribute("path") + "\\" + var.Name + ".version", var.GetAttribute("ver"));
+                        }
+                        else
+                        {
+                            updateLog.Text += "更新失败：" + var.GetAttribute("name") + "\r\n";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        DialogResult error = MessageBox.Show(ex.Message + "\r\n\r\n" + x.path + var.GetAttribute("path"), "写入版本信息失败", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                        if (error == DialogResult.Retry)
+                        {
+                            goto writeVersionFile;
+                        } else
+                        {
+                            updateFatalError = true;
+                        }
+                    }
+                }
             }
             updateAction.Text = "更新完成";
-            updateLog.AppendText("******更新完成******");
+            updateLog.AppendText("******更新完成******\r\n");
             log("更新完成");
             endUpdateAction();
         }
@@ -209,12 +337,6 @@ namespace MCUpdater
         /// </summary>
         /// <param name="url">下载地址</param>
         /// <param name="file">保存文件名</param>
-        ///
-        /// <summary>
-        /// 开始下载
-        /// </summary>
-        /// <param name="url">下载地址</param>
-        /// <param name="file">保存文件名</param>
         /// 
         protected void startUpdateDownload(string url, string file)
         {
@@ -224,13 +346,61 @@ namespace MCUpdater
 
                 WebClient wc = new WebClient();
                 wc.DownloadFileAsync(new Uri(url), x.path + x.updpath + x.dlpath + file);
-                wc.DownloadProgressChanged += wc_DownloadProgressChanged;
-                wc.DownloadFileCompleted += wc_DownloadFileCompleted;
+                wc.DownloadProgressChanged += (object sender, DownloadProgressChangedEventArgs e) =>
+                {
+                    string speedText = e.ProgressPercentage.ToString() + "%";
+                    updateThisProgressText.Text = speedText;
+                    updateThisProgressBar.Value = (int)e.ProgressPercentage;
+                };
+                wc.DownloadFileCompleted += (object sender, AsyncCompletedEventArgs e) =>
+                {
+                    if (e.Error != null)
+                    {
+                        DialogResult error = MessageBox.Show(e.Error.Message + "\r\n\r\n" + url, "下载失败", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                        if (error == DialogResult.Retry)
+                        {
+                            updateLog.Text += "下载失败，重试下载：" + url + "\r\n";
+                            startUpdateDownload(url, file);
+                        }
+                        else
+                        {
+                            updateLog.Text += "下载失败并取消重试：" + url + "\r\n";
+                            endUpdateAction();
+                            return;
+                        }
+                    }
+                    if (!e.Cancelled)
+                    {
+                        updateFlag = true;
+                    }
+                    else
+                    {
+                        DialogResult error = MessageBox.Show(e.Error.Message + "\r\n\r\n" + url, "下载过程中出错", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                        if (error == DialogResult.Retry)
+                        {
+                            updateLog.Text += "下载过程中出错，重试下载：" + url + "\r\n";
+                            startUpdateDownload(url, file);
+                        }
+                        else
+                        {
+                            updateLog.Text += "下载过程中出错并取消重试：" + url + "\r\n";
+                            return;
+                        }
+                    }
+                };
+                
                 if (url.Length > 80)
                 {
                     url = url.Substring(0, 80);
                 }
                 updateAction.Text = "正在下载：" + url;
+                updateLog.Text += updateAction.Text + "\r\n";
+
+                while (wc.IsBusy)
+                {
+                    Thread.Sleep(x.sleep);
+                    Application.DoEvents();
+                }
             }
             catch (Exception ex)
             {
@@ -293,39 +463,5 @@ namespace MCUpdater
                 return;
             }
         }*/
-
-        void wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                error(e.Error.Message, "下载更新数据失败");
-                endUpdateAction();
-                return;
-            }
-            if (!e.Cancelled)
-            {
-                updateFlag = true;
-            }
-            else
-            {
-                DialogResult error = MessageBox.Show(e.Error.Message, "下载失败", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
-                if (error == DialogResult.Retry)
-                {
-                    doCheckUpdate();
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-        }
-
-        void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            string speedText = e.ProgressPercentage.ToString() + "%";
-            updateThisProgressText.Text = speedText;
-            updateThisProgressBar.Value = (int)e.ProgressPercentage;
-        }
     }
 }

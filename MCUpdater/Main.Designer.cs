@@ -89,7 +89,6 @@ namespace MCUpdater
             this.updateServer = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.forceUpdate = new System.Windows.Forms.CheckedListBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.updateThisProgressText = new System.Windows.Forms.Label();
             this.updateAction = new System.Windows.Forms.Label();
             this.updateButton = new System.Windows.Forms.Button();
@@ -122,6 +121,7 @@ namespace MCUpdater
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.diyDialog = new System.Windows.Forms.FontDialog();
+            this.openOmodsDir = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.mcLauncher.SuspendLayout();
             this.toolTab.SuspendLayout();
@@ -178,10 +178,10 @@ namespace MCUpdater
             this.mcLauncher.Controls.Add(this.label7);
             this.mcLauncher.Controls.Add(this.label6);
             this.mcLauncher.Controls.Add(this.label13);
-            this.mcLauncher.Location = new System.Drawing.Point(4, 26);
+            this.mcLauncher.Location = new System.Drawing.Point(4, 22);
             this.mcLauncher.Name = "mcLauncher";
             this.mcLauncher.Padding = new System.Windows.Forms.Padding(3);
-            this.mcLauncher.Size = new System.Drawing.Size(745, 357);
+            this.mcLauncher.Size = new System.Drawing.Size(745, 361);
             this.mcLauncher.TabIndex = 7;
             this.mcLauncher.Text = "启动器";
             this.mcLauncher.UseVisualStyleBackColor = true;
@@ -395,10 +395,10 @@ namespace MCUpdater
             this.toolTab.Controls.Add(this.groupBox4);
             this.toolTab.Controls.Add(this.groupBox1);
             this.toolTab.Controls.Add(this.toolGroupBox);
-            this.toolTab.Location = new System.Drawing.Point(4, 26);
+            this.toolTab.Location = new System.Drawing.Point(4, 22);
             this.toolTab.Name = "toolTab";
             this.toolTab.Padding = new System.Windows.Forms.Padding(3);
-            this.toolTab.Size = new System.Drawing.Size(745, 357);
+            this.toolTab.Size = new System.Drawing.Size(745, 361);
             this.toolTab.TabIndex = 5;
             this.toolTab.Text = "工具箱";
             this.toolTab.UseVisualStyleBackColor = true;
@@ -642,21 +642,22 @@ namespace MCUpdater
             // 
             // offlineModsTab
             // 
+            this.offlineModsTab.Controls.Add(this.openOmodsDir);
             this.offlineModsTab.Controls.Add(this.refreshMods);
             this.offlineModsTab.Controls.Add(this.label1);
             this.offlineModsTab.Controls.Add(this.offlineModList);
             this.offlineModsTab.Controls.Add(this.saveOfflineMod);
-            this.offlineModsTab.Location = new System.Drawing.Point(4, 22);
+            this.offlineModsTab.Location = new System.Drawing.Point(4, 26);
             this.offlineModsTab.Name = "offlineModsTab";
             this.offlineModsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.offlineModsTab.Size = new System.Drawing.Size(745, 361);
+            this.offlineModsTab.Size = new System.Drawing.Size(745, 357);
             this.offlineModsTab.TabIndex = 3;
             this.offlineModsTab.Text = "Mod管理";
             this.offlineModsTab.UseVisualStyleBackColor = true;
             // 
             // refreshMods
             // 
-            this.refreshMods.Location = new System.Drawing.Point(6, 319);
+            this.refreshMods.Location = new System.Drawing.Point(513, 320);
             this.refreshMods.Name = "refreshMods";
             this.refreshMods.Size = new System.Drawing.Size(87, 34);
             this.refreshMods.TabIndex = 4;
@@ -667,11 +668,11 @@ namespace MCUpdater
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(205, 327);
+            this.label1.Location = new System.Drawing.Point(6, 319);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(288, 17);
+            this.label1.Size = new System.Drawing.Size(352, 34);
             this.label1.TabIndex = 3;
-            this.label1.Text = "请选择要操作的Mod，勾选表示启用，不选表示禁用";
+            this.label1.Text = "请选择要操作的Mod，勾选表示启用，不选表示禁用\r\n点击右侧的 打开模组文件夹 后可以在打开的文件夹放入你的模组";
             // 
             // offlineModList
             // 
@@ -733,13 +734,12 @@ namespace MCUpdater
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.forceUpdate);
-            this.groupBox2.Controls.Add(this.linkLabel1);
             this.groupBox2.Location = new System.Drawing.Point(524, 62);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(210, 202);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "强制更新";
+            this.groupBox2.Text = "选择更新内容";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // forceUpdate
@@ -750,24 +750,8 @@ namespace MCUpdater
             "请先检查更新"});
             this.forceUpdate.Location = new System.Drawing.Point(7, 23);
             this.forceUpdate.Name = "forceUpdate";
-            this.forceUpdate.Size = new System.Drawing.Size(197, 148);
+            this.forceUpdate.Size = new System.Drawing.Size(197, 166);
             this.forceUpdate.TabIndex = 29;
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.linkLabel1.LinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.linkLabel1.Location = new System.Drawing.Point(4, 180);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(200, 17);
-            this.linkLabel1.TabIndex = 28;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Tag = "";
-            this.linkLabel1.Text = "什么是强制更新？什么时候需要它？";
-            this.linkLabel1.VisitedLinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked_1);
             // 
             // updateThisProgressText
             // 
@@ -1129,6 +1113,16 @@ namespace MCUpdater
             this.diyDialog.ShowColor = true;
             this.diyDialog.ShowHelp = true;
             // 
+            // openOmodsDir
+            // 
+            this.openOmodsDir.Location = new System.Drawing.Point(374, 320);
+            this.openOmodsDir.Name = "openOmodsDir";
+            this.openOmodsDir.Size = new System.Drawing.Size(133, 34);
+            this.openOmodsDir.TabIndex = 5;
+            this.openOmodsDir.Text = "打开模组文件夹 (&O)";
+            this.openOmodsDir.UseVisualStyleBackColor = true;
+            this.openOmodsDir.Click += new System.EventHandler(this.openOmodsDir_Click);
+            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1159,7 +1153,6 @@ namespace MCUpdater
             this.checkUpdate.ResumeLayout(false);
             this.checkUpdate.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.mainTabControl.ResumeLayout(false);
@@ -1262,8 +1255,8 @@ namespace MCUpdater
         private System.Windows.Forms.Button diyButton;
         private System.Windows.Forms.FontDialog diyDialog;
         private System.Windows.Forms.Button launcherButton;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.CheckedListBox forceUpdate;
+        private System.Windows.Forms.Button openOmodsDir;
     }
 }
 
