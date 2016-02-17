@@ -873,6 +873,7 @@ namespace MCUpdater
             this.launcherButton.TabIndex = 26;
             this.launcherButton.Text = "MoeCraft 启动器 (&L)";
             this.launcherButton.UseVisualStyleBackColor = true;
+            this.launcherButton.Click += new System.EventHandler(this.launcherButton_Click_1);
             // 
             // diyButton
             // 

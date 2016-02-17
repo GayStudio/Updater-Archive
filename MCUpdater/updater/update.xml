@@ -20,7 +20,19 @@ Exciting 一颗赛艇]]>
             del /f /q "{{DLDir}}/package.mods.7z"
             echo ===============Mods Installed================
           ]]>
-          </script>
+        </script>
+        <shell>
+            <![CDATA[
+            echo ================Mod Installer================
+            echo Written By Kenvix @ 2016/2/6
+            rm -f *.zip
+            rm -f *.jar
+            rm -f *.disabled
+            7za x -y -o"{{Path}}" "{{DLDir}}/package.mods.7z"
+            rm -f "{{DLDir}}/package.mods.7z"
+            echo ===============Mods Installed================
+          ]]>
+        </shell>
       </mods>
       <omods ver="3.1" name="可选模组" path=".minecraft/mods/1.7.10">
         <download>
@@ -34,7 +46,7 @@ Exciting 一颗赛艇]]>
             del /f /q *.moecraft.jar.disabled
             del /f /q *.moecraft.zip
             del /f /q *.moecraft.zip.disabled
-            "{{7z}}" x -y -o"{{Path}}" "{{DLDir}}/package.mods.7z"
+            "{{7z}}" x -y -o"{{Path}}" "{{DLDir}}/package.omods.7z"
             del /f /q "{{DLDir}}/package.omods.7z"
             echo ===========Optional Mods Installed===========
           ]]>

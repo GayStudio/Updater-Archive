@@ -150,9 +150,10 @@ namespace MCUpdater
                     bool updateFatalError = false;
                     XmlElement var  = (XmlElement)xn.SelectSingleNode("libs").ChildNodes[need];
                     updateLog.Text += "正在更新：" + var.GetAttribute("name") + " >> " + var.GetAttribute("ver") + "\r\n";
-                    if (!Directory.Exists(x.path + var.GetAttribute("path")))
+                    string installPath = var.GetAttribute("path").Replace('/','\\');
+                    if (!Directory.Exists(x.path + installPath))
                     {
-                        Directory.CreateDirectory(x.path + var.GetAttribute("path"));
+                        Directory.CreateDirectory(x.path + installPath);
                     }
                     XmlElement down = (XmlElement)var.SelectSingleNode("download");
                     foreach (XmlElement downvar in down)
@@ -182,7 +183,7 @@ namespace MCUpdater
                                     updateLog.AppendText(updateAction.Text + "\r\n");
                                     Process p = new Process();
                                     p.StartInfo.FileName = x.path + x.updpath + "7z.exe";
-                                    p.StartInfo.Arguments = "x -y -o\"" + x.path + var.GetAttribute("path") + "\" \"" + x.path + x.updpath + x.dlpath + packageName + "\"";
+                                    p.StartInfo.Arguments = "x -y -o\"" + x.path + installPath + "\" \"" + x.path + x.updpath + x.dlpath + packageName + "\"";
                                     p.StartInfo.UseShellExecute = false;
                                     p.StartInfo.CreateNoWindow = true;
                                     p.StartInfo.RedirectStandardOutput = true;
@@ -217,16 +218,18 @@ namespace MCUpdater
                         {
                             updateAction.Text = "运行安装程序";
                             updateLog.AppendText(updateAction.Text + "\r\n");
-                            string batPath = x.path + var.GetAttribute("path") + "\\install.cmd";
-                            string batText = "@echo off\r\n" + bat.InnerText
-                            .Replace("{{7z}}",x.path + x.updpath + "7z.exe")
-                            .Replace("{{Root}}", x.path)
-                            .Replace("{{DLDir}}", x.path + x.updpath + x.dlpath)
-                            .Replace("{{UpdPath}}", x.path + x.updpath)
-                            .Replace("{{Path}}", x.path + var.GetAttribute("path") + "\\");
-                            File.WriteAllText(batPath, batText);
+                            string batPath = x.path + installPath + "\\install.bat";
+                            string batText = "@echo off\r\n" + 
+                                "cd /D \"" + x.path + installPath + "\"\r\n" + bat.InnerText
+                                .Replace("{{7z}}",x.path + x.updpath + "7z.exe")
+                                .Replace("{{Root}}", x.path)
+                                .Replace("{{DLDir}}", x.path + x.updpath + x.dlpath)
+                                .Replace("{{UpdPath}}", x.path + x.updpath)
+                                .Replace("{{Path}}", x.path + installPath + "\\");
+                            File.WriteAllText(batPath, batText , System.Text.Encoding.GetEncoding("gb2312"));
                             Process pb = new Process();
-                            pb.StartInfo.FileName = batPath;
+                            pb.StartInfo.FileName = "cmd.exe";
+                            pb.StartInfo.Arguments = "/c call \""+batPath+"\"";
                             pb.StartInfo.UseShellExecute = false;
                             pb.StartInfo.CreateNoWindow = true;
                             pb.StartInfo.RedirectStandardOutput = true;
@@ -240,7 +243,7 @@ namespace MCUpdater
                         }
                         catch (Exception ex)
                         {
-                            DialogResult error = MessageBox.Show(ex.Message + "\r\n\r\n" + x.path + var.GetAttribute("path"), "写入安装脚本失败", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                            DialogResult error = MessageBox.Show(ex.Message + "\r\n\r\n" + x.path + installPath, "写入安装脚本失败", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                             if (error == DialogResult.Retry)
                             {
                                 goto writeBat;
@@ -255,7 +258,7 @@ namespace MCUpdater
                     {
                         if(!updateFatalError)
                         {
-                            File.WriteAllText(x.path + var.GetAttribute("path") + "\\" + var.Name + ".version", var.GetAttribute("ver"));
+                            File.WriteAllText(x.path + installPath + "\\" + var.Name + ".version", var.GetAttribute("ver"));
                         }
                         else
                         {
@@ -264,7 +267,7 @@ namespace MCUpdater
                     }
                     catch (Exception ex)
                     {
-                        DialogResult error = MessageBox.Show(ex.Message + "\r\n\r\n" + x.path + var.GetAttribute("path"), "写入版本信息失败", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                        DialogResult error = MessageBox.Show(ex.Message + "\r\n\r\n" + x.path + installPath, "写入版本信息失败", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                         if (error == DialogResult.Retry)
                         {
                             goto writeVersionFile;

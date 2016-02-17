@@ -381,5 +381,23 @@ namespace MCUpdater
                 error(ex.Message, "启动失败");
             }
         }
+
+        private void launcherButton_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                if(File.Exists(x.path + "Launcher.exe"))
+                {
+                    Process.Start(x.path + "Launcher.exe");
+                } else
+                {
+                    Process.Start(x.path + "启动器.exe");
+                }
+            }
+            catch (Exception ex)
+            {
+                error(ex.Message, "启动失败");
+            }
+        }
     }
 }
