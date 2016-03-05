@@ -219,13 +219,13 @@ namespace MCUpdater
                             updateAction.Text = "运行安装程序";
                             updateLog.AppendText(updateAction.Text + "\r\n");
                             string batPath = x.path + installPath + "\\install.bat";
-                            string batText = "@echo off\r\n" + 
-                                "cd /D \"" + x.path + installPath + "\"\r\n" + bat.InnerText
+                            string batText = ("@echo off\n" +
+                                "cd /D \"" + x.path + installPath + "\"\n" + bat.InnerText
                                 .Replace("{{7z}}",x.path + x.updpath + "7z.exe")
                                 .Replace("{{Root}}", x.path)
                                 .Replace("{{DLDir}}", x.path + x.updpath + x.dlpath)
                                 .Replace("{{UpdPath}}", x.path + x.updpath)
-                                .Replace("{{Path}}", x.path + installPath + "\\");
+                                .Replace("{{Path}}", x.path + installPath + "\\")).Replace("\n","\r\n");
                             File.WriteAllText(batPath, batText , System.Text.Encoding.GetEncoding("gb2312"));
                             Process pb = new Process();
                             pb.StartInfo.FileName = "cmd.exe";
