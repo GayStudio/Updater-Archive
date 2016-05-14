@@ -109,7 +109,7 @@ case $1 in
         sudo screen -d ${screen}
     ;;
     sk)
-        sudo screen -d ${screen}
+        sudo screen -X kill
     ;;
     *)
         echo -e "\033[31;40;1m Usage: Arguments:\e[0m"
