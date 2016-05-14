@@ -20,23 +20,17 @@ namespace MoecraftPkgInstaller
                 try
                 {
                     var fs = new FileStream(Program.path, FileMode.Open);
-                    //尚未读取的文件内容长度  
-                    long left = fs.Length;
+                    long left = fs.Length; //尚未读取的文件内容长度  
                     setMaxProgress((int)left);
-                    //存储读取结果  
-                    byte[] bytes = new byte[1048576];
-                    //每次读取长度  
-                    int maxLength = bytes.Length;
-                    //读取位置  
-                    int start = 0;
-                    //实际返回结果长度  
-                    int num = 0;
-                    //当文件未读取长度大于0时，不断进行读取  
+                    byte[] bytes = new byte[1048576]; //存储读取结果  
+                    int maxLength = bytes.Length; //每次读取长度  
+                    int start = 0; //读取位置  
+                    int num = 0; //实际返回结果长度  
                     string text;
                     int sp;
                     int ep;
                     string data = "";
-                    while (left > 0)
+                    while (left > 0) //当文件未读取长度大于0时，不断进行读取  
                     {
                         setprogress(Math.Abs((int)(left - fs.Length)));
                         fs.Position = start;
@@ -71,6 +65,7 @@ namespace MoecraftPkgInstaller
                     if (string.IsNullOrEmpty(data))
                     {
                         error("找不到包自述，因此无法安装该包", "解析包失败");
+                        Environment.Exit(2);
                     }
                     else
                     {
@@ -90,13 +85,15 @@ namespace MoecraftPkgInstaller
                         }
                         catch (Exception ex)
                         {
-                            error(ex.ToString(), "解析包信息失败");
+                            error(ex.Message, "解析包信息失败");
+                            Environment.Exit(3);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    error(ex.ToString(), "打开文件失败");
+                    error(ex.Message, "打开文件失败");
+                    Environment.Exit(1);
                 }
             });
             th.Start();
@@ -210,7 +207,7 @@ namespace MoecraftPkgInstaller
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void selectInstallDir_Click(object sender, EventArgs e)
@@ -221,6 +218,11 @@ namespace MoecraftPkgInstaller
             {
                 installPath.Text = dg.SelectedPath;
             }
+        }
+
+        private void main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

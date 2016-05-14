@@ -399,5 +399,10 @@ namespace MCUpdater
                 error(ex.Message, "启动失败");
             }
         }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }

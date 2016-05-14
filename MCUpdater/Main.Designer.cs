@@ -178,10 +178,10 @@ namespace MCUpdater
             this.mcLauncher.Controls.Add(this.label7);
             this.mcLauncher.Controls.Add(this.label6);
             this.mcLauncher.Controls.Add(this.label13);
-            this.mcLauncher.Location = new System.Drawing.Point(4, 26);
+            this.mcLauncher.Location = new System.Drawing.Point(4, 22);
             this.mcLauncher.Name = "mcLauncher";
             this.mcLauncher.Padding = new System.Windows.Forms.Padding(3);
-            this.mcLauncher.Size = new System.Drawing.Size(745, 357);
+            this.mcLauncher.Size = new System.Drawing.Size(745, 361);
             this.mcLauncher.TabIndex = 7;
             this.mcLauncher.Text = "启动器";
             this.mcLauncher.UseVisualStyleBackColor = true;
@@ -394,10 +394,10 @@ namespace MCUpdater
             this.toolTab.Controls.Add(this.groupBox4);
             this.toolTab.Controls.Add(this.groupBox1);
             this.toolTab.Controls.Add(this.toolGroupBox);
-            this.toolTab.Location = new System.Drawing.Point(4, 26);
+            this.toolTab.Location = new System.Drawing.Point(4, 22);
             this.toolTab.Name = "toolTab";
             this.toolTab.Padding = new System.Windows.Forms.Padding(3);
-            this.toolTab.Size = new System.Drawing.Size(745, 357);
+            this.toolTab.Size = new System.Drawing.Size(745, 361);
             this.toolTab.TabIndex = 5;
             this.toolTab.Text = "工具箱";
             this.toolTab.UseVisualStyleBackColor = true;
@@ -621,10 +621,10 @@ namespace MCUpdater
             // logTab
             // 
             this.logTab.Controls.Add(this.logBox);
-            this.logTab.Location = new System.Drawing.Point(4, 26);
+            this.logTab.Location = new System.Drawing.Point(4, 22);
             this.logTab.Name = "logTab";
             this.logTab.Padding = new System.Windows.Forms.Padding(3);
-            this.logTab.Size = new System.Drawing.Size(745, 357);
+            this.logTab.Size = new System.Drawing.Size(745, 361);
             this.logTab.TabIndex = 4;
             this.logTab.Text = "操作日志";
             this.logTab.UseVisualStyleBackColor = true;
@@ -646,10 +646,10 @@ namespace MCUpdater
             this.offlineModsTab.Controls.Add(this.label1);
             this.offlineModsTab.Controls.Add(this.offlineModList);
             this.offlineModsTab.Controls.Add(this.saveOfflineMod);
-            this.offlineModsTab.Location = new System.Drawing.Point(4, 26);
+            this.offlineModsTab.Location = new System.Drawing.Point(4, 22);
             this.offlineModsTab.Name = "offlineModsTab";
             this.offlineModsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.offlineModsTab.Size = new System.Drawing.Size(745, 357);
+            this.offlineModsTab.Size = new System.Drawing.Size(745, 361);
             this.offlineModsTab.TabIndex = 3;
             this.offlineModsTab.Text = "Mod管理";
             this.offlineModsTab.UseVisualStyleBackColor = true;
@@ -858,9 +858,9 @@ namespace MCUpdater
             this.aboutTab.Controls.Add(this.version);
             this.aboutTab.Controls.Add(this.label2);
             this.aboutTab.Controls.Add(this.pictureBox1);
-            this.aboutTab.Location = new System.Drawing.Point(4, 26);
+            this.aboutTab.Location = new System.Drawing.Point(4, 22);
             this.aboutTab.Name = "aboutTab";
-            this.aboutTab.Size = new System.Drawing.Size(745, 357);
+            this.aboutTab.Size = new System.Drawing.Size(745, 361);
             this.aboutTab.TabIndex = 8;
             this.aboutTab.Text = "关于";
             this.aboutTab.UseVisualStyleBackColor = true;
@@ -1130,6 +1130,7 @@ namespace MCUpdater
             this.MaximizeBox = false;
             this.Name = "Main";
             this.Text = "x.pname";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.mcLauncher.ResumeLayout(false);

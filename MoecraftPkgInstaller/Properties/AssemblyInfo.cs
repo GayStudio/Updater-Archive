@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("MoecraftPkgInstaller")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Moecraft Package Installer")]
+[assembly: AssemblyDescription("Moecraft Package Installer")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MoecraftPkgInstaller")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("MoeNet Inc.")]
+[assembly: AssemblyProduct("Moecraft Package Installer")]
+[assembly: AssemblyCopyright("Copyright © 2015 MoeNet All Rights Reserved")]
+[assembly: AssemblyTrademark("Copyright © 2015 MoeNet All Rights Reserved")]
 [assembly: AssemblyCulture("")]
 
 //将 ComVisible 设置为 false 将使此程序集中的类型
