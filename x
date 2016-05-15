@@ -11,7 +11,7 @@ mcsign="#Controlled-By-X" #Moecraft Server Argument Sign
 # Core
 cd ${xpath}
 echo -e "\033[34;49;1m(C) 2016 MoeCraft All Rights Reserved\e[0m"
-echo -e "\033[32;49;1mMoeCraft Server Console\e[0m // Written by Kenvix @ 2016/5/14"
+echo -e "\033[32;49;1mMoeCraft Server Console\e[0m // Written by Kenvix @ 2016/5/15"
 echo -e "\033[31;49;1m------------------------------------------------------------\e[0m"
 case $1 in
 	r)
@@ -45,7 +45,10 @@ case $1 in
                 echo -e "Using Jar File: ${jarfile}"
                 echo -e ${comm}
                 echo -e "\033[31;49;1m------------------------------------------------------------\e[0m"
+                touch ${xpid}
                 echo $$ > ${xpid}
+                trap "echo -e ' \033[31;40;1m Ctrl+C: SIGINT! Stopping Loop Mode...\e[0m' & rm -rf ${xpid} & exit 0" 2
+                trap "echo -e ' \033[31;40;1m Kill: SIGTERM! Stopping Loop Mode...\e[0m' & rm -rf ${xpid} & exit 0" 2
                 while [[ true ]];do
                     java ${comm} -jar ${xpath}/${jarfile} ${mcsign}
                     echo ""
