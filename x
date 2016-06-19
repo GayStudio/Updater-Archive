@@ -25,8 +25,10 @@ case $1 in
             echo -e ${comm}
             echo -e "\033[31;49;1m------------------------------------------------------------\e[0m"
             java ${comm} -jar ${xpath}/${jarfile} ${mcsign}
+            exitcode=$?
             echo ""
             echo -e "\033[31;49;1m------------------------------------------------------------\e[0m"
+            echo -e "\033[32;1mExit Code: ${exitcode}\e[0m"
             echo -e "\033[34;49;1mMoeCraft Server Closed\e[0m"
         fi
     ;;
@@ -51,8 +53,10 @@ case $1 in
                 trap "echo -e ' \033[31;40;1m Kill: SIGTERM! Stopping Loop Mode...\e[0m' & rm -rf ${xpid} & exit 0" 2
                 while [[ true ]];do
                     java ${comm} -jar ${xpath}/${jarfile} ${mcsign}
+                    exitcode=$?
                     echo ""
                     echo -e "\033[31;49;1m------------------------------------------------------------\e[0m"
+                    echo -e "\033[32;1mExit Code: ${exitcode}\e[0m"
                     echo -e "\033[34;49;1mMoeCraft Server Closed\e[0m Run again after ${sleeptime}"
                     echo "Stpped at " `date '+%Y-%m-%d %H:%M:%S'` " press Ctrl+C to cancel reboot"
                     sleep ${sleeptime}
@@ -71,12 +75,12 @@ case $1 in
         fi
         pid=`ps -x | grep ${mcsign} | grep -v grep`
         if [ $? -ne 0 ]; then
-            echo -e "\033[32;1mError: Process Not running!"
+            echo -e "\033[32;1mError: Process Not running!\e[0m"
         else
             sudo kill -s INT `echo $pid | awk '{ print $1 }'`
-            echo -e "\033[32;1mStopping!"
+            echo -e "\033[32;1mStopping!\e[0m"
             echo -e "\033[31;49;1m------------------------------------------------------------\e[0m"
-            free -h
+            free -hb
         fi
     ;;
     k)

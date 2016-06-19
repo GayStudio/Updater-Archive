@@ -5,17 +5,17 @@
 Exciting 一颗赛艇]]>
   </desc>
   <libs>
-      <mods ver="3.8" name="模组" path=".minecraft/mods">
+      <mods ver="4.1" name="模组" path=".minecraft/mods">
         <download>
           <url name="package.mods.7z">{{url}}mods.7z</url>
         </download>
         <script type="bat">
           <![CDATA[
             echo ================Mod Installer================
-            echo Written By Kenvix @ 2016/2/1
-            del /f /q *.zip
-            del /f /q *.jar
-            del /f /q *.disabled
+            echo Written By Kenvix @ 2016/6/9
+            del /f /q *.moecraft.zip
+            del /f /q *.moecraft.jar
+            del /f /q *.moecraft.disabled
             "{{7z}}" x -y -o"{{Path}}" "{{DLDir}}/package.mods.7z"
             del /f /q "{{DLDir}}/package.mods.7z"
             echo ===============Mods Installed================
@@ -24,17 +24,17 @@ Exciting 一颗赛艇]]>
         <shell>
             <![CDATA[
             echo ================Mod Installer================
-            echo Written By Kenvix @ 2016/2/6
-            rm -f *.zip
-            rm -f *.jar
-            rm -f *.disabled
+            echo Written By Kenvix @ 2016/6/9
+            rm -f *.moecraft.zip
+            rm -f *.moecraft.jar
+            rm -f *.moecraft.disabled
             7za x -y -o"{{Path}}" "{{DLDir}}/package.mods.7z"
             rm -f "{{DLDir}}/package.mods.7z"
             echo ===============Mods Installed================
           ]]>
         </shell>
       </mods>
-      <omods ver="3.1" name="可选模组" path=".minecraft/mods/1.7.10">
+      <omods ver="4.1" name="可选模组" path=".minecraft/mods/1.7.10">
         <download>
           <url name="package.omods.7z">{{url}}omods.7z</url>
         </download>
@@ -52,7 +52,7 @@ Exciting 一颗赛艇]]>
           ]]>
         </script>
       </omods>
-      <config ver="3.7" name="配置文件" path=".minecraft/Config">
+      <config ver="4.0" name="配置文件" path=".minecraft/Config">
         <download>
           <url name="package.config.7z" unpack="1">{{url}}config.7z</url>
         </download>
