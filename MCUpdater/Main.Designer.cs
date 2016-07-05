@@ -114,8 +114,6 @@ namespace MCUpdater
             this.label19 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.stusUrl = new System.Windows.Forms.LinkLabel();
-            this.label4 = new System.Windows.Forms.Label();
             this.kenvixUrl = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.version = new System.Windows.Forms.Label();
@@ -851,16 +849,14 @@ namespace MCUpdater
             this.aboutTab.Controls.Add(this.label19);
             this.aboutTab.Controls.Add(this.textBox1);
             this.aboutTab.Controls.Add(this.label5);
-            this.aboutTab.Controls.Add(this.stusUrl);
-            this.aboutTab.Controls.Add(this.label4);
             this.aboutTab.Controls.Add(this.kenvixUrl);
             this.aboutTab.Controls.Add(this.label3);
             this.aboutTab.Controls.Add(this.version);
             this.aboutTab.Controls.Add(this.label2);
             this.aboutTab.Controls.Add(this.pictureBox1);
-            this.aboutTab.Location = new System.Drawing.Point(4, 22);
+            this.aboutTab.Location = new System.Drawing.Point(4, 26);
             this.aboutTab.Name = "aboutTab";
-            this.aboutTab.Size = new System.Drawing.Size(745, 361);
+            this.aboutTab.Size = new System.Drawing.Size(745, 357);
             this.aboutTab.TabIndex = 8;
             this.aboutTab.Text = "关于";
             this.aboutTab.UseVisualStyleBackColor = true;
@@ -929,7 +925,7 @@ namespace MCUpdater
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(195, 23);
             this.textBox4.TabIndex = 21;
-            this.textBox4.Text = "466674252";
+            this.textBox4.Text = "566786837";
             // 
             // label23
             // 
@@ -1035,31 +1031,6 @@ namespace MCUpdater
             this.label5.TabIndex = 14;
             this.label5.Text = "© MoeNet Inc. 保留所有权利";
             // 
-            // stusUrl
-            // 
-            this.stusUrl.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.stusUrl.AutoSize = true;
-            this.stusUrl.BackColor = System.Drawing.Color.Transparent;
-            this.stusUrl.LinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.stusUrl.Location = new System.Drawing.Point(292, 113);
-            this.stusUrl.Name = "stusUrl";
-            this.stusUrl.Size = new System.Drawing.Size(113, 17);
-            this.stusUrl.TabIndex = 13;
-            this.stusUrl.TabStop = true;
-            this.stusUrl.Tag = "";
-            this.stusUrl.Text = "StusGame GROUP";
-            this.stusUrl.VisitedLinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.stusUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.stusUrl_LinkClicked);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(275, 113);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(20, 17);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "@";
-            // 
             // kenvixUrl
             // 
             this.kenvixUrl.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
@@ -1068,11 +1039,11 @@ namespace MCUpdater
             this.kenvixUrl.LinkColor = System.Drawing.SystemColors.MenuHighlight;
             this.kenvixUrl.Location = new System.Drawing.Point(234, 113);
             this.kenvixUrl.Name = "kenvixUrl";
-            this.kenvixUrl.Size = new System.Drawing.Size(45, 17);
+            this.kenvixUrl.Size = new System.Drawing.Size(84, 17);
             this.kenvixUrl.TabIndex = 11;
             this.kenvixUrl.TabStop = true;
             this.kenvixUrl.Tag = "";
-            this.kenvixUrl.Text = "Kenvix";
+            this.kenvixUrl.Text = "Kenvix ~ ~ ~";
             this.kenvixUrl.VisitedLinkColor = System.Drawing.SystemColors.MenuHighlight;
             this.kenvixUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.kenvixUrl_LinkClicked);
             // 
@@ -1214,8 +1185,6 @@ namespace MCUpdater
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TabPage aboutTab;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.LinkLabel stusUrl;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.LinkLabel kenvixUrl;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label version;

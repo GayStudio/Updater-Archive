@@ -160,19 +160,7 @@ namespace MCUpdater
         {
             try
             {
-                Process.Start("http://zhizhe8.net/");
-            }
-            catch (Exception ex)
-            {
-                error(ex.Message);
-            }
-        }
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            try
-            {
-                Process.Start("http://www.stus8.com");
+                Process.Start("http://kenvix.com/");
             }
             catch (Exception ex)
             {
@@ -295,6 +283,14 @@ namespace MCUpdater
         private void updateServer_SelectedIndexChanged(object sender, EventArgs e)
         {
             conn.set("updateServer",updateServer.SelectedIndex.ToString());
+            if(nowUpdate != 0)
+            {
+                updateButton.Text = "检查更新 (&C)";
+                updateAction.Text = "节点已切换。需要重新检查更新，请点击右下角的 [ 检查更新 ] 按钮";
+                updateThisProgressBar.Value = 0;
+                updateThisProgressText.Text = "准备就绪";
+                nowUpdate = 0;
+            }
         }
 
         #region 查看MC崩溃日志

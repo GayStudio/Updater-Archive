@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <root>
-  <lc desc="默认" xml="update.xml">http://localhost/</lc>
-  <v2 desc="默认" xml="info.xml">https://cdn.moecraft.net/mc/</v2>
-  <cb desc="备用" xml="info.xml">http://cdn.moeclub.net/mc/</cb>
+  <v2 desc="MoeCraft 默认" xml="info.xml">https://cdn.moecraft.net/mc/</v2>
+  <cb desc="MoeCraft 备用" xml="info.xml">http://cdn.moeclub.net/mc/</cb>
+  <ny desc="NyaCraft" xml="info.xml">http://cdn.moecraft.net/nyacraft/</ny>
+  <lc desc="单机测试(勿选)" xml="info.xml">http://localhost/mc/</lc>
 </root>

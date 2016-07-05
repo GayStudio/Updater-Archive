@@ -52,6 +52,7 @@ namespace MCUpdater
             {
                 File.WriteAllBytes(x.path + x.updpath + "config.xml", Properties.Resources.config);
             }
+            File.WriteAllText(x.path + x.updpath + "updater.name", Application.ExecutablePath.Substring(Application.StartupPath.Length + 1));
         }
     }
 }

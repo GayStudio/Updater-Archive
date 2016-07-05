@@ -20,11 +20,12 @@ namespace MoecraftPkgInstaller
                 try
                 {
                     var fs = new FileStream(Program.path, FileMode.Open);
+                    var fn = new FileInfo(Program.path);
                     long left = fs.Length; //尚未读取的文件内容长度  
                     setMaxProgress((int)left);
                     byte[] bytes = new byte[1048576]; //存储读取结果  
                     int maxLength = bytes.Length; //每次读取长度  
-                    int start = 0; //读取位置  
+                    int start = (int)fn.Length; //读取位置  
                     int num = 0; //实际返回结果长度  
                     string text;
                     int sp;

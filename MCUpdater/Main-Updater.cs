@@ -73,7 +73,7 @@ namespace MCUpdater
                 endUpdateAction();
                 return;
             }
-            updateAction.Text = "获取本版更新信息成功。点击开始更新按钮可以运行更新。你可以在右侧选择要强制更新哪些组件。";
+            updateAction.Text = "获取本版更新信息成功。点击开始更新按钮可以运行更新。你可以在右侧选择要更新哪些组件。";
             readUpdateInfo(result);
         }
 
@@ -348,6 +348,7 @@ namespace MCUpdater
             {
 
                 WebClient wc = new WebClient();
+                ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
                 wc.DownloadFileAsync(new Uri(url), x.path + x.updpath + x.dlpath + file);
                 wc.DownloadProgressChanged += (object sender, DownloadProgressChangedEventArgs e) =>
                 {

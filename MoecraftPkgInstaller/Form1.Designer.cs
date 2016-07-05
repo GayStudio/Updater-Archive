@@ -154,9 +154,9 @@
             // 
             this.installButton.Enabled = false;
             this.installButton.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.installButton.Location = new System.Drawing.Point(366, 132);
+            this.installButton.Location = new System.Drawing.Point(335, 132);
             this.installButton.Name = "installButton";
-            this.installButton.Size = new System.Drawing.Size(127, 37);
+            this.installButton.Size = new System.Drawing.Size(158, 37);
             this.installButton.TabIndex = 13;
             this.installButton.Text = "确定安装 (&I)";
             this.installButton.UseVisualStyleBackColor = true;
