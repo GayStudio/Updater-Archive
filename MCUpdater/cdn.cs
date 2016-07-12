@@ -92,6 +92,10 @@ namespace MCUpdater
                     {
                         headers.Add(xhead, e.Attributes["header_" + xhead].Value);
                     }
+                    else
+                    {
+                        headers.Add(xhead, "");
+                    }
                 }
             }
             else

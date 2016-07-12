@@ -1,0 +1,17 @@
+(C) 2016 MoeCraft All Rights Reserved
+MoeCraft Server Console // Written by Kenvix @ 2016/5/14
+------------------------------------------------------------
+用法：x 参数
+参数：
+r    启动 Minecraft
+l    循环模式启动 Minecraft，用 x c  或者 x k 停止它
+c    像 /stop 指令一样停止 Minecraft 服务器
+k    暴力杀死 Minecraft 服务器进程
+x    恢复Minecraft 服务器会话并结束其他正在运行的会话
+g    恢复一个正在运行的Minecraft 服务器会话
+sc   创建名为mc的Minecraft 服务器会话
+sd   结束Minecraft 服务器会话
+sk   杀死Minecraft 服务器会话
+------------------------------------------------------------
+例如，我要恢复mc会话，则输入：
+x x
