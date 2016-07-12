@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml;
 using System.Text;
+using System;
 
 namespace MCUpdater
 {
@@ -60,6 +61,44 @@ namespace MCUpdater
                 {"desc", e.Attributes["desc"].Value},
                 {"id", e.Name},
             };
+        }
+
+        /// <summary>
+        /// 用索引获取CDN Header信息
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> getHeaders(int index)
+        {
+            return getHeaders(root.ChildNodes[index].Name);
+        }
+
+        /// <summary>
+        /// 用ID获取CDN Header信息
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> getHeaders(string id)
+        {
+            var e = root.GetElementsByTagName(id)[0];
+            Dictionary<string,string> headers;
+            if (e.Attributes["headers"] != null)
+            {
+                string[] headerList = e.Attributes["headers"].Value.Split(',');
+                headers = new Dictionary<string, string>();
+                foreach (string xhead in headerList)
+                {
+                    if (e.Attributes["header_" + xhead] != null)
+                    {
+                        headers.Add(xhead, e.Attributes["header_" + xhead].Value);
+                    }
+                }
+            }
+            else
+            {
+                headers = null;
+            }
+            return headers;
         }
 
         public XmlNodeList list()

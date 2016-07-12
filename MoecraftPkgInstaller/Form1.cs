@@ -9,60 +9,31 @@ namespace MoecraftPkgInstaller
 {
     public partial class main : Form
     {
-        public const string startString = "%*$@#!";
-        public const string endString = "!#@$*%";
+        public const string startString = "------START-MOECRAFT-PKGINSTALLER-DATA------";
+        public const string endString = "------END-MOECRAFT-PKGINSTALLER-DATA------";
         public main()
         {
             InitializeComponent();
             pkgPath.Text = Program.path;
             Thread th = new Thread(() =>
             {
-                try
-                {
+                //try
+                //{
                     var fs = new FileStream(Program.path, FileMode.Open);
                     var fn = new FileInfo(Program.path);
-                    long left = fs.Length; //尚未读取的文件内容长度  
-                    setMaxProgress((int)left);
-                    byte[] bytes = new byte[1048576]; //存储读取结果  
-                    int maxLength = bytes.Length; //每次读取长度  
-                    int start = (int)fn.Length; //读取位置  
-                    int num = 0; //实际返回结果长度  
-                    string text;
-                    int sp;
-                    int ep;
-                    string data = "";
-                    while (left > 0) //当文件未读取长度大于0时，不断进行读取  
-                    {
-                        setprogress(Math.Abs((int)(left - fs.Length)));
-                        fs.Position = start;
-                        num = 0;
-                        if (left < maxLength)
-                            num = fs.Read(bytes, 0, Convert.ToInt32(left));
-                        else
-                            num = fs.Read(bytes, 0, maxLength);
-                        if (num == 0)
-                            break;
-                        start += num;
-                        left -= num;
-                        text = Encoding.UTF8.GetString(bytes);
-                        sp = text.IndexOf(startString); //开始字符串
-                        ep = text.IndexOf(endString); //结束字符串
-                        if (sp != -1 && ep != -1)
-                        {
-                            data = text.Substring(sp + startString.Length);
-                            break;
-                        }
-                        else if (sp != -1 && ep == -1)
-                        {
-                            data = text.Substring(sp + startString.Length);
-                            break;
-                        }
-                        else if (sp == -1 && ep != -1)
-                        {
-                            data = text.Substring(0, ep - endString.Length);
-                            break;
-                        }
-                    }
+                    int fsize = (int)fn.Length;
+                    Console.WriteLine(fsize);
+                    byte[] bytes = new byte[4194304]; //存储读取结果  
+                Console.WriteLine(bytes.Length);
+                Console.WriteLine(fsize - bytes.Length);
+                fs.Seek(fsize - bytes.Length, SeekOrigin.Begin);
+                    fs.Read(bytes, 0, 4194304);
+                Console.Write(bytes);
+                    string text = Encoding.UTF8.GetString(bytes);
+                    int start = text.IndexOf(startString);
+                    int end = text.IndexOf(endString);
+                    string data = text.Substring(start + startString.Length, end);
+                    error(data);
                     if (string.IsNullOrEmpty(data))
                     {
                         error("找不到包自述，因此无法安装该包", "解析包失败");
@@ -90,12 +61,12 @@ namespace MoecraftPkgInstaller
                             Environment.Exit(3);
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    error(ex.Message, "打开文件失败");
-                    Environment.Exit(1);
-                }
+                //}
+                //catch (Exception ex)
+                //{
+                //    error(ex.Message, "打开文件失败");
+                //    Environment.Exit(1);
+                //}
             });
             th.Start();
         }

@@ -6,7 +6,6 @@ using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using System.IO.Compression;
 using System.Collections.Generic;
 
 namespace MCUpdater
@@ -65,7 +64,7 @@ namespace MCUpdater
                 }
                 Application.DoEvents();
             }*/
-            startUpdateDownload(server, "update.xml");
+            startUpdateDownload(server, "update.xml", cdnc.getHeaders(updateServer.SelectedIndex));
             result = File.ReadAllText(x.path + x.updpath + x.dlpath + "update.xml");
             if (!string.IsNullOrEmpty(errorMsg))
             {
@@ -158,7 +157,7 @@ namespace MCUpdater
                     XmlElement down = (XmlElement)var.SelectSingleNode("download");
                     foreach (XmlElement downvar in down)
                     {
-                        startUpdateDownload((downvar.InnerText).Replace("{{url}}", cdnc.get(updateServer.SelectedIndex)["url"]), downvar.GetAttribute("name"));
+                        startUpdateDownload((downvar.InnerText).Replace("{{url}}", cdnc.get(updateServer.SelectedIndex)["url"]), downvar.GetAttribute("name"), cdnc.getHeaders(updateServer.SelectedIndex));
                         if(!File.Exists(x.path + x.updpath + x.dlpath + downvar.GetAttribute("name")) || (new FileInfo(x.path + x.updpath + x.dlpath + downvar.GetAttribute("name"))).Length <= 0)
                         {
                             updateFatalError = true;
@@ -342,12 +341,18 @@ namespace MCUpdater
         /// <param name="url">下载地址</param>
         /// <param name="file">保存文件名</param>
         /// 
-        protected void startUpdateDownload(string url, string file)
+        protected void startUpdateDownload(string url, string file, Dictionary<string,string> headers = null)
         {
             try
             {
-
                 WebClient wc = new WebClient();
+                if(headers != null)
+                {
+                    foreach(KeyValuePair<string, string> xhead in headers)
+                    {
+                        wc.Headers.Set(xhead.Key, xhead.Value);
+                    }
+                }
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
                 wc.DownloadFileAsync(new Uri(url), x.path + x.updpath + x.dlpath + file);
                 wc.DownloadProgressChanged += (object sender, DownloadProgressChangedEventArgs e) =>
@@ -364,7 +369,7 @@ namespace MCUpdater
                         if (error == DialogResult.Retry)
                         {
                             updateLog.Text += "下载失败，重试下载：" + url + "\r\n";
-                            startUpdateDownload(url, file);
+                            startUpdateDownload(url, file, cdnc.getHeaders(updateServer.SelectedIndex));
                         }
                         else
                         {
@@ -383,7 +388,7 @@ namespace MCUpdater
                         if (error == DialogResult.Retry)
                         {
                             updateLog.Text += "下载过程中出错，重试下载：" + url + "\r\n";
-                            startUpdateDownload(url, file);
+                            startUpdateDownload(url, file, cdnc.getHeaders(updateServer.SelectedIndex));
                         }
                         else
                         {
@@ -411,7 +416,7 @@ namespace MCUpdater
                 DialogResult error = MessageBox.Show(ex.Message, "下载失败", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                 if (error == DialogResult.Retry)
                 {
-                    startUpdateDownload(url, file);
+                    startUpdateDownload(url, file, cdnc.getHeaders(updateServer.SelectedIndex));
                 }
                 else
                 {

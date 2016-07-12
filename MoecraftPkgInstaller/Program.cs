@@ -21,12 +21,12 @@ namespace MoecraftPkgInstaller
             Application.EnableVisualStyles();
             if(!File.Exists(updater))
             {
-                if (!File.Exists("updater.name"))
+                if (!File.Exists(Application.StartupPath + "\\updater.name"))
                 {
                     MessageBox.Show("找不到 MoeCraft Toolbox，请确保你已将本程序放置于 MoeCraft Toolbox 所在目录下的 updater 文件夹，并运行过 MoeCraft Toolbox ( V2.4 以上版本 )", "Moecraft Package Installer", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Environment.Exit(2);
                 }
-                updater = "..\\" + File.ReadAllText("updater.name");
+                updater = Application.StartupPath + "\\..\\" + File.ReadAllText("updater.name");
                 if (!File.Exists(updater))
                 {
                     MessageBox.Show("找不到 MoeCraft Toolbox ( updater.name 所指示的路径无效 )，请确保你已将本程序放置于 MoeCraft Toolbox 所在目录下的 updater 文件夹，并运行过 MoeCraft Toolbox ( V2.4 以上版本 )", "Moecraft Package Installer", MessageBoxButtons.OK, MessageBoxIcon.Error);
