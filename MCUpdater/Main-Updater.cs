@@ -14,6 +14,7 @@ namespace MCUpdater
     {
         private int nowUpdate = 0;
         private XmlElement xn;
+        public bool updateFlag;
         private void updateButton_Click(object sender, EventArgs e)
         {
             if(nowUpdate == 2)
@@ -178,21 +179,7 @@ namespace MCUpdater
                                 doUnpack:
                                 try
                                 {
-                                    updateAction.Text = "正在解压缩文件：" + packageName;
-                                    updateLog.AppendText(updateAction.Text + "\r\n");
-                                    Process p = new Process();
-                                    p.StartInfo.FileName = x.path + x.updpath + "7z.exe";
-                                    p.StartInfo.Arguments = "x -y -o\"" + x.path + installPath + "\" \"" + x.path + x.updpath + x.dlpath + packageName + "\"";
-                                    p.StartInfo.UseShellExecute = false;
-                                    p.StartInfo.CreateNoWindow = true;
-                                    p.StartInfo.RedirectStandardOutput = true;
-                                    p.Start();
-                                    p.BeginOutputReadLine();
-                                    p.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
-                                    while (!p.WaitForExit(x.sleep))
-                                    {
-                                        Application.DoEvents();
-                                    }
+                                    runUnpack(packageName, installPath);
                                 }
                                 catch (Exception ex)
                                 {
@@ -215,30 +202,7 @@ namespace MCUpdater
                         writeBat:
                         try
                         {
-                            updateAction.Text = "运行安装程序";
-                            updateLog.AppendText(updateAction.Text + "\r\n");
-                            string batPath = x.path + installPath + "\\install.bat";
-                            string batText = ("@echo off\n" +
-                                "cd /D \"" + x.path + installPath + "\"\n" + bat.InnerText
-                                .Replace("{{7z}}",x.path + x.updpath + "7z.exe")
-                                .Replace("{{Root}}", x.path)
-                                .Replace("{{DLDir}}", x.path + x.updpath + x.dlpath)
-                                .Replace("{{UpdPath}}", x.path + x.updpath)
-                                .Replace("{{Path}}", x.path + installPath + "\\")).Replace("\n","\r\n");
-                            File.WriteAllText(batPath, batText , System.Text.Encoding.GetEncoding("gb2312"));
-                            Process pb = new Process();
-                            pb.StartInfo.FileName = "cmd.exe";
-                            pb.StartInfo.Arguments = "/c call \""+batPath+"\"";
-                            pb.StartInfo.UseShellExecute = false;
-                            pb.StartInfo.CreateNoWindow = true;
-                            pb.StartInfo.RedirectStandardOutput = true;
-                            pb.Start();
-                            pb.BeginOutputReadLine();
-                            pb.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
-                            while (!pb.WaitForExit(x.sleep))
-                            {
-                                Application.DoEvents();
-                            }
+                            runInstaller(bat.InnerText, installPath);
                         }
                         catch (Exception ex)
                         {
@@ -283,6 +247,66 @@ namespace MCUpdater
             endUpdateAction();
         }
 
+        /// <summary>
+        /// 解压缩更新包
+        /// </summary>
+        /// <param name="packageName">包文件名</param>
+        /// <param name="installPath">安装路径</param>
+        private void runUnpack(string packageName, string installPath)
+        {
+            updateAction.Text = "正在解压缩文件：" + packageName;
+            updateLog.AppendText(updateAction.Text + "\r\n");
+            Process p = new Process();
+            p.StartInfo.FileName = x.path + x.updpath + "7z.exe";
+            p.StartInfo.Arguments = "x -y -o\"" + x.path + installPath + "\" \"" + x.path + x.updpath + x.dlpath + packageName + "\"";
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.CreateNoWindow = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.Start();
+            p.BeginOutputReadLine();
+            p.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
+            while (!p.WaitForExit(x.sleep))
+            {
+                Application.DoEvents();
+            }
+        }
+
+        /// <summary>
+        /// 运行BAT安装程序
+        /// </summary>
+        /// <param name="batOriginText">BAT原始内容</param>
+        /// <param name="installPath">安装路径</param>
+        private void runInstaller(string batOriginText, string installPath, string sainstall = null)
+        {
+            updateAction.Text = "运行安装程序";
+            updateLog.AppendText(updateAction.Text + "\r\n");
+            string batPath = x.path + installPath + "\\install.bat";
+            string batText = ("@echo off\n" +
+                                "cd /D \"" + x.path + installPath + "\"\n" + batOriginText
+                                .Replace("{{7z}}",x.path + x.updpath + "7z.exe")
+                                .Replace("{{Root}}", x.path)
+                                .Replace("{{DLDir}}", sainstall == null ? x.path + x.updpath + x.dlpath : sainstall)
+                                .Replace("{{UpdPath}}", x.path + x.updpath)
+                                .Replace("{{Path}}", x.path + installPath + "\\")).Replace("\n","\r\n");
+            File.WriteAllText(batPath, batText, System.Text.Encoding.GetEncoding("gb2312"));
+            Process pb = new Process();
+            pb.StartInfo.FileName = "cmd.exe";
+            pb.StartInfo.Arguments = "/c call \"" + batPath + "\"";
+            pb.StartInfo.UseShellExecute = false;
+            pb.StartInfo.CreateNoWindow = true;
+            pb.StartInfo.RedirectStandardOutput = true;
+            pb.Start();
+            pb.BeginOutputReadLine();
+            pb.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
+            while (!pb.WaitForExit(x.sleep))
+            {
+                Application.DoEvents();
+            }
+        }
+
+        /// <summary>
+        /// 结束更新界面操作
+        /// </summary>
         private void endUpdateAction()
         {
             nowUpdate = 0;
@@ -294,15 +318,110 @@ namespace MCUpdater
             updateButton.Text = "检查更新 (&C)";
             updateButton.Enabled = true;
         }
-        #region 判断是否需要强制更新
+        /// <summary>
+        /// 判断是否需要强制更新
+        /// </summary>
         private bool isForceUpdate(string v)
         {
             return false;
         }
-        #endregion
+
+        /// <summary>
+        /// 独立更新
+        /// </summary>
+        private void SAUpdate()
+        {
+            try
+            {
+                string[] arg;
+                bool unpack = false;
+                string name = null;
+                string path = "";
+                string to = "";
+                string ver = "1.0";
+                string desc = null;
+                string batpath = null;
+                foreach (string value in p.arg)
+                {
+                    string av = value.Substring(0,1);
+                    if (av == "/" || av == "-")
+                    {
+                        arg = value.Split('=');
+                        string ak = arg[0].Substring(1);
+                        string ad = arg.Length >= 2 ? arg[1] : null;
+                        switch (ak)
+                        {
+                            case "unpack":
+                                unpack = true;
+                                break;
+                            case "name":
+                                if (ad != null)
+                                {
+                                    name = ad;
+                                }
+                                break;
+                            case "path":
+                                if (ad != null)
+                                {
+                                    path = ad.Replace("\"", "");
+                                }
+                                break;
+                            case "to":
+                                if (ad != null)
+                                {
+                                    to = ad.Replace("\"", "");
+                                }
+                                break;
+                            case "ver":
+                                if (ad != null)
+                                {
+                                    ver = ad;
+                                }
+                                break;
+                            case "desc":
+                                if (ad != null)
+                                {
+                                    desc = ad.Replace("\"", "");
+                                }
+                                break;
+                            case "batpath":
+                                if (ad != null)
+                                {
+                                    batpath = ad.Replace("\"", "");
+                                }
+                                break;
+                        }
+                    }
+                }
+                if (name == null) return;
+                if (desc == null) desc = name;
+                if (!string.IsNullOrEmpty(to) && !Directory.Exists(x.path + to))
+                {
+                    Directory.CreateDirectory(x.path + to);
+                }
+                updateLog.Text = "进入包独立安装模式\r\n-----------------------------------------------------\r\n";
+                updateAction.Text = "正在安装包：" + desc + " V" + ver;
+                updateLog.AppendText(updateAction.Text + "\r\n");
+                updateLog.AppendText("输出目录：" + x.path + to + "\r\n");
+                if (unpack && !string.IsNullOrEmpty(path)) runUnpack(path, to);
+                if (!string.IsNullOrEmpty(batpath) && !string.IsNullOrEmpty(to) && File.Exists(batpath))
+                {
+                    runInstaller(File.ReadAllText(batpath), to, (new FileInfo(path).DirectoryName));
+                    if (File.Exists(batpath))
+                    {
+                        File.Delete(batpath);
+                    }
+                }
+                updateAction.Text = "已成功安装包：" + desc + " V" + ver;
+                updateLog.AppendText("\r\n" + updateAction.Text + "\r\n您可以继续使用 " + x.pname + "，或者关闭它\r\n");
+            }
+            catch (Exception ex)
+            {
+                error(ex.ToString(),"独立包安装程序无法安装此包");
+            }
+        }
 
         #region 处理压缩包
-
         private void p_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
             // 这里仅做输出的示例，实际上您可以根据情况取消获取命令行的内容  
@@ -340,7 +459,7 @@ namespace MCUpdater
         /// </summary>
         /// <param name="url">下载地址</param>
         /// <param name="file">保存文件名</param>
-        /// 
+        /// <param name="headers">头</param>
         protected void startUpdateDownload(string url, string file, Dictionary<string,string> headers = null)
         {
             try

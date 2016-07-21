@@ -10,5 +10,6 @@ namespace MoecraftPkgInstaller
         public float ver { get; set; }
         public string path { get; set; }
         public string script { get; set; }
+        public bool unpack { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 
@@ -19,14 +20,14 @@ namespace MoecraftPkgInstaller
         static void Main(string[] args)
         {
             Application.EnableVisualStyles();
-            if(!File.Exists(updater))
+            if (!File.Exists(updater))
             {
                 if (!File.Exists(Application.StartupPath + "\\updater.name"))
                 {
                     MessageBox.Show("找不到 MoeCraft Toolbox，请确保你已将本程序放置于 MoeCraft Toolbox 所在目录下的 updater 文件夹，并运行过 MoeCraft Toolbox ( V2.4 以上版本 )", "Moecraft Package Installer", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Environment.Exit(2);
                 }
-                updater = Application.StartupPath + "\\..\\" + File.ReadAllText("updater.name");
+                updater = Application.StartupPath + "\\..\\" + File.ReadAllText(Application.StartupPath + "\\updater.name");
                 if (!File.Exists(updater))
                 {
                     MessageBox.Show("找不到 MoeCraft Toolbox ( updater.name 所指示的路径无效 )，请确保你已将本程序放置于 MoeCraft Toolbox 所在目录下的 updater 文件夹，并运行过 MoeCraft Toolbox ( V2.4 以上版本 )", "Moecraft Package Installer", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -66,7 +67,7 @@ namespace MoecraftPkgInstaller
                         case "-unsetass":
                             try
                             {
-                                string text = Properties.Resources.unsetass.Replace("{selfpath}", Application.ExecutablePath.Replace(@"\",@"\\"));
+                                string text = Encoding.Default.GetString(Encoding.UTF8.GetBytes(Properties.Resources.unsetass.Replace("{selfpath}", Application.ExecutablePath.Replace(@"\",@"\\"))));
                                 string path = Application.StartupPath + "\\" + "UnSetAssociation.reg";
                                 File.WriteAllText(path, text);
                                 Process.Start("regedit.exe", "/s \"" + path + "\"");
@@ -82,6 +83,11 @@ namespace MoecraftPkgInstaller
                     }
                 }
                 path = args[0];
+                if(!File.Exists(path))
+                {
+                    MessageBox.Show("指定的文件不存在：" + path, "Moecraft Package Installer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Environment.Exit(2);
+                }
             }
             else
             {

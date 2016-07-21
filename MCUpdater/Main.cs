@@ -5,6 +5,7 @@ using System.Net;
 using System.Windows.Forms;
 using System.Linq;
 using System.Threading;
+using Microsoft.Win32;
 
 namespace MCUpdater
 {
@@ -12,7 +13,6 @@ namespace MCUpdater
     {
         private config conn;
         private cdn cdnc;
-        private bool updateFlag = false;
         private string updateError;
         public bool inited = false;
         public Main()
@@ -24,10 +24,10 @@ namespace MCUpdater
             }
             catch (Exception ex)
             {
-                MessageBox.Show("致命错误：无法打开配置文件：\r\n" + ex.Message + "\r\n" + ex.StackTrace,x.pname + " 初始化失败",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("致命错误：无法打开配置文件：\r\n" + ex.Message + "\r\n" + ex.StackTrace, x.pname + " 初始化失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
             }
-            if(conn.get("disVisualStyles") == "1")
+            if (conn.get("disVisualStyles") == "1")
             {
                 Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
             }
@@ -35,10 +35,14 @@ namespace MCUpdater
             #region UI
             label2.Text = x.pname;
             Text = x.pname;
+            if (p.pkgInstall)
+            {
+                Text += " - Package Install Mode";
+            }
             version.Text = x.ver;
             diyDialog.HelpRequest += (object sender, EventArgs e) =>
             {
-                MessageBox.Show("这个功能并没有什么卵用\r\n下次启动更新器后无效","所谓的帮助",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("这个功能并没有什么卵用\r\n下次启动更新器后无效", "所谓的帮助", MessageBoxButtons.OK, MessageBoxIcon.Information);
             };
 #if !DEBUG
             mainTabControl.TabPages.Remove(mainTabControl.TabPages[5]); //隐藏启动器页面
@@ -63,7 +67,7 @@ namespace MCUpdater
             }
             */
             var cdnListVar = cdnc.list();
-            foreach(System.Xml.XmlElement cdnInfo in cdnListVar)
+            foreach (System.Xml.XmlElement cdnInfo in cdnListVar)
             {
                 updateServer.Items.Add(cdnInfo.GetAttribute("desc"));
             }
@@ -108,15 +112,15 @@ namespace MCUpdater
             }
             log("读取用户设置成功");
              */
-            if (conn.get("disMcCheck") == "0")
+            if (conn.get("disMcCheck") == "0" && p.pkgInstall != false)
             {
                 disMcCheck.Checked = false;
-                if(!Directory.Exists(x.mcLibPath))
+                if (!Directory.Exists(x.mcLibPath))
                 {
                     if (MessageBox.Show("你尚未安装 " + x.name + "，无法进行游戏，是否要现在安装？\r\n将使用默认节点下载安装。你可以稍候在 检查更新 页面安装\r\n\r\n如果你不想看到此提示，可以在 关于 页面禁用", x.pname, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         doCheckUpdate();
-                        
+
                     }
                 }
             }
@@ -124,10 +128,19 @@ namespace MCUpdater
             {
                 disMcCheck.Checked = true;
             }
+            var ass = Registry.ClassesRoot.OpenSubKey("MoecraftUpdater.Pkg\\shell\\open");
+            if (ass == null)
+            {
+                success("你尚未设置 MoeCraft Package ( .moecraftpkg ) 文件关联，稍后将设置关联\r\n\r\n如果你要移动 MoeCraft 到其他目录，请到 关于 页面重新设置关联\r\n如果你要删除 MoeCraft，请到 关于 页面取消关联后再卸载", x.pname);
+                try
+                {
+                    Process.Start(x.path + x.updpath + "MoecraftPkgInstaller.exe", "-setass");
+                }
+                catch (Exception) { }
+            }
             loadPlayerSettings();
             #endregion
             log("启动成功: " + " V" + x.ver + " | " + System.Environment.OSVersion);
-            inited = true;
         }
         /// <summary>
         /// 记录日志
@@ -399,6 +412,42 @@ namespace MCUpdater
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void Main_Activated(object sender, EventArgs e)
+        {
+            if(!inited)
+            {
+                if (p.pkgInstall)
+                {
+                    SAUpdate();
+                }
+                inited = true;
+            }
+        }
+
+        private void setAss_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(x.path + x.updpath + "MoecraftPkgInstaller.exe", "-setass");
+            }
+            catch (Exception ex)
+            {
+                error(ex.Message, "启动失败");
+            }
+        }
+
+        private void unsetAss_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(x.path + x.updpath + "MoecraftPkgInstaller.exe", "-unsetass");
+            }
+            catch (Exception ex)
+            {
+                error(ex.Message, "启动失败");
+            }
         }
     }
 }

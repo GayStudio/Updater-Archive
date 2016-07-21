@@ -7,12 +7,14 @@ namespace MCUpdater
 {
     static class p
     {
+        public static bool pkgInstall = false;
+        public static string[] arg;
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
         ///
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
 #if !DEBUG
             //设置应用程序处理异常方式：ThreadException处理
@@ -30,8 +32,13 @@ namespace MCUpdater
                 ex.ShowDialog();
             });
 #endif
+            arg = args;
             initResFile();
             Application.EnableVisualStyles();
+            if(args.Length >= 4 && args[0] == "pkginstall")
+            {
+                pkgInstall = true;
+            }
             Application.Run(new Main());
         }
 

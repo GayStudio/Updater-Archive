@@ -40,10 +40,12 @@
             this.tipLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.installPath = new System.Windows.Forms.TextBox();
-            this.selectInstallDir = new System.Windows.Forms.Button();
             this.installButton = new System.Windows.Forms.Button();
             this.progress = new System.Windows.Forms.ProgressBar();
             this.loadingLabel = new System.Windows.Forms.Label();
+            this.pkgUnpack = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.pkgBat = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -117,17 +119,17 @@
             // tipLabel
             // 
             this.tipLabel.AutoSize = true;
-            this.tipLabel.Location = new System.Drawing.Point(12, 132);
+            this.tipLabel.Location = new System.Drawing.Point(12, 200);
             this.tipLabel.Name = "tipLabel";
-            this.tipLabel.Size = new System.Drawing.Size(161, 12);
+            this.tipLabel.Size = new System.Drawing.Size(269, 12);
             this.tipLabel.TabIndex = 9;
-            this.tipLabel.Text = "点击 确定安装 来安装该包。";
+            this.tipLabel.Text = "以上是该包的信息，点击 确定安装 来安装该包。";
             this.tipLabel.Visible = false;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 101);
+            this.label6.Location = new System.Drawing.Point(13, 160);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 10;
@@ -135,28 +137,19 @@
             // 
             // installPath
             // 
-            this.installPath.Location = new System.Drawing.Point(74, 98);
+            this.installPath.Location = new System.Drawing.Point(74, 157);
             this.installPath.Name = "installPath";
-            this.installPath.Size = new System.Drawing.Size(351, 21);
+            this.installPath.ReadOnly = true;
+            this.installPath.Size = new System.Drawing.Size(415, 21);
             this.installPath.TabIndex = 11;
-            // 
-            // selectInstallDir
-            // 
-            this.selectInstallDir.Location = new System.Drawing.Point(431, 98);
-            this.selectInstallDir.Name = "selectInstallDir";
-            this.selectInstallDir.Size = new System.Drawing.Size(62, 23);
-            this.selectInstallDir.TabIndex = 12;
-            this.selectInstallDir.Text = "浏览...";
-            this.selectInstallDir.UseVisualStyleBackColor = true;
-            this.selectInstallDir.Click += new System.EventHandler(this.selectInstallDir_Click);
             // 
             // installButton
             // 
             this.installButton.Enabled = false;
-            this.installButton.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.installButton.Location = new System.Drawing.Point(335, 132);
+            this.installButton.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.installButton.Location = new System.Drawing.Point(335, 194);
             this.installButton.Name = "installButton";
-            this.installButton.Size = new System.Drawing.Size(158, 37);
+            this.installButton.Size = new System.Drawing.Size(158, 40);
             this.installButton.TabIndex = 13;
             this.installButton.Text = "确定安装 (&I)";
             this.installButton.UseVisualStyleBackColor = true;
@@ -164,7 +157,7 @@
             // 
             // progress
             // 
-            this.progress.Location = new System.Drawing.Point(14, 129);
+            this.progress.Location = new System.Drawing.Point(14, 194);
             this.progress.Name = "progress";
             this.progress.Size = new System.Drawing.Size(300, 22);
             this.progress.TabIndex = 14;
@@ -172,25 +165,54 @@
             // loadingLabel
             // 
             this.loadingLabel.AutoSize = true;
-            this.loadingLabel.Location = new System.Drawing.Point(12, 158);
+            this.loadingLabel.Location = new System.Drawing.Point(12, 223);
             this.loadingLabel.Name = "loadingLabel";
             this.loadingLabel.Size = new System.Drawing.Size(65, 12);
             this.loadingLabel.TabIndex = 15;
             this.loadingLabel.Text = "正在读取包";
             // 
+            // pkgUnpack
+            // 
+            this.pkgUnpack.AutoSize = true;
+            this.pkgUnpack.Enabled = false;
+            this.pkgUnpack.Location = new System.Drawing.Point(74, 130);
+            this.pkgUnpack.Name = "pkgUnpack";
+            this.pkgUnpack.Size = new System.Drawing.Size(144, 16);
+            this.pkgUnpack.TabIndex = 16;
+            this.pkgUnpack.Text = "该包需要运行解包程序";
+            this.pkgUnpack.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 102);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 12);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "安装程序：";
+            // 
+            // pkgBat
+            // 
+            this.pkgBat.Location = new System.Drawing.Point(74, 99);
+            this.pkgBat.Name = "pkgBat";
+            this.pkgBat.ReadOnly = true;
+            this.pkgBat.Size = new System.Drawing.Size(419, 21);
+            this.pkgBat.TabIndex = 17;
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 181);
-            this.Controls.Add(this.loadingLabel);
+            this.ClientSize = new System.Drawing.Size(501, 247);
             this.Controls.Add(this.progress);
+            this.Controls.Add(this.pkgBat);
+            this.Controls.Add(this.pkgUnpack);
+            this.Controls.Add(this.loadingLabel);
             this.Controls.Add(this.installButton);
-            this.Controls.Add(this.selectInstallDir);
             this.Controls.Add(this.installPath);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.tipLabel);
             this.Controls.Add(this.pkgPath);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.pkgDesc);
             this.Controls.Add(this.pkgVer);
@@ -198,6 +220,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.tipLabel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "main";
             this.Text = "MoeCraft Package Installer";
@@ -220,10 +243,12 @@
         private System.Windows.Forms.Label tipLabel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox installPath;
-        private System.Windows.Forms.Button selectInstallDir;
         private System.Windows.Forms.Button installButton;
         private System.Windows.Forms.ProgressBar progress;
         private System.Windows.Forms.Label loadingLabel;
+        private System.Windows.Forms.CheckBox pkgUnpack;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox pkgBat;
     }
 }
 

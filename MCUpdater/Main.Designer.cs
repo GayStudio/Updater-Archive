@@ -98,6 +98,8 @@ namespace MCUpdater
             this.updateLog = new System.Windows.Forms.TextBox();
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.aboutTab = new System.Windows.Forms.TabPage();
+            this.unsetAss = new System.Windows.Forms.Button();
+            this.setAss = new System.Windows.Forms.Button();
             this.launcherButton = new System.Windows.Forms.Button();
             this.diyButton = new System.Windows.Forms.Button();
             this.updateLogButtom = new System.Windows.Forms.Button();
@@ -814,7 +816,7 @@ namespace MCUpdater
             this.updateLog.Size = new System.Drawing.Size(494, 261);
             this.updateLog.TabIndex = 7;
             this.updateLog.Text = "若要检查更新或者安装游戏，请点击右下角的 [ 检查更新 ] 按钮\r\n稍后将在此处显示该版本的新特性\r\n\r\nTip:更新器不是启动器；更新完成后会自动下载启动器\r\n" +
-    "Tip:右下角可以选择更新服务器节点\r\nTip:工具箱和关于页面还有很多功能等待你去挖掘\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nMoeUpdater V2 By K" +
+    "Tip:右下角可以选择更新服务器节点\r\nTip:工具箱和关于页面还有很多功能等待你去挖掘\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nMoeUpdater V3 By K" +
     "envix";
             // 
             // mainTabControl
@@ -833,6 +835,8 @@ namespace MCUpdater
             // 
             // aboutTab
             // 
+            this.aboutTab.Controls.Add(this.unsetAss);
+            this.aboutTab.Controls.Add(this.setAss);
             this.aboutTab.Controls.Add(this.launcherButton);
             this.aboutTab.Controls.Add(this.diyButton);
             this.aboutTab.Controls.Add(this.updateLogButtom);
@@ -861,9 +865,29 @@ namespace MCUpdater
             this.aboutTab.Text = "关于";
             this.aboutTab.UseVisualStyleBackColor = true;
             // 
+            // unsetAss
+            // 
+            this.unsetAss.Location = new System.Drawing.Point(577, 144);
+            this.unsetAss.Name = "unsetAss";
+            this.unsetAss.Size = new System.Drawing.Size(144, 34);
+            this.unsetAss.TabIndex = 28;
+            this.unsetAss.Text = "解除文件关联 (&N)";
+            this.unsetAss.UseVisualStyleBackColor = true;
+            this.unsetAss.Click += new System.EventHandler(this.unsetAss_Click);
+            // 
+            // setAss
+            // 
+            this.setAss.Location = new System.Drawing.Point(577, 104);
+            this.setAss.Name = "setAss";
+            this.setAss.Size = new System.Drawing.Size(144, 34);
+            this.setAss.TabIndex = 27;
+            this.setAss.Text = "设置文件关联 (&A)";
+            this.setAss.UseVisualStyleBackColor = true;
+            this.setAss.Click += new System.EventHandler(this.setAss_Click);
+            // 
             // launcherButton
             // 
-            this.launcherButton.Location = new System.Drawing.Point(577, 142);
+            this.launcherButton.Location = new System.Drawing.Point(577, 220);
             this.launcherButton.Name = "launcherButton";
             this.launcherButton.Size = new System.Drawing.Size(144, 34);
             this.launcherButton.TabIndex = 26;
@@ -1020,7 +1044,7 @@ namespace MCUpdater
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(195, 23);
             this.textBox1.TabIndex = 16;
-            this.textBox1.Text = "moecraft.net";
+            this.textBox1.Text = "mc.moecraft.net";
             // 
             // label5
             // 
@@ -1063,7 +1087,7 @@ namespace MCUpdater
             this.version.Name = "version";
             this.version.Size = new System.Drawing.Size(45, 17);
             this.version.TabIndex = 9;
-            this.version.Text = "2.0.0.0";
+            this.version.Text = "3.0.0.0";
             // 
             // label2
             // 
@@ -1101,6 +1125,7 @@ namespace MCUpdater
             this.MaximizeBox = false;
             this.Name = "Main";
             this.Text = "x.pname";
+            this.Activated += new System.EventHandler(this.Main_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -1223,6 +1248,8 @@ namespace MCUpdater
         private System.Windows.Forms.Button launcherButton;
         private System.Windows.Forms.CheckedListBox forceUpdate;
         private System.Windows.Forms.Button openOmodsDir;
+        private System.Windows.Forms.Button unsetAss;
+        private System.Windows.Forms.Button setAss;
     }
 }
 
