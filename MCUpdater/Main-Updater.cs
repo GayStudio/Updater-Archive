@@ -408,6 +408,7 @@ namespace MCUpdater
                 {
                     runInstaller(File.ReadAllText(batpath), to, (new FileInfo(path).DirectoryName));
                 }
+                File.WriteAllText(x.path + to + "\\" + name + ".version", ver);
                 updateAction.Text = "已成功安装包：" + desc + " V" + ver;
                 updateLog.AppendText("\r\n" + updateAction.Text + "\r\n您可以继续使用 " + x.pname + "，或者关闭它\r\n");
             }

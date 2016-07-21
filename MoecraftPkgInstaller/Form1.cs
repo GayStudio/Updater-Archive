@@ -265,13 +265,5 @@ namespace MoecraftPkgInstaller
             }
             return r;
         }
-
-        private void main_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (File.Exists(pkgBat.Text))
-            {
-                File.Delete(pkgBat.Text);
-            }
-        }
     }
 }
