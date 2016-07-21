@@ -407,10 +407,6 @@ namespace MCUpdater
                 if (!string.IsNullOrEmpty(batpath) && !string.IsNullOrEmpty(to) && File.Exists(batpath))
                 {
                     runInstaller(File.ReadAllText(batpath), to, (new FileInfo(path).DirectoryName));
-                    if (File.Exists(batpath))
-                    {
-                        File.Delete(batpath);
-                    }
                 }
                 updateAction.Text = "已成功安装包：" + desc + " V" + ver;
                 updateLog.AppendText("\r\n" + updateAction.Text + "\r\n您可以继续使用 " + x.pname + "，或者关闭它\r\n");

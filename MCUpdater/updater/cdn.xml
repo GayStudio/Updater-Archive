@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <root>
-  <v2 desc="MoeCraft: 腾讯云" xml="info.xml" headers="Host,Referer" header_Host="cdn.moecraft.net" header_Referer="http://cdn.moecraft.net/">http://cdn.moecraft.net/mc/</v2>
+  <v2 desc="MoeCraft: 腾讯云" xml="info.xml" headers="Host,Referer" header_Host="cdn.moecraft.net" header_Referer="http://cdn.moecraft.net/">http://cdn.nyacloud.net/mc/</v2>
   <cb desc="MoeCraft: Coding" xml="info.xml">https://coding.net/u/kenvix/p/moecraft/git/raw/master/</cb>
   <ny desc="NyaCraft" xml="info.xml">http://cdn.moecraft.net/nyacraft/</ny>
   <lc desc="单机测试(勿选)" xml="info.xml">http://localhost/mc/</lc>
