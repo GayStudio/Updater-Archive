@@ -12,10 +12,12 @@ namespace MoecraftPkgInstaller
     {
         public const string startString = "------START-MOECRAFT-PKGINSTALLER-DATA------";
         public const string endString = "------END-MOECRAFT-PKGINSTALLER-DATA------";
+        public const int readSize = 4194304;
         public main()
         {
             InitializeComponent();
             pkgPath.Text = Program.path;
+            pkgOutput.Text = Application.StartupPath + "\\..\\";
             Thread th = new Thread(() =>
             {
                 try
@@ -23,9 +25,18 @@ namespace MoecraftPkgInstaller
                     var fn = new FileInfo(Program.path);
                     var fs = new FileStream(Program.path, FileMode.Open, FileAccess.Read, FileShare.Read);
                     int fsize = (int)fn.Length;
-                    byte[] bytes = new byte[4194304]; //存储读取结果  
-                    fs.Seek(fsize - bytes.Length, SeekOrigin.Begin);
-                    fs.Read(bytes, 0, 4194304);
+                    byte[] bytes;
+                    if (fsize >= readSize)
+                    {
+                        bytes = new byte[readSize]; //存储读取结果  
+                        fs.Seek(fsize - bytes.Length, SeekOrigin.Begin);
+                        fs.Read(bytes, 0, readSize);
+                    }
+                    else
+                    {
+                        bytes = new byte[fsize]; //存储读取结果  
+                        fs.Read(bytes, 0, fsize);
+                    }
                     int start = bytesIndexOf(bytes, 0, startString);
                     string data = convertBytesToSting(bytes,start).Substring(startString.Length);
                     data = data.Substring(0, data.Length - endString.Length);
@@ -264,6 +275,30 @@ namespace MoecraftPkgInstaller
                 r += Convert.ToString(Char.ConvertFromUtf32(src[i]));
             }
             return r;
+        }
+
+        private void openOutputDir_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                Process.Start(pkgOutput.Text);
+            }
+            catch (Exception ex)
+            {
+                error(ex.Message + "\r\n请手动打开：" + pkgOutput.Text);
+            }
+        }
+
+        private void openInstallDir_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                Process.Start(pkgOutput.Text + installPath.Text);
+            }
+            catch (Exception ex)
+            {
+                error(ex.Message + "\r\n请手动打开：" + pkgOutput.Text + installPath.Text);
+            }
         }
     }
 }

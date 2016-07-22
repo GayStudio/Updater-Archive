@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 
@@ -11,7 +12,7 @@ namespace MoecraftPkgInstaller
     {
         public static string path = "";
         public static bool auto = false;
-        public static string updater = "..\\MCUpdater.exe";
+        public static string updater = Application.StartupPath + "\\..\\MCUpdater.exe";
 
         /// <summary>
         /// 应用程序的主入口点。
@@ -19,6 +20,21 @@ namespace MoecraftPkgInstaller
         [STAThread]
         static void Main(string[] args)
         {
+#if !DEBUG
+            //设置应用程序处理异常方式：ThreadException处理
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.Automatic);
+            //处理UI线程异常
+            Application.ThreadException += new ThreadExceptionEventHandler((object sender, ThreadExceptionEventArgs e) =>
+            {
+                MessageBox.Show(e.Exception.ToString(), "Moecraft Package Installer 遇到未处理的异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            });
+            //处理非UI线程异常
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler((object sender, UnhandledExceptionEventArgs e) =>
+            {
+                MessageBox.Show(e.ExceptionObject.ToString(), "Moecraft Package Installer 遇到未处理的异常",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            });
+#endif
             Application.EnableVisualStyles();
             if (!File.Exists(updater))
             {

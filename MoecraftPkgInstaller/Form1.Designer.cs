@@ -46,6 +46,10 @@
             this.pkgUnpack = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.pkgBat = new System.Windows.Forms.TextBox();
+            this.pkgOutput = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.openOutputDir = new System.Windows.Forms.LinkLabel();
+            this.openInstallDir = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
@@ -77,10 +81,10 @@
             // 
             // pkgName
             // 
-            this.pkgName.Location = new System.Drawing.Point(74, 10);
+            this.pkgName.Location = new System.Drawing.Point(90, 10);
             this.pkgName.Name = "pkgName";
             this.pkgName.ReadOnly = true;
-            this.pkgName.Size = new System.Drawing.Size(240, 21);
+            this.pkgName.Size = new System.Drawing.Size(224, 21);
             this.pkgName.TabIndex = 3;
             // 
             // pkgVer
@@ -93,10 +97,10 @@
             // 
             // pkgDesc
             // 
-            this.pkgDesc.Location = new System.Drawing.Point(74, 39);
+            this.pkgDesc.Location = new System.Drawing.Point(90, 39);
             this.pkgDesc.Name = "pkgDesc";
             this.pkgDesc.ReadOnly = true;
-            this.pkgDesc.Size = new System.Drawing.Size(419, 21);
+            this.pkgDesc.Size = new System.Drawing.Size(403, 21);
             this.pkgDesc.TabIndex = 6;
             // 
             // label4
@@ -110,16 +114,16 @@
             // 
             // pkgPath
             // 
-            this.pkgPath.Location = new System.Drawing.Point(74, 68);
+            this.pkgPath.Location = new System.Drawing.Point(90, 68);
             this.pkgPath.Name = "pkgPath";
             this.pkgPath.ReadOnly = true;
-            this.pkgPath.Size = new System.Drawing.Size(419, 21);
+            this.pkgPath.Size = new System.Drawing.Size(403, 21);
             this.pkgPath.TabIndex = 8;
             // 
             // tipLabel
             // 
             this.tipLabel.AutoSize = true;
-            this.tipLabel.Location = new System.Drawing.Point(12, 200);
+            this.tipLabel.Location = new System.Drawing.Point(12, 221);
             this.tipLabel.Name = "tipLabel";
             this.tipLabel.Size = new System.Drawing.Size(269, 12);
             this.tipLabel.TabIndex = 9;
@@ -129,7 +133,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 160);
+            this.label6.Location = new System.Drawing.Point(13, 188);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 10;
@@ -137,17 +141,17 @@
             // 
             // installPath
             // 
-            this.installPath.Location = new System.Drawing.Point(74, 157);
+            this.installPath.Location = new System.Drawing.Point(90, 185);
             this.installPath.Name = "installPath";
             this.installPath.ReadOnly = true;
-            this.installPath.Size = new System.Drawing.Size(415, 21);
+            this.installPath.Size = new System.Drawing.Size(403, 21);
             this.installPath.TabIndex = 11;
             // 
             // installButton
             // 
             this.installButton.Enabled = false;
             this.installButton.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.installButton.Location = new System.Drawing.Point(335, 194);
+            this.installButton.Location = new System.Drawing.Point(335, 218);
             this.installButton.Name = "installButton";
             this.installButton.Size = new System.Drawing.Size(158, 40);
             this.installButton.TabIndex = 13;
@@ -157,7 +161,7 @@
             // 
             // progress
             // 
-            this.progress.Location = new System.Drawing.Point(14, 194);
+            this.progress.Location = new System.Drawing.Point(14, 216);
             this.progress.Name = "progress";
             this.progress.Size = new System.Drawing.Size(300, 22);
             this.progress.TabIndex = 14;
@@ -165,7 +169,7 @@
             // loadingLabel
             // 
             this.loadingLabel.AutoSize = true;
-            this.loadingLabel.Location = new System.Drawing.Point(12, 223);
+            this.loadingLabel.Location = new System.Drawing.Point(12, 247);
             this.loadingLabel.Name = "loadingLabel";
             this.loadingLabel.Size = new System.Drawing.Size(65, 12);
             this.loadingLabel.TabIndex = 15;
@@ -175,7 +179,7 @@
             // 
             this.pkgUnpack.AutoSize = true;
             this.pkgUnpack.Enabled = false;
-            this.pkgUnpack.Location = new System.Drawing.Point(74, 130);
+            this.pkgUnpack.Location = new System.Drawing.Point(90, 130);
             this.pkgUnpack.Name = "pkgUnpack";
             this.pkgUnpack.Size = new System.Drawing.Size(144, 16);
             this.pkgUnpack.TabIndex = 16;
@@ -193,18 +197,71 @@
             // 
             // pkgBat
             // 
-            this.pkgBat.Location = new System.Drawing.Point(74, 99);
+            this.pkgBat.Location = new System.Drawing.Point(90, 99);
             this.pkgBat.Name = "pkgBat";
             this.pkgBat.ReadOnly = true;
-            this.pkgBat.Size = new System.Drawing.Size(419, 21);
+            this.pkgBat.Size = new System.Drawing.Size(403, 21);
             this.pkgBat.TabIndex = 17;
+            // 
+            // pkgOutput
+            // 
+            this.pkgOutput.Location = new System.Drawing.Point(90, 154);
+            this.pkgOutput.Name = "pkgOutput";
+            this.pkgOutput.ReadOnly = true;
+            this.pkgOutput.Size = new System.Drawing.Size(403, 21);
+            this.pkgOutput.TabIndex = 18;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 157);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 12);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "输出目录：";
+            // 
+            // openOutputDir
+            // 
+            this.openOutputDir.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.openOutputDir.AutoSize = true;
+            this.openOutputDir.BackColor = System.Drawing.Color.Transparent;
+            this.openOutputDir.LinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.openOutputDir.Location = new System.Drawing.Point(416, 131);
+            this.openOutputDir.Name = "openOutputDir";
+            this.openOutputDir.Size = new System.Drawing.Size(77, 12);
+            this.openOutputDir.TabIndex = 21;
+            this.openOutputDir.TabStop = true;
+            this.openOutputDir.Tag = "";
+            this.openOutputDir.Text = "打开输出目录";
+            this.openOutputDir.VisitedLinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.openOutputDir.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openOutputDir_LinkClicked);
+            // 
+            // openInstallDir
+            // 
+            this.openInstallDir.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.openInstallDir.AutoSize = true;
+            this.openInstallDir.BackColor = System.Drawing.Color.Transparent;
+            this.openInstallDir.LinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.openInstallDir.Location = new System.Drawing.Point(323, 131);
+            this.openInstallDir.Name = "openInstallDir";
+            this.openInstallDir.Size = new System.Drawing.Size(77, 12);
+            this.openInstallDir.TabIndex = 22;
+            this.openInstallDir.TabStop = true;
+            this.openInstallDir.Tag = "";
+            this.openInstallDir.Text = "打开安装目录";
+            this.openInstallDir.VisitedLinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.openInstallDir.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openInstallDir_LinkClicked);
             // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(501, 247);
+            this.ClientSize = new System.Drawing.Size(506, 271);
+            this.Controls.Add(this.openInstallDir);
+            this.Controls.Add(this.openOutputDir);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.progress);
+            this.Controls.Add(this.pkgOutput);
             this.Controls.Add(this.pkgBat);
             this.Controls.Add(this.pkgUnpack);
             this.Controls.Add(this.loadingLabel);
@@ -249,6 +306,10 @@
         private System.Windows.Forms.CheckBox pkgUnpack;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox pkgBat;
+        private System.Windows.Forms.TextBox pkgOutput;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.LinkLabel openOutputDir;
+        private System.Windows.Forms.LinkLabel openInstallDir;
     }
 }
 

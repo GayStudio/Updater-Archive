@@ -179,7 +179,7 @@ namespace MCUpdater
                                 doUnpack:
                                 try
                                 {
-                                    runUnpack(packageName, installPath);
+                                    runUnpack(x.path + x.updpath + x.dlpath + packageName, installPath);
                                 }
                                 catch (Exception ex)
                                 {
@@ -250,7 +250,7 @@ namespace MCUpdater
         /// <summary>
         /// 解压缩更新包
         /// </summary>
-        /// <param name="packageName">包文件名</param>
+        /// <param name="packageName">包的完整路径</param>
         /// <param name="installPath">安装路径</param>
         private void runUnpack(string packageName, string installPath)
         {
@@ -258,7 +258,7 @@ namespace MCUpdater
             updateLog.AppendText(updateAction.Text + "\r\n");
             Process p = new Process();
             p.StartInfo.FileName = x.path + x.updpath + "7z.exe";
-            p.StartInfo.Arguments = "x -y -o\"" + x.path + installPath + "\" \"" + x.path + x.updpath + x.dlpath + packageName + "\"";
+            p.StartInfo.Arguments = "x -y -o\"" + x.path + installPath + "\" \"" + packageName + "\"";
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.CreateNoWindow = true;
             p.StartInfo.RedirectStandardOutput = true;
@@ -276,6 +276,7 @@ namespace MCUpdater
         /// </summary>
         /// <param name="batOriginText">BAT原始内容</param>
         /// <param name="installPath">安装路径</param>
+        /// <param name="sainstall">独立包安装时，填写包所在的目录</param>
         private void runInstaller(string batOriginText, string installPath, string sainstall = null)
         {
             updateAction.Text = "运行安装程序";
