@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Threading;
 using Microsoft.Win32;
+using System.Security.Principal;
 
 namespace MCUpdater
 {
@@ -32,6 +33,34 @@ namespace MCUpdater
                 Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
             }
             InitializeComponent();
+            try
+            {
+                WindowsIdentity identity = WindowsIdentity.GetCurrent();
+                WindowsPrincipal principal = new WindowsPrincipal(identity);
+                if (principal.IsInRole(WindowsBuiltInRole.Administrator))
+                {
+                    log("当前正以系统管理员身份启动 " + x.pname);
+                }
+                else
+                {
+                    error("请注意：您并非以系管理员身份运行 " + x.pname + " !\r\n这可能会导致各种问题，强烈建议下次运行本程序右键选择 [以管理员身份运行]");
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.UseShellExecute = true;
+                    startInfo.WorkingDirectory = Environment.CurrentDirectory;
+                    startInfo.FileName = Application.ExecutablePath;
+                    foreach (string a in p.arg)
+                    {
+                        startInfo.Arguments += a + " ";
+                    }
+                    //设置启动动作,确保以管理员身份运行
+                    startInfo.Verb = "runas";
+                    Environment.Exit(254);
+                }
+            }
+            catch (Exception ex)
+            {
+                error(ex.ToString(), "检查权限失败");
+            }
             #region UI
             label2.Text = x.pname;
             Text = x.pname;
@@ -448,6 +477,28 @@ namespace MCUpdater
             {
                 error(ex.Message, "启动失败");
             }
+        }
+
+        private void installPkg1_Click(object sender, EventArgs e)
+        {
+            selectPkg();
+        }
+
+        void selectPkg()
+        {
+            try
+            {
+                Process.Start(x.path + x.updpath + "MoecraftPkgInstaller.exe");
+            }
+            catch (Exception ex)
+            {
+                error(ex.Message, "启动失败");
+            }
+        }
+
+        private void installPkg2_Click(object sender, EventArgs e)
+        {
+            selectPkg();
         }
     }
 }

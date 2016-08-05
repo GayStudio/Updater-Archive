@@ -262,12 +262,22 @@ namespace MCUpdater
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.CreateNoWindow = true;
             p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.Verb = "runas";
             p.Start();
             p.BeginOutputReadLine();
             p.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
             while (!p.WaitForExit(x.sleep))
             {
                 Application.DoEvents();
+            }
+            Application.DoEvents();
+            updateLog.Text += "7z 退出代码：" + p.ExitCode + "\r\n";
+            if (p.ExitCode != 0)
+            {
+                if (MessageBox.Show("部分文件解压出错！退出码：" + p.ExitCode + "\r\n你想要重试解压吗？","解压缩文件出错", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
+                {
+                    runUnpack(packageName, installPath);
+                }
             }
         }
 
@@ -284,24 +294,35 @@ namespace MCUpdater
             string batPath = x.path + installPath + "\\install.bat";
             string batText = ("@echo off\n" +
                                 "cd /D \"" + x.path + installPath + "\"\n" + batOriginText
-                                .Replace("{{7z}}",x.path + x.updpath + "7z.exe")
+                                .Replace("{{7z}}", x.path + x.updpath + "7z.exe")
                                 .Replace("{{Root}}", x.path)
                                 .Replace("{{DLDir}}", sainstall == null ? x.path + x.updpath + x.dlpath : sainstall)
                                 .Replace("{{UpdPath}}", x.path + x.updpath)
                                 .Replace("{{Path}}", x.path + installPath + "\\")).Replace("\n","\r\n");
             File.WriteAllText(batPath, batText, System.Text.Encoding.GetEncoding("gb2312"));
             Process pb = new Process();
-            pb.StartInfo.FileName = "cmd.exe";
-            pb.StartInfo.Arguments = "/c call \"" + batPath + "\"";
+            //pb.StartInfo.FileName = "cmd.exe";
+            //pb.StartInfo.Arguments = "/c call \"" + batPath + "\"";
+            pb.StartInfo.FileName = batPath;
             pb.StartInfo.UseShellExecute = false;
             pb.StartInfo.CreateNoWindow = true;
             pb.StartInfo.RedirectStandardOutput = true;
+            pb.StartInfo.Verb = "runas";
             pb.Start();
             pb.BeginOutputReadLine();
             pb.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
             while (!pb.WaitForExit(x.sleep))
             {
                 Application.DoEvents();
+            }
+            Application.DoEvents();
+            updateLog.Text += "安装程序退出代码：" + pb.ExitCode + "\r\n";
+            if (pb.ExitCode != 0)
+            {
+                if (MessageBox.Show("安装程序出错！退出码：" + pb.ExitCode + "\r\n你想要重试安装吗？", "安装程序出错", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
+                {
+                    runInstaller(batOriginText, installPath, sainstall);
+                }
             }
         }
 

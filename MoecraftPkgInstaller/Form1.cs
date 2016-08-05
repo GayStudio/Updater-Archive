@@ -16,8 +16,30 @@ namespace MoecraftPkgInstaller
         public main()
         {
             InitializeComponent();
-            pkgPath.Text = Program.path;
             pkgOutput.Text = Application.StartupPath + "\\..\\";
+            ver.Text += Application.ProductVersion;
+            if (string.IsNullOrEmpty(Program.path))
+            {
+                OpenFileDialog of = new OpenFileDialog();
+                of.HelpRequest += (object sender, EventArgs e) =>
+                {
+                    Program.getHelp();
+                };
+                of.Title = "选择要安装的 MoeCraft Package 文件 - MoeCraft Package Installer";
+                of.Multiselect = false;
+                if (Directory.Exists(Application.StartupPath + "\\downloads"))
+                    of.InitialDirectory = Application.StartupPath + "\\downloads";
+                of.Filter = "MoeCraft Pkg (*.moecraftpkg)|*.moecraftpkg";
+                if (of.ShowDialog() == DialogResult.OK && File.Exists(of.FileName))
+                {
+                    Program.path = of.FileName;
+                }
+                else
+                {
+                    Environment.Exit(100);
+                }
+            }
+            pkgPath.Text = Program.path;
             Thread th = new Thread(() =>
             {
                 try
@@ -55,6 +77,11 @@ namespace MoecraftPkgInstaller
                         setBat(batTemp);
                     }
                     setFinish();
+                    if (Program.auto)
+                    {
+                        startInstall();
+                        Environment.Exit(0);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -200,6 +227,11 @@ namespace MoecraftPkgInstaller
         }
 
         private void button2_Click(object sender, EventArgs e)
+        {
+            startInstall();
+        }
+
+        void startInstall()
         {
             Process ps = new Process();
             ps.StartInfo.FileName = Program.updater;

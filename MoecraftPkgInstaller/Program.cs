@@ -61,6 +61,16 @@ namespace MoecraftPkgInstaller
                             auto = true;
                             break;
 
+                        case "/?":
+                        case "-?":
+                        case "/help":
+                        case "-help":
+                        case "/h":
+                        case "-h":
+                            getHelp();
+                            Environment.Exit(0);
+                            break;
+
                         case "/setass":
                         case "-setass":
                             try
@@ -105,13 +115,15 @@ namespace MoecraftPkgInstaller
                     Environment.Exit(2);
                 }
             }
-            else
-            {
-                MessageBox.Show("Moecraft 包安装程序用法：\r\nMoecraftPkgInstaller.exe [/auto] [/exit] [/setass] <包文件>\r\n\r\n/auto -- 在扫描完成后自动安装，无需用户同意\r\n/setass -- 设置文件关联并退出，仅可以与 /auto 连用表示静默设置。通过检查 ERRORLEVEL 变量，可以确定执行结果，1为失败，0为成功\r\n/unsetass -- 取消设置文件关联，其他同上。", "Moecraft Package Installer",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                return;
-            }
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new main());
+        }
+
+        public static void getHelp()
+        {
+            MessageBox.Show(
+                        "Moecraft 包安装程序用法：\r\nMoecraftPkgInstaller.exe [包文件] [/help] [/auto] [/setass] [/unsetass]\r\n\r\n/help -- 获取程序命令行帮助\r\n/auto -- 在扫描完成后自动安装，无需用户同意\r\n/setass -- 设置文件关联并退出，仅可以与 /auto 连用表示静默设置。通过检查 ERRORLEVEL 变量，可以确定执行结果，1为失败，0为成功\r\n/unsetass -- 取消设置文件关联，其他同上。",
+                        "Moecraft Package Installer", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

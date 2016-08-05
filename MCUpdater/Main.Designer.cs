@@ -98,6 +98,7 @@ namespace MCUpdater
             this.updateLog = new System.Windows.Forms.TextBox();
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.aboutTab = new System.Windows.Forms.TabPage();
+            this.installPkg1 = new System.Windows.Forms.Button();
             this.unsetAss = new System.Windows.Forms.Button();
             this.setAss = new System.Windows.Forms.Button();
             this.launcherButton = new System.Windows.Forms.Button();
@@ -122,6 +123,7 @@ namespace MCUpdater
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.diyDialog = new System.Windows.Forms.FontDialog();
+            this.installPkg2 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.mcLauncher.SuspendLayout();
             this.toolTab.SuspendLayout();
@@ -394,10 +396,10 @@ namespace MCUpdater
             this.toolTab.Controls.Add(this.groupBox4);
             this.toolTab.Controls.Add(this.groupBox1);
             this.toolTab.Controls.Add(this.toolGroupBox);
-            this.toolTab.Location = new System.Drawing.Point(4, 22);
+            this.toolTab.Location = new System.Drawing.Point(4, 26);
             this.toolTab.Name = "toolTab";
             this.toolTab.Padding = new System.Windows.Forms.Padding(3);
-            this.toolTab.Size = new System.Drawing.Size(745, 361);
+            this.toolTab.Size = new System.Drawing.Size(745, 357);
             this.toolTab.TabIndex = 5;
             this.toolTab.Text = "工具箱";
             this.toolTab.UseVisualStyleBackColor = true;
@@ -556,6 +558,7 @@ namespace MCUpdater
             // 
             // toolGroupBox
             // 
+            this.toolGroupBox.Controls.Add(this.installPkg2);
             this.toolGroupBox.Controls.Add(this.runStrongholdsCalculator);
             this.toolGroupBox.Controls.Add(this.gameLogViewerButton);
             this.toolGroupBox.Controls.Add(this.regionCalculatorButton);
@@ -621,10 +624,10 @@ namespace MCUpdater
             // logTab
             // 
             this.logTab.Controls.Add(this.logBox);
-            this.logTab.Location = new System.Drawing.Point(4, 26);
+            this.logTab.Location = new System.Drawing.Point(4, 22);
             this.logTab.Name = "logTab";
             this.logTab.Padding = new System.Windows.Forms.Padding(3);
-            this.logTab.Size = new System.Drawing.Size(745, 357);
+            this.logTab.Size = new System.Drawing.Size(745, 361);
             this.logTab.TabIndex = 4;
             this.logTab.Text = "操作日志";
             this.logTab.UseVisualStyleBackColor = true;
@@ -646,10 +649,10 @@ namespace MCUpdater
             this.offlineModsTab.Controls.Add(this.label1);
             this.offlineModsTab.Controls.Add(this.offlineModList);
             this.offlineModsTab.Controls.Add(this.saveOfflineMod);
-            this.offlineModsTab.Location = new System.Drawing.Point(4, 22);
+            this.offlineModsTab.Location = new System.Drawing.Point(4, 26);
             this.offlineModsTab.Name = "offlineModsTab";
             this.offlineModsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.offlineModsTab.Size = new System.Drawing.Size(745, 361);
+            this.offlineModsTab.Size = new System.Drawing.Size(745, 357);
             this.offlineModsTab.TabIndex = 3;
             this.offlineModsTab.Text = "Mod管理";
             this.offlineModsTab.UseVisualStyleBackColor = true;
@@ -835,6 +838,7 @@ namespace MCUpdater
             // 
             // aboutTab
             // 
+            this.aboutTab.Controls.Add(this.installPkg1);
             this.aboutTab.Controls.Add(this.unsetAss);
             this.aboutTab.Controls.Add(this.setAss);
             this.aboutTab.Controls.Add(this.launcherButton);
@@ -865,9 +869,19 @@ namespace MCUpdater
             this.aboutTab.Text = "关于";
             this.aboutTab.UseVisualStyleBackColor = true;
             // 
+            // installPkg1
+            // 
+            this.installPkg1.Location = new System.Drawing.Point(491, 13);
+            this.installPkg1.Name = "installPkg1";
+            this.installPkg1.Size = new System.Drawing.Size(230, 32);
+            this.installPkg1.TabIndex = 29;
+            this.installPkg1.Text = "手动安装MoeCraft Package (&I)";
+            this.installPkg1.UseVisualStyleBackColor = true;
+            this.installPkg1.Click += new System.EventHandler(this.installPkg1_Click);
+            // 
             // unsetAss
             // 
-            this.unsetAss.Location = new System.Drawing.Point(577, 144);
+            this.unsetAss.Location = new System.Drawing.Point(577, 157);
             this.unsetAss.Name = "unsetAss";
             this.unsetAss.Size = new System.Drawing.Size(144, 34);
             this.unsetAss.TabIndex = 28;
@@ -877,7 +891,7 @@ namespace MCUpdater
             // 
             // setAss
             // 
-            this.setAss.Location = new System.Drawing.Point(577, 104);
+            this.setAss.Location = new System.Drawing.Point(577, 117);
             this.setAss.Name = "setAss";
             this.setAss.Size = new System.Drawing.Size(144, 34);
             this.setAss.TabIndex = 27;
@@ -887,7 +901,7 @@ namespace MCUpdater
             // 
             // launcherButton
             // 
-            this.launcherButton.Location = new System.Drawing.Point(577, 220);
+            this.launcherButton.Location = new System.Drawing.Point(577, 230);
             this.launcherButton.Name = "launcherButton";
             this.launcherButton.Size = new System.Drawing.Size(144, 34);
             this.launcherButton.TabIndex = 26;
@@ -897,7 +911,7 @@ namespace MCUpdater
             // 
             // diyButton
             // 
-            this.diyButton.Location = new System.Drawing.Point(577, 12);
+            this.diyButton.Location = new System.Drawing.Point(577, 59);
             this.diyButton.Name = "diyButton";
             this.diyButton.Size = new System.Drawing.Size(144, 32);
             this.diyButton.TabIndex = 25;
@@ -907,7 +921,7 @@ namespace MCUpdater
             // 
             // updateLogButtom
             // 
-            this.updateLogButtom.Location = new System.Drawing.Point(577, 278);
+            this.updateLogButtom.Location = new System.Drawing.Point(577, 288);
             this.updateLogButtom.Name = "updateLogButtom";
             this.updateLogButtom.Size = new System.Drawing.Size(144, 49);
             this.updateLogButtom.TabIndex = 24;
@@ -1114,6 +1128,16 @@ namespace MCUpdater
             this.diyDialog.ShowColor = true;
             this.diyDialog.ShowHelp = true;
             // 
+            // installPkg2
+            // 
+            this.installPkg2.Location = new System.Drawing.Point(26, 83);
+            this.installPkg2.Name = "installPkg2";
+            this.installPkg2.Size = new System.Drawing.Size(133, 32);
+            this.installPkg2.TabIndex = 30;
+            this.installPkg2.Text = "安装MoeCraft包 (&I)";
+            this.installPkg2.UseVisualStyleBackColor = true;
+            this.installPkg2.Click += new System.EventHandler(this.installPkg2_Click);
+            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1250,6 +1274,8 @@ namespace MCUpdater
         private System.Windows.Forms.Button openOmodsDir;
         private System.Windows.Forms.Button unsetAss;
         private System.Windows.Forms.Button setAss;
+        private System.Windows.Forms.Button installPkg1;
+        private System.Windows.Forms.Button installPkg2;
     }
 }
 

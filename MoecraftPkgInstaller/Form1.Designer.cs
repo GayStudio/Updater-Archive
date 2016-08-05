@@ -50,6 +50,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.openOutputDir = new System.Windows.Forms.LinkLabel();
             this.openInstallDir = new System.Windows.Forms.LinkLabel();
+            this.kenvixUrl = new System.Windows.Forms.LinkLabel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.ver = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -252,11 +256,57 @@
             this.openInstallDir.VisitedLinkColor = System.Drawing.SystemColors.MenuHighlight;
             this.openInstallDir.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openInstallDir_LinkClicked);
             // 
+            // kenvixUrl
+            // 
+            this.kenvixUrl.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.kenvixUrl.AutoSize = true;
+            this.kenvixUrl.BackColor = System.Drawing.Color.Transparent;
+            this.kenvixUrl.LinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.kenvixUrl.Location = new System.Drawing.Point(416, 294);
+            this.kenvixUrl.Name = "kenvixUrl";
+            this.kenvixUrl.Size = new System.Drawing.Size(77, 12);
+            this.kenvixUrl.TabIndex = 24;
+            this.kenvixUrl.TabStop = true;
+            this.kenvixUrl.Tag = "";
+            this.kenvixUrl.Text = "Kenvix ~ ~ ~";
+            this.kenvixUrl.VisitedLinkColor = System.Drawing.SystemColors.MenuHighlight;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(376, 294);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(41, 12);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "作者：";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 270);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(473, 12);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "你可以对 .moecraftpkg 文件右键选择 OneKey Quick Install 来一键安装包，支持多选";
+            // 
+            // ver
+            // 
+            this.ver.AutoSize = true;
+            this.ver.Location = new System.Drawing.Point(13, 294);
+            this.ver.Name = "ver";
+            this.ver.Size = new System.Drawing.Size(53, 12);
+            this.ver.TabIndex = 26;
+            this.ver.Text = "Version.";
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(506, 271);
+            this.ClientSize = new System.Drawing.Size(506, 317);
+            this.Controls.Add(this.ver);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.kenvixUrl);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.openInstallDir);
             this.Controls.Add(this.openOutputDir);
             this.Controls.Add(this.label5);
@@ -310,6 +360,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.LinkLabel openOutputDir;
         private System.Windows.Forms.LinkLabel openInstallDir;
+        private System.Windows.Forms.LinkLabel kenvixUrl;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label ver;
     }
 }
 
