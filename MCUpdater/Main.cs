@@ -28,9 +28,10 @@ namespace MCUpdater
                 MessageBox.Show("致命错误：无法打开配置文件：\r\n" + ex.Message + "\r\n" + ex.StackTrace, x.pname + " 初始化失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
             }
-            if (conn.get("disVisualStyles") == "1")
+            if (conn.get("disVisualStyles") == "1" || p.arg.Contains("/ugly") || p.arg.Contains("-ugly"))
             {
                 Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
+                
             }
             InitializeComponent();
             try
@@ -63,7 +64,7 @@ namespace MCUpdater
             }
             #region UI
             label2.Text = x.pname;
-            Text = x.pname;
+            this.Text = x.pname + " Ver." + Application.ProductVersion;
             if (p.pkgInstall)
             {
                 Text += " - Package Install Mode";
@@ -395,7 +396,7 @@ namespace MCUpdater
             if(diyDialog.ShowDialog() == DialogResult.OK)
             {
                 Font = diyDialog.Font;
-                ForeColor = diyDialog.Color;
+                ForeColor = diyDialog.Color;                
             }
         }
 

@@ -72,6 +72,7 @@ namespace MCUpdater
             this.disableForgeProgress = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.toolGroupBox = new System.Windows.Forms.GroupBox();
+            this.installPkg2 = new System.Windows.Forms.Button();
             this.runStrongholdsCalculator = new System.Windows.Forms.Button();
             this.gameLogViewerButton = new System.Windows.Forms.Button();
             this.regionCalculatorButton = new System.Windows.Forms.Button();
@@ -123,7 +124,6 @@ namespace MCUpdater
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.diyDialog = new System.Windows.Forms.FontDialog();
-            this.installPkg2 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.mcLauncher.SuspendLayout();
             this.toolTab.SuspendLayout();
@@ -571,6 +571,16 @@ namespace MCUpdater
             this.toolGroupBox.TabStop = false;
             this.toolGroupBox.Text = "常用工具";
             // 
+            // installPkg2
+            // 
+            this.installPkg2.Location = new System.Drawing.Point(26, 83);
+            this.installPkg2.Name = "installPkg2";
+            this.installPkg2.Size = new System.Drawing.Size(133, 32);
+            this.installPkg2.TabIndex = 30;
+            this.installPkg2.Text = "安装MoeCraft包 (&I)";
+            this.installPkg2.UseVisualStyleBackColor = true;
+            this.installPkg2.Click += new System.EventHandler(this.installPkg2_Click);
+            // 
             // runStrongholdsCalculator
             // 
             this.runStrongholdsCalculator.Location = new System.Drawing.Point(26, 173);
@@ -819,8 +829,8 @@ namespace MCUpdater
             this.updateLog.Size = new System.Drawing.Size(494, 261);
             this.updateLog.TabIndex = 7;
             this.updateLog.Text = "若要检查更新或者安装游戏，请点击右下角的 [ 检查更新 ] 按钮\r\n稍后将在此处显示该版本的新特性\r\n\r\nTip:更新器不是启动器；更新完成后会自动下载启动器\r\n" +
-    "Tip:右下角可以选择更新服务器节点\r\nTip:工具箱和关于页面还有很多功能等待你去挖掘\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nMoeUpdater V3 By K" +
-    "envix";
+    "Tip:右下角可以选择更新服务器节点\r\nTip:工具箱和关于页面还有很多功能等待你去挖掘\r\n\r\n\r\n\r\n你可以点击 .moecraftpkg 格式文件来直接安装" +
+    "包\r\n\r\n\r\n\r\n\r\nMoeUpdater V3 By Kenvix";
             // 
             // mainTabControl
             // 
@@ -1127,16 +1137,6 @@ namespace MCUpdater
             this.diyDialog.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.diyDialog.ShowColor = true;
             this.diyDialog.ShowHelp = true;
-            // 
-            // installPkg2
-            // 
-            this.installPkg2.Location = new System.Drawing.Point(26, 83);
-            this.installPkg2.Name = "installPkg2";
-            this.installPkg2.Size = new System.Drawing.Size(133, 32);
-            this.installPkg2.TabIndex = 30;
-            this.installPkg2.Text = "安装MoeCraft包 (&I)";
-            this.installPkg2.UseVisualStyleBackColor = true;
-            this.installPkg2.Click += new System.EventHandler(this.installPkg2_Click);
             // 
             // Main
             // 
