@@ -1,4 +1,4 @@
-# Written by Kenvix @ 2016/8/15
+# Written by Kenvix @ 2016/8/18
 # Variables
 xpath="/home/mc" #Minecraft Path
 jarfile="Thermos-1.7.10-1614-server.jar" #Minecraft Jar File
@@ -11,12 +11,13 @@ sleeptime="3s" #Loop mode Sleep time
 xpid="/dev/moecraft.pid" #Moecraft Server Console(Loop mode) PID File
 mcsign="#Controlled-By-X" #Moecraft Server Argument Sign
 # Core
+date=`date "+%Y-%m-%d %H:%M:%S"`
 cd ${xpath}
 echo -e "\033[34;49;1m(C) 2016 MoeCraft All Rights Reserved\e[0m"
-echo -e "\033[32;49;1mMoeCraft Server Console\e[0m // Written by Kenvix @ 2016/8/15"
+echo -e "\033[32;49;1mMoeCraft Server Console\e[0m // Written by Kenvix @ 2016/8/18"
 echo -e "\033[31;49;1m------------------------------------------------------------\e[0m"
 case $1 in
-	r)
+    r)
         ps fe | grep ${mcsign} | grep -v grep
         if [ $? -eq 0 ]; then
             echo -e "\033[32;1mError: Minecraft has already running!\e[0m"
@@ -73,7 +74,7 @@ case $1 in
     c)
         echo -e "\033[32;1mStopping Server ...\e[0m"
         if [ -f "$xpid" ]; then
-            echo "PID File exists, Kill Minecraft Server Console + Loop Mode and Delete!"
+            echo "PID File exists, Kill Minecraft Server Console + Loop Mode and Delete!\e[0m"
             shpid=`cat ${xpid}`
             sudo kill -s KILL ${shpid}
             rm -rf ${xpid}
@@ -91,17 +92,17 @@ case $1 in
     k)
         echo -e "\033[32;1mKilling Server ...\e[0m"
         if [ -f "$xpid" ]; then
-            echo "PID File exists, Kill Minecraft Server Console + Loop Mode and Delete!"
+            echo "PID File exists, Kill Minecraft Server Console + Loop Mode and Delete!\e[0m"
             shpid=`cat ${xpid}`
             sudo kill -s KILL ${shpid}
             rm -rf ${xpid}
         fi
         pid=`ps x | grep ${mcsign} | grep -v grep`
         if [ $? -ne 0 ]; then
-            echo -e "\033[32;1mError: Process Not running!"
+            echo -e "\033[32;1mError: Process Not running!\e[0m"
         else
             sudo kill -s KILL `echo $pid | awk '{ print $1 }'`
-            echo -e "\033[32;1mKilled!"
+            echo -e "\033[32;1mKilled!\e[0m"
             echo -e "\033[31;49;1m------------------------------------------------------------\e[0m"
             free -h
         fi
@@ -124,8 +125,36 @@ case $1 in
     sk)
         sudo screen -X kill
     ;;
+    bi)
+        if [ -d ".git" ]; then
+           echo -e "\033[32;1mGit has already initialized!\e[0m"
+        else
+           echo -e "\033[32;1mLoading Git Init Command....\e[0m"
+           git init
+           git config --local user.email "admin@moecraft.net"
+           git config --local user.name "MoeCraft X-Backup"
+        fi
+        if [ -f "x-ignore.txt" ]; then
+            echo -e "\033[32;1mUpdating x-ignore.txt ---> .gitignore file....\e[0m"
+            rm -rf .gitignore
+            cp x-ignore.txt .gitignore
+        fi
+        echo -e "\033[32;1mInitialized! Use 'x br' to run backup\e[0m"
+    ;;
+    br)
+        echo -e "\033[32;1mRunning Backup... \e[0mIf Git says 'fatal: confused by unstable object source data', Please stop your minecraft first"
+        if [ -d ".git" ]; then
+           echo -e "\033[32;1mLoading Git Add Command....\e[0m"
+           git add .
+           echo -e "\033[32;1mLoading Git Commit Command....\e[0m"
+           git commit -a -m "X-Backup at ${date}"
+           echo -e "\033[32;1mBackup Completed!\e[0m"
+        else
+           echo -e "\033[31;40;1mFatal Error: \e[0m Git System is not OK,use 'x bi' to initialize it"
+        fi
+    ;;
     *)
-        echo -e "\033[31;40;1m Usage: Arguments:\e[0m"
+        echo -e "\033[31;40;1m Usage: Arguments:\e[0m                    [${date}]"
         echo "r    Run the minecraft"
         echo "l    Run the minecraft with loop mode. (You can stop it by 'x c')"
         echo "c    Close the server like /stop command"
@@ -135,6 +164,8 @@ case $1 in
         echo "sc   Create a screen named ${screen} . You can kill the screen with Ctrl+A K"
         echo "sd   Detach a screen named ${screen}"
         echo "sk   Kill a screen named ${screen}"
+        echo "bi   [Backup Tool] Initialize Git Backup System. If Git has already initialized, this command will update x-ignore file only"
+        echo "br   [Backup Tool] Run Backup"
     ;;
 esac
 echo -e "\033[31;49;1m------------------------------------------------------------\e[0m"
