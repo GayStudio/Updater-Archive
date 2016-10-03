@@ -279,7 +279,14 @@ namespace MCUpdater
 
         private void kenvixUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://zhizhe8.net");
+            try
+            {
+                Process.Start("http://zhizhe8.net");
+            }
+            catch (Exception ex)
+            {
+                error(ex.ToString());
+            }
         }
 
         private void stusUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

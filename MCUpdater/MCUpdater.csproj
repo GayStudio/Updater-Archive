@@ -149,6 +149,7 @@
       <DependentUpon>EX.cs</DependentUpon>
     </Compile>
     <Compile Include="I\forgeJsonData.cs" />
+    <Compile Include="I\XiaocaoException.cs" />
     <Compile Include="logViewer.cs">
       <SubType>Form</SubType>
     </Compile>
