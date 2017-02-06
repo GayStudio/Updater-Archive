@@ -114,8 +114,10 @@
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
   <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -205,6 +207,7 @@
     <EmbeddedResource Include="regionCalculator.resx">
       <DependentUpon>regionCalculator.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="Properties\app.config" />
     <None Include="updater\mcpatch.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -217,9 +220,6 @@
     </None>
     <None Include="updater\new.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Properties\app.manifest">
-      <SubType>Designer</SubType>
     </None>
     <None Include="MCUpdater_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
@@ -256,6 +256,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\gg.bmp" />
+    <None Include="Resources\74.png" />
+    <None Include="Resources\83.png" />
+    <None Include="Resources\88.png" />
+    <None Include="Resources\98.png" />
+    <None Include="Resources\99.png" />
+    <None Include="Resources\102.png" />
+    <None Include="Resources\72.png" />
     <Content Include="updater\update.xml" />
     <None Include="updater\7z.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

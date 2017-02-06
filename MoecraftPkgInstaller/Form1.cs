@@ -25,7 +25,7 @@ namespace MoecraftPkgInstaller
                 {
                     Program.getHelp();
                 };
-                of.Title = "选择要安装的 MoeCraft Package 文件 - MoeCraft Package Installer";
+                of.Title = "选择要安装的 MoeCraft Package 文件 - MoeCraft Package Installer V" + Application.ProductVersion;
                 of.Multiselect = false;
                 if (Directory.Exists(Application.StartupPath + "\\downloads"))
                     of.InitialDirectory = Application.StartupPath + "\\downloads";
@@ -241,6 +241,10 @@ namespace MoecraftPkgInstaller
             ps.StartInfo.Arguments += " -desc=\"" + pkgDesc.Text + "\"";
             ps.StartInfo.Arguments += " -ver=" + pkgVer.Text;
             ps.StartInfo.Arguments += " -path=\"" + pkgPath.Text + "\"";
+            if(Program.exit)
+            {
+                ps.StartInfo.Arguments += " -exit";
+            }
             if (pkgUnpack.Checked)
             {
                 ps.StartInfo.Arguments += " -unpack";
@@ -331,6 +335,11 @@ namespace MoecraftPkgInstaller
             {
                 error(ex.Message + "\r\n请手动打开：" + pkgOutput.Text + installPath.Text);
             }
+        }
+
+        private void main_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

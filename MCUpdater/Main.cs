@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using Microsoft.Win32;
 using System.Security.Principal;
+using System.Reflection;
 
 namespace MCUpdater
 {
@@ -67,7 +68,8 @@ namespace MCUpdater
             this.Text = x.pname + " Ver." + Application.ProductVersion;
             if (p.pkgInstall)
             {
-                Text += " - Package Install Mode";
+                Text += " - StandAlone Package Install Mode";
+                mainTabControl.SelectedIndex = 1;
             }
             version.Text = x.ver;
             diyDialog.HelpRequest += (object sender, EventArgs e) =>
@@ -75,7 +77,7 @@ namespace MCUpdater
                 MessageBox.Show("这个功能并没有什么卵用\r\n下次启动更新器后无效", "所谓的帮助", MessageBoxButtons.OK, MessageBoxIcon.Information);
             };
 #if !DEBUG
-            mainTabControl.TabPages.Remove(mainTabControl.TabPages[5]); //隐藏启动器页面
+            mainTabControl.TabPages.Remove(mainTabControl.TabPages[6]); //隐藏启动器页面
 #endif
             /*
             if (string.IsNullOrEmpty(playerJRE.Text))
@@ -101,7 +103,6 @@ namespace MCUpdater
             {
                 updateServer.Items.Add(cdnInfo.GetAttribute("desc"));
             }
-            updateServer.SelectedIndex = 0;
             getModList();
             /*
             playerName.Text   = conn.get("playerName");
@@ -170,7 +171,11 @@ namespace MCUpdater
             }
             loadPlayerSettings();
             #endregion
-            log("启动成功: " + " V" + x.ver + " | " + System.Environment.OSVersion);
+            updateServer.SelectedIndex = 0;
+            log("Process Command Line: " + Environment.CommandLine);
+            log("Process Current Directory: " + Environment.CurrentDirectory);
+            log("User@Machine: " + Environment.UserName +  "@" + Environment.MachineName);
+            log("启动成功: " + " V" + x.ver + " | (" + x.osver.ToString() + ") " + Environment.OSVersion);
         }
         /// <summary>
         /// 记录日志
@@ -201,14 +206,7 @@ namespace MCUpdater
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-                Process.Start("http://kenvix.com/");
-            }
-            catch (Exception ex)
-            {
-                error(ex.Message);
-            }
+            openUrl("http://kenvix.com/");
         }
 
         private void launcherButton_Click(object sender, EventArgs e)
@@ -267,46 +265,32 @@ namespace MCUpdater
         
         private void regLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-                Process.Start("https://accounts.moecraft.net/index.php");
-            }
-            catch (Exception ex)
-            {
-                error(ex.Message + "\r\n请手动打开：https://accounts.moecraft.net");
-            }
+            openUrl("https://accounts.moecraft.net/index.php");
         }
 
         private void kenvixUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-                Process.Start("http://zhizhe8.net");
-            }
-            catch (Exception ex)
-            {
-                error(ex.ToString());
-            }
+            openUrl("http://kenvix.com");
         }
 
         private void stusUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://www.stus8.com");
+            openUrl("http://www.stus8.com");
         }
 
         private void accountsUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://accounts.moecraft.net");
+            openUrl("https://accounts.moecraft.net");
         }
 
         private void joinGroupUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://jq.qq.com/?_wv=1027&k=ewYmnq");
+            openUrl("http://jq.qq.com/?_wv=1027&k=ewYmnq");
         }
 
         private void bbsUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://moeclub.net");
+            openUrl("http://moeclub.net");
         }
 
         private void regionCalculatorButton_Click(object sender, EventArgs e)
@@ -508,5 +492,152 @@ namespace MCUpdater
         {
             selectPkg();
         }
+
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        {
+           Type g = (new Properties.Resources()).GetType();
+           ggimg.Image = (System.Drawing.Image)g.InvokeMember("gg_" + (new Random()).Next(0,6), BindingFlags.GetProperty, null, (g.InvokeMember(null,
+           BindingFlags.DeclaredOnly |
+           BindingFlags.Public | BindingFlags.NonPublic | 
+           BindingFlags.Instance | BindingFlags.CreateInstance, null, null, null)), null);
+        }
+
+        private void bignews_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        {
+            bignews.Visible = true;
+            bignewsinit.Hide();
+        }
+
+        private void bignews_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            log("正在导航到网页：" + e.Url);
+        }
+
+        private void bignews_FileDownload(object sender, EventArgs e)
+        {
+            try
+            {
+                var urlobj = bignews.Document.ActiveElement;
+                var url = urlobj.GetAttribute("href");
+                if (string.IsNullOrEmpty(url)) return;
+                string filename = url.Split('/')[url.Split('/').Length - 1];
+                log("文件下载请求：" + url);
+                var moeset = urlobj.GetAttribute("moecraft");
+                bool isquiet = false;
+                bool ispkginstaller = false;
+                bool isopen = false;
+                bool isexec = false;
+                bool iscontinue = false;
+                bool isdownload = true;
+                if (!string.IsNullOrEmpty(moeset))
+                {
+                    var moeres = moeset.Split(' ');
+                    foreach(string moe in moeres)
+                    {
+                        switch(moe)
+                        {
+                            case "quiet": isquiet = true; break;
+                            case "pkginstaller": ispkginstaller = true; break;
+                            case "exec": isexec = true; break;
+                            case "open": isopen = true; break;
+                            case "continue": iscontinue = true; break;
+                            case "nodownload": isdownload = false; break;
+                        }
+                    }
+                } else
+                {
+                    return;
+                }
+                if(!iscontinue)
+                {
+                    urlobj.RemoveFocus();
+                    bignews.Stop();
+                }
+                if (!isquiet && MessageBox.Show("检测到文件下载请求，你想要下载此文件吗？\r\n文件名：" + filename + "\r\n位于：" + url, "下载文件 - MoeCraft Toolbox Inner Browser", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) != DialogResult.OK)
+                {
+                    return;
+                }
+                logbreak();
+                updateLog.Text += "检测到 MoeCraft 数据下载请求\r\n";
+                mainTabControl.SelectedIndex = 1;
+                if (isdownload)
+                {
+                    startUpdateDownload(url, filename);
+                    if(isexec)
+                    {
+                        try
+                        {
+                            updateLog.Text += "运行程序："+ filename +"\r\n";
+                            Process.Start(x.path + x.updpath + x.dlpath + filename);
+                        }
+                        catch (Exception) { }
+                    }
+                    if (isopen)
+                    {
+                        try
+                        {
+                            updateLog.Text += "打开文件：" + filename + "\r\n";
+                            Process.Start("explorer.exe", "\"" + x.path + x.updpath + x.dlpath + filename + "\"");
+                        }
+                        catch (Exception) { }
+                    }
+                    if (ispkginstaller)
+                    {
+                        try
+                        {
+                            updateLog.Text += "运行 MoeCraft 包安装程序：" + filename + "\r\n";
+                            Process.Start(x.path + x.updpath + "MoecraftPkgInstaller.exe", "\"" + x.path + x.updpath + x.dlpath + filename + "\" /auto /exit");
+                        }
+                        catch (Exception ex) {
+                            error("启动包安装程序失败：" + ex.ToString());
+                        }
+                    }
+                }
+            }
+            catch (NullReferenceException) { return; }
+            catch (Exception ex) {
+                log("无法处理文件下载请求：" + ex.ToString());
+            }
+        }
+
+        private void updateLog_TextChanged(object sender, EventArgs e)
+        {
+            updateLog.ScrollToCaret();
+        }
+
+        private void logBox_TextChanged(object sender, EventArgs e)
+        {
+            logBox.ScrollToCaret();
+        }
+
+        private void bignews_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+        }
+
+        private void linkLabel1_LinkClicked_2(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            openUrl("https://telegram.me/moecraft");
+        }
+
+        void openUrl(string url)
+        {
+            try
+            {
+                Process.Start(url);
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    Process.Start("explorer.exe \"" + url + "\"");
+                }
+                catch(Exception ex2)
+                {
+                    error("调用浏览器失败：\r\n" + ex2.Message + "\r\n请手动打开：" + url);
+                }
+            }
+        }
+
     }
 }

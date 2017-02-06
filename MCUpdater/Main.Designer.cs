@@ -56,6 +56,13 @@ namespace MCUpdater
             this.label6 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.toolTab = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.gameLogViewerButton = new System.Windows.Forms.Button();
+            this.crashReportViewerButton = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.regionCalculatorButton = new System.Windows.Forms.Button();
+            this.runStrongholdsCalculator = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.installPatch = new System.Windows.Forms.Button();
             this.label26 = new System.Windows.Forms.Label();
@@ -73,10 +80,6 @@ namespace MCUpdater
             this.label14 = new System.Windows.Forms.Label();
             this.toolGroupBox = new System.Windows.Forms.GroupBox();
             this.installPkg2 = new System.Windows.Forms.Button();
-            this.runStrongholdsCalculator = new System.Windows.Forms.Button();
-            this.gameLogViewerButton = new System.Windows.Forms.Button();
-            this.regionCalculatorButton = new System.Windows.Forms.Button();
-            this.crashReportViewerButton = new System.Windows.Forms.Button();
             this.cleanDownloadCache = new System.Windows.Forms.Button();
             this.logTab = new System.Windows.Forms.TabPage();
             this.logBox = new System.Windows.Forms.TextBox();
@@ -98,7 +101,13 @@ namespace MCUpdater
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.updateLog = new System.Windows.Forms.TextBox();
             this.mainTabControl = new System.Windows.Forms.TabControl();
+            this.news = new System.Windows.Forms.TabPage();
+            this.bignewsinit = new System.Windows.Forms.Label();
+            this.bignews = new System.Windows.Forms.WebBrowser();
             this.aboutTab = new System.Windows.Forms.TabPage();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.installPkg1 = new System.Windows.Forms.Button();
             this.unsetAss = new System.Windows.Forms.Button();
             this.setAss = new System.Windows.Forms.Button();
@@ -122,11 +131,13 @@ namespace MCUpdater
             this.label3 = new System.Windows.Forms.Label();
             this.version = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ggimg = new System.Windows.Forms.PictureBox();
             this.diyDialog = new System.Windows.Forms.FontDialog();
             this.statusStrip1.SuspendLayout();
             this.mcLauncher.SuspendLayout();
             this.toolTab.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -137,17 +148,18 @@ namespace MCUpdater
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.mainTabControl.SuspendLayout();
+            this.news.SuspendLayout();
             this.aboutTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ggimg)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lastLog});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 403);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 433);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(778, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(810, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -183,7 +195,7 @@ namespace MCUpdater
             this.mcLauncher.Location = new System.Drawing.Point(4, 22);
             this.mcLauncher.Name = "mcLauncher";
             this.mcLauncher.Padding = new System.Windows.Forms.Padding(3);
-            this.mcLauncher.Size = new System.Drawing.Size(745, 361);
+            this.mcLauncher.Size = new System.Drawing.Size(778, 381);
             this.mcLauncher.TabIndex = 7;
             this.mcLauncher.Text = "启动器";
             this.mcLauncher.UseVisualStyleBackColor = true;
@@ -392,17 +404,91 @@ namespace MCUpdater
             // 
             // toolTab
             // 
+            this.toolTab.Controls.Add(this.groupBox7);
+            this.toolTab.Controls.Add(this.groupBox6);
             this.toolTab.Controls.Add(this.groupBox5);
             this.toolTab.Controls.Add(this.groupBox4);
             this.toolTab.Controls.Add(this.groupBox1);
             this.toolTab.Controls.Add(this.toolGroupBox);
-            this.toolTab.Location = new System.Drawing.Point(4, 26);
+            this.toolTab.Location = new System.Drawing.Point(4, 22);
             this.toolTab.Name = "toolTab";
             this.toolTab.Padding = new System.Windows.Forms.Padding(3);
-            this.toolTab.Size = new System.Drawing.Size(745, 357);
+            this.toolTab.Size = new System.Drawing.Size(778, 381);
             this.toolTab.TabIndex = 5;
             this.toolTab.Text = "工具箱";
             this.toolTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label4);
+            this.groupBox7.Controls.Add(this.gameLogViewerButton);
+            this.groupBox7.Controls.Add(this.crashReportViewerButton);
+            this.groupBox7.Location = new System.Drawing.Point(178, 309);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(409, 62);
+            this.groupBox7.TabIndex = 16;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "日志查看器";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 28);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(92, 17);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "帮助你诊断错误";
+            // 
+            // gameLogViewerButton
+            // 
+            this.gameLogViewerButton.Location = new System.Drawing.Point(261, 19);
+            this.gameLogViewerButton.Name = "gameLogViewerButton";
+            this.gameLogViewerButton.Size = new System.Drawing.Size(133, 34);
+            this.gameLogViewerButton.TabIndex = 12;
+            this.gameLogViewerButton.Text = "游戏日志 (&S)";
+            this.gameLogViewerButton.UseVisualStyleBackColor = true;
+            this.gameLogViewerButton.Click += new System.EventHandler(this.gameLogViewerButton_Click);
+            // 
+            // crashReportViewerButton
+            // 
+            this.crashReportViewerButton.Location = new System.Drawing.Point(119, 19);
+            this.crashReportViewerButton.Name = "crashReportViewerButton";
+            this.crashReportViewerButton.Size = new System.Drawing.Size(133, 34);
+            this.crashReportViewerButton.TabIndex = 11;
+            this.crashReportViewerButton.Text = "崩溃日志(&A)";
+            this.crashReportViewerButton.UseVisualStyleBackColor = true;
+            this.crashReportViewerButton.Click += new System.EventHandler(this.crashReportViewerButton_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.regionCalculatorButton);
+            this.groupBox6.Controls.Add(this.runStrongholdsCalculator);
+            this.groupBox6.Location = new System.Drawing.Point(17, 130);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(155, 112);
+            this.groupBox6.TabIndex = 15;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "计算器";
+            // 
+            // regionCalculatorButton
+            // 
+            this.regionCalculatorButton.Location = new System.Drawing.Point(10, 25);
+            this.regionCalculatorButton.Name = "regionCalculatorButton";
+            this.regionCalculatorButton.Size = new System.Drawing.Size(133, 34);
+            this.regionCalculatorButton.TabIndex = 10;
+            this.regionCalculatorButton.Text = "区域文件计算器 (&E)";
+            this.regionCalculatorButton.UseVisualStyleBackColor = true;
+            this.regionCalculatorButton.Click += new System.EventHandler(this.regionCalculatorButton_Click);
+            // 
+            // runStrongholdsCalculator
+            // 
+            this.runStrongholdsCalculator.Location = new System.Drawing.Point(10, 65);
+            this.runStrongholdsCalculator.Name = "runStrongholdsCalculator";
+            this.runStrongholdsCalculator.Size = new System.Drawing.Size(133, 34);
+            this.runStrongholdsCalculator.TabIndex = 13;
+            this.runStrongholdsCalculator.Text = "要塞坐标计算器 (&T)";
+            this.runStrongholdsCalculator.UseVisualStyleBackColor = true;
+            this.runStrongholdsCalculator.Click += new System.EventHandler(this.runStrongholdsCalculator_Click);
             // 
             // groupBox5
             // 
@@ -410,16 +496,16 @@ namespace MCUpdater
             this.groupBox5.Controls.Add(this.label26);
             this.groupBox5.Controls.Add(this.label25);
             this.groupBox5.Controls.Add(this.label24);
-            this.groupBox5.Location = new System.Drawing.Point(492, 158);
+            this.groupBox5.Location = new System.Drawing.Point(386, 144);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(217, 183);
+            this.groupBox5.Size = new System.Drawing.Size(201, 159);
             this.groupBox5.TabIndex = 14;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "安装低配补丁";
             // 
             // installPatch
             // 
-            this.installPatch.Location = new System.Drawing.Point(20, 121);
+            this.installPatch.Location = new System.Drawing.Point(12, 98);
             this.installPatch.Name = "installPatch";
             this.installPatch.Size = new System.Drawing.Size(173, 34);
             this.installPatch.TabIndex = 14;
@@ -430,7 +516,7 @@ namespace MCUpdater
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(17, 57);
+            this.label26.Location = new System.Drawing.Point(8, 47);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(148, 17);
             this.label26.TabIndex = 16;
@@ -439,7 +525,7 @@ namespace MCUpdater
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(17, 84);
+            this.label25.Location = new System.Drawing.Point(9, 68);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(116, 17);
             this.label25.TabIndex = 15;
@@ -448,7 +534,7 @@ namespace MCUpdater
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(17, 31);
+            this.label24.Location = new System.Drawing.Point(9, 25);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(188, 17);
             this.label24.TabIndex = 14;
@@ -460,9 +546,9 @@ namespace MCUpdater
             this.groupBox4.Controls.Add(this.label22);
             this.groupBox4.Controls.Add(this.recMcOpt);
             this.groupBox4.Controls.Add(this.bakMcOpt);
-            this.groupBox4.Location = new System.Drawing.Point(223, 157);
+            this.groupBox4.Location = new System.Drawing.Point(178, 144);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(252, 184);
+            this.groupBox4.Size = new System.Drawing.Size(202, 159);
             this.groupBox4.TabIndex = 12;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "备份游戏内设置";
@@ -470,7 +556,7 @@ namespace MCUpdater
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(15, 32);
+            this.label21.Location = new System.Drawing.Point(11, 25);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(164, 17);
             this.label21.TabIndex = 13;
@@ -479,15 +565,15 @@ namespace MCUpdater
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(15, 58);
+            this.label22.Location = new System.Drawing.Point(11, 47);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(224, 17);
+            this.label22.Size = new System.Drawing.Size(176, 17);
             this.label22.TabIndex = 12;
-            this.label22.Text = "备份内容为游戏设置、服务器列表、键位";
+            this.label22.Text = "备份内容为设置、服务器、键位";
             // 
             // recMcOpt
             // 
-            this.recMcOpt.Location = new System.Drawing.Point(18, 134);
+            this.recMcOpt.Location = new System.Drawing.Point(13, 111);
             this.recMcOpt.Name = "recMcOpt";
             this.recMcOpt.Size = new System.Drawing.Size(173, 34);
             this.recMcOpt.TabIndex = 10;
@@ -497,7 +583,7 @@ namespace MCUpdater
             // 
             // bakMcOpt
             // 
-            this.bakMcOpt.Location = new System.Drawing.Point(18, 88);
+            this.bakMcOpt.Location = new System.Drawing.Point(14, 71);
             this.bakMcOpt.Name = "bakMcOpt";
             this.bakMcOpt.Size = new System.Drawing.Size(173, 34);
             this.bakMcOpt.TabIndex = 11;
@@ -511,16 +597,16 @@ namespace MCUpdater
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.disableForgeProgress);
             this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Location = new System.Drawing.Point(223, 16);
+            this.groupBox1.Location = new System.Drawing.Point(178, 17);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(486, 135);
+            this.groupBox1.Size = new System.Drawing.Size(409, 121);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "解决低端电脑启动失败问题";
             // 
             // enableForgeProgress
             // 
-            this.enableForgeProgress.Location = new System.Drawing.Point(222, 85);
+            this.enableForgeProgress.Location = new System.Drawing.Point(217, 73);
             this.enableForgeProgress.Name = "enableForgeProgress";
             this.enableForgeProgress.Size = new System.Drawing.Size(173, 34);
             this.enableForgeProgress.TabIndex = 3;
@@ -531,7 +617,7 @@ namespace MCUpdater
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(15, 54);
+            this.label15.Location = new System.Drawing.Point(10, 49);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(380, 17);
             this.label15.TabIndex = 2;
@@ -539,7 +625,7 @@ namespace MCUpdater
             // 
             // disableForgeProgress
             // 
-            this.disableForgeProgress.Location = new System.Drawing.Point(18, 85);
+            this.disableForgeProgress.Location = new System.Drawing.Point(13, 73);
             this.disableForgeProgress.Name = "disableForgeProgress";
             this.disableForgeProgress.Size = new System.Drawing.Size(173, 34);
             this.disableForgeProgress.TabIndex = 1;
@@ -550,7 +636,7 @@ namespace MCUpdater
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(15, 31);
+            this.label14.Location = new System.Drawing.Point(10, 26);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(296, 17);
             this.label14.TabIndex = 0;
@@ -559,21 +645,17 @@ namespace MCUpdater
             // toolGroupBox
             // 
             this.toolGroupBox.Controls.Add(this.installPkg2);
-            this.toolGroupBox.Controls.Add(this.runStrongholdsCalculator);
-            this.toolGroupBox.Controls.Add(this.gameLogViewerButton);
-            this.toolGroupBox.Controls.Add(this.regionCalculatorButton);
-            this.toolGroupBox.Controls.Add(this.crashReportViewerButton);
             this.toolGroupBox.Controls.Add(this.cleanDownloadCache);
             this.toolGroupBox.Location = new System.Drawing.Point(17, 16);
             this.toolGroupBox.Name = "toolGroupBox";
-            this.toolGroupBox.Size = new System.Drawing.Size(191, 325);
+            this.toolGroupBox.Size = new System.Drawing.Size(155, 108);
             this.toolGroupBox.TabIndex = 10;
             this.toolGroupBox.TabStop = false;
             this.toolGroupBox.Text = "常用工具";
             // 
             // installPkg2
             // 
-            this.installPkg2.Location = new System.Drawing.Point(26, 83);
+            this.installPkg2.Location = new System.Drawing.Point(10, 62);
             this.installPkg2.Name = "installPkg2";
             this.installPkg2.Size = new System.Drawing.Size(133, 32);
             this.installPkg2.TabIndex = 30;
@@ -581,49 +663,9 @@ namespace MCUpdater
             this.installPkg2.UseVisualStyleBackColor = true;
             this.installPkg2.Click += new System.EventHandler(this.installPkg2_Click);
             // 
-            // runStrongholdsCalculator
-            // 
-            this.runStrongholdsCalculator.Location = new System.Drawing.Point(26, 173);
-            this.runStrongholdsCalculator.Name = "runStrongholdsCalculator";
-            this.runStrongholdsCalculator.Size = new System.Drawing.Size(133, 34);
-            this.runStrongholdsCalculator.TabIndex = 13;
-            this.runStrongholdsCalculator.Text = "要塞坐标计算器 (&T)";
-            this.runStrongholdsCalculator.UseVisualStyleBackColor = true;
-            this.runStrongholdsCalculator.Click += new System.EventHandler(this.runStrongholdsCalculator_Click);
-            // 
-            // gameLogViewerButton
-            // 
-            this.gameLogViewerButton.Location = new System.Drawing.Point(26, 235);
-            this.gameLogViewerButton.Name = "gameLogViewerButton";
-            this.gameLogViewerButton.Size = new System.Drawing.Size(133, 34);
-            this.gameLogViewerButton.TabIndex = 12;
-            this.gameLogViewerButton.Text = "游戏日志查看器 (&S)";
-            this.gameLogViewerButton.UseVisualStyleBackColor = true;
-            this.gameLogViewerButton.Click += new System.EventHandler(this.gameLogViewerButton_Click);
-            // 
-            // regionCalculatorButton
-            // 
-            this.regionCalculatorButton.Location = new System.Drawing.Point(26, 133);
-            this.regionCalculatorButton.Name = "regionCalculatorButton";
-            this.regionCalculatorButton.Size = new System.Drawing.Size(133, 34);
-            this.regionCalculatorButton.TabIndex = 10;
-            this.regionCalculatorButton.Text = "区域文件计算器 (&E)";
-            this.regionCalculatorButton.UseVisualStyleBackColor = true;
-            this.regionCalculatorButton.Click += new System.EventHandler(this.regionCalculatorButton_Click);
-            // 
-            // crashReportViewerButton
-            // 
-            this.crashReportViewerButton.Location = new System.Drawing.Point(26, 275);
-            this.crashReportViewerButton.Name = "crashReportViewerButton";
-            this.crashReportViewerButton.Size = new System.Drawing.Size(133, 34);
-            this.crashReportViewerButton.TabIndex = 11;
-            this.crashReportViewerButton.Text = "崩溃日志查看器 (&A)";
-            this.crashReportViewerButton.UseVisualStyleBackColor = true;
-            this.crashReportViewerButton.Click += new System.EventHandler(this.crashReportViewerButton_Click);
-            // 
             // cleanDownloadCache
             // 
-            this.cleanDownloadCache.Location = new System.Drawing.Point(26, 31);
+            this.cleanDownloadCache.Location = new System.Drawing.Point(10, 22);
             this.cleanDownloadCache.Name = "cleanDownloadCache";
             this.cleanDownloadCache.Size = new System.Drawing.Size(133, 34);
             this.cleanDownloadCache.TabIndex = 9;
@@ -637,7 +679,7 @@ namespace MCUpdater
             this.logTab.Location = new System.Drawing.Point(4, 22);
             this.logTab.Name = "logTab";
             this.logTab.Padding = new System.Windows.Forms.Padding(3);
-            this.logTab.Size = new System.Drawing.Size(745, 361);
+            this.logTab.Size = new System.Drawing.Size(778, 381);
             this.logTab.TabIndex = 4;
             this.logTab.Text = "操作日志";
             this.logTab.UseVisualStyleBackColor = true;
@@ -649,8 +691,9 @@ namespace MCUpdater
             this.logBox.Name = "logBox";
             this.logBox.ReadOnly = true;
             this.logBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.logBox.Size = new System.Drawing.Size(732, 334);
+            this.logBox.Size = new System.Drawing.Size(765, 364);
             this.logBox.TabIndex = 0;
+            this.logBox.TextChanged += new System.EventHandler(this.logBox_TextChanged);
             // 
             // offlineModsTab
             // 
@@ -659,17 +702,17 @@ namespace MCUpdater
             this.offlineModsTab.Controls.Add(this.label1);
             this.offlineModsTab.Controls.Add(this.offlineModList);
             this.offlineModsTab.Controls.Add(this.saveOfflineMod);
-            this.offlineModsTab.Location = new System.Drawing.Point(4, 26);
+            this.offlineModsTab.Location = new System.Drawing.Point(4, 22);
             this.offlineModsTab.Name = "offlineModsTab";
             this.offlineModsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.offlineModsTab.Size = new System.Drawing.Size(745, 357);
+            this.offlineModsTab.Size = new System.Drawing.Size(778, 381);
             this.offlineModsTab.TabIndex = 3;
             this.offlineModsTab.Text = "Mod管理";
             this.offlineModsTab.UseVisualStyleBackColor = true;
             // 
             // openOmodsDir
             // 
-            this.openOmodsDir.Location = new System.Drawing.Point(374, 320);
+            this.openOmodsDir.Location = new System.Drawing.Point(374, 340);
             this.openOmodsDir.Name = "openOmodsDir";
             this.openOmodsDir.Size = new System.Drawing.Size(133, 34);
             this.openOmodsDir.TabIndex = 5;
@@ -679,9 +722,9 @@ namespace MCUpdater
             // 
             // refreshMods
             // 
-            this.refreshMods.Location = new System.Drawing.Point(513, 320);
+            this.refreshMods.Location = new System.Drawing.Point(513, 340);
             this.refreshMods.Name = "refreshMods";
-            this.refreshMods.Size = new System.Drawing.Size(87, 34);
+            this.refreshMods.Size = new System.Drawing.Size(120, 34);
             this.refreshMods.TabIndex = 4;
             this.refreshMods.Text = "刷新 (&R)";
             this.refreshMods.UseVisualStyleBackColor = true;
@@ -690,7 +733,7 @@ namespace MCUpdater
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 319);
+            this.label1.Location = new System.Drawing.Point(6, 339);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(352, 34);
             this.label1.TabIndex = 3;
@@ -701,13 +744,13 @@ namespace MCUpdater
             this.offlineModList.FormattingEnabled = true;
             this.offlineModList.Location = new System.Drawing.Point(6, 6);
             this.offlineModList.Name = "offlineModList";
-            this.offlineModList.Size = new System.Drawing.Size(733, 310);
+            this.offlineModList.Size = new System.Drawing.Size(766, 328);
             this.offlineModList.TabIndex = 2;
             this.offlineModList.SelectedIndexChanged += new System.EventHandler(this.offlineModList_SelectedIndexChanged);
             // 
             // saveOfflineMod
             // 
-            this.saveOfflineMod.Location = new System.Drawing.Point(606, 319);
+            this.saveOfflineMod.Location = new System.Drawing.Point(639, 339);
             this.saveOfflineMod.Name = "saveOfflineMod";
             this.saveOfflineMod.Size = new System.Drawing.Size(133, 34);
             this.saveOfflineMod.TabIndex = 1;
@@ -728,7 +771,7 @@ namespace MCUpdater
             this.checkUpdate.Location = new System.Drawing.Point(4, 26);
             this.checkUpdate.Name = "checkUpdate";
             this.checkUpdate.Padding = new System.Windows.Forms.Padding(3);
-            this.checkUpdate.Size = new System.Drawing.Size(745, 357);
+            this.checkUpdate.Size = new System.Drawing.Size(778, 377);
             this.checkUpdate.TabIndex = 2;
             this.checkUpdate.Text = "检查更新";
             this.checkUpdate.UseVisualStyleBackColor = true;
@@ -736,7 +779,7 @@ namespace MCUpdater
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(524, 273);
+            this.label17.Location = new System.Drawing.Point(564, 293);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(56, 17);
             this.label17.TabIndex = 10;
@@ -746,7 +789,7 @@ namespace MCUpdater
             // 
             this.updateServer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.updateServer.FormattingEnabled = true;
-            this.updateServer.Location = new System.Drawing.Point(595, 270);
+            this.updateServer.Location = new System.Drawing.Point(631, 290);
             this.updateServer.Name = "updateServer";
             this.updateServer.Size = new System.Drawing.Size(139, 25);
             this.updateServer.TabIndex = 9;
@@ -755,9 +798,9 @@ namespace MCUpdater
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.forceUpdate);
-            this.groupBox2.Location = new System.Drawing.Point(524, 62);
+            this.groupBox2.Location = new System.Drawing.Point(560, 33);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(210, 202);
+            this.groupBox2.Size = new System.Drawing.Size(210, 235);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "选择更新内容";
@@ -770,17 +813,17 @@ namespace MCUpdater
             "请先检查更新"});
             this.forceUpdate.Location = new System.Drawing.Point(7, 23);
             this.forceUpdate.Name = "forceUpdate";
-            this.forceUpdate.Size = new System.Drawing.Size(197, 166);
+            this.forceUpdate.Size = new System.Drawing.Size(197, 202);
             this.forceUpdate.TabIndex = 29;
             // 
             // updateThisProgressText
             // 
             this.updateThisProgressText.AutoSize = true;
-            this.updateThisProgressText.Location = new System.Drawing.Point(636, 7);
+            this.updateThisProgressText.Location = new System.Drawing.Point(564, 7);
             this.updateThisProgressText.Name = "updateThisProgressText";
-            this.updateThisProgressText.Size = new System.Drawing.Size(56, 17);
+            this.updateThisProgressText.Size = new System.Drawing.Size(129, 17);
             this.updateThisProgressText.TabIndex = 5;
-            this.updateThisProgressText.Text = "准备就绪";
+            this.updateThisProgressText.Text = "-- % |  -- MB / -- MB";
             // 
             // updateAction
             // 
@@ -794,7 +837,7 @@ namespace MCUpdater
             // updateButton
             // 
             this.updateButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.updateButton.Location = new System.Drawing.Point(524, 309);
+            this.updateButton.Location = new System.Drawing.Point(560, 329);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(210, 36);
             this.updateButton.TabIndex = 1;
@@ -806,7 +849,7 @@ namespace MCUpdater
             // 
             this.updateThisProgressBar.Location = new System.Drawing.Point(12, 33);
             this.updateThisProgressBar.Name = "updateThisProgressBar";
-            this.updateThisProgressBar.Size = new System.Drawing.Size(720, 23);
+            this.updateThisProgressBar.Size = new System.Drawing.Size(542, 23);
             this.updateThisProgressBar.TabIndex = 3;
             // 
             // groupBox3
@@ -814,7 +857,7 @@ namespace MCUpdater
             this.groupBox3.Controls.Add(this.updateLog);
             this.groupBox3.Location = new System.Drawing.Point(12, 62);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(506, 289);
+            this.groupBox3.Size = new System.Drawing.Size(542, 303);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "更新日志";
@@ -826,28 +869,69 @@ namespace MCUpdater
             this.updateLog.Name = "updateLog";
             this.updateLog.ReadOnly = true;
             this.updateLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.updateLog.Size = new System.Drawing.Size(494, 261);
+            this.updateLog.Size = new System.Drawing.Size(530, 275);
             this.updateLog.TabIndex = 7;
             this.updateLog.Text = "若要检查更新或者安装游戏，请点击右下角的 [ 检查更新 ] 按钮\r\n稍后将在此处显示该版本的新特性\r\n\r\nTip:更新器不是启动器；更新完成后会自动下载启动器\r\n" +
     "Tip:右下角可以选择更新服务器节点\r\nTip:工具箱和关于页面还有很多功能等待你去挖掘\r\n\r\n\r\n\r\n你可以点击 .moecraftpkg 格式文件来直接安装" +
     "包\r\n\r\n\r\n\r\n\r\nMoeUpdater V3 By Kenvix";
+            this.updateLog.TextChanged += new System.EventHandler(this.updateLog_TextChanged);
             // 
             // mainTabControl
             // 
+            this.mainTabControl.Controls.Add(this.news);
             this.mainTabControl.Controls.Add(this.checkUpdate);
             this.mainTabControl.Controls.Add(this.offlineModsTab);
             this.mainTabControl.Controls.Add(this.toolTab);
             this.mainTabControl.Controls.Add(this.aboutTab);
             this.mainTabControl.Controls.Add(this.logTab);
             this.mainTabControl.Controls.Add(this.mcLauncher);
-            this.mainTabControl.Location = new System.Drawing.Point(13, 13);
+            this.mainTabControl.Location = new System.Drawing.Point(12, 12);
             this.mainTabControl.Name = "mainTabControl";
             this.mainTabControl.SelectedIndex = 0;
-            this.mainTabControl.Size = new System.Drawing.Size(753, 387);
+            this.mainTabControl.Size = new System.Drawing.Size(786, 407);
             this.mainTabControl.TabIndex = 5;
+            // 
+            // news
+            // 
+            this.news.Controls.Add(this.bignewsinit);
+            this.news.Controls.Add(this.bignews);
+            this.news.Location = new System.Drawing.Point(4, 26);
+            this.news.Name = "news";
+            this.news.Size = new System.Drawing.Size(778, 377);
+            this.news.TabIndex = 9;
+            this.news.Text = "大新闻";
+            this.news.UseVisualStyleBackColor = true;
+            // 
+            // bignewsinit
+            // 
+            this.bignewsinit.AutoSize = true;
+            this.bignewsinit.Location = new System.Drawing.Point(27, 23);
+            this.bignewsinit.Name = "bignewsinit";
+            this.bignewsinit.Size = new System.Drawing.Size(261, 34);
+            this.bignewsinit.TabIndex = 1;
+            this.bignewsinit.Text = "大新闻加载中 ....\r\n                               ——也爱你的MoeCraft\r\n";
+            // 
+            // bignews
+            // 
+            this.bignews.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bignews.Location = new System.Drawing.Point(0, 0);
+            this.bignews.MinimumSize = new System.Drawing.Size(20, 20);
+            this.bignews.Name = "bignews";
+            this.bignews.ScriptErrorsSuppressed = true;
+            this.bignews.Size = new System.Drawing.Size(778, 377);
+            this.bignews.TabIndex = 0;
+            this.bignews.Url = new System.Uri("http://accounts.moecraft.net/index.php?m=API&c=News&a=index", System.UriKind.Absolute);
+            this.bignews.Visible = false;
+            this.bignews.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.bignews_DocumentCompleted);
+            this.bignews.FileDownload += new System.EventHandler(this.bignews_FileDownload);
+            this.bignews.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.bignews_Navigated);
+            this.bignews.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.bignews_Navigating);
             // 
             // aboutTab
             // 
+            this.aboutTab.Controls.Add(this.linkLabel1);
+            this.aboutTab.Controls.Add(this.textBox5);
+            this.aboutTab.Controls.Add(this.label16);
             this.aboutTab.Controls.Add(this.installPkg1);
             this.aboutTab.Controls.Add(this.unsetAss);
             this.aboutTab.Controls.Add(this.setAss);
@@ -871,13 +955,47 @@ namespace MCUpdater
             this.aboutTab.Controls.Add(this.label3);
             this.aboutTab.Controls.Add(this.version);
             this.aboutTab.Controls.Add(this.label2);
-            this.aboutTab.Controls.Add(this.pictureBox1);
-            this.aboutTab.Location = new System.Drawing.Point(4, 26);
+            this.aboutTab.Controls.Add(this.ggimg);
+            this.aboutTab.Location = new System.Drawing.Point(4, 22);
             this.aboutTab.Name = "aboutTab";
-            this.aboutTab.Size = new System.Drawing.Size(745, 357);
+            this.aboutTab.Size = new System.Drawing.Size(778, 381);
             this.aboutTab.TabIndex = 8;
             this.aboutTab.Text = "关于";
             this.aboutTab.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.linkLabel1.LinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.linkLabel1.Location = new System.Drawing.Point(336, 336);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(56, 17);
+            this.linkLabel1.TabIndex = 33;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Tag = "";
+            this.linkLabel1.Text = "点击加入";
+            this.linkLabel1.VisitedLinkColor = System.Drawing.SystemColors.MenuHighlight;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked_2);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(126, 333);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(195, 23);
+            this.textBox5.TabIndex = 32;
+            this.textBox5.Text = "https://telegram.me/moecraft";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(30, 336);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(79, 17);
+            this.label16.TabIndex = 31;
+            this.label16.Text = "Telegram 群";
             // 
             // installPkg1
             // 
@@ -1122,15 +1240,16 @@ namespace MCUpdater
             this.label2.TabIndex = 8;
             this.label2.Text = "x.pname";
             // 
-            // pictureBox1
+            // ggimg
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.ImageLocation = "";
-            this.pictureBox1.Location = new System.Drawing.Point(23, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(385, 99);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
+            this.ggimg.Image = ((System.Drawing.Image)(resources.GetObject("ggimg.Image")));
+            this.ggimg.ImageLocation = "";
+            this.ggimg.Location = new System.Drawing.Point(23, 12);
+            this.ggimg.Name = "ggimg";
+            this.ggimg.Size = new System.Drawing.Size(391, 99);
+            this.ggimg.TabIndex = 5;
+            this.ggimg.TabStop = false;
+            this.ggimg.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
             // 
             // diyDialog
             // 
@@ -1141,7 +1260,7 @@ namespace MCUpdater
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(778, 425);
+            this.ClientSize = new System.Drawing.Size(810, 455);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.mainTabControl);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1156,6 +1275,9 @@ namespace MCUpdater
             this.mcLauncher.ResumeLayout(false);
             this.mcLauncher.PerformLayout();
             this.toolTab.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1173,9 +1295,11 @@ namespace MCUpdater
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.mainTabControl.ResumeLayout(false);
+            this.news.ResumeLayout(false);
+            this.news.PerformLayout();
             this.aboutTab.ResumeLayout(false);
             this.aboutTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ggimg)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1238,7 +1362,7 @@ namespace MCUpdater
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label version;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox ggimg;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBox1;
@@ -1276,6 +1400,15 @@ namespace MCUpdater
         private System.Windows.Forms.Button setAss;
         private System.Windows.Forms.Button installPkg1;
         private System.Windows.Forms.Button installPkg2;
+        private System.Windows.Forms.TabPage news;
+        private System.Windows.Forms.WebBrowser bignews;
+        private System.Windows.Forms.Label bignewsinit;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label16;
     }
 }
 

@@ -332,6 +332,7 @@
             this.Name = "main";
             this.Text = "MoeCraft Package Installer";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.main_FormClosed);
+            this.Load += new System.EventHandler(this.main_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

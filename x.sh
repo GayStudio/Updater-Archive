@@ -3,11 +3,12 @@
 xpath="/home/mc" #Minecraft Path
 jarfile="Thermos-1.7.10-1614-server.jar" #Minecraft Jar File
 screen="mc" #Name of screen
-comm="-Dfml.queryResult=confirm -Xms7G -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:+UseStringDeduplication -XX:hashCode=5 -Dfile.encoding=UTF-8 -Xmx8G -d64 -server" #Forge Command
+comm="-Dfml.queryResult=confirm -Xms20G -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:+UseStringDeduplication -XX:hashCode=5 -Dfile.encoding=UTF-8 -Xmx20G -d64 -server" #Forge Command
 #comm="-Dfml.queryResult=confirm -Xms3600M -Xmx5000M -XX:+AggressiveOpts -XX:+UseCompressedOops -XX:+UseG1GC -XX:MaxGCPauseMillis=50" #Forge Command
 #comm="-Dfml.queryResult=confirm -Xms3600M -Xmx3900M" #Forge Command
 #comm="-Xmx280M -XX:+AggressiveOpts " #Command
 sleeptime="3s" #Loop mode Sleep time
+javahost="sudo -u mc java"
 xpid="/dev/moecraft.pid" #Moecraft Server Console(Loop mode) PID File
 mcsign="#Controlled-By-X" #Moecraft Server Argument Sign
 # Core
@@ -28,7 +29,7 @@ case $1 in
             echo -e "Using Jar File: ${jarfile}"
             echo -e ${comm}
             echo -e "\033[31;49;1m------------------------------------------------------------\e[0m"
-            java ${comm} -jar ${xpath}/${jarfile} ${mcsign}
+            ${javahost} ${comm} -jar ${xpath}/${jarfile} ${mcsign}
             exitcode=$?
             echo ""
             echo -e "\033[31;49;1m------------------------------------------------------------\e[0m"
@@ -57,7 +58,7 @@ case $1 in
                 trap "echo -e ' \033[31;40;1m Ctrl+C: SIGINT! Stopping Loop Mode...\e[0m' & rm -rf ${xpid} & exit 0" 2
                 trap "echo -e ' \033[31;40;1m Kill: SIGTERM! Stopping Loop Mode...\e[0m' & rm -rf ${xpid} & exit 0" 2
                 while [[ true ]];do
-                    java ${comm} -jar ${xpath}/${jarfile} ${mcsign}
+                    ${javahost} ${comm} -jar ${xpath}/${jarfile} ${mcsign}
                     exitcode=$?
                     echo ""
                     echo -e "\033[31;49;1m------------------------------------------------------------\e[0m"

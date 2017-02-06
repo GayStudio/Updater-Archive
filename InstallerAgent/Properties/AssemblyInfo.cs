@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Moecraft Package Installer")]
-[assembly: AssemblyDescription("Moecraft Package Installer")]
+[assembly: AssemblyTitle("InstallerAgent")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("MoeNet Inc.")]
-[assembly: AssemblyProduct("Moecraft Package Installer")]
-[assembly: AssemblyCopyright("Copyright © 2015 MoeNet All Rights Reserved")]
-[assembly: AssemblyTrademark("Copyright © 2015 MoeNet All Rights Reserved")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("InstallerAgent")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 //将 ComVisible 设置为 false 将使此程序集中的类型
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("0f49658e-cbe4-4fde-af33-6ea13c089acd")]
+[assembly: Guid("92ed55f4-de1d-4113-ad9b-5412d34c5476")]
 
 // 程序集的版本信息由下列四个值组成: 
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 //可以指定所有这些值，也可以使用“生成号”和“修订号”的默认值，
 // 方法是按如下所示使用“*”: :
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.5.0.0")]
-[assembly: AssemblyFileVersion("1.5.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
