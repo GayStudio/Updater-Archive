@@ -702,10 +702,10 @@ namespace MCUpdater
             this.offlineModsTab.Controls.Add(this.label1);
             this.offlineModsTab.Controls.Add(this.offlineModList);
             this.offlineModsTab.Controls.Add(this.saveOfflineMod);
-            this.offlineModsTab.Location = new System.Drawing.Point(4, 22);
+            this.offlineModsTab.Location = new System.Drawing.Point(4, 26);
             this.offlineModsTab.Name = "offlineModsTab";
             this.offlineModsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.offlineModsTab.Size = new System.Drawing.Size(778, 381);
+            this.offlineModsTab.Size = new System.Drawing.Size(778, 377);
             this.offlineModsTab.TabIndex = 3;
             this.offlineModsTab.Text = "Mod管理";
             this.offlineModsTab.UseVisualStyleBackColor = true;
@@ -735,18 +735,21 @@ namespace MCUpdater
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 339);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(352, 34);
+            this.label1.Size = new System.Drawing.Size(288, 34);
             this.label1.TabIndex = 3;
-            this.label1.Text = "请选择要操作的Mod，勾选表示启用，不选表示禁用\r\n点击右侧的 打开模组文件夹 后可以在打开的文件夹放入你的模组";
+            this.label1.Text = "请选择要操作的Mod，勾选表示启用，不选表示禁用\r\n你可以将 Mod 拖动到上面来添加 Mod";
             // 
             // offlineModList
             // 
+            this.offlineModList.AllowDrop = true;
             this.offlineModList.FormattingEnabled = true;
             this.offlineModList.Location = new System.Drawing.Point(6, 6);
             this.offlineModList.Name = "offlineModList";
             this.offlineModList.Size = new System.Drawing.Size(766, 328);
             this.offlineModList.TabIndex = 2;
             this.offlineModList.SelectedIndexChanged += new System.EventHandler(this.offlineModList_SelectedIndexChanged);
+            this.offlineModList.DragDrop += new System.Windows.Forms.DragEventHandler(this.offlineModList_DragDrop);
+            this.offlineModList.DragEnter += new System.Windows.Forms.DragEventHandler(this.offlineModList_DragEnter);
             // 
             // saveOfflineMod
             // 
@@ -768,10 +771,10 @@ namespace MCUpdater
             this.checkUpdate.Controls.Add(this.updateButton);
             this.checkUpdate.Controls.Add(this.updateThisProgressBar);
             this.checkUpdate.Controls.Add(this.groupBox3);
-            this.checkUpdate.Location = new System.Drawing.Point(4, 26);
+            this.checkUpdate.Location = new System.Drawing.Point(4, 22);
             this.checkUpdate.Name = "checkUpdate";
             this.checkUpdate.Padding = new System.Windows.Forms.Padding(3);
-            this.checkUpdate.Size = new System.Drawing.Size(778, 377);
+            this.checkUpdate.Size = new System.Drawing.Size(778, 381);
             this.checkUpdate.TabIndex = 2;
             this.checkUpdate.Text = "检查更新";
             this.checkUpdate.UseVisualStyleBackColor = true;
@@ -810,7 +813,8 @@ namespace MCUpdater
             this.forceUpdate.Enabled = false;
             this.forceUpdate.FormattingEnabled = true;
             this.forceUpdate.Items.AddRange(new object[] {
-            "请先检查更新"});
+            "请先检查更新",
+            "请选择速度最快的节点来更新"});
             this.forceUpdate.Location = new System.Drawing.Point(7, 23);
             this.forceUpdate.Name = "forceUpdate";
             this.forceUpdate.Size = new System.Drawing.Size(197, 202);
@@ -871,9 +875,9 @@ namespace MCUpdater
             this.updateLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.updateLog.Size = new System.Drawing.Size(530, 275);
             this.updateLog.TabIndex = 7;
-            this.updateLog.Text = "若要检查更新或者安装游戏，请点击右下角的 [ 检查更新 ] 按钮\r\n稍后将在此处显示该版本的新特性\r\n\r\nTip:更新器不是启动器；更新完成后会自动下载启动器\r\n" +
-    "Tip:右下角可以选择更新服务器节点\r\nTip:工具箱和关于页面还有很多功能等待你去挖掘\r\n\r\n\r\n\r\n你可以点击 .moecraftpkg 格式文件来直接安装" +
-    "包\r\n\r\n\r\n\r\n\r\nMoeUpdater V3 By Kenvix";
+            this.updateLog.Text = "若要检查更新或者安装游戏，请点击右下角的 [ 检查更新 ] 按钮\r\n(请选择速度最快的更新节点来更新)\r\n\r\nTip:更新器不是启动器；更新完成后会自动下载启动器" +
+    "\r\nTip:右下角可以选择更新服务器节点\r\nTip:工具箱和关于页面还有很多功能等待你去挖掘\r\n\r\n\r\n\r\n你可以点击 .moecraftpkg 格式文件来直接" +
+    "安装包\r\n\r\n\r\n\r\n\r\nMoeUpdater V3 By Kenvix";
             this.updateLog.TextChanged += new System.EventHandler(this.updateLog_TextChanged);
             // 
             // mainTabControl
@@ -920,7 +924,7 @@ namespace MCUpdater
             this.bignews.ScriptErrorsSuppressed = true;
             this.bignews.Size = new System.Drawing.Size(778, 377);
             this.bignews.TabIndex = 0;
-            this.bignews.Url = new System.Uri("http://accounts.moecraft.net/index.php?m=API&c=News&a=index", System.UriKind.Absolute);
+            this.bignews.Url = new System.Uri("https://accounts.moecraft.net/index.php?m=API&c=News&a=index", System.UriKind.Absolute);
             this.bignews.Visible = false;
             this.bignews.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.bignews_DocumentCompleted);
             this.bignews.FileDownload += new System.EventHandler(this.bignews_FileDownload);
@@ -984,9 +988,9 @@ namespace MCUpdater
             this.textBox5.Location = new System.Drawing.Point(126, 333);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(195, 23);
+            this.textBox5.Size = new System.Drawing.Size(204, 23);
             this.textBox5.TabIndex = 32;
-            this.textBox5.Text = "https://telegram.me/moecraft";
+            this.textBox5.Text = "https://telegram.me/moecraftbot";
             // 
             // label16
             // 
@@ -1089,7 +1093,7 @@ namespace MCUpdater
             this.textBox4.Location = new System.Drawing.Point(126, 304);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(195, 23);
+            this.textBox4.Size = new System.Drawing.Size(204, 23);
             this.textBox4.TabIndex = 21;
             this.textBox4.Text = "566786837";
             // 
@@ -1148,16 +1152,16 @@ namespace MCUpdater
             this.textBox3.Location = new System.Drawing.Point(126, 275);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(195, 23);
+            this.textBox3.Size = new System.Drawing.Size(204, 23);
             this.textBox3.TabIndex = 18;
-            this.textBox3.Text = "http://moeclub.net";
+            this.textBox3.Text = "https://moeclub.net";
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(126, 246);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(195, 23);
+            this.textBox2.Size = new System.Drawing.Size(204, 23);
             this.textBox2.TabIndex = 18;
             this.textBox2.Text = "https://accounts.moecraft.net";
             // 
@@ -1184,9 +1188,9 @@ namespace MCUpdater
             this.textBox1.Location = new System.Drawing.Point(126, 217);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(195, 23);
+            this.textBox1.Size = new System.Drawing.Size(204, 23);
             this.textBox1.TabIndex = 16;
-            this.textBox1.Text = "mc.moecraft.net";
+            this.textBox1.Text = "moecraft.net";
             // 
             // label5
             // 

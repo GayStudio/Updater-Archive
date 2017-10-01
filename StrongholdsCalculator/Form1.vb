@@ -54,6 +54,6 @@
     End Sub
 
     Private Sub moeUrl_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles moeUrl.LinkClicked
-        url("http://www.moecraft.net")
+        url("https://www.moecraft.net")
     End Sub
 End Class

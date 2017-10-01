@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <desc>
+    <![CDATA[MoeCraft 3: "Update1"<br/>请自行挑选下载速度最快的节点来下载<br/>OSChina和Coding节点不支持显示进度，请耐心等待下载<br/>MoeCraft Toolbox 4.0 更新内容：1.增加速度更快的OSchina源<br/>
+2.修复大新闻无法访问的bug<br/>
+3.修复无法取消下载更新的bug<br/>
+4.更新器和启动器不再请求管理员权限<br/>
+5.启动器(Launcher.exe)美化无java的提示窗口，引导用户安装java<br/>
+4.修复关于页面中无效的地址<br/>
+2.删除坏掉的源]]>
+  </desc>
+  <libs>
+    <omods ver="30.1" name="可选模组" path=".minecraft/mods/1.12">
+      <download>
+        <url name="omods.moecraftpkg">{{url}}omods.moecraftpkg</url>
+      </download>
+      <script type="bat">
+        <![CDATA[echo ===========Optional Mod Installer============ && echo Written By Kenvix @ 2016/2/1 && del *.moecraft.* && "{{7z}}" x -y -o"{{Path}}" "{{DLDir}}/omods.moecraftpkg" && echo ===========Optional Mods Installed=========== && exit %errorlevel%]]>
+      </script>
+      <shell>
+        <![CDATA[
+            echo ===========Optional Mod Installer============
+            echo Written By Kenvix @ 2016/7/12
+            rm -f *.moecraft.jar
+            rm -f *.moecraft.jar.disabled
+            rm -f *.moecraft.zip
+            rm -f *.moecraft.zip.disabled
+            "{{7z}}" x -y -o"{{Path}}" "{{DLDir}}/omods.moecraftpkg"
+            echo ===========Optional Mods Installed===========
+          ]]>
+      </shell>
+    </omods>
+    <root ver="30.2" name="根目录文件" path="">
+      <download>
+        <url name="root.moecraftpkg" unpack="1">{{url}}root.moecraftpkg</url>
+      </download>
+    </root>
+    <main ver="30.1" name="核心文件"  path=".minecraft">
+      <download>
+        <url name="core.moecraftpkg" unpack="1">{{url}}core.moecraftpkg</url>
+      </download>
+    </main>
+    <asset ver="30.1" name="资源(语言,声音等)文件" path=".minecraft/assets">
+      <download>
+        <url name="assets.moecraftpkg" unpack="1">{{url}}assets.moecraftpkg</url>
+      </download>
+    </asset>
+  </libs>
+</root>

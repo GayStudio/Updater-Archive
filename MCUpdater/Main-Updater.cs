@@ -91,7 +91,7 @@ namespace MCUpdater
             xn = doc.DocumentElement;
             if (xn.SelectSingleNode("desc") != null)
             {
-                updateLog.Text  = xn.SelectSingleNode("desc").InnerText;
+                updateLog.Text = xn.SelectSingleNode("desc").InnerText.Replace("<br/>", "\r\n").Replace("<br>", "\r\n");
                 logbreak();
                 updateLog.Text += "以下内容可以更新：\r\n";
             }
@@ -169,6 +169,7 @@ namespace MCUpdater
                         foreach (XmlElement downvar in down)
                         {
                             startUpdateDownload((downvar.InnerText).Replace("{{url}}", cdnc.get(updateServer.SelectedIndex)["url"]), downvar.GetAttribute("name"), cdnc.getHeaders(updateServer.SelectedIndex));
+                            if (nowUpdate == 0) return;
                             if (!File.Exists(x.path + x.updpath + x.dlpath + downvar.GetAttribute("name")) || (new FileInfo(x.path + x.updpath + x.dlpath + downvar.GetAttribute("name"))).Length <= 0)
                             {
                                 updateFatalError = true;
@@ -633,6 +634,7 @@ namespace MCUpdater
                     }
                     if (e.Error != null)
                     {
+                        if (nowUpdate == 0) return;
                         DialogResult error = MessageBox.Show(e.Error.Message + "\r\n\r\n" + url, "下载失败", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                         if (error == DialogResult.Retry)
                         {
@@ -641,7 +643,7 @@ namespace MCUpdater
                         }
                         else
                         {
-                            updateLog.Text += "下载失败并取消重试：" + url + "\r\n";
+                            updateLog.Text += "下载失败：" + url + "\r\n";
                             endUpdateAction();
                             return;
                         }
@@ -676,6 +678,10 @@ namespace MCUpdater
                 while (wc.IsBusy)
                 {
                     Thread.Sleep(x.sleep);
+                    if(nowUpdate == 0)
+                    {
+                        wc.CancelAsync();
+                    }
                     Application.DoEvents();
                 }
             }

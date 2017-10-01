@@ -27,7 +27,7 @@ namespace InstallerAgent
                 ps.StartInfo.RedirectStandardOutput = true;
                 ps.StartInfo.Verb = "runas";
                 ps.Start();
-                
+                return 0;
             } else
             {
                 return 200;

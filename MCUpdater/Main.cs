@@ -8,6 +8,7 @@ using System.Threading;
 using Microsoft.Win32;
 using System.Security.Principal;
 using System.Reflection;
+using System.Drawing;
 
 namespace MCUpdater
 {
@@ -35,34 +36,6 @@ namespace MCUpdater
                 
             }
             InitializeComponent();
-            try
-            {
-                WindowsIdentity identity = WindowsIdentity.GetCurrent();
-                WindowsPrincipal principal = new WindowsPrincipal(identity);
-                if (principal.IsInRole(WindowsBuiltInRole.Administrator))
-                {
-                    log("当前正以系统管理员身份启动 " + x.pname);
-                }
-                else
-                {
-                    error("请注意：您并非以系管理员身份运行 " + x.pname + " !\r\n这可能会导致各种问题，强烈建议下次运行本程序右键选择 [以管理员身份运行]");
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.UseShellExecute = true;
-                    startInfo.WorkingDirectory = Environment.CurrentDirectory;
-                    startInfo.FileName = Application.ExecutablePath;
-                    foreach (string a in p.arg)
-                    {
-                        startInfo.Arguments += a + " ";
-                    }
-                    //设置启动动作,确保以管理员身份运行
-                    startInfo.Verb = "runas";
-                    Environment.Exit(254);
-                }
-            }
-            catch (Exception ex)
-            {
-                error(ex.ToString(), "检查权限失败");
-            }
             #region UI
             label2.Text = x.pname;
             this.Text = x.pname + " Ver." + Application.ProductVersion;
@@ -400,11 +373,11 @@ namespace MCUpdater
         {
             try
             {
-                if(!Directory.Exists(x.path + x.binpath + "mods\\1.7.10"))
+                if(!Directory.Exists(x.moddir))
                 {
-                    Directory.CreateDirectory(x.path + x.binpath + "mods\\1.7.10");
+                    Directory.CreateDirectory(x.moddir);
                 }
-                Process.Start("explorer.exe", "\"" + x.path + x.binpath + "mods\\1.7.10\"");
+                Process.Start("explorer.exe", "\"" + x.moddir + "\"");
             }
             catch (Exception ex)
             {
@@ -419,7 +392,12 @@ namespace MCUpdater
                 if(File.Exists(x.path + "Launcher.exe"))
                 {
                     Process.Start(x.path + "Launcher.exe");
-                } else
+                }
+                else if (File.Exists(x.path + "MCLauncher.exe"))
+                {
+                    Process.Start(x.path + "MCLauncher.exe");
+                }
+                else
                 {
                     Process.Start(x.path + "启动器.exe");
                 }
@@ -521,7 +499,6 @@ namespace MCUpdater
                 var url = urlobj.GetAttribute("href");
                 if (string.IsNullOrEmpty(url)) return;
                 string filename = url.Split('/')[url.Split('/').Length - 1];
-                log("文件下载请求：" + url);
                 var moeset = urlobj.GetAttribute("moecraft");
                 bool isquiet = false;
                 bool ispkginstaller = false;
@@ -531,6 +508,7 @@ namespace MCUpdater
                 bool isdownload = true;
                 if (!string.IsNullOrEmpty(moeset))
                 {
+                    log("文件下载请求：" + url);
                     var moeres = moeset.Split(' ');
                     foreach(string moe in moeres)
                     {
@@ -617,7 +595,7 @@ namespace MCUpdater
 
         private void linkLabel1_LinkClicked_2(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            openUrl("https://telegram.me/moecraft");
+            openUrl("https://telegram.me/moecraftbot");
         }
 
         void openUrl(string url)
@@ -639,5 +617,26 @@ namespace MCUpdater
             }
         }
 
+        private void offlineModList_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+            else e.Effect = DragDropEffects.None;
+        }
+
+        private void offlineModList_DragDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                string filepath = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+                FileInfo fi = new FileInfo(filepath);
+                File.Copy(filepath, x.path  + x.moddir + fi.Name);
+                log("已添加 Mod: " + fi.Name);
+            }
+            catch (Exception ex)
+            {
+                log("添加 Mod 失败：" + ex.Message);
+            }
+        }
     }
 }

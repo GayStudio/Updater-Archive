@@ -264,6 +264,19 @@
     <None Include="Resources\99.png" />
     <None Include="Resources\102.png" />
     <None Include="Resources\72.png" />
+    <Content Include="updater\info.xml" />
+    <Content Include="updater\paths\bakList.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="updater\paths\binpath.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="updater\paths\mcLibPath.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="updater\paths\moddir.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="updater\update.xml" />
     <None Include="updater\7z.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

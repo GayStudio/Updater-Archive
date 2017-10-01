@@ -32,14 +32,21 @@ namespace MCUpdater
                 ex.ShowDialog();
             });
 #endif
-            arg = args;
-            initResFile();
-            Application.EnableVisualStyles();
-            if(args.Length >= 4 && args[0] == "pkginstall")
+            try
             {
-                pkgInstall = true;
+                arg = args;
+                initResFile();
+                Application.EnableVisualStyles();
+                if (args.Length >= 4 && args[0] == "pkginstall")
+                {
+                    pkgInstall = true;
+                }
+                Application.Run(new Main());
             }
-            Application.Run(new Main());
+            catch(Exception e)
+            {
+                MessageBox.Show(e.ToString(),"MoeCraft Toolbox 初始化失败",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
