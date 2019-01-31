@@ -155,18 +155,19 @@ namespace MCUpdater
             // 
             // statusStrip1
             // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lastLog});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 433);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 485);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(810, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(992, 25);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lastLog
             // 
             this.lastLog.Name = "lastLog";
-            this.lastLog.Size = new System.Drawing.Size(56, 17);
+            this.lastLog.Size = new System.Drawing.Size(69, 20);
             this.lastLog.Text = "准备就绪";
             // 
             // mcLauncher
@@ -192,10 +193,10 @@ namespace MCUpdater
             this.mcLauncher.Controls.Add(this.label7);
             this.mcLauncher.Controls.Add(this.label6);
             this.mcLauncher.Controls.Add(this.label13);
-            this.mcLauncher.Location = new System.Drawing.Point(4, 22);
+            this.mcLauncher.Location = new System.Drawing.Point(4, 29);
             this.mcLauncher.Name = "mcLauncher";
             this.mcLauncher.Padding = new System.Windows.Forms.Padding(3);
-            this.mcLauncher.Size = new System.Drawing.Size(778, 381);
+            this.mcLauncher.Size = new System.Drawing.Size(984, 477);
             this.mcLauncher.TabIndex = 7;
             this.mcLauncher.Text = "启动器";
             this.mcLauncher.UseVisualStyleBackColor = true;
@@ -208,7 +209,7 @@ namespace MCUpdater
             this.regLink.LinkColor = System.Drawing.SystemColors.MenuHighlight;
             this.regLink.Location = new System.Drawing.Point(613, 20);
             this.regLink.Name = "regLink";
-            this.regLink.Size = new System.Drawing.Size(116, 17);
+            this.regLink.Size = new System.Drawing.Size(144, 20);
             this.regLink.TabIndex = 27;
             this.regLink.TabStop = true;
             this.regLink.Tag = "";
@@ -221,7 +222,7 @@ namespace MCUpdater
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(407, 20);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(200, 17);
+            this.label8.Size = new System.Drawing.Size(249, 20);
             this.label8.TabIndex = 26;
             this.label8.Text = "请填写您在用户中心填写的游戏名称";
             // 
@@ -230,7 +231,7 @@ namespace MCUpdater
             this.debugMode.AutoSize = true;
             this.debugMode.Location = new System.Drawing.Point(654, 123);
             this.debugMode.Name = "debugMode";
-            this.debugMode.Size = new System.Drawing.Size(75, 21);
+            this.debugMode.Size = new System.Drawing.Size(91, 24);
             this.debugMode.TabIndex = 25;
             this.debugMode.Text = "调试模式";
             this.debugMode.UseVisualStyleBackColor = true;
@@ -240,7 +241,7 @@ namespace MCUpdater
             this.playerFS.AutoSize = true;
             this.playerFS.Location = new System.Drawing.Point(678, 52);
             this.playerFS.Name = "playerFS";
-            this.playerFS.Size = new System.Drawing.Size(51, 21);
+            this.playerFS.Size = new System.Drawing.Size(61, 24);
             this.playerFS.TabIndex = 24;
             this.playerFS.Text = "全屏";
             this.playerFS.UseVisualStyleBackColor = true;
@@ -250,7 +251,7 @@ namespace MCUpdater
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(444, 55);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(14, 17);
+            this.label12.Size = new System.Drawing.Size(17, 20);
             this.label12.TabIndex = 23;
             this.label12.Text = "x";
             // 
@@ -259,7 +260,7 @@ namespace MCUpdater
             this.playerHeight.Location = new System.Drawing.Point(460, 52);
             this.playerHeight.MaxLength = 6;
             this.playerHeight.Name = "playerHeight";
-            this.playerHeight.Size = new System.Drawing.Size(61, 23);
+            this.playerHeight.Size = new System.Drawing.Size(61, 27);
             this.playerHeight.TabIndex = 22;
             this.playerHeight.Text = "768";
             // 
@@ -268,7 +269,7 @@ namespace MCUpdater
             this.playerWidth.Location = new System.Drawing.Point(381, 52);
             this.playerWidth.MaxLength = 6;
             this.playerWidth.Name = "playerWidth";
-            this.playerWidth.Size = new System.Drawing.Size(61, 23);
+            this.playerWidth.Size = new System.Drawing.Size(61, 27);
             this.playerWidth.TabIndex = 21;
             this.playerWidth.Text = "1024";
             // 
@@ -285,7 +286,7 @@ namespace MCUpdater
             // 
             this.playerJRE.Location = new System.Drawing.Point(108, 86);
             this.playerJRE.Name = "playerJRE";
-            this.playerJRE.Size = new System.Drawing.Size(513, 23);
+            this.playerJRE.Size = new System.Drawing.Size(513, 27);
             this.playerJRE.TabIndex = 11;
             // 
             // playerMem
@@ -295,7 +296,7 @@ namespace MCUpdater
             this.playerMem.Location = new System.Drawing.Point(86, 52);
             this.playerMem.MaxLength = 10;
             this.playerMem.Name = "playerMem";
-            this.playerMem.Size = new System.Drawing.Size(87, 23);
+            this.playerMem.Size = new System.Drawing.Size(87, 27);
             this.playerMem.TabIndex = 2;
             this.playerMem.Text = "1024";
             // 
@@ -305,7 +306,7 @@ namespace MCUpdater
             this.playerName.Location = new System.Drawing.Point(86, 17);
             this.playerName.MaxLength = 20;
             this.playerName.Name = "playerName";
-            this.playerName.Size = new System.Drawing.Size(315, 23);
+            this.playerName.Size = new System.Drawing.Size(315, 27);
             this.playerName.TabIndex = 1;
             // 
             // label11
@@ -313,7 +314,7 @@ namespace MCUpdater
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(322, 55);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(56, 17);
+            this.label11.Size = new System.Drawing.Size(69, 20);
             this.label11.TabIndex = 20;
             this.label11.Text = "分辨率：";
             // 
@@ -322,7 +323,7 @@ namespace MCUpdater
             this.playerClose.AutoSize = true;
             this.playerClose.Location = new System.Drawing.Point(268, 310);
             this.playerClose.Name = "playerClose";
-            this.playerClose.Size = new System.Drawing.Size(147, 21);
+            this.playerClose.Size = new System.Drawing.Size(181, 24);
             this.playerClose.TabIndex = 19;
             this.playerClose.Text = "启动游戏后退出本程序";
             this.playerClose.UseVisualStyleBackColor = true;
@@ -352,7 +353,7 @@ namespace MCUpdater
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(16, 124);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(200, 17);
+            this.label10.Size = new System.Drawing.Size(249, 20);
             this.label10.TabIndex = 15;
             this.label10.Text = "启动参数（高级，一般无需在意）：";
             // 
@@ -371,7 +372,7 @@ namespace MCUpdater
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(17, 89);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(88, 17);
+            this.label9.Size = new System.Drawing.Size(108, 20);
             this.label9.TabIndex = 12;
             this.label9.Text = "JRE安装目录：";
             // 
@@ -380,7 +381,7 @@ namespace MCUpdater
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(16, 54);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(68, 17);
+            this.label7.Size = new System.Drawing.Size(84, 20);
             this.label7.TabIndex = 5;
             this.label7.Text = "启动内存：";
             // 
@@ -389,7 +390,7 @@ namespace MCUpdater
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(175, 54);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(28, 17);
+            this.label6.Size = new System.Drawing.Size(33, 20);
             this.label6.TabIndex = 4;
             this.label6.Text = "MB";
             // 
@@ -398,7 +399,7 @@ namespace MCUpdater
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(16, 20);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(68, 17);
+            this.label13.Size = new System.Drawing.Size(84, 20);
             this.label13.TabIndex = 0;
             this.label13.Text = "游戏昵称：";
             // 
@@ -410,10 +411,10 @@ namespace MCUpdater
             this.toolTab.Controls.Add(this.groupBox4);
             this.toolTab.Controls.Add(this.groupBox1);
             this.toolTab.Controls.Add(this.toolGroupBox);
-            this.toolTab.Location = new System.Drawing.Point(4, 22);
+            this.toolTab.Location = new System.Drawing.Point(4, 29);
             this.toolTab.Name = "toolTab";
             this.toolTab.Padding = new System.Windows.Forms.Padding(3);
-            this.toolTab.Size = new System.Drawing.Size(778, 381);
+            this.toolTab.Size = new System.Drawing.Size(984, 477);
             this.toolTab.TabIndex = 5;
             this.toolTab.Text = "工具箱";
             this.toolTab.UseVisualStyleBackColor = true;
@@ -423,9 +424,9 @@ namespace MCUpdater
             this.groupBox7.Controls.Add(this.label4);
             this.groupBox7.Controls.Add(this.gameLogViewerButton);
             this.groupBox7.Controls.Add(this.crashReportViewerButton);
-            this.groupBox7.Location = new System.Drawing.Point(178, 309);
+            this.groupBox7.Location = new System.Drawing.Point(244, 308);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(409, 62);
+            this.groupBox7.Size = new System.Drawing.Size(525, 62);
             this.groupBox7.TabIndex = 16;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "日志查看器";
@@ -435,13 +436,13 @@ namespace MCUpdater
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(10, 28);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(92, 17);
+            this.label4.Size = new System.Drawing.Size(114, 20);
             this.label4.TabIndex = 14;
             this.label4.Text = "帮助你诊断错误";
             // 
             // gameLogViewerButton
             // 
-            this.gameLogViewerButton.Location = new System.Drawing.Point(261, 19);
+            this.gameLogViewerButton.Location = new System.Drawing.Point(379, 21);
             this.gameLogViewerButton.Name = "gameLogViewerButton";
             this.gameLogViewerButton.Size = new System.Drawing.Size(133, 34);
             this.gameLogViewerButton.TabIndex = 12;
@@ -451,7 +452,7 @@ namespace MCUpdater
             // 
             // crashReportViewerButton
             // 
-            this.crashReportViewerButton.Location = new System.Drawing.Point(119, 19);
+            this.crashReportViewerButton.Location = new System.Drawing.Point(237, 21);
             this.crashReportViewerButton.Name = "crashReportViewerButton";
             this.crashReportViewerButton.Size = new System.Drawing.Size(133, 34);
             this.crashReportViewerButton.TabIndex = 11;
@@ -463,18 +464,18 @@ namespace MCUpdater
             // 
             this.groupBox6.Controls.Add(this.regionCalculatorButton);
             this.groupBox6.Controls.Add(this.runStrongholdsCalculator);
-            this.groupBox6.Location = new System.Drawing.Point(17, 130);
+            this.groupBox6.Location = new System.Drawing.Point(17, 143);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(155, 112);
+            this.groupBox6.Size = new System.Drawing.Size(221, 159);
             this.groupBox6.TabIndex = 15;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "计算器";
             // 
             // regionCalculatorButton
             // 
-            this.regionCalculatorButton.Location = new System.Drawing.Point(10, 25);
+            this.regionCalculatorButton.Location = new System.Drawing.Point(10, 40);
             this.regionCalculatorButton.Name = "regionCalculatorButton";
-            this.regionCalculatorButton.Size = new System.Drawing.Size(133, 34);
+            this.regionCalculatorButton.Size = new System.Drawing.Size(205, 34);
             this.regionCalculatorButton.TabIndex = 10;
             this.regionCalculatorButton.Text = "区域文件计算器 (&E)";
             this.regionCalculatorButton.UseVisualStyleBackColor = true;
@@ -482,9 +483,9 @@ namespace MCUpdater
             // 
             // runStrongholdsCalculator
             // 
-            this.runStrongholdsCalculator.Location = new System.Drawing.Point(10, 65);
+            this.runStrongholdsCalculator.Location = new System.Drawing.Point(10, 98);
             this.runStrongholdsCalculator.Name = "runStrongholdsCalculator";
-            this.runStrongholdsCalculator.Size = new System.Drawing.Size(133, 34);
+            this.runStrongholdsCalculator.Size = new System.Drawing.Size(205, 34);
             this.runStrongholdsCalculator.TabIndex = 13;
             this.runStrongholdsCalculator.Text = "要塞坐标计算器 (&T)";
             this.runStrongholdsCalculator.UseVisualStyleBackColor = true;
@@ -496,9 +497,9 @@ namespace MCUpdater
             this.groupBox5.Controls.Add(this.label26);
             this.groupBox5.Controls.Add(this.label25);
             this.groupBox5.Controls.Add(this.label24);
-            this.groupBox5.Location = new System.Drawing.Point(386, 144);
+            this.groupBox5.Location = new System.Drawing.Point(512, 143);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(201, 159);
+            this.groupBox5.Size = new System.Drawing.Size(257, 159);
             this.groupBox5.TabIndex = 14;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "安装低配补丁";
@@ -518,7 +519,7 @@ namespace MCUpdater
             this.label26.AutoSize = true;
             this.label26.Location = new System.Drawing.Point(8, 47);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(148, 17);
+            this.label26.Size = new System.Drawing.Size(185, 20);
             this.label26.TabIndex = 16;
             this.label26.Text = "来增强游戏内FPS（帧率）";
             // 
@@ -527,7 +528,7 @@ namespace MCUpdater
             this.label25.AutoSize = true;
             this.label25.Location = new System.Drawing.Point(9, 68);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(116, 17);
+            this.label25.Size = new System.Drawing.Size(144, 20);
             this.label25.TabIndex = 15;
             this.label25.Text = "安装前请先备份设置";
             // 
@@ -536,7 +537,7 @@ namespace MCUpdater
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(9, 25);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(188, 17);
+            this.label24.Size = new System.Drawing.Size(234, 20);
             this.label24.TabIndex = 14;
             this.label24.Text = "安装低配补丁，可以通过降低画质";
             // 
@@ -546,9 +547,9 @@ namespace MCUpdater
             this.groupBox4.Controls.Add(this.label22);
             this.groupBox4.Controls.Add(this.recMcOpt);
             this.groupBox4.Controls.Add(this.bakMcOpt);
-            this.groupBox4.Location = new System.Drawing.Point(178, 144);
+            this.groupBox4.Location = new System.Drawing.Point(244, 143);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(202, 159);
+            this.groupBox4.Size = new System.Drawing.Size(252, 159);
             this.groupBox4.TabIndex = 12;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "备份游戏内设置";
@@ -558,7 +559,7 @@ namespace MCUpdater
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(11, 25);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(164, 17);
+            this.label21.Size = new System.Drawing.Size(204, 20);
             this.label21.TabIndex = 13;
             this.label21.Text = "防止因操作不慎导致设置丢失";
             // 
@@ -567,7 +568,7 @@ namespace MCUpdater
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(11, 47);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(176, 17);
+            this.label22.Size = new System.Drawing.Size(219, 20);
             this.label22.TabIndex = 12;
             this.label22.Text = "备份内容为设置、服务器、键位";
             // 
@@ -597,18 +598,18 @@ namespace MCUpdater
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.disableForgeProgress);
             this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Location = new System.Drawing.Point(178, 17);
+            this.groupBox1.Location = new System.Drawing.Point(244, 16);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(409, 121);
+            this.groupBox1.Size = new System.Drawing.Size(525, 121);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "解决低端电脑启动失败问题";
             // 
             // enableForgeProgress
             // 
-            this.enableForgeProgress.Location = new System.Drawing.Point(217, 73);
+            this.enableForgeProgress.Location = new System.Drawing.Point(274, 73);
             this.enableForgeProgress.Name = "enableForgeProgress";
-            this.enableForgeProgress.Size = new System.Drawing.Size(173, 34);
+            this.enableForgeProgress.Size = new System.Drawing.Size(238, 34);
             this.enableForgeProgress.TabIndex = 3;
             this.enableForgeProgress.Text = "恢复启动进度条";
             this.enableForgeProgress.UseVisualStyleBackColor = true;
@@ -619,7 +620,7 @@ namespace MCUpdater
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(10, 49);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(380, 17);
+            this.label15.Size = new System.Drawing.Size(474, 20);
             this.label15.TabIndex = 2;
             this.label15.Text = "然后游戏马上崩溃，则可以尝试使用本工具关闭启动进度条来解决问题";
             // 
@@ -627,7 +628,7 @@ namespace MCUpdater
             // 
             this.disableForgeProgress.Location = new System.Drawing.Point(13, 73);
             this.disableForgeProgress.Name = "disableForgeProgress";
-            this.disableForgeProgress.Size = new System.Drawing.Size(173, 34);
+            this.disableForgeProgress.Size = new System.Drawing.Size(239, 34);
             this.disableForgeProgress.TabIndex = 1;
             this.disableForgeProgress.Text = "关闭启动进度条 [ 解决问题 ]";
             this.disableForgeProgress.UseVisualStyleBackColor = true;
@@ -638,7 +639,7 @@ namespace MCUpdater
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(10, 26);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(296, 17);
+            this.label14.Size = new System.Drawing.Size(369, 20);
             this.label14.TabIndex = 0;
             this.label14.Text = "如果你在启动游戏的时候，出现游戏窗口，背景为黑色";
             // 
@@ -648,16 +649,16 @@ namespace MCUpdater
             this.toolGroupBox.Controls.Add(this.cleanDownloadCache);
             this.toolGroupBox.Location = new System.Drawing.Point(17, 16);
             this.toolGroupBox.Name = "toolGroupBox";
-            this.toolGroupBox.Size = new System.Drawing.Size(155, 108);
+            this.toolGroupBox.Size = new System.Drawing.Size(221, 121);
             this.toolGroupBox.TabIndex = 10;
             this.toolGroupBox.TabStop = false;
             this.toolGroupBox.Text = "常用工具";
             // 
             // installPkg2
             // 
-            this.installPkg2.Location = new System.Drawing.Point(10, 62);
+            this.installPkg2.Location = new System.Drawing.Point(10, 73);
             this.installPkg2.Name = "installPkg2";
-            this.installPkg2.Size = new System.Drawing.Size(133, 32);
+            this.installPkg2.Size = new System.Drawing.Size(205, 32);
             this.installPkg2.TabIndex = 30;
             this.installPkg2.Text = "安装MoeCraft包 (&I)";
             this.installPkg2.UseVisualStyleBackColor = true;
@@ -665,9 +666,9 @@ namespace MCUpdater
             // 
             // cleanDownloadCache
             // 
-            this.cleanDownloadCache.Location = new System.Drawing.Point(10, 22);
+            this.cleanDownloadCache.Location = new System.Drawing.Point(10, 26);
             this.cleanDownloadCache.Name = "cleanDownloadCache";
-            this.cleanDownloadCache.Size = new System.Drawing.Size(133, 34);
+            this.cleanDownloadCache.Size = new System.Drawing.Size(205, 34);
             this.cleanDownloadCache.TabIndex = 9;
             this.cleanDownloadCache.Text = "清除下载缓存 (&C)";
             this.cleanDownloadCache.UseVisualStyleBackColor = true;
@@ -676,22 +677,23 @@ namespace MCUpdater
             // logTab
             // 
             this.logTab.Controls.Add(this.logBox);
-            this.logTab.Location = new System.Drawing.Point(4, 22);
+            this.logTab.Location = new System.Drawing.Point(4, 29);
             this.logTab.Name = "logTab";
             this.logTab.Padding = new System.Windows.Forms.Padding(3);
-            this.logTab.Size = new System.Drawing.Size(778, 381);
+            this.logTab.Size = new System.Drawing.Size(984, 477);
             this.logTab.TabIndex = 4;
             this.logTab.Text = "操作日志";
             this.logTab.UseVisualStyleBackColor = true;
             // 
             // logBox
             // 
-            this.logBox.Location = new System.Drawing.Point(7, 7);
+            this.logBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logBox.Location = new System.Drawing.Point(3, 3);
             this.logBox.Multiline = true;
             this.logBox.Name = "logBox";
             this.logBox.ReadOnly = true;
             this.logBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.logBox.Size = new System.Drawing.Size(765, 364);
+            this.logBox.Size = new System.Drawing.Size(978, 471);
             this.logBox.TabIndex = 0;
             this.logBox.TextChanged += new System.EventHandler(this.logBox_TextChanged);
             // 
@@ -702,19 +704,19 @@ namespace MCUpdater
             this.offlineModsTab.Controls.Add(this.label1);
             this.offlineModsTab.Controls.Add(this.offlineModList);
             this.offlineModsTab.Controls.Add(this.saveOfflineMod);
-            this.offlineModsTab.Location = new System.Drawing.Point(4, 26);
+            this.offlineModsTab.Location = new System.Drawing.Point(4, 29);
             this.offlineModsTab.Name = "offlineModsTab";
             this.offlineModsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.offlineModsTab.Size = new System.Drawing.Size(778, 377);
+            this.offlineModsTab.Size = new System.Drawing.Size(984, 477);
             this.offlineModsTab.TabIndex = 3;
             this.offlineModsTab.Text = "Mod管理";
             this.offlineModsTab.UseVisualStyleBackColor = true;
             // 
             // openOmodsDir
             // 
-            this.openOmodsDir.Location = new System.Drawing.Point(374, 340);
+            this.openOmodsDir.Location = new System.Drawing.Point(407, 401);
             this.openOmodsDir.Name = "openOmodsDir";
-            this.openOmodsDir.Size = new System.Drawing.Size(133, 34);
+            this.openOmodsDir.Size = new System.Drawing.Size(167, 40);
             this.openOmodsDir.TabIndex = 5;
             this.openOmodsDir.Text = "打开模组文件夹 (&O)";
             this.openOmodsDir.UseVisualStyleBackColor = true;
@@ -722,9 +724,9 @@ namespace MCUpdater
             // 
             // refreshMods
             // 
-            this.refreshMods.Location = new System.Drawing.Point(513, 340);
+            this.refreshMods.Location = new System.Drawing.Point(580, 401);
             this.refreshMods.Name = "refreshMods";
-            this.refreshMods.Size = new System.Drawing.Size(120, 34);
+            this.refreshMods.Size = new System.Drawing.Size(145, 40);
             this.refreshMods.TabIndex = 4;
             this.refreshMods.Text = "刷新 (&R)";
             this.refreshMods.UseVisualStyleBackColor = true;
@@ -733,9 +735,9 @@ namespace MCUpdater
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 339);
+            this.label1.Location = new System.Drawing.Point(8, 401);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(288, 34);
+            this.label1.Size = new System.Drawing.Size(359, 40);
             this.label1.TabIndex = 3;
             this.label1.Text = "请选择要操作的Mod，勾选表示启用，不选表示禁用\r\n你可以将 Mod 拖动到上面来添加 Mod";
             // 
@@ -745,7 +747,7 @@ namespace MCUpdater
             this.offlineModList.FormattingEnabled = true;
             this.offlineModList.Location = new System.Drawing.Point(6, 6);
             this.offlineModList.Name = "offlineModList";
-            this.offlineModList.Size = new System.Drawing.Size(766, 328);
+            this.offlineModList.Size = new System.Drawing.Size(970, 378);
             this.offlineModList.TabIndex = 2;
             this.offlineModList.SelectedIndexChanged += new System.EventHandler(this.offlineModList_SelectedIndexChanged);
             this.offlineModList.DragDrop += new System.Windows.Forms.DragEventHandler(this.offlineModList_DragDrop);
@@ -753,9 +755,9 @@ namespace MCUpdater
             // 
             // saveOfflineMod
             // 
-            this.saveOfflineMod.Location = new System.Drawing.Point(639, 339);
+            this.saveOfflineMod.Location = new System.Drawing.Point(744, 401);
             this.saveOfflineMod.Name = "saveOfflineMod";
-            this.saveOfflineMod.Size = new System.Drawing.Size(133, 34);
+            this.saveOfflineMod.Size = new System.Drawing.Size(232, 40);
             this.saveOfflineMod.TabIndex = 1;
             this.saveOfflineMod.Text = "保存更改 (&S)";
             this.saveOfflineMod.UseVisualStyleBackColor = true;
@@ -771,10 +773,10 @@ namespace MCUpdater
             this.checkUpdate.Controls.Add(this.updateButton);
             this.checkUpdate.Controls.Add(this.updateThisProgressBar);
             this.checkUpdate.Controls.Add(this.groupBox3);
-            this.checkUpdate.Location = new System.Drawing.Point(4, 22);
+            this.checkUpdate.Location = new System.Drawing.Point(4, 29);
             this.checkUpdate.Name = "checkUpdate";
             this.checkUpdate.Padding = new System.Windows.Forms.Padding(3);
-            this.checkUpdate.Size = new System.Drawing.Size(778, 381);
+            this.checkUpdate.Size = new System.Drawing.Size(984, 477);
             this.checkUpdate.TabIndex = 2;
             this.checkUpdate.Text = "检查更新";
             this.checkUpdate.UseVisualStyleBackColor = true;
@@ -782,9 +784,9 @@ namespace MCUpdater
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(564, 293);
+            this.label17.Location = new System.Drawing.Point(707, 362);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(56, 17);
+            this.label17.Size = new System.Drawing.Size(69, 20);
             this.label17.TabIndex = 10;
             this.label17.Text = "更新节点";
             // 
@@ -792,18 +794,18 @@ namespace MCUpdater
             // 
             this.updateServer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.updateServer.FormattingEnabled = true;
-            this.updateServer.Location = new System.Drawing.Point(631, 290);
+            this.updateServer.Location = new System.Drawing.Point(782, 359);
             this.updateServer.Name = "updateServer";
-            this.updateServer.Size = new System.Drawing.Size(139, 25);
+            this.updateServer.Size = new System.Drawing.Size(194, 28);
             this.updateServer.TabIndex = 9;
             this.updateServer.SelectedIndexChanged += new System.EventHandler(this.updateServer_SelectedIndexChanged);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.forceUpdate);
-            this.groupBox2.Location = new System.Drawing.Point(560, 33);
+            this.groupBox2.Location = new System.Drawing.Point(704, 33);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(210, 235);
+            this.groupBox2.Size = new System.Drawing.Size(272, 320);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "选择更新内容";
@@ -815,17 +817,17 @@ namespace MCUpdater
             this.forceUpdate.Items.AddRange(new object[] {
             "请先检查更新",
             "请选择速度最快的节点来更新"});
-            this.forceUpdate.Location = new System.Drawing.Point(7, 23);
+            this.forceUpdate.Location = new System.Drawing.Point(7, 24);
             this.forceUpdate.Name = "forceUpdate";
-            this.forceUpdate.Size = new System.Drawing.Size(197, 202);
+            this.forceUpdate.Size = new System.Drawing.Size(259, 290);
             this.forceUpdate.TabIndex = 29;
             // 
             // updateThisProgressText
             // 
             this.updateThisProgressText.AutoSize = true;
-            this.updateThisProgressText.Location = new System.Drawing.Point(564, 7);
+            this.updateThisProgressText.Location = new System.Drawing.Point(707, 7);
             this.updateThisProgressText.Name = "updateThisProgressText";
-            this.updateThisProgressText.Size = new System.Drawing.Size(129, 17);
+            this.updateThisProgressText.Size = new System.Drawing.Size(148, 20);
             this.updateThisProgressText.TabIndex = 5;
             this.updateThisProgressText.Text = "-- % |  -- MB / -- MB";
             // 
@@ -834,16 +836,16 @@ namespace MCUpdater
             this.updateAction.AutoSize = true;
             this.updateAction.Location = new System.Drawing.Point(10, 7);
             this.updateAction.Name = "updateAction";
-            this.updateAction.Size = new System.Drawing.Size(344, 17);
+            this.updateAction.Size = new System.Drawing.Size(425, 20);
             this.updateAction.TabIndex = 6;
             this.updateAction.Text = "若要检查更新或者安装游戏，请点击右下角的 [ 检查更新 ] 按钮";
             // 
             // updateButton
             // 
             this.updateButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.updateButton.Location = new System.Drawing.Point(560, 329);
+            this.updateButton.Location = new System.Drawing.Point(711, 395);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(210, 36);
+            this.updateButton.Size = new System.Drawing.Size(265, 49);
             this.updateButton.TabIndex = 1;
             this.updateButton.Text = "检查更新 (&C)";
             this.updateButton.UseVisualStyleBackColor = true;
@@ -851,17 +853,17 @@ namespace MCUpdater
             // 
             // updateThisProgressBar
             // 
-            this.updateThisProgressBar.Location = new System.Drawing.Point(12, 33);
+            this.updateThisProgressBar.Location = new System.Drawing.Point(12, 37);
             this.updateThisProgressBar.Name = "updateThisProgressBar";
-            this.updateThisProgressBar.Size = new System.Drawing.Size(542, 23);
+            this.updateThisProgressBar.Size = new System.Drawing.Size(686, 23);
             this.updateThisProgressBar.TabIndex = 3;
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.updateLog);
-            this.groupBox3.Location = new System.Drawing.Point(12, 62);
+            this.groupBox3.Location = new System.Drawing.Point(14, 73);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(542, 303);
+            this.groupBox3.Size = new System.Drawing.Size(684, 371);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "更新日志";
@@ -873,7 +875,7 @@ namespace MCUpdater
             this.updateLog.Name = "updateLog";
             this.updateLog.ReadOnly = true;
             this.updateLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.updateLog.Size = new System.Drawing.Size(530, 275);
+            this.updateLog.Size = new System.Drawing.Size(672, 343);
             this.updateLog.TabIndex = 7;
             this.updateLog.Text = "若要检查更新或者安装游戏，请点击右下角的 [ 检查更新 ] 按钮\r\n(请选择速度最快的更新节点来更新)\r\n\r\nTip:更新器不是启动器；更新完成后会自动下载启动器" +
     "\r\nTip:右下角可以选择更新服务器节点\r\nTip:工具箱和关于页面还有很多功能等待你去挖掘\r\n\r\n\r\n\r\n你可以点击 .moecraftpkg 格式文件来直接" +
@@ -889,19 +891,21 @@ namespace MCUpdater
             this.mainTabControl.Controls.Add(this.aboutTab);
             this.mainTabControl.Controls.Add(this.logTab);
             this.mainTabControl.Controls.Add(this.mcLauncher);
-            this.mainTabControl.Location = new System.Drawing.Point(12, 12);
+            this.mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainTabControl.Location = new System.Drawing.Point(0, 0);
+            this.mainTabControl.Margin = new System.Windows.Forms.Padding(10, 10, 10, 50);
             this.mainTabControl.Name = "mainTabControl";
             this.mainTabControl.SelectedIndex = 0;
-            this.mainTabControl.Size = new System.Drawing.Size(786, 407);
+            this.mainTabControl.Size = new System.Drawing.Size(992, 510);
             this.mainTabControl.TabIndex = 5;
             // 
             // news
             // 
             this.news.Controls.Add(this.bignewsinit);
             this.news.Controls.Add(this.bignews);
-            this.news.Location = new System.Drawing.Point(4, 26);
+            this.news.Location = new System.Drawing.Point(4, 29);
             this.news.Name = "news";
-            this.news.Size = new System.Drawing.Size(778, 377);
+            this.news.Size = new System.Drawing.Size(984, 477);
             this.news.TabIndex = 9;
             this.news.Text = "大新闻";
             this.news.UseVisualStyleBackColor = true;
@@ -911,7 +915,7 @@ namespace MCUpdater
             this.bignewsinit.AutoSize = true;
             this.bignewsinit.Location = new System.Drawing.Point(27, 23);
             this.bignewsinit.Name = "bignewsinit";
-            this.bignewsinit.Size = new System.Drawing.Size(261, 34);
+            this.bignewsinit.Size = new System.Drawing.Size(294, 40);
             this.bignewsinit.TabIndex = 1;
             this.bignewsinit.Text = "大新闻加载中 ....\r\n                               ——也爱你的MoeCraft\r\n";
             // 
@@ -922,7 +926,7 @@ namespace MCUpdater
             this.bignews.MinimumSize = new System.Drawing.Size(20, 20);
             this.bignews.Name = "bignews";
             this.bignews.ScriptErrorsSuppressed = true;
-            this.bignews.Size = new System.Drawing.Size(778, 377);
+            this.bignews.Size = new System.Drawing.Size(984, 477);
             this.bignews.TabIndex = 0;
             this.bignews.Url = new System.Uri("https://accounts.moecraft.net/index.php?m=API&c=News&a=index", System.UriKind.Absolute);
             this.bignews.Visible = false;
@@ -960,9 +964,9 @@ namespace MCUpdater
             this.aboutTab.Controls.Add(this.version);
             this.aboutTab.Controls.Add(this.label2);
             this.aboutTab.Controls.Add(this.ggimg);
-            this.aboutTab.Location = new System.Drawing.Point(4, 22);
+            this.aboutTab.Location = new System.Drawing.Point(4, 29);
             this.aboutTab.Name = "aboutTab";
-            this.aboutTab.Size = new System.Drawing.Size(778, 381);
+            this.aboutTab.Size = new System.Drawing.Size(984, 477);
             this.aboutTab.TabIndex = 8;
             this.aboutTab.Text = "关于";
             this.aboutTab.UseVisualStyleBackColor = true;
@@ -973,9 +977,9 @@ namespace MCUpdater
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.BackColor = System.Drawing.Color.Transparent;
             this.linkLabel1.LinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.linkLabel1.Location = new System.Drawing.Point(336, 336);
+            this.linkLabel1.Location = new System.Drawing.Point(450, 336);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(56, 17);
+            this.linkLabel1.Size = new System.Drawing.Size(69, 20);
             this.linkLabel1.TabIndex = 33;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Tag = "";
@@ -985,10 +989,10 @@ namespace MCUpdater
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(126, 333);
+            this.textBox5.Location = new System.Drawing.Point(167, 333);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(204, 23);
+            this.textBox5.Size = new System.Drawing.Size(268, 27);
             this.textBox5.TabIndex = 32;
             this.textBox5.Text = "https://telegram.me/moecraftbot";
             // 
@@ -997,25 +1001,25 @@ namespace MCUpdater
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(30, 336);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(79, 17);
+            this.label16.Size = new System.Drawing.Size(97, 20);
             this.label16.TabIndex = 31;
             this.label16.Text = "Telegram 群";
             // 
             // installPkg1
             // 
-            this.installPkg1.Location = new System.Drawing.Point(491, 13);
+            this.installPkg1.Location = new System.Drawing.Point(775, 13);
             this.installPkg1.Name = "installPkg1";
-            this.installPkg1.Size = new System.Drawing.Size(230, 32);
+            this.installPkg1.Size = new System.Drawing.Size(189, 55);
             this.installPkg1.TabIndex = 29;
-            this.installPkg1.Text = "手动安装MoeCraft Package (&I)";
+            this.installPkg1.Text = "手动安装\r\nMoeCraft Package (&I)";
             this.installPkg1.UseVisualStyleBackColor = true;
             this.installPkg1.Click += new System.EventHandler(this.installPkg1_Click);
             // 
             // unsetAss
             // 
-            this.unsetAss.Location = new System.Drawing.Point(577, 157);
+            this.unsetAss.Location = new System.Drawing.Point(775, 197);
             this.unsetAss.Name = "unsetAss";
-            this.unsetAss.Size = new System.Drawing.Size(144, 34);
+            this.unsetAss.Size = new System.Drawing.Size(189, 47);
             this.unsetAss.TabIndex = 28;
             this.unsetAss.Text = "解除文件关联 (&N)";
             this.unsetAss.UseVisualStyleBackColor = true;
@@ -1023,9 +1027,9 @@ namespace MCUpdater
             // 
             // setAss
             // 
-            this.setAss.Location = new System.Drawing.Point(577, 117);
+            this.setAss.Location = new System.Drawing.Point(775, 144);
             this.setAss.Name = "setAss";
-            this.setAss.Size = new System.Drawing.Size(144, 34);
+            this.setAss.Size = new System.Drawing.Size(189, 47);
             this.setAss.TabIndex = 27;
             this.setAss.Text = "设置文件关联 (&A)";
             this.setAss.UseVisualStyleBackColor = true;
@@ -1033,9 +1037,9 @@ namespace MCUpdater
             // 
             // launcherButton
             // 
-            this.launcherButton.Location = new System.Drawing.Point(577, 230);
+            this.launcherButton.Location = new System.Drawing.Point(775, 271);
             this.launcherButton.Name = "launcherButton";
-            this.launcherButton.Size = new System.Drawing.Size(144, 34);
+            this.launcherButton.Size = new System.Drawing.Size(189, 45);
             this.launcherButton.TabIndex = 26;
             this.launcherButton.Text = "MoeCraft 启动器 (&L)";
             this.launcherButton.UseVisualStyleBackColor = true;
@@ -1043,9 +1047,9 @@ namespace MCUpdater
             // 
             // diyButton
             // 
-            this.diyButton.Location = new System.Drawing.Point(577, 59);
+            this.diyButton.Location = new System.Drawing.Point(775, 74);
             this.diyButton.Name = "diyButton";
-            this.diyButton.Size = new System.Drawing.Size(144, 32);
+            this.diyButton.Size = new System.Drawing.Size(189, 47);
             this.diyButton.TabIndex = 25;
             this.diyButton.Text = "个性化设置 (&D)";
             this.diyButton.UseVisualStyleBackColor = true;
@@ -1053,9 +1057,9 @@ namespace MCUpdater
             // 
             // updateLogButtom
             // 
-            this.updateLogButtom.Location = new System.Drawing.Point(577, 288);
+            this.updateLogButtom.Location = new System.Drawing.Point(775, 322);
             this.updateLogButtom.Name = "updateLogButtom";
-            this.updateLogButtom.Size = new System.Drawing.Size(144, 49);
+            this.updateLogButtom.Size = new System.Drawing.Size(189, 49);
             this.updateLogButtom.TabIndex = 24;
             this.updateLogButtom.Text = "更新日志 (&U)";
             this.updateLogButtom.UseVisualStyleBackColor = true;
@@ -1064,9 +1068,9 @@ namespace MCUpdater
             // disMcCheck
             // 
             this.disMcCheck.AutoSize = true;
-            this.disMcCheck.Location = new System.Drawing.Point(28, 171);
+            this.disMcCheck.Location = new System.Drawing.Point(28, 177);
             this.disMcCheck.Name = "disMcCheck";
-            this.disMcCheck.Size = new System.Drawing.Size(242, 21);
+            this.disMcCheck.Size = new System.Drawing.Size(299, 24);
             this.disMcCheck.TabIndex = 23;
             this.disMcCheck.Text = "不要在启动时提示我没有安装 MoeCraft";
             this.disMcCheck.UseVisualStyleBackColor = true;
@@ -1078,9 +1082,9 @@ namespace MCUpdater
             this.joinGroupUrl.AutoSize = true;
             this.joinGroupUrl.BackColor = System.Drawing.Color.Transparent;
             this.joinGroupUrl.LinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.joinGroupUrl.Location = new System.Drawing.Point(336, 307);
+            this.joinGroupUrl.Location = new System.Drawing.Point(450, 307);
             this.joinGroupUrl.Name = "joinGroupUrl";
-            this.joinGroupUrl.Size = new System.Drawing.Size(56, 17);
+            this.joinGroupUrl.Size = new System.Drawing.Size(69, 20);
             this.joinGroupUrl.TabIndex = 22;
             this.joinGroupUrl.TabStop = true;
             this.joinGroupUrl.Tag = "";
@@ -1090,10 +1094,10 @@ namespace MCUpdater
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(126, 304);
+            this.textBox4.Location = new System.Drawing.Point(167, 304);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(204, 23);
+            this.textBox4.Size = new System.Drawing.Size(268, 27);
             this.textBox4.TabIndex = 21;
             this.textBox4.Text = "566786837";
             // 
@@ -1102,7 +1106,7 @@ namespace MCUpdater
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(29, 307);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(80, 17);
+            this.label23.Size = new System.Drawing.Size(97, 20);
             this.label23.TabIndex = 20;
             this.label23.Text = "QQ 讨论群号";
             // 
@@ -1111,7 +1115,7 @@ namespace MCUpdater
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(29, 220);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(92, 17);
+            this.label18.Size = new System.Drawing.Size(114, 20);
             this.label18.TabIndex = 15;
             this.label18.Text = "游戏服务器地址";
             // 
@@ -1121,9 +1125,9 @@ namespace MCUpdater
             this.bbsUrl.AutoSize = true;
             this.bbsUrl.BackColor = System.Drawing.Color.Transparent;
             this.bbsUrl.LinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.bbsUrl.Location = new System.Drawing.Point(336, 278);
+            this.bbsUrl.Location = new System.Drawing.Point(450, 278);
             this.bbsUrl.Name = "bbsUrl";
-            this.bbsUrl.Size = new System.Drawing.Size(56, 17);
+            this.bbsUrl.Size = new System.Drawing.Size(69, 20);
             this.bbsUrl.TabIndex = 19;
             this.bbsUrl.TabStop = true;
             this.bbsUrl.Tag = "";
@@ -1137,9 +1141,9 @@ namespace MCUpdater
             this.accountsUrl.AutoSize = true;
             this.accountsUrl.BackColor = System.Drawing.Color.Transparent;
             this.accountsUrl.LinkColor = System.Drawing.SystemColors.MenuHighlight;
-            this.accountsUrl.Location = new System.Drawing.Point(336, 249);
+            this.accountsUrl.Location = new System.Drawing.Point(450, 249);
             this.accountsUrl.Name = "accountsUrl";
-            this.accountsUrl.Size = new System.Drawing.Size(56, 17);
+            this.accountsUrl.Size = new System.Drawing.Size(69, 20);
             this.accountsUrl.TabIndex = 19;
             this.accountsUrl.TabStop = true;
             this.accountsUrl.Tag = "";
@@ -1149,19 +1153,19 @@ namespace MCUpdater
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(126, 275);
+            this.textBox3.Location = new System.Drawing.Point(167, 275);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(204, 23);
+            this.textBox3.Size = new System.Drawing.Size(268, 27);
             this.textBox3.TabIndex = 18;
-            this.textBox3.Text = "https://moeclub.net";
+            this.textBox3.Text = "https://telegram.me/moecraftnews";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(126, 246);
+            this.textBox2.Location = new System.Drawing.Point(167, 246);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(204, 23);
+            this.textBox2.Size = new System.Drawing.Size(268, 27);
             this.textBox2.TabIndex = 18;
             this.textBox2.Text = "https://accounts.moecraft.net";
             // 
@@ -1170,25 +1174,25 @@ namespace MCUpdater
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(29, 278);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(56, 17);
+            this.label20.Size = new System.Drawing.Size(84, 20);
             this.label20.TabIndex = 17;
-            this.label20.Text = "论坛地址";
+            this.label20.Text = "公告发布区";
             // 
             // label19
             // 
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(29, 249);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(80, 17);
+            this.label19.Size = new System.Drawing.Size(99, 20);
             this.label19.TabIndex = 17;
             this.label19.Text = "用户中心地址";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(126, 217);
+            this.textBox1.Location = new System.Drawing.Point(167, 217);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(204, 23);
+            this.textBox1.Size = new System.Drawing.Size(268, 27);
             this.textBox1.TabIndex = 16;
             this.textBox1.Text = "moecraft.net";
             // 
@@ -1197,7 +1201,7 @@ namespace MCUpdater
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(25, 142);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(172, 17);
+            this.label5.Size = new System.Drawing.Size(211, 20);
             this.label5.TabIndex = 14;
             this.label5.Text = "© MoeNet Inc. 保留所有权利";
             // 
@@ -1209,11 +1213,11 @@ namespace MCUpdater
             this.kenvixUrl.LinkColor = System.Drawing.SystemColors.MenuHighlight;
             this.kenvixUrl.Location = new System.Drawing.Point(234, 113);
             this.kenvixUrl.Name = "kenvixUrl";
-            this.kenvixUrl.Size = new System.Drawing.Size(84, 17);
+            this.kenvixUrl.Size = new System.Drawing.Size(184, 20);
             this.kenvixUrl.TabIndex = 11;
             this.kenvixUrl.TabStop = true;
             this.kenvixUrl.Tag = "";
-            this.kenvixUrl.Text = "Kenvix ~ ~ ~";
+            this.kenvixUrl.Text = "Kenvix <i@kenvix.com>";
             this.kenvixUrl.VisitedLinkColor = System.Drawing.SystemColors.MenuHighlight;
             this.kenvixUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.kenvixUrl_LinkClicked);
             // 
@@ -1222,7 +1226,7 @@ namespace MCUpdater
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(194, 113);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 17);
+            this.label3.Size = new System.Drawing.Size(54, 20);
             this.label3.TabIndex = 10;
             this.label3.Text = "作者：";
             // 
@@ -1231,7 +1235,7 @@ namespace MCUpdater
             this.version.AutoSize = true;
             this.version.Location = new System.Drawing.Point(137, 113);
             this.version.Name = "version";
-            this.version.Size = new System.Drawing.Size(45, 17);
+            this.version.Size = new System.Drawing.Size(57, 20);
             this.version.TabIndex = 9;
             this.version.Text = "3.0.0.0";
             // 
@@ -1240,7 +1244,7 @@ namespace MCUpdater
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(26, 113);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 17);
+            this.label2.Size = new System.Drawing.Size(71, 20);
             this.label2.TabIndex = 8;
             this.label2.Text = "x.pname";
             // 
@@ -1250,7 +1254,7 @@ namespace MCUpdater
             this.ggimg.ImageLocation = "";
             this.ggimg.Location = new System.Drawing.Point(23, 12);
             this.ggimg.Name = "ggimg";
-            this.ggimg.Size = new System.Drawing.Size(391, 99);
+            this.ggimg.Size = new System.Drawing.Size(382, 99);
             this.ggimg.TabIndex = 5;
             this.ggimg.TabStop = false;
             this.ggimg.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
@@ -1264,7 +1268,7 @@ namespace MCUpdater
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(810, 455);
+            this.ClientSize = new System.Drawing.Size(992, 510);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.mainTabControl);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
